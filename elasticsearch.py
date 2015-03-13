@@ -303,7 +303,8 @@ class ElasticsearchIndexDocumentCommand(BaseElasticsearchCommand):
         body = self.get_selection_text()
         if doc_id:
             self.curl_request(
-                'PUT', make_path(self.index, self.doc_type, doc_id), body)
+                'PUT', make_path(self.index, self.doc_type, doc_id),
+                body, {'pretty': 'true'})
             return
 
         self.curl_request(
