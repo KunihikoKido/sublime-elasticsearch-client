@@ -595,6 +595,40 @@ class ShowActiveServerCommand(BaseElasticsearchCommand):
 
     def run(self):
         super(ShowActiveServerCommand, self).run()
+        output_panel = self.window.get_output_panel("textarea")
+        self.window.run_command("show_panel", {"panel": "output.textarea"})
+        output_panel.run_command(
+            "insert", {
+                "characters":
+                "Active Server Settings\n"
+                "======================\n"
+                "- base_url                     : {base_url}\n"
+                "- index                        : {index}\n"
+                "- doc_type                     : {doc_type}\n"
+                "- analyzer                     : {analyzer}\n"
+                "- enabled_create_index         : {enabled_create_index}\n"
+                "- enabled_delete_mapping       : {enabled_delete_mapping}\n"
+                "- enabled_delete_document      : {enabled_delete_document}\n"
+                "- enabled_delete_index         : {enabled_delete_index}\n"
+                "- enabled_index_document       : {enabled_index_document}\n"
+                "- enabled_put_mapping          : {enabled_put_mapping}\n"
+                "- enabled_register_query       : {enabled_register_query}\n"
+                "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
+                "".format(
+                    base_url=self.base_url,
+                    index=self.index,
+                    doc_type=self.doc_type,
+                    analyzer=self.analyzer,
+                    enabled_create_index=self.enabled_create_index,
+                    enabled_delete_mapping=self.enabled_delete_mapping,
+                    enabled_delete_document=self.enabled_delete_document,
+                    enabled_delete_index=self.enabled_delete_index,
+                    enabled_index_document=self.enabled_index_document,
+                    enabled_put_mapping=self.enabled_put_mapping,
+                    enabled_register_query=self.enabled_register_query,
+                    enabled_delete_percolator=self.enabled_delete_percolator)
+            })
+
         sublime.status_message(
             'Elasticsearch: {0} ({1} / {2})'.format(
                 self.active_server, self.index, self.doc_type))
