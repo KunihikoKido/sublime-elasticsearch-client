@@ -94,6 +94,10 @@ Elasticsearch: Index Document      | PUT/POST  | ``/index/type/id``
 Elasticsearch: List All Indexes    | GET       | ``/_cat/indices``
 Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
 Elasticsearch: Search Request      | POST      | ``/index/type/_search``
+Elasticsearch: Register Query for Percolator | PUT       | ``/index/.percolator/id``
+Elasticsearch: Show Query for Percolator     | POST      | ``/index/.percolator/_search``
+Elasticsearch: Match Query for Percolator    | POST      | ``/index/type/_percolate``
+Elasticsearch: Delete Query for Percolator   | DELETE    | ``/index/.percolator/id``
 Elasticsearch: Show Active Server  | -         |  ※ appears in the status bar.
 Elasticsearch: Switch Servers      | -         |  ※ change the active server.
 Elasticsearch: Change Index        | -         |  ※ change the index for active server.

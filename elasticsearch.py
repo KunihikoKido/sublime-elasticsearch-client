@@ -43,6 +43,10 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
             'enabled_delete_mapping', False)
         self.enabled_index_document = server_settings.get(
             'enabled_index_document', False)
+        self.enabled_register_query = server_settings.get(
+            'enabled_register_query', False)
+        self.enabled_delete_percolator = server_settings.get(
+            'enabled_delete_percolator', False)
 
     def get_request_url(self, url, params):
         params = urlencode(params or {})
@@ -444,6 +448,131 @@ class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
             None, {'pretty': 'true'})
 
         self.set_doc_type(doc_type)
+
+
+class ElasticsearchRegisterPercolatorCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(ElasticsearchRegisterPercolatorCommand, self).run()
+
+        if not self.enabled_register_query:
+            sublime.status_message(
+                '*** Disabled Register Query (Percolator)! ***')
+            return
+
+        if not self.index:
+            self.window.show_input_panel(
+                'Index: ', self.index, self.set_index, None, None)
+
+        self.window.show_input_panel(
+            '({0}) Percolator ID : '.format(self.index),
+            '', self.register_query, None, None)
+
+    def set_index(self, index):
+        super(ElasticsearchRegisterPercolatorCommand, self).set_index(index)
+        self.run()
+
+    def register_query(self, percolator_id):
+        if not percolator_id:
+            sublime.status_message('Canceled')
+            return
+
+        body = self.get_selection_text()
+        self.curl_request(
+            'PUT', make_path(self.index, '.percolator', percolator_id),
+            body, {'pretty': 'true'})
+
+
+class ElasticsearchShowPercolatorCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(ElasticsearchShowPercolatorCommand, self).run()
+
+        if not self.index:
+            self.window.show_input_panel(
+                'Index: ', '', self.set_index, None, None)
+            return
+
+        self.curl_request(
+            'POST', make_path(self.index, '.percolator', '_search'),
+            None, {'pretty': 'true'})
+
+    def set_index(self, index):
+        super(ElasticsearchIndexDocumentCommand, self).set_index(index)
+        self.run()
+
+
+class ElasticsearchMatchPercolatorCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(ElasticsearchMatchPercolatorCommand, self).run()
+
+        if not self.index:
+            self.window.show_input_panel(
+                'Index: ', '', self.set_index, None, None)
+            return
+
+        if not self.doc_type:
+            self.window.show_input_panel(
+                '({0}) Doc Type: '.format(self.index),
+                '', self.set_doc_type, None, None)
+            return
+
+        body = self.get_selection_text()
+        self.curl_request(
+            'POST', make_path(self.index, self.doc_type, '_percolate'),
+            body, {'pretty': 'true'})
+
+    def set_index(self, index):
+        super(ElasticsearchIndexDocumentCommand, self).set_index(index)
+        self.run()
+
+    def set_doc_type(self, doc_type):
+        super(ElasticsearchIndexDocumentCommand, self).set_doc_type(doc_type)
+        self.run()
+
+
+class ElasticsearchDeletePercolatorCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(ElasticsearchDeletePercolatorCommand, self).run()
+
+        if not self.enabled_delete_percolator:
+            sublime.status_message('*** Disabled Delete Percolator! ***')
+            return
+
+        if not self.index:
+            self.window.show_input_panel(
+                'Index: ', '', self.set_index, None, None)
+            return
+
+        if not self.doc_type:
+            self.window.show_input_panel(
+                '({0}) Doc Type: '.format(self.index),
+                '', self.set_doc_type, None, None)
+            return
+
+        self.window.show_input_panel(
+            '({0}) Percolator ID: '.format(self.index),
+            '', self.delete_percolator, None, None)
+
+    def set_index(self, index):
+        super(ElasticsearchDeletePercolatorCommand, self).set_index(index)
+        self.run()
+
+    def set_doc_type(self, doc_type):
+        super(ElasticsearchDeletePercolatorCommand, self).\
+            set_doc_type(doc_type)
+        self.run()
+
+    def delete_percolator(self, percolator_id):
+        if not percolator_id:
+            sublime.status_message('Canceled')
+            return
+
+        self.curl_request(
+            'DELETE', make_path(self.index, '.percolator', percolator_id),
+            None, {'pretty': 'true'})
 
 
 class SwitchServersCommand(BaseElasticsearchCommand):

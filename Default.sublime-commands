@@ -52,6 +52,22 @@
         "command": "elasticsearch_delete_document",
     },
     {
+        "caption": "ElasticsearchClient: Register Query for Percolator",
+        "command": "elasticsearch_register_percolator",
+    },
+    {
+        "caption": "ElasticsearchClient: Show Query for Percolator",
+        "command": "elasticsearch_show_percolator",
+    },
+    {
+        "caption": "ElasticsearchClient: Match Document for Percolator",
+        "command": "elasticsearch_match_percolator",
+    },
+    {
+        "caption": "ElasticsearchClient: UN-Register Query for Percolator",
+        "command": "elasticsearch_delete_percolator",
+    },
+    {
         "caption": "ElasticsearchClient: Switch Servers",
         "command": "switch_servers",
     },

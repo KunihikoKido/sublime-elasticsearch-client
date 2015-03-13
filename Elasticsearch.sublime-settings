@@ -11,6 +11,8 @@
             "enabled_delete_index": true,
             "enabled_index_document": false,
             "enabled_put_mapping": true,
+            "enabled_register_query": true,
+            "enabled_delete_percolator": true,
             "hettp_headers": {}
         }
     }
