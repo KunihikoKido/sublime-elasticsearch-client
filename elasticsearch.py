@@ -61,7 +61,7 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         for k, v in self.http_headers.items():
             curl_command += ['-H', "{0}: {1}".format(k, v)]
 
-        self.window.run_command('exec', {'cmd': curl_command})
+        self.window.run_command('exec', {'cmd': curl_command, 'quiet': True})
 
     def get_selection_text(self):
         view = self.window.active_view()
