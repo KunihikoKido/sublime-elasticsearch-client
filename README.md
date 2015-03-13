@@ -33,6 +33,7 @@ User Settings (accessible from the *Preferences/Package Settings/Elasticsearch C
 Example:
 ```json
 {
+    "active_server": "localhost",
     "servers": {
         "localhost": {
             "base_url": "http://localhost:9200/",
