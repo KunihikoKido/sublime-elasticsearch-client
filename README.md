@@ -65,9 +65,9 @@ Setting                    | Description
 
 Setting                    | Description
 -------------------------- | ----------------------------------
-``base_url``               | Elasticsearch API Endpoint URL.
-``index``                  | Elasticsearch Index name.
-``doc_type``               | Elasticsearch Type name.
+``base_url``               | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
+``index``                  | Elasticsearch Index name. default: ``test``
+``doc_type``               | Elasticsearch Type name. default: ``test``
 ``analyzer``               | analyzer for Analyze Command. default: ``default``
 ``enabled_create_index``   | if set ``true`` you can create index. default: ``false``
 ``enabled_delete_mapping`` | if set ``true`` you can delete mapping. default: ``false``

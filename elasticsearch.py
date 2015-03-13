@@ -26,8 +26,8 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
             'base_url', 'http://localhost:9200/')
         if not self.base_url.endswith('/'):
             self.base_url += '/'
-        self.index = server_settings.get('index')
-        self.doc_type = server_settings.get('doc_type')
+        self.index = server_settings.get('index', 'test')
+        self.doc_type = server_settings.get('doc_type', 'test')
         self.http_headers = server_settings.get('http_headers', {})
 
         self.analyzer = server_settings.get('analyzer', 'default')
@@ -467,7 +467,8 @@ class ShowActiveServerCommand(BaseElasticsearchCommand):
     def run(self):
         super(ShowActiveServerCommand, self).run()
         sublime.status_message(
-            'Elasticsearch: {0}'.format(self.active_server))
+            'Elasticsearch: {0} ({1} / {2})'.format(
+                self.active_server, self.index, self.doc_type))
 
 
 class ChangeIndexCommand(BaseElasticsearchCommand):
