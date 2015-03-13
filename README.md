@@ -45,7 +45,9 @@ Example:
             "enabled_delete_document": true,
             "enabled_delete_index": true,
             "enabled_index_document": false,
-            "enabled_put_mapping": true
+            "enabled_put_mapping": true,
+            "enabled_register_query": true,
+            "enabled_delete_percolator": true,
         },
         "api.siba.tokyo": {
             "base_url": "https://api.siba.tokyo/public/",
@@ -75,6 +77,9 @@ Setting                    | Description
 ``enabled_delete_index``   | if set ``true`` you can delete index. default: ``false``
 ``enabled_index_document`` | if set ``true`` you can index document. default: ``false``
 ``enabled_put_mapping``    | if set ``true`` you can put mapping. default: ``false``
+``enabled_register_query``    | if set ``true`` you can register query for percolator. default: ``false``
+``enabled_delete_percolator``    | if set ``true`` you can delete registerd query for percolator. default: ``false``
+
 
 ## Commands
 open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...``.
