@@ -52,7 +52,7 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         params = urlencode(params or {})
         if url:
             return '{0}{1}?{2}'.format(self.base_url, url, params)
-        return '{0}?pretty'.format(self.base_url, params)
+        return '{0}?{1}'.format(self.base_url, params)
 
     def curl_request(self, method, url=None, body=None, params=None):
         curl_command = ['curl', '-s', '-X', method]
