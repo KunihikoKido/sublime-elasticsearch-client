@@ -1,0 +1,18 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:profit}": {
+        "scripted_metric": {
+            "init_script": "${2:_agg['transactions'] = []}",
+            "map_script": "${3:if (doc['type'].value == \"sale\") \{ _agg.transactions.add(doc['amount'].value) \} else \{ _agg.transactions.add(-1 * doc['amount'].value) \}}",
+            "combine_script": "${4:profit = 0; for (t in _agg.transactions) \{ profit += t \}; return profit}",
+            "reduce_script": "${5:profit = 0; for (a in _aggs) \{ profit += a \}; return profit}"
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsscriptedmetric</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

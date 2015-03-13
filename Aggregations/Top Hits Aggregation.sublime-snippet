@@ -1,0 +1,19 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:top_tag_hits}": {
+        "top_hits": {
+            "_source": {$2},
+            "highlight": {$3},
+            "from": ${4:0},
+            "size" : ${5:3},
+            "sort": [$6],
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>saggstophit</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

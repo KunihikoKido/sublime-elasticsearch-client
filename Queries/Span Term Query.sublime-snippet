@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+"span_term": {"${1:user}": {"value": "${2:kimchy}", "boost": ${3:2.0}}}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>spanterm</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

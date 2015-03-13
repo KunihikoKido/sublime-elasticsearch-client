@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+"query_string": {
+    "default_field": "${1:content}",
+    "query": "${2:this AND that OR thus}"
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>querystring</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

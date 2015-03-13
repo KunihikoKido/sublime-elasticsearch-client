@@ -1,0 +1,19 @@
+<snippet>
+    <content><![CDATA[
+"top_children" : {
+    "type": "${1:blog_tag}",
+    "query" : {
+        ${2:"term": \{
+            "tag": "something"
+        \}}
+    },
+    "score": "${3:(max|sum|avg)}",
+    "factor": ${4:5},
+    "incremental_factor": ${5:2}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>topchildren</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

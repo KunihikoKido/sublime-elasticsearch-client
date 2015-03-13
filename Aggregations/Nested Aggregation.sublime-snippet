@@ -1,0 +1,18 @@
+<snippet>
+    <content><![CDATA[
+"aggs" : {
+    "${1:resellers}": {
+        "nested": {
+            "path": "${2:resellers}"
+        },
+        ${3:"aggs": \{
+            "min_price": \{"min": \{"field": "resellers.price"\}\}
+        \}}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsnested</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

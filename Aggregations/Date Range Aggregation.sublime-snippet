@@ -1,0 +1,20 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:range}": {
+        "date_range": {
+            "field": "${2:date}",
+            "format": "${3:MM-yyy}",
+            "ranges": [
+                { "to": "now-10M/M" },
+                { "from": "now-10M/M" }
+            ]
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsdaterange</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

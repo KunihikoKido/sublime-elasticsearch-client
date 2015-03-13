@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"geohash_cell": {
+    "${1:pin}": {
+        "lat": ${2:13.4080},
+        "lon": ${3:52.5186}
+    },
+    "precision": ${4:3},
+    "neighbors": ${5:true}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>geohash</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

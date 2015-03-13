@@ -1,0 +1,18 @@
+<snippet>
+    <content><![CDATA[
+"span_near": {
+    "clauses": [
+        ${1:\{"span_term": \{"field": "value1"\}\},
+        \{"span_term": \{"field": "value1"\}\},
+        \{"span_term": \{"field": "value1"\}\}}
+    ],
+    "slop": ${4:12},
+    "in_order": ${5:false},
+    "collect_payloads": ${6:false}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>spannear</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

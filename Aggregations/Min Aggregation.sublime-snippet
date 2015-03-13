@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:min_price}": {
+        "min": {
+            "field": "${2:price}"
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsmin</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

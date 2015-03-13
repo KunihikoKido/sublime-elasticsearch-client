@@ -1,0 +1,17 @@
+<snippet>
+    <content><![CDATA[
+"fuzzy": {
+    "${1:user}": {
+        "value": "${2:ki}",
+        "boost": ${3:1.0},
+        "fuzziness": ${4:2},
+        "prefix_length": ${5:0},
+        "max_expansions": ${6:100}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>fuzzy</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

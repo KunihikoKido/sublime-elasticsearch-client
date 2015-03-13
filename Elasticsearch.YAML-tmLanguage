@@ -1,0 +1,11 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Elasticsearch
+scopeName: source.es
+fileTypes: [es]
+uuid: bd4306a8-862e-4fbb-a455-8c351164cf0d
+
+patterns:
+- include: source.json
+
+...

@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+"terms" : {
+    "${1:tags}": [${2:"blue", "pill"}],
+    "minimum_should_match" : ${2:1}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>terms</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

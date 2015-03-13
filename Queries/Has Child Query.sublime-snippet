@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"has_child": {
+    "type": "${1:comment}",
+    "query": {
+        ${2:"term": {
+            "user": "john"
+        }}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>haschild</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

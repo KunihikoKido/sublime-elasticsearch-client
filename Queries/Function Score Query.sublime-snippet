@@ -1,0 +1,31 @@
+<snippet>
+    <content><![CDATA[
+"function_score": {
+    "query": {
+        $1
+    },
+    "boost": "${2:boost for the whole query}",
+    "functions": [
+        ${3:\{
+            "filter": \{\},
+            "FUNCTION": \{\},
+            "weight": number
+        \},
+        \{
+            "FUNCTION": \{\}
+        \},
+        \{
+            "filter": \{\},
+            "weight": number
+        \}}
+    ],
+    "max_boost": ${4:1.0},
+    "score_mode": "${5:(multiply|sum|avg|first|max|min)}",
+    "boost_mode": "${6:(multiply|replace|sum|avg|max|min)}"
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>functionscore</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

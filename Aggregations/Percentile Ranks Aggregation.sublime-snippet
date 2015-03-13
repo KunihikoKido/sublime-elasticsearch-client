@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:load_time_outlier}": {
+        "percentile_ranks" : {
+            "field": "${2:load_time}"
+            "values": [${3:15, 30}]
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggspercentileranks</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+"constant_score": {
+    ${1:"query": \{
+        "term": \{"user": "kimchy"\}
+    \}},
+    "boost" : 1.2
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>constantscore</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

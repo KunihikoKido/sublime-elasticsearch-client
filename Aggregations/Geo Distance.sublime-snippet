@@ -1,0 +1,21 @@
+<snippet>
+    <content><![CDATA[
+"aggs" : {
+    "${1:rings_around_amsterdam}" : {
+        "geo_distance" : {
+            "field" : "${2:location}",
+            "origin" : "${3:52.3760, 4.894}",
+            "ranges" : [
+                { "to" : 100 },
+                { "from" : 100, "to" : 300 },
+                { "from" : 300 }
+            ]
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsgeodistance</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

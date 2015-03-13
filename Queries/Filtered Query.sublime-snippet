@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"filtered": {
+    "query": {
+        ${1:"match": \{ "tweet": "full text search"\}}
+    },
+    "filter": {
+        ${2:"range": \{"created": \{"gte": "now - 1d / d"\}\}}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>filtered</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

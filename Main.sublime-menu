@@ -1,0 +1,35 @@
+[
+  {
+    "caption": "Preferences",
+    "mnemonic": "n",
+    "id": "preferences",
+    "children": [
+      {
+        "caption": "Package Settings",
+        "mnemonic": "P",
+        "id": "package-settings",
+        "children": [
+          {
+            "caption": "Elasticsearch Client",
+            "children": [
+              {
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/ElasticsearchClient/Elasticsearch.sublime-settings"
+                },
+                "caption": "Settings – Default"
+              },
+              {
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/User/Elasticsearch.sublime-settings"
+                },
+                "caption": "Settings – User"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

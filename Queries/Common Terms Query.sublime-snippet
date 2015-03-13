@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+"common": {
+    "${1:body}": {
+        "query": "${2:nelly the elephant as a cartoon}",
+        "cutoff_frequency": ${3:0.001},
+        "low_freq_operator" "${4:and}"
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>commonterms</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"match": {
+    "${1:message}": {
+        "query": "${2:to be or not to be}",
+        "operator": "${3:and}",
+        "zero_terms_query": "${4:all}",
+        "cutoff_frequency" : ${5:0.001}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>match</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

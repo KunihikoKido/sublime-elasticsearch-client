@@ -1,0 +1,23 @@
+<snippet>
+    <content><![CDATA[
+"nested" : {
+    "path" : "${1:obj1.path}",
+    "filter" : {
+        ${2:"bool" : \{
+            "must" : [
+                \{
+                    "term": \{"obj1.name": "blue"\}
+                \},
+                \{
+                    "range": \{"obj1.count": \{"gt": 5\}\}
+                \}
+            ]
+        \}}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>nested</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

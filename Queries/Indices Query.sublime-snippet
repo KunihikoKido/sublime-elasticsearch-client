@@ -1,0 +1,17 @@
+<snippet>
+    <content><![CDATA[
+"indices" : {
+    "indices" : [${1:"index1", "index2"}],
+    "query" : {
+        ${2:"term": \{"tag": "wow"\}}
+    },
+    "no_match_filter" : {
+        ${3:"term": \{"tag": "kow"\}}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>indices</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

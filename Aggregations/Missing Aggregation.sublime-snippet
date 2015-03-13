@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:products_without_a_price}": {
+        "missing": {"field": "${2:price}"}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsmissing</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

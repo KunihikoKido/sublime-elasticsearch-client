@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:author_count}" : {
+        "cardinality" : {
+            "field" : "${2:author}"
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggscardinality</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

@@ -1,0 +1,71 @@
+[
+    {
+        "caption": "ElasticsearchClient: Search Request",
+        "command": "elasticsearch_search_request",
+    },
+    {
+        "caption": "ElasticsearchClient: Analyze",
+        "command": "elasticsearch_analyze",
+    },
+    {
+        "caption": "ElasticsearchClient: Cluster Health",
+        "command": "elasticsearch_cluster_health",
+    },
+    {
+        "caption": "ElasticsearchClient: List All Indexes",
+        "command": "elasticsearch_list_all_indexes",
+    },
+    {
+        "caption": "ElasticsearchClient: Get Index Settings",
+        "command": "elasticsearch_get_index_settings",
+    },
+    {
+        "caption": "ElasticsearchClient: Get Mapping",
+        "command": "elasticsearch_get_mapping",
+    },
+    {
+        "caption": "ElasticsearchClient: Create Index",
+        "command": "elasticsearch_create_index",
+    },
+    {
+        "caption": "ElasticsearchClient: Put Mapping",
+        "command": "elasticsearch_put_mapping",
+    },
+    {
+        "caption": "ElasticsearchClient: Index Document",
+        "command": "elasticsearch_index_document",
+    },
+    {
+        "caption": "ElasticsearchClient: Get Document",
+        "command": "elasticsearch_get_document",
+    },
+    {
+        "caption": "ElasticsearchClient: Delete Index",
+        "command": "elasticsearch_delete_index",
+    },
+    {
+        "caption": "ElasticsearchClient: Delete Mapping",
+        "command": "elasticsearch_delete_mapping",
+    },
+    {
+        "caption": "ElasticsearchClient: Delete Document",
+        "command": "elasticsearch_delete_document",
+    },
+    {
+        "caption": "ElasticsearchClient: Switch Servers",
+        "command": "switch_servers",
+    },
+    {
+        "caption": "ElasticsearchClient: Show Active Server",
+        "command": "show_active_server",
+    },
+    {
+        "caption": "ElasticsearchClient: Change Index",
+        "command": "change_index",
+    },
+    {
+        "caption": "ElasticsearchClient: Change Doc Type",
+        "command": "change_doc_type",
+    }
+
+]

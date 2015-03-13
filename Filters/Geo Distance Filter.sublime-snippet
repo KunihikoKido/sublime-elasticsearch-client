@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+"geo_distance": {
+    "distance": "${1:200km}",
+    "${2:pin.location}": {
+        "lat": ${3:40},
+        "lon": ${4:-70}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>geodistance</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

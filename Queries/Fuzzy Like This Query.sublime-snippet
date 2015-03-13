@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[
+"fuzzy_like_this": {
+    "fields": [${1:"name.first", "name.last"}],
+    "like_text" : "${2:text like this one}",
+    "max_query_terms": ${3:25}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>fuzzylike</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

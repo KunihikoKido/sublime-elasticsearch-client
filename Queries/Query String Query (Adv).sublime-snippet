@@ -1,0 +1,28 @@
+<snippet>
+    <content><![CDATA[
+"query_string": {
+    "default_field": "${1:content}",
+    "query": "${2:this AND that OR thus}",
+    "default_operator": "${3:or}",
+    "analyzer": "${4:default}",
+    "allow_leading_wildcard": ${5:true},
+    "lowercase_expanded_terms": ${6:true},
+    "enable_position_increments": ${7:true},
+    "fuzzy_max_expansions": ${8:50},
+    "fuzziness": "${9:AUTO}",
+    "fuzzy_prefix_length": ${10:0},
+    "phrase_slop": ${11:0},
+    "boost": ${11:1.0},
+    "analyze_wildcard": ${12:true},
+    "auto_generate_phrase_queries": ${13:false},
+    "max_determinized_states": ${14:10000},
+    "minimum_should_match": ${15:2},
+    "lenient": ${16:true},
+    "locale": "${17:ROOT}"
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>querystring</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

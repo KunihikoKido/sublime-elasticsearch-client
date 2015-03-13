@@ -1,0 +1,17 @@
+<snippet>
+    <content><![CDATA[
+"geo_polygon": {
+    "${1:person.location}": {
+        "points": [
+            {"lat": ${2:40}, "lon": ${3:-70}},
+            {"lat": ${4:30}, "lon": ${5:-80}},
+            {"lat": ${6:20}, "lon": ${7:-90}}
+        ]
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>geopolygon</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

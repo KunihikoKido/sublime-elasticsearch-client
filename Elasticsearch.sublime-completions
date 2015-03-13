@@ -1,0 +1,35 @@
+{
+    "scope": "source.es",
+    "completions": [
+        "true",
+        "false",
+        "asc",
+        "desc",
+
+        "_all",
+        "_score",
+
+        {"trigger": "query", "contents": "\"query\": {$1}" },
+        {"trigger": "size", "contents": "\"size\": ${1:10}" },
+        {"trigger": "from", "contents": "\"from\": ${1:0}" },
+        {"trigger": "sort", "contents": "\"sort\": [\"_score\"]" },
+        {"trigger": "source", "contents": "\"_source\": ${1:false}" },
+        {"trigger": "include", "contents": "\"include\": [$1]" },
+        {"trigger": "exclude", "contents": "\"exclude\": [$1]" },
+        {"trigger": "fields", "contents": "\"fields\": [$1]" },
+        {"trigger": "partial_fields", "contents": "\"partial_fields\": {$1}" },
+        {"trigger": "script_fields", "contents": "\"script_fields\": {$1}" },
+        {"trigger": "filter", "contents": "\"filter\": {$1}" },
+        {"trigger": "post_filter", "contents": "\"post_filter\": {$1}" },
+        {"trigger": "highlight", "contents": "\"highlight\": {$1}" },
+        {"trigger": "pre_tags", "contents": "\"pre_tags\": [\"${1:<key>}\"]" },
+        {"trigger": "post_tags", "contents": "\"post_tags\": [\"${1:</key>}\"]" },
+        {"trigger": "rescore", "contents": "\"rescore\": {$1}" },
+        {"trigger": "explain", "contents": "\"explain\": ${1:true}" },
+        {"trigger": "version", "contents": "\"version\": ${1:true}" },
+        {"trigger": "indices_boost", "contents": "\"indices_boost\": {$1}" },
+        {"trigger": "min_score", "contents": "\"min_score\": ${1:0.5}" },
+        {"trigger": "_name", "contents": "\"_name\": \"${1:test}\"" },
+        {"trigger": "stats", "contents": "\"stats\" : [${1:\"group1\", \"group2\"}]" },
+    ]
+}

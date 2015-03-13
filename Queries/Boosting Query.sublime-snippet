@@ -1,0 +1,21 @@
+<snippet>
+    <content><![CDATA[
+"boosting": {
+    "positive" : {
+        ${1:"term": \{
+            "field1" : "value1"
+        \}}
+    },
+    "negative" : {
+        ${2:"term": \{
+            "field2" : "value2"
+        \}}
+    },
+    "negative_boost": ${3:0.2}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>boosting</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

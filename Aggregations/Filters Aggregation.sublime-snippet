@@ -1,0 +1,26 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:messages}": {
+        "filters": {
+            "filters": {
+                "${2:errors}": {${3:"term": \{"body": "error"\}}},
+                "${4:warnings}": {${5:"term": \{"body": "warning"\}}}
+            }
+        },
+        ${6:"aggs": \{
+            "monthly": \{
+                "histogram": \{
+                    "field": "timestamp",
+                    "interval": "1M"
+                \}
+            \}
+        \}}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>saggsfilter</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

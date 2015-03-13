@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+"geo_bounding_box": {
+    "${1:pin.location}": {
+        "top_left": "${2:dr5r9ydj2y73}",
+        "bottom_right": "${3:drj7teegpus6}"
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>geobounding</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

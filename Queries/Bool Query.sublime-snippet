@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"bool": {
+    "must": [{$1}],
+    "must_not": [{$2}],
+    "should": [{$3}],
+    "minimum_should_match": ${4:1},
+    "boost": ${5:1.0}
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>bool</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

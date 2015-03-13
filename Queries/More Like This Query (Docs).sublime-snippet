@@ -1,0 +1,25 @@
+<snippet>
+    <content><![CDATA[
+"more_like_this": {
+    "fields": [${1:"name.first", "name.last"}],
+    "docs": [
+        ${2:\{
+            "_index": "test",
+            "_type": "type",
+            "_id": "1"
+        \},
+        \{
+            "_index": "test",
+            "_type": "type",
+            "_id": "2"
+        \}}
+    ],
+    "min_term_freq": ${3:1},
+    "max_query_terms": ${4:12}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>morelike</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

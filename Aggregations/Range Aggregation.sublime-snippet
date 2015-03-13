@@ -1,0 +1,20 @@
+<snippet>
+    <content><![CDATA[
+"aggs": {
+    "${1:price_ranges}": {
+        "range": {
+            "field": "${2:price}",
+            "ranges": [
+                {"to" : 50},
+                {"from" : 50, "to" : 100},
+                {"from" : 100}
+            ]
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsrange</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

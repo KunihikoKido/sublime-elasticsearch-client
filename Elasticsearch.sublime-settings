@@ -1,0 +1,17 @@
+{
+    "servers": {
+        "localhost": {
+            "base_url": "http://localhost:9200/",
+            "index": "test",
+            "doc_type": "test",
+            "analyzer": "default",
+            "enabled_create_index": true,
+            "enabled_delete_mapping": true,
+            "enabled_delete_document": true,
+            "enabled_delete_index": true,
+            "enabled_index_document": false,
+            "enabled_put_mapping": true,
+            "hettp_headers": {}
+        }
+    }
+}

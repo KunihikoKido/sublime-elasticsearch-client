@@ -1,0 +1,19 @@
+<snippet>
+    <content><![CDATA[
+"geo_shape": {
+    "${1:location}": {
+        "shape": {
+            "type": "${2:envelope}",
+            "coordinates" : [
+                [${3:13.0, 53.0}],
+                [${4:14.0, 52.0}]
+            ]
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>geoshape</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

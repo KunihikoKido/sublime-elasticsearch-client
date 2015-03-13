@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+"range": {
+    "${1:age}": {
+        "gte": ${2:10},
+        "lte": ${3:20}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>range</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

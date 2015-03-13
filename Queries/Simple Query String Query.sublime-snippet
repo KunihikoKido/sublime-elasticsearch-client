@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+"simple_query_string" : {
+    "query": "${1:\"fried eggs\" +(eggplant | potato) -frittata}",
+    "analyzer": "${2:snowball}",
+    "fields": [${3:"body^5", "_all"}],
+    "default_operator": "${4:and}",
+    "flags" : "${5:(ALL|NONE|AND|OR|NOT|PREFIX|PHRASE|PRECEDENCE|ESCAPE|WHITESPACE|FUZZY|NEAR|SLOP)}"
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>simplequery</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

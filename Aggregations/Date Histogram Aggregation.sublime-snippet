@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+"aggs" : {
+    "${1:articles_over_time}" : {
+        "date_histogram" : {
+            "field" : "${2:date}",
+            "interval" : "${3:month}"
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>aggsdatehistogram</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

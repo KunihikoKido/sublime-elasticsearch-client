@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+"multi_match": {
+    "query": "${1:this is a test}",
+    "type": "best_fields",
+    "fields": [${2:"subject", "message"}],
+    "tie_breaker": ${3:0.3}
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>multimatch</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

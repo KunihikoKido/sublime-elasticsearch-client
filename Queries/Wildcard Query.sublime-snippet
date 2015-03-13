@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[
+"wildcard": {
+    "${1:user}": {
+        "value": "${2:ki*y}", "boost": ${3:2.0}
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>wildcard</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.es</scope>
+</snippet>

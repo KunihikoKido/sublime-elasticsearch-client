@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>es</string>
+	</array>
+	<key>name</key>
+	<string>Elasticsearch</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>source.json</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.es</string>
+	<key>uuid</key>
+	<string>bd4306a8-862e-4fbb-a455-8c351164cf0d</string>
+</dict>
+</plist>
