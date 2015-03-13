@@ -76,6 +76,7 @@ Setting                    | Description
 ``enabled_put_mapping``    | if set ``true`` you can put mapping. default: ``false``
 
 ## Commands
+open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...``.
 
 Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
@@ -99,6 +100,7 @@ Elasticsearch: Change Doc Type     | -         |  Sublime Change Setting.
 
 
 ## Snippets for Queries
+file types ``*.es`` or set syntax ``Elasticsearch``
 
 Abbreviation                    | tag
 ------------------------------- | ----------------------------------
@@ -138,6 +140,7 @@ topchildren                     | ``"top_children": {...}``
 wildcard                        | ``"wildcard": {...}``
 
 ## Snippets for Filters
+file types ``*.es`` or set syntax ``Elasticsearch``
 
 Abbreviation                    | tag
 ------------------------------- | ----------------------------------
@@ -168,6 +171,7 @@ terms                           | ``"terms": {...}``
 type                            | ``"type": {...}``
 
 ## Snippets for Aggregations
+file types ``*.es`` or set syntax ``Elasticsearch``
 
 Abbreviation                    | tag
 ------------------------------- | ----------------------------------
@@ -203,6 +207,7 @@ aggsvaluecount                  | ``"aggs": {..."value_count": {...}``
 
 
 ## Completions
+file types ``*.es`` or set syntax ``Elasticsearch``
 
 - _all
 - _score
