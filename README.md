@@ -94,10 +94,10 @@ Elasticsearch: Index Document      | PUT/POST  | ``/index/type/id``
 Elasticsearch: List All Indexes    | GET       | ``/_cat/indices``
 Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
 Elasticsearch: Search Request      | POST      | ``/index/type/_search``
-Elasticsearch: Show Active Server  | -         |  Sublime Change Setting.
-Elasticsearch: Switch Servers      | -         |  Sublime Change Setting.
-Elasticsearch: Change Index        | -         |  Sublime Change Setting.
-Elasticsearch: Change Doc Type     | -         |  Sublime Change Setting.
+Elasticsearch: Show Active Server  | -         |  ※ appears in the status bar.
+Elasticsearch: Switch Servers      | -         |  ※ change the active server.
+Elasticsearch: Change Index        | -         |  ※ change the index for active server.
+Elasticsearch: Change Doc Type     | -         |  ※ change the doc type for active server.
 
 
 ## Snippets for Queries
