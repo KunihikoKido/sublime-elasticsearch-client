@@ -6,6 +6,7 @@ import sublime_plugin
 DEFAULT_PARAMS = {'pretty': 'true'}
 SKIP_PATH = (None, '', b'', [], ())
 
+
 def make_path(*parts):
     return '/'.join([p for p in parts if p not in SKIP_PATH])
 
@@ -25,6 +26,7 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
             'base_url', 'http://localhost:9200/')
         if not self.base_url.endswith('/'):
             self.base_url += '/'
+
         self.index = server_settings.get('index', 'test')
         self.doc_type = server_settings.get('doc_type', 'test')
         self.http_headers = server_settings.get('http_headers', {})
@@ -80,24 +82,27 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
             return  # canceled
         self.servers[self.active_server]['index'] = index_name
         self.settings.set('servers', self.servers)
-        sublime.save_settings("Elasticsearch.sublime-settings")
-        sublime.status_message('Changed index: {0}'.format(index_name))
+        self.save_settings()
+        self.status_message('Changed index: {0}'.format(index_name))
 
     def set_doc_type(self, doc_type):
         if not doc_type:
             return  # canceled
         self.servers[self.active_server]['doc_type'] = doc_type
         self.settings.set('servers', self.servers)
-        sublime.save_settings("Elasticsearch.sublime-settings")
-        sublime.status_message('Changed Type: {0}'.format(doc_type))
+        self.save_settings()
+        self.status_message('Changed Type: {0}'.format(doc_type))
 
     def set_analyzer(self, analyzer):
         if not analyzer:
             return  # canceled
         self.servers[self.active_server]['analyzer'] = analyzer
         self.settings.set('servers', self.servers)
-        sublime.save_settings("Elasticsearch.sublime-settings")
-        sublime.status_message('Changed Type: {0}'.format(analyzer))
+        self.save_settings()
+        self.status_message('Changed Type: {0}'.format(analyzer))
+
+    def save_settings(self):
+        sublime.save_settings('Elasticsearch.sublime-settings')
 
     def get_index(self, callback):
         self.window.show_input_panel(
@@ -125,19 +130,19 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         output_panel.run_command("insert", {"characters": text})
 
 
-class ElasticsearchSearchRequestCommand(BaseElasticsearchCommand):
+class SearchRequestCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchSearchRequestCommand, self).run()
+        super(SearchRequestCommand, self).run()
         url = make_path(self.index, self.doc_type, '_search')
         body = self.get_selection_text()
         self.run_request('POST', url, body)
 
 
-class ElasticsearchCreateIndexCommand(BaseElasticsearchCommand):
+class CreateIndexCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchCreateIndexCommand, self).run()
+        super(CreateIndexCommand, self).run()
 
         if not self.enabled_create_index:
             self.status_message('*** Disabled Create Index! ***')
@@ -155,10 +160,10 @@ class ElasticsearchCreateIndexCommand(BaseElasticsearchCommand):
         self.set_index(index)
 
 
-class ElasticsearchPutMappingCommand(BaseElasticsearchCommand):
+class PutMappingCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchPutMappingCommand, self).run()
+        super(PutMappingCommand, self).run()
 
         if not self.enabled_put_mapping:
             self.status_message('*** Disabled Put Mapping! ***')
@@ -171,7 +176,7 @@ class ElasticsearchPutMappingCommand(BaseElasticsearchCommand):
         self.get_doc_type(self.put_mapping)
 
     def set_index(self, index):
-        super(ElasticsearchPutMappingCommand, self).set_index(index)
+        super(PutMappingCommand, self).set_index(index)
         self.run()
 
     def put_mapping(self, doc_type):
@@ -186,10 +191,10 @@ class ElasticsearchPutMappingCommand(BaseElasticsearchCommand):
         self.set_doc_type(doc_type)
 
 
-class ElasticsearchAnalyzeCommand(BaseElasticsearchCommand):
+class AnalyzeCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchAnalyzeCommand, self).run()
+        super(AnalyzeCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -198,7 +203,7 @@ class ElasticsearchAnalyzeCommand(BaseElasticsearchCommand):
         self.get_analyzer(self.analyze)
 
     def set_index(self, index):
-        super(ElasticsearchAnalyzeCommand, self).set_index(index)
+        super(AnalyzeCommand, self).set_index(index)
         self.run()
 
     def analyze(self, analyzer):
@@ -215,30 +220,30 @@ class ElasticsearchAnalyzeCommand(BaseElasticsearchCommand):
         self.set_analyzer(analyzer)
 
 
-class ElasticsearchClusterHealthCommand(BaseElasticsearchCommand):
+class ClusterHealthCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchClusterHealthCommand, self).run()
+        super(ClusterHealthCommand, self).run()
 
         url = make_path('_cat', 'health')
         params = {'v': 'true'}
         self.run_request('GET', url, None, params)
 
 
-class ElasticsearchListAllIndexesCommand(BaseElasticsearchCommand):
+class ListAllIndexesCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchListAllIndexesCommand, self).run()
+        super(ListAllIndexesCommand, self).run()
 
         url = make_path('_cat', 'indices')
         params = {'v': 'true'}
         self.run_request('GET', url, None, params)
 
 
-class ElasticsearchGetIndexSettingsCommand(BaseElasticsearchCommand):
+class GetIndexSettingsCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchGetIndexSettingsCommand, self).run()
+        super(GetIndexSettingsCommand, self).run()
 
         self.get_index(self.get_index_settings)
 
@@ -252,10 +257,10 @@ class ElasticsearchGetIndexSettingsCommand(BaseElasticsearchCommand):
         self.set_index(index)
 
 
-class ElasticsearchGetMappingCommand(BaseElasticsearchCommand):
+class GetMappingCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchGetMappingCommand, self).run()
+        super(GetMappingCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -264,7 +269,7 @@ class ElasticsearchGetMappingCommand(BaseElasticsearchCommand):
         self.get_doc_type(self.get_mapping)
 
     def set_index(self, index):
-        super(ElasticsearchGetMappingCommand, self).set_index(index)
+        super(GetMappingCommand, self).set_index(index)
         self.run()
 
     def get_mapping(self, doc_type):
@@ -278,10 +283,10 @@ class ElasticsearchGetMappingCommand(BaseElasticsearchCommand):
         self.set_doc_type(doc_type)
 
 
-class ElasticsearchIndexDocumentCommand(BaseElasticsearchCommand):
+class IndexDocumentCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchIndexDocumentCommand, self).run()
+        super(IndexDocumentCommand, self).run()
 
         if not self.enabled_index_document:
             self.status_message('*** Disabled Index Document! ***')
@@ -298,11 +303,11 @@ class ElasticsearchIndexDocumentCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.index_document)
 
     def set_index(self, index):
-        super(ElasticsearchIndexDocumentCommand, self).set_index(index)
+        super(IndexDocumentCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(ElasticsearchIndexDocumentCommand, self).set_doc_type(doc_type)
+        super(IndexDocumentCommand, self).set_doc_type(doc_type)
         self.run()
 
     def index_document(self, doc_id):
@@ -315,10 +320,10 @@ class ElasticsearchIndexDocumentCommand(BaseElasticsearchCommand):
         self.run_request(method, url, body)
 
 
-class ElasticsearchDeleteDocumentCommand(BaseElasticsearchCommand):
+class DeleteDocumentCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchDeleteDocumentCommand, self).run()
+        super(DeleteDocumentCommand, self).run()
 
         if not self.enabled_delete_document:
             self.status_message('*** Disabled Delete Document! ***')
@@ -335,11 +340,11 @@ class ElasticsearchDeleteDocumentCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.delete_document)
 
     def set_index(self, index):
-        super(ElasticsearchDeleteDocumentCommand, self).set_index(index)
+        super(DeleteDocumentCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(ElasticsearchDeleteDocumentCommand, self).set_doc_type(doc_type)
+        super(DeleteDocumentCommand, self).set_doc_type(doc_type)
         self.run()
 
     def delete_document(self, doc_id):
@@ -351,10 +356,10 @@ class ElasticsearchDeleteDocumentCommand(BaseElasticsearchCommand):
         self.run_request('DELETE', url)
 
 
-class ElasticsearchGetDocumentCommand(BaseElasticsearchCommand):
+class GetDocumentCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchGetDocumentCommand, self).run()
+        super(GetDocumentCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -367,11 +372,11 @@ class ElasticsearchGetDocumentCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.get_document)
 
     def set_index(self, index):
-        super(ElasticsearchGetDocumentCommand, self).set_index(index)
+        super(GetDocumentCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(ElasticsearchGetDocumentCommand, self).set_doc_type(doc_type)
+        super(GetDocumentCommand, self).set_doc_type(doc_type)
         self.run()
 
     def get_document(self, doc_id):
@@ -383,10 +388,10 @@ class ElasticsearchGetDocumentCommand(BaseElasticsearchCommand):
         self.run_request('GET', url)
 
 
-class ElasticsearchDeleteIndexCommand(BaseElasticsearchCommand):
+class DeleteIndexCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchDeleteIndexCommand, self).run()
+        super(DeleteIndexCommand, self).run()
 
         if not self.enabled_delete_index:
             self.status_message('*** Disabled Delete Index! ***')
@@ -403,10 +408,10 @@ class ElasticsearchDeleteIndexCommand(BaseElasticsearchCommand):
         self.run_request('DELETE', url)
 
 
-class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
+class DeleteMappingCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchDeleteMappingCommand, self).run()
+        super(DeleteMappingCommand, self).run()
 
         if not self.enabled_delete_mapping:
             self.status_message('*** Disabled Delete Mapping! ***')
@@ -419,7 +424,7 @@ class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
         self.get_doc_type(self.delete_mapping)
 
     def set_index(self, index):
-        super(ElasticsearchDeleteMappingCommand, self).set_index(index)
+        super(DeleteMappingCommand, self).set_index(index)
         self.run()
 
     def delete_mapping(self, doc_type):
@@ -433,10 +438,10 @@ class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
         self.set_doc_type(doc_type)
 
 
-class ElasticsearchRegisterPercolatorCommand(BaseElasticsearchCommand):
+class RegisterPercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchRegisterPercolatorCommand, self).run()
+        super(RegisterPercolatorCommand, self).run()
 
         if not self.enabled_register_query:
             self.status_message(
@@ -449,7 +454,7 @@ class ElasticsearchRegisterPercolatorCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.register_query)
 
     def set_index(self, index):
-        super(ElasticsearchRegisterPercolatorCommand, self).set_index(index)
+        super(RegisterPercolatorCommand, self).set_index(index)
         self.run()
 
     def register_query(self, doc_id):
@@ -462,10 +467,10 @@ class ElasticsearchRegisterPercolatorCommand(BaseElasticsearchCommand):
         self.run_request('PUT', url, body)
 
 
-class ElasticsearchShowPercolatorCommand(BaseElasticsearchCommand):
+class ShowPercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchShowPercolatorCommand, self).run()
+        super(ShowPercolatorCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -475,14 +480,14 @@ class ElasticsearchShowPercolatorCommand(BaseElasticsearchCommand):
         self.run_request('POST', url)
 
     def set_index(self, index):
-        super(ElasticsearchIndexDocumentCommand, self).set_index(index)
+        super(ShowPercolatorCommand, self).set_index(index)
         self.run()
 
 
-class ElasticsearchMatchPercolatorCommand(BaseElasticsearchCommand):
+class MatchPercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchMatchPercolatorCommand, self).run()
+        super(MatchPercolatorCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -497,18 +502,18 @@ class ElasticsearchMatchPercolatorCommand(BaseElasticsearchCommand):
         self.run_request('POST', url, body)
 
     def set_index(self, index):
-        super(ElasticsearchIndexDocumentCommand, self).set_index(index)
+        super(MatchPercolatorCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(ElasticsearchIndexDocumentCommand, self).set_doc_type(doc_type)
+        super(MatchPercolatorCommand, self).set_doc_type(doc_type)
         self.run()
 
 
-class ElasticsearchDeletePercolatorCommand(BaseElasticsearchCommand):
+class DeletePercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ElasticsearchDeletePercolatorCommand, self).run()
+        super(DeletePercolatorCommand, self).run()
 
         if not self.enabled_delete_percolator:
             self.status_message('*** Disabled Delete Percolator! ***')
@@ -525,12 +530,11 @@ class ElasticsearchDeletePercolatorCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.delete_percolator)
 
     def set_index(self, index):
-        super(ElasticsearchDeletePercolatorCommand, self).set_index(index)
+        super(DeletePercolatorCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(ElasticsearchDeletePercolatorCommand, self).\
-            set_doc_type(doc_type)
+        super(DeletePercolatorCommand, self).set_doc_type(doc_type)
         self.run()
 
     def delete_percolator(self, doc_id):
@@ -555,7 +559,7 @@ class SwitchServersCommand(BaseElasticsearchCommand):
             return  # canceled
         self.active_server = list(self.servers.keys())[index]
         self.settings.set("active_server", self.active_server)
-        sublime.save_settings("Elasticsearch.sublime-settings")
+        self.save_settings()
 
 
 class ShowActiveServerCommand(BaseElasticsearchCommand):
@@ -563,38 +567,38 @@ class ShowActiveServerCommand(BaseElasticsearchCommand):
     def run(self):
         super(ShowActiveServerCommand, self).run()
         self.panel(
-                "Active Server Settings\n"
-                "======================\n"
-                "- base_url                     : {base_url}\n"
-                "- index                        : {index}\n"
-                "- doc_type                     : {doc_type}\n"
-                "- analyzer                     : {analyzer}\n"
-                "- enabled_create_index         : {enabled_create_index}\n"
-                "- enabled_delete_document      : {enabled_delete_document}\n"
-                "- enabled_delete_index         : {enabled_delete_index}\n"
-                "- enabled_delete_mapping       : {enabled_delete_mapping}\n"
-                "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
-                "- enabled_index_document       : {enabled_index_document}\n"
-                "- enabled_put_mapping          : {enabled_put_mapping}\n"
-                "- enabled_register_query       : {enabled_register_query}\n"
-                "".format(
-                    base_url=self.base_url,
-                    index=self.index,
-                    doc_type=self.doc_type,
-                    analyzer=self.analyzer,
-                    enabled_create_index=self.enabled_create_index,
-                    enabled_delete_document=self.enabled_delete_document,
-                    enabled_delete_index=self.enabled_delete_index,
-                    enabled_delete_mapping=self.enabled_delete_mapping,
-                    enabled_delete_percolator=self.enabled_delete_percolator,
-                    enabled_index_document=self.enabled_index_document,
-                    enabled_put_mapping=self.enabled_put_mapping,
-                    enabled_register_query=self.enabled_register_query,
-                    )
+            "Active Server Settings [{active_server}]\n"
+            "=============================================================\n"
+            "- base_url                     : {base_url}\n"
+            "- index                        : {index}\n"
+            "- doc_type                     : {doc_type}\n"
+            "- analyzer                     : {analyzer}\n"
+            "- enabled_create_index         : {enabled_create_index}\n"
+            "- enabled_delete_document      : {enabled_delete_document}\n"
+            "- enabled_delete_index         : {enabled_delete_index}\n"
+            "- enabled_delete_mapping       : {enabled_delete_mapping}\n"
+            "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
+            "- enabled_index_document       : {enabled_index_document}\n"
+            "- enabled_put_mapping          : {enabled_put_mapping}\n"
+            "- enabled_register_query       : {enabled_register_query}\n"
+            "".format(
+                active_server=self.active_server,
+                base_url=self.base_url,
+                index=self.index,
+                doc_type=self.doc_type,
+                analyzer=self.analyzer,
+                enabled_create_index=self.enabled_create_index,
+                enabled_delete_document=self.enabled_delete_document,
+                enabled_delete_index=self.enabled_delete_index,
+                enabled_delete_mapping=self.enabled_delete_mapping,
+                enabled_delete_percolator=self.enabled_delete_percolator,
+                enabled_index_document=self.enabled_index_document,
+                enabled_put_mapping=self.enabled_put_mapping,
+                enabled_register_query=self.enabled_register_query)
         )
 
         self.status_message(
-            'Elasticsearch: {0} ({1} / {2})'.format(
+            ': {0} ({1} / {2})'.format(
                 self.active_server, self.index, self.doc_type))
 
 
