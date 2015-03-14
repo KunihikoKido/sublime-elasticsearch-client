@@ -3,9 +3,8 @@ from urllib.parse import urlencode
 import sublime
 import sublime_plugin
 
-
+DEFAULT_PARAMS = {'pretty': 'true'}
 SKIP_PATH = (None, '', b'', [], ())
-
 
 def make_path(*parts):
     return '/'.join([p for p in parts if p not in SKIP_PATH])
@@ -49,12 +48,12 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
             'enabled_delete_percolator', False)
 
     def get_request_url(self, url, params):
-        params = urlencode(params or {})
+        params = urlencode(params or DEFAULT_PARAMS)
         if url:
             return '{0}{1}?{2}'.format(self.base_url, url, params)
         return '{0}?{1}'.format(self.base_url, params)
 
-    def curl_request(self, method, url=None, body=None, params=None):
+    def run_request(self, method, url=None, body=None, params=None):
         curl_command = ['curl', '-s', '-X', method]
         request_url = self.get_request_url(url, params)
         curl_command += [request_url]
@@ -100,17 +99,39 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         sublime.save_settings("Elasticsearch.sublime-settings")
         sublime.status_message('Changed Type: {0}'.format(analyzer))
 
+    def get_index(self, callback):
+        self.window.show_input_panel(
+            'Index: ', self.index, callback, None, None)
+
+    def get_doc_type(self, callback):
+        self.window.show_input_panel(
+            'Document Type: ', self.doc_type, callback, None, None)
+
+    def get_doc_id(self, callback):
+        self.window.show_input_panel(
+            'Document Id: ', '', callback, None, None)
+
+    def get_analyzer(self, callback):
+        self.window.show_input_panel(
+            'Analyzer: ', self.analyzer, callback, None, None)
+
+    def status_message(self, message):
+        sublime.status_message(message)
+
+    def panel(self, text):
+        output_panel = self.window.get_output_panel("textarea")
+        output_panel.set_syntax_file('')
+        self.window.run_command("show_panel", {"panel": "output.textarea"})
+        output_panel.run_command("insert", {"characters": text})
+
 
 class ElasticsearchSearchRequestCommand(BaseElasticsearchCommand):
 
     def run(self):
         super(ElasticsearchSearchRequestCommand, self).run()
-
+        url = make_path(self.index, self.doc_type, '_search')
         body = self.get_selection_text()
-        self.curl_request(
-            'POST',
-            make_path(self.index, self.doc_type, '_search'), body,
-            {'pretty': 'true'})
+        self.run_request('POST', url, body)
 
 
 class ElasticsearchCreateIndexCommand(BaseElasticsearchCommand):
@@ -119,20 +140,18 @@ class ElasticsearchCreateIndexCommand(BaseElasticsearchCommand):
         super(ElasticsearchCreateIndexCommand, self).run()
 
         if not self.enabled_create_index:
-            sublime.status_message('*** Disabled Create Index! ***')
+            self.status_message('*** Disabled Create Index! ***')
             return
 
-        self.window.show_input_panel(
-            'Index: ', self.index, self.create_index, None, None)
+        self.get_index(self.create_index)
 
     def create_index(self, index):
         if not index:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'PUT', make_path(self.index), None, {'pretty': 'true'})
-
+        url = make_path(self.index)
+        self.run_request('PUT', url)
         self.set_index(index)
 
 
@@ -142,17 +161,14 @@ class ElasticsearchPutMappingCommand(BaseElasticsearchCommand):
         super(ElasticsearchPutMappingCommand, self).run()
 
         if not self.enabled_put_mapping:
-            sublime.status_message('*** Disabled Put Mapping! ***')
+            self.status_message('*** Disabled Put Mapping! ***')
             return
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
-        self.window.show_input_panel(
-            '({0}) Doc Type: '.format(self.index),
-            self.doc_type, self.put_mapping, None, None)
+        self.get_doc_type(self.put_mapping)
 
     def set_index(self, index):
         super(ElasticsearchPutMappingCommand, self).set_index(index)
@@ -160,13 +176,12 @@ class ElasticsearchPutMappingCommand(BaseElasticsearchCommand):
 
     def put_mapping(self, doc_type):
         if not doc_type:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
+        url = make_path(self.index, '_mapping', doc_type)
         body = self.get_selection_text()
-        self.curl_request(
-            'PUT', make_path(self.index, '_mapping', doc_type),
-            body, {'pretty': 'true'})
+        self.run_request('PUT', url, body)
 
         self.set_doc_type(doc_type)
 
@@ -177,13 +192,10 @@ class ElasticsearchAnalyzeCommand(BaseElasticsearchCommand):
         super(ElasticsearchAnalyzeCommand, self).run()
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
-        self.window.show_input_panel(
-            '({0}) Analyzer: '.format(self.index),
-            self.analyzer, self.analyze, None, None)
+        self.get_analyzer(self.analyze)
 
     def set_index(self, index):
         super(ElasticsearchAnalyzeCommand, self).set_index(index)
@@ -191,13 +203,14 @@ class ElasticsearchAnalyzeCommand(BaseElasticsearchCommand):
 
     def analyze(self, analyzer):
         if not analyzer:
-            sublime.status_message('canceled')
+            self.status_message('canceled')
             return
 
+        url = make_path(self.index, '_analyze')
         body = self.get_selection_text()
-        self.curl_request(
-            'POST', make_path(self.index, '_analyze'), body,
-            {'pretty': 'true', 'analyzer': analyzer})
+        params = {'analyzer': analyzer}
+        params.update(DEFAULT_PARAMS)
+        self.run_request('POST', url, body, params)
 
         self.set_analyzer(analyzer)
 
@@ -207,8 +220,9 @@ class ElasticsearchClusterHealthCommand(BaseElasticsearchCommand):
     def run(self):
         super(ElasticsearchClusterHealthCommand, self).run()
 
-        self.curl_request(
-            'GET', make_path('_cat', 'health'), None, {'v': 'true'})
+        url = make_path('_cat', 'health')
+        params = {'v': 'true'}
+        self.run_request('GET', url, None, params)
 
 
 class ElasticsearchListAllIndexesCommand(BaseElasticsearchCommand):
@@ -216,8 +230,9 @@ class ElasticsearchListAllIndexesCommand(BaseElasticsearchCommand):
     def run(self):
         super(ElasticsearchListAllIndexesCommand, self).run()
 
-        self.curl_request(
-            'GET', make_path('_cat', 'indices'), None, {'v': 'true'})
+        url = make_path('_cat', 'indices')
+        params = {'v': 'true'}
+        self.run_request('GET', url, None, params)
 
 
 class ElasticsearchGetIndexSettingsCommand(BaseElasticsearchCommand):
@@ -225,19 +240,15 @@ class ElasticsearchGetIndexSettingsCommand(BaseElasticsearchCommand):
     def run(self):
         super(ElasticsearchGetIndexSettingsCommand, self).run()
 
-        self.window.show_input_panel(
-            'Index: ', self.index, self.get_index_settings, None, None)
-        return
+        self.get_index(self.get_index_settings)
 
     def get_index_settings(self, index):
         if not index:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'GET', make_path(index, '_settings'),
-            None, {'pretty': 'true'})
-
+        url = make_path(index, '_settings')
+        self.run_request('GET', url)
         self.set_index(index)
 
 
@@ -247,13 +258,10 @@ class ElasticsearchGetMappingCommand(BaseElasticsearchCommand):
         super(ElasticsearchGetMappingCommand, self).run()
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
-        self.window.show_input_panel(
-            '({0}) Doc Type: '.format(self.index),
-            self.doc_type, self.get_mapping, None, None)
+        self.get_doc_type(self.get_mapping)
 
     def set_index(self, index):
         super(ElasticsearchGetMappingCommand, self).set_index(index)
@@ -261,12 +269,11 @@ class ElasticsearchGetMappingCommand(BaseElasticsearchCommand):
 
     def get_mapping(self, doc_type):
         if not doc_type:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'GET', make_path(self.index, '_mapping', doc_type),
-            None, {'pretty': 'true'})
+        url = make_path(self.index, '_mapping', doc_type)
+        self.run_request('GET', url)
 
         self.set_doc_type(doc_type)
 
@@ -277,23 +284,18 @@ class ElasticsearchIndexDocumentCommand(BaseElasticsearchCommand):
         super(ElasticsearchIndexDocumentCommand, self).run()
 
         if not self.enabled_index_document:
-            sublime.status_message('*** Disabled Index Document! ***')
+            self.status_message('*** Disabled Index Document! ***')
             return
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
         if not self.doc_type:
-            self.window.show_input_panel(
-                '({0}) Doc Type: '.format(self.index),
-                '', self.set_doc_type, None, None)
+            self.get_doc_type(self.set_doc_type)
             return
 
-        self.window.show_input_panel(
-            '({0}/{1}) Document ID: '.format(self.index, self.doc_type),
-            '', self.index_document, None, None)
+        self.get_doc_id(self.index_document)
 
     def set_index(self, index):
         super(ElasticsearchIndexDocumentCommand, self).set_index(index)
@@ -304,16 +306,13 @@ class ElasticsearchIndexDocumentCommand(BaseElasticsearchCommand):
         self.run()
 
     def index_document(self, doc_id):
+        method = 'POST'
+        url = make_path(self.index, self.doc_type)
         body = self.get_selection_text()
         if doc_id:
-            self.curl_request(
-                'PUT', make_path(self.index, self.doc_type, doc_id),
-                body, {'pretty': 'true'})
-            return
-
-        self.curl_request(
-            'POST', make_path(self.index, self.doc_type),
-            body, {'pretty': 'true'})
+            method = 'PUT'
+            url = make_path(self.index, self.doc_type, doc_id)
+        self.run_request(method, url, body)
 
 
 class ElasticsearchDeleteDocumentCommand(BaseElasticsearchCommand):
@@ -322,23 +321,18 @@ class ElasticsearchDeleteDocumentCommand(BaseElasticsearchCommand):
         super(ElasticsearchDeleteDocumentCommand, self).run()
 
         if not self.enabled_delete_document:
-            sublime.status_message('*** Disabled Delete Document! ***')
+            self.status_message('*** Disabled Delete Document! ***')
             return
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
         if not self.doc_type:
-            self.window.show_input_panel(
-                '({0}) Doc Type: '.format(self.index),
-                '', self.set_doc_type, None, None)
+            self.get_doc_type(self.set_doc_type)
             return
 
-        self.window.show_input_panel(
-            '({0}/{1}) Document ID: '.format(self.index, self.doc_type),
-            '', self.delete_document, None, None)
+        self.get_doc_id(self.delete_document)
 
     def set_index(self, index):
         super(ElasticsearchDeleteDocumentCommand, self).set_index(index)
@@ -350,12 +344,11 @@ class ElasticsearchDeleteDocumentCommand(BaseElasticsearchCommand):
 
     def delete_document(self, doc_id):
         if not doc_id:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'DELETE', make_path(self.index, self.doc_type, doc_id),
-            None, {'pretty': 'true'})
+        url = make_path(self.index, self.doc_type, doc_id)
+        self.run_request('DELETE', url)
 
 
 class ElasticsearchGetDocumentCommand(BaseElasticsearchCommand):
@@ -364,19 +357,14 @@ class ElasticsearchGetDocumentCommand(BaseElasticsearchCommand):
         super(ElasticsearchGetDocumentCommand, self).run()
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
         if not self.doc_type:
-            self.window.show_input_panel(
-                '({0}) Doc Type: '.format(self.index),
-                '', self.set_doc_type, None, None)
+            self.get_doc_type(self.set_doc_type)
             return
 
-        self.window.show_input_panel(
-            '({0}/{1}) Document ID: '.format(self.index, self.doc_type),
-            '', self.get_document, None, None)
+        self.get_doc_id(self.get_document)
 
     def set_index(self, index):
         super(ElasticsearchGetDocumentCommand, self).set_index(index)
@@ -388,12 +376,11 @@ class ElasticsearchGetDocumentCommand(BaseElasticsearchCommand):
 
     def get_document(self, doc_id):
         if not doc_id:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'GET', make_path(self.index, self.doc_type, doc_id),
-            None, {'pretty': 'true'})
+        url = make_path(self.index, self.doc_type, doc_id)
+        self.run_request('GET', url)
 
 
 class ElasticsearchDeleteIndexCommand(BaseElasticsearchCommand):
@@ -402,18 +389,18 @@ class ElasticsearchDeleteIndexCommand(BaseElasticsearchCommand):
         super(ElasticsearchDeleteIndexCommand, self).run()
 
         if not self.enabled_delete_index:
-            sublime.status_message('*** Disabled Delete Index! ***')
+            self.status_message('*** Disabled Delete Index! ***')
             return
 
-        self.window.show_input_panel(
-            'Index: ', self.index, self.delete_index, None, None)
+        self.get_index(self.delete_index)
 
     def delete_index(self, index):
         if not index:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request('DELETE', make_path(index), None, {'pretty': 'true'})
+        url = make_path(index)
+        self.run_request('DELETE', url)
 
 
 class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
@@ -422,17 +409,14 @@ class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
         super(ElasticsearchDeleteMappingCommand, self).run()
 
         if not self.enabled_delete_mapping:
-            sublime.status_message('*** Disabled Delete Mapping! ***')
+            self.status_message('*** Disabled Delete Mapping! ***')
             return
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
-        self.window.show_input_panel(
-            '({0}) Doc Type: '.format(self.index),
-            self.doc_type, self.delete_mapping, None, None)
+        self.get_doc_type(self.delete_mapping)
 
     def set_index(self, index):
         super(ElasticsearchDeleteMappingCommand, self).set_index(index)
@@ -440,12 +424,11 @@ class ElasticsearchDeleteMappingCommand(BaseElasticsearchCommand):
 
     def delete_mapping(self, doc_type):
         if not doc_type:
-            sublime.status_message('Canceled')
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'DELETE', make_path(self.index, doc_type),
-            None, {'pretty': 'true'})
+        url = make_path(self.index, doc_type)
+        self.run_request('DELETE', url)
 
         self.set_doc_type(doc_type)
 
@@ -456,31 +439,27 @@ class ElasticsearchRegisterPercolatorCommand(BaseElasticsearchCommand):
         super(ElasticsearchRegisterPercolatorCommand, self).run()
 
         if not self.enabled_register_query:
-            sublime.status_message(
+            self.status_message(
                 '*** Disabled Register Query (Percolator)! ***')
             return
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', self.index, self.set_index, None, None)
+            self.get_index(self.set_index)
 
-        self.window.show_input_panel(
-            '({0}) Percolator ID : '.format(self.index),
-            '', self.register_query, None, None)
+        self.get_doc_id(self.register_query)
 
     def set_index(self, index):
         super(ElasticsearchRegisterPercolatorCommand, self).set_index(index)
         self.run()
 
-    def register_query(self, percolator_id):
-        if not percolator_id:
-            sublime.status_message('Canceled')
+    def register_query(self, doc_id):
+        if not doc_id:
+            self.status_message('Canceled')
             return
 
+        url = make_path(self.index, '.percolator', doc_id)
         body = self.get_selection_text()
-        self.curl_request(
-            'PUT', make_path(self.index, '.percolator', percolator_id),
-            body, {'pretty': 'true'})
+        self.run_request('PUT', url, body)
 
 
 class ElasticsearchShowPercolatorCommand(BaseElasticsearchCommand):
@@ -489,13 +468,11 @@ class ElasticsearchShowPercolatorCommand(BaseElasticsearchCommand):
         super(ElasticsearchShowPercolatorCommand, self).run()
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
-        self.curl_request(
-            'POST', make_path(self.index, '.percolator', '_search'),
-            None, {'pretty': 'true'})
+        url = make_path(self.index, '.percolator', '_search')
+        self.run_request('POST', url)
 
     def set_index(self, index):
         super(ElasticsearchIndexDocumentCommand, self).set_index(index)
@@ -508,20 +485,16 @@ class ElasticsearchMatchPercolatorCommand(BaseElasticsearchCommand):
         super(ElasticsearchMatchPercolatorCommand, self).run()
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
         if not self.doc_type:
-            self.window.show_input_panel(
-                '({0}) Doc Type: '.format(self.index),
-                '', self.set_doc_type, None, None)
+            self.get_doc_type(self.set_doc_type)
             return
 
+        url = make_path(self.index, self.doc_type, '_percolate')
         body = self.get_selection_text()
-        self.curl_request(
-            'POST', make_path(self.index, self.doc_type, '_percolate'),
-            body, {'pretty': 'true'})
+        self.run_request('POST', url, body)
 
     def set_index(self, index):
         super(ElasticsearchIndexDocumentCommand, self).set_index(index)
@@ -538,23 +511,18 @@ class ElasticsearchDeletePercolatorCommand(BaseElasticsearchCommand):
         super(ElasticsearchDeletePercolatorCommand, self).run()
 
         if not self.enabled_delete_percolator:
-            sublime.status_message('*** Disabled Delete Percolator! ***')
+            self.status_message('*** Disabled Delete Percolator! ***')
             return
 
         if not self.index:
-            self.window.show_input_panel(
-                'Index: ', '', self.set_index, None, None)
+            self.get_index(self.set_index)
             return
 
         if not self.doc_type:
-            self.window.show_input_panel(
-                '({0}) Doc Type: '.format(self.index),
-                '', self.set_doc_type, None, None)
+            self.get_doc_type(self.set_doc_type)
             return
 
-        self.window.show_input_panel(
-            '({0}) Percolator ID: '.format(self.index),
-            '', self.delete_percolator, None, None)
+        self.get_doc_id(self.delete_percolator)
 
     def set_index(self, index):
         super(ElasticsearchDeletePercolatorCommand, self).set_index(index)
@@ -565,14 +533,13 @@ class ElasticsearchDeletePercolatorCommand(BaseElasticsearchCommand):
             set_doc_type(doc_type)
         self.run()
 
-    def delete_percolator(self, percolator_id):
-        if not percolator_id:
-            sublime.status_message('Canceled')
+    def delete_percolator(self, doc_id):
+        if not doc_id:
+            self.status_message('Canceled')
             return
 
-        self.curl_request(
-            'DELETE', make_path(self.index, '.percolator', percolator_id),
-            None, {'pretty': 'true'})
+        url = make_path(self.index, '.percolator', doc_id)
+        self.run_request('DELETE', url)
 
 
 class SwitchServersCommand(BaseElasticsearchCommand):
@@ -595,11 +562,7 @@ class ShowActiveServerCommand(BaseElasticsearchCommand):
 
     def run(self):
         super(ShowActiveServerCommand, self).run()
-        output_panel = self.window.get_output_panel("textarea")
-        self.window.run_command("show_panel", {"panel": "output.textarea"})
-        output_panel.run_command(
-            "insert", {
-                "characters":
+        self.panel(
                 "Active Server Settings\n"
                 "======================\n"
                 "- base_url                     : {base_url}\n"
@@ -627,9 +590,9 @@ class ShowActiveServerCommand(BaseElasticsearchCommand):
                     enabled_put_mapping=self.enabled_put_mapping,
                     enabled_register_query=self.enabled_register_query,
                     enabled_delete_percolator=self.enabled_delete_percolator)
-            })
+        )
 
-        sublime.status_message(
+        self.status_message(
             'Elasticsearch: {0} ({1} / {2})'.format(
                 self.active_server, self.index, self.doc_type))
 
@@ -638,14 +601,11 @@ class ChangeIndexCommand(BaseElasticsearchCommand):
 
     def run(self):
         super(ChangeIndexCommand, self).run()
-        self.window.show_input_panel(
-            'Change to: ', self.index, self.set_index, None, None)
+        self.get_index(self.set_index)
 
 
 class ChangeDocTypeCommand(BaseElasticsearchCommand):
 
     def run(self):
         super(ChangeDocTypeCommand, self).run()
-        self.window.show_input_panel(
-            '({0}) Change to: '.format(self.index),
-            self.doc_type, self.set_doc_type, None, None)
+        self.get_doc_type(self.set_doc_type)

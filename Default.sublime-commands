@@ -52,19 +52,19 @@
         "command": "elasticsearch_delete_document",
     },
     {
-        "caption": "Elasticsearch: Register Query for Percolator",
+        "caption": "Elasticsearch: Register Query (Percolator)",
         "command": "elasticsearch_register_percolator",
     },
     {
-        "caption": "Elasticsearch: Show Query for Percolator",
+        "caption": "Elasticsearch: Show Registered Query (Percolator)",
         "command": "elasticsearch_show_percolator",
     },
     {
-        "caption": "Elasticsearch: Match Document for Percolator",
+        "caption": "Elasticsearch: Match Document (Percolator)",
         "command": "elasticsearch_match_percolator",
     },
     {
-        "caption": "Elasticsearch: UN-Register Query for Percolator",
+        "caption": "Elasticsearch: UN-Register Query (Percolator)",
         "command": "elasticsearch_delete_percolator",
     },
     {
