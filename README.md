@@ -9,7 +9,7 @@ To install, clone to your "Packages" directory.
 - OS X: ~/Library/Application\\ Support/Sublime\\ Text\\ 3/Packages
 
 ```bash
-git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git ElasticsearchClient
+git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git Elasticsearch
 ```
 
 

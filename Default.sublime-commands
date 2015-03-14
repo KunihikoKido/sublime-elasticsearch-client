@@ -1,86 +1,86 @@
 [
     {
-        "caption": "ElasticsearchClient: Search Request",
+        "caption": "Elasticsearch: Search",
         "command": "elasticsearch_search_request",
     },
     {
-        "caption": "ElasticsearchClient: Analyze",
+        "caption": "Elasticsearch: Analyze",
         "command": "elasticsearch_analyze",
     },
     {
-        "caption": "ElasticsearchClient: Cluster Health",
+        "caption": "Elasticsearch: Cluster Health",
         "command": "elasticsearch_cluster_health",
     },
     {
-        "caption": "ElasticsearchClient: List All Indexes",
+        "caption": "Elasticsearch: List All Indexes",
         "command": "elasticsearch_list_all_indexes",
     },
     {
-        "caption": "ElasticsearchClient: Get Index Settings",
+        "caption": "Elasticsearch: Get Index Settings",
         "command": "elasticsearch_get_index_settings",
     },
     {
-        "caption": "ElasticsearchClient: Get Mapping",
+        "caption": "Elasticsearch: Get Mapping",
         "command": "elasticsearch_get_mapping",
     },
     {
-        "caption": "ElasticsearchClient: Create Index",
+        "caption": "Elasticsearch: Create Index",
         "command": "elasticsearch_create_index",
     },
     {
-        "caption": "ElasticsearchClient: Put Mapping",
+        "caption": "Elasticsearch: Put Mapping",
         "command": "elasticsearch_put_mapping",
     },
     {
-        "caption": "ElasticsearchClient: Index Document",
+        "caption": "Elasticsearch: Index Document",
         "command": "elasticsearch_index_document",
     },
     {
-        "caption": "ElasticsearchClient: Get Document",
+        "caption": "Elasticsearch: Get Document",
         "command": "elasticsearch_get_document",
     },
     {
-        "caption": "ElasticsearchClient: Delete Index",
+        "caption": "Elasticsearch: Delete Index",
         "command": "elasticsearch_delete_index",
     },
     {
-        "caption": "ElasticsearchClient: Delete Mapping",
+        "caption": "Elasticsearch: Delete Mapping",
         "command": "elasticsearch_delete_mapping",
     },
     {
-        "caption": "ElasticsearchClient: Delete Document",
+        "caption": "Elasticsearch: Delete Document",
         "command": "elasticsearch_delete_document",
     },
     {
-        "caption": "ElasticsearchClient: Register Query for Percolator",
+        "caption": "Elasticsearch: Register Query for Percolator",
         "command": "elasticsearch_register_percolator",
     },
     {
-        "caption": "ElasticsearchClient: Show Query for Percolator",
+        "caption": "Elasticsearch: Show Query for Percolator",
         "command": "elasticsearch_show_percolator",
     },
     {
-        "caption": "ElasticsearchClient: Match Document for Percolator",
+        "caption": "Elasticsearch: Match Document for Percolator",
         "command": "elasticsearch_match_percolator",
     },
     {
-        "caption": "ElasticsearchClient: UN-Register Query for Percolator",
+        "caption": "Elasticsearch: UN-Register Query for Percolator",
         "command": "elasticsearch_delete_percolator",
     },
     {
-        "caption": "ElasticsearchClient: Switch Servers",
+        "caption": "Elasticsearch: Switch Servers",
         "command": "switch_servers",
     },
     {
-        "caption": "ElasticsearchClient: Show Active Server",
+        "caption": "Elasticsearch: Show Active Server",
         "command": "show_active_server",
     },
     {
-        "caption": "ElasticsearchClient: Change Index",
+        "caption": "Elasticsearch: Change Index",
         "command": "change_index",
     },
     {
-        "caption": "ElasticsearchClient: Change Doc Type",
+        "caption": "Elasticsearch: Change Doc Type",
         "command": "change_doc_type",
     }
 
