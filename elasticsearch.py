@@ -560,6 +560,7 @@ class EsSwitchServersCommand(BaseElasticsearchCommand):
         self.active_server = list(self.servers.keys())[index]
         self.settings.set("active_server", self.active_server)
         self.save_settings()
+        self.status_message("Switched: {0}".format(self.active_server))
 
 
 class EsShowActiveServerCommand(BaseElasticsearchCommand):
