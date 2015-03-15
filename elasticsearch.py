@@ -155,7 +155,7 @@ class CreateIndexCommand(BaseElasticsearchCommand):
             self.status_message('Canceled')
             return
 
-        url = make_path(self.index)
+        url = make_path(index)
         self.run_request('PUT', url)
         self.set_index(index)
 
