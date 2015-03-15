@@ -130,19 +130,19 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         output_panel.run_command("insert", {"characters": text})
 
 
-class SearchRequestCommand(BaseElasticsearchCommand):
+class EsSearchRequestCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(SearchRequestCommand, self).run()
+        super(EsSearchRequestCommand, self).run()
         url = make_path(self.index, self.doc_type, '_search')
         body = self.get_selection_text()
         self.run_request('POST', url, body)
 
 
-class CreateIndexCommand(BaseElasticsearchCommand):
+class EsCreateIndexCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(CreateIndexCommand, self).run()
+        super(EsCreateIndexCommand, self).run()
 
         if not self.enabled_create_index:
             self.status_message('*** Disabled Create Index! ***')
@@ -160,10 +160,10 @@ class CreateIndexCommand(BaseElasticsearchCommand):
         self.set_index(index)
 
 
-class PutMappingCommand(BaseElasticsearchCommand):
+class EsPutMappingCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(PutMappingCommand, self).run()
+        super(EsPutMappingCommand, self).run()
 
         if not self.enabled_put_mapping:
             self.status_message('*** Disabled Put Mapping! ***')
@@ -176,7 +176,7 @@ class PutMappingCommand(BaseElasticsearchCommand):
         self.get_doc_type(self.put_mapping)
 
     def set_index(self, index):
-        super(PutMappingCommand, self).set_index(index)
+        super(EsPutMappingCommand, self).set_index(index)
         self.run()
 
     def put_mapping(self, doc_type):
@@ -191,10 +191,10 @@ class PutMappingCommand(BaseElasticsearchCommand):
         self.set_doc_type(doc_type)
 
 
-class AnalyzeCommand(BaseElasticsearchCommand):
+class EsAnalyzeCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(AnalyzeCommand, self).run()
+        super(EsAnalyzeCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -203,7 +203,7 @@ class AnalyzeCommand(BaseElasticsearchCommand):
         self.get_analyzer(self.analyze)
 
     def set_index(self, index):
-        super(AnalyzeCommand, self).set_index(index)
+        super(EsAnalyzeCommand, self).set_index(index)
         self.run()
 
     def analyze(self, analyzer):
@@ -220,30 +220,30 @@ class AnalyzeCommand(BaseElasticsearchCommand):
         self.set_analyzer(analyzer)
 
 
-class ClusterHealthCommand(BaseElasticsearchCommand):
+class EsClusterHealthCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ClusterHealthCommand, self).run()
+        super(EsClusterHealthCommand, self).run()
 
         url = make_path('_cat', 'health')
         params = {'v': 'true'}
         self.run_request('GET', url, None, params)
 
 
-class ListAllIndexesCommand(BaseElasticsearchCommand):
+class EsListAllIndexesCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ListAllIndexesCommand, self).run()
+        super(EsListAllIndexesCommand, self).run()
 
         url = make_path('_cat', 'indices')
         params = {'v': 'true'}
         self.run_request('GET', url, None, params)
 
 
-class GetIndexSettingsCommand(BaseElasticsearchCommand):
+class EsGetIndexSettingsCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(GetIndexSettingsCommand, self).run()
+        super(EsGetIndexSettingsCommand, self).run()
 
         self.get_index(self.get_index_settings)
 
@@ -257,10 +257,10 @@ class GetIndexSettingsCommand(BaseElasticsearchCommand):
         self.set_index(index)
 
 
-class GetMappingCommand(BaseElasticsearchCommand):
+class EsGetMappingCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(GetMappingCommand, self).run()
+        super(EsGetMappingCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -269,7 +269,7 @@ class GetMappingCommand(BaseElasticsearchCommand):
         self.get_doc_type(self.get_mapping)
 
     def set_index(self, index):
-        super(GetMappingCommand, self).set_index(index)
+        super(EsGetMappingCommand, self).set_index(index)
         self.run()
 
     def get_mapping(self, doc_type):
@@ -283,10 +283,10 @@ class GetMappingCommand(BaseElasticsearchCommand):
         self.set_doc_type(doc_type)
 
 
-class IndexDocumentCommand(BaseElasticsearchCommand):
+class EsIndexDocumentCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(IndexDocumentCommand, self).run()
+        super(EsIndexDocumentCommand, self).run()
 
         if not self.enabled_index_document:
             self.status_message('*** Disabled Index Document! ***')
@@ -303,11 +303,11 @@ class IndexDocumentCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.index_document)
 
     def set_index(self, index):
-        super(IndexDocumentCommand, self).set_index(index)
+        super(EsIndexDocumentCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(IndexDocumentCommand, self).set_doc_type(doc_type)
+        super(EsIndexDocumentCommand, self).set_doc_type(doc_type)
         self.run()
 
     def index_document(self, doc_id):
@@ -320,10 +320,10 @@ class IndexDocumentCommand(BaseElasticsearchCommand):
         self.run_request(method, url, body)
 
 
-class DeleteDocumentCommand(BaseElasticsearchCommand):
+class EsDeleteDocumentCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(DeleteDocumentCommand, self).run()
+        super(EsDeleteDocumentCommand, self).run()
 
         if not self.enabled_delete_document:
             self.status_message('*** Disabled Delete Document! ***')
@@ -340,11 +340,11 @@ class DeleteDocumentCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.delete_document)
 
     def set_index(self, index):
-        super(DeleteDocumentCommand, self).set_index(index)
+        super(EsDeleteDocumentCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(DeleteDocumentCommand, self).set_doc_type(doc_type)
+        super(EsDeleteDocumentCommand, self).set_doc_type(doc_type)
         self.run()
 
     def delete_document(self, doc_id):
@@ -356,10 +356,10 @@ class DeleteDocumentCommand(BaseElasticsearchCommand):
         self.run_request('DELETE', url)
 
 
-class GetDocumentCommand(BaseElasticsearchCommand):
+class EsGetDocumentCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(GetDocumentCommand, self).run()
+        super(EsGetDocumentCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -372,11 +372,11 @@ class GetDocumentCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.get_document)
 
     def set_index(self, index):
-        super(GetDocumentCommand, self).set_index(index)
+        super(EsGetDocumentCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(GetDocumentCommand, self).set_doc_type(doc_type)
+        super(EsGetDocumentCommand, self).set_doc_type(doc_type)
         self.run()
 
     def get_document(self, doc_id):
@@ -388,10 +388,10 @@ class GetDocumentCommand(BaseElasticsearchCommand):
         self.run_request('GET', url)
 
 
-class DeleteIndexCommand(BaseElasticsearchCommand):
+class EsDeleteIndexCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(DeleteIndexCommand, self).run()
+        super(EsDeleteIndexCommand, self).run()
 
         if not self.enabled_delete_index:
             self.status_message('*** Disabled Delete Index! ***')
@@ -408,10 +408,10 @@ class DeleteIndexCommand(BaseElasticsearchCommand):
         self.run_request('DELETE', url)
 
 
-class DeleteMappingCommand(BaseElasticsearchCommand):
+class EsDeleteMappingCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(DeleteMappingCommand, self).run()
+        super(EsDeleteMappingCommand, self).run()
 
         if not self.enabled_delete_mapping:
             self.status_message('*** Disabled Delete Mapping! ***')
@@ -424,7 +424,7 @@ class DeleteMappingCommand(BaseElasticsearchCommand):
         self.get_doc_type(self.delete_mapping)
 
     def set_index(self, index):
-        super(DeleteMappingCommand, self).set_index(index)
+        super(EsDeleteMappingCommand, self).set_index(index)
         self.run()
 
     def delete_mapping(self, doc_type):
@@ -438,10 +438,10 @@ class DeleteMappingCommand(BaseElasticsearchCommand):
         self.set_doc_type(doc_type)
 
 
-class RegisterPercolatorCommand(BaseElasticsearchCommand):
+class EsRegisterPercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(RegisterPercolatorCommand, self).run()
+        super(EsRegisterPercolatorCommand, self).run()
 
         if not self.enabled_register_query:
             self.status_message(
@@ -454,7 +454,7 @@ class RegisterPercolatorCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.register_query)
 
     def set_index(self, index):
-        super(RegisterPercolatorCommand, self).set_index(index)
+        super(EsRegisterPercolatorCommand, self).set_index(index)
         self.run()
 
     def register_query(self, doc_id):
@@ -467,10 +467,10 @@ class RegisterPercolatorCommand(BaseElasticsearchCommand):
         self.run_request('PUT', url, body)
 
 
-class ShowPercolatorCommand(BaseElasticsearchCommand):
+class EsShowPercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ShowPercolatorCommand, self).run()
+        super(EsShowPercolatorCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -480,14 +480,14 @@ class ShowPercolatorCommand(BaseElasticsearchCommand):
         self.run_request('POST', url)
 
     def set_index(self, index):
-        super(ShowPercolatorCommand, self).set_index(index)
+        super(EsShowPercolatorCommand, self).set_index(index)
         self.run()
 
 
-class MatchPercolatorCommand(BaseElasticsearchCommand):
+class EsMatchPercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(MatchPercolatorCommand, self).run()
+        super(EsMatchPercolatorCommand, self).run()
 
         if not self.index:
             self.get_index(self.set_index)
@@ -502,18 +502,18 @@ class MatchPercolatorCommand(BaseElasticsearchCommand):
         self.run_request('POST', url, body)
 
     def set_index(self, index):
-        super(MatchPercolatorCommand, self).set_index(index)
+        super(EsMatchPercolatorCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(MatchPercolatorCommand, self).set_doc_type(doc_type)
+        super(EsMatchPercolatorCommand, self).set_doc_type(doc_type)
         self.run()
 
 
-class DeletePercolatorCommand(BaseElasticsearchCommand):
+class EsDeletePercolatorCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(DeletePercolatorCommand, self).run()
+        super(EsDeletePercolatorCommand, self).run()
 
         if not self.enabled_delete_percolator:
             self.status_message('*** Disabled Delete Percolator! ***')
@@ -530,11 +530,11 @@ class DeletePercolatorCommand(BaseElasticsearchCommand):
         self.get_doc_id(self.delete_percolator)
 
     def set_index(self, index):
-        super(DeletePercolatorCommand, self).set_index(index)
+        super(EsDeletePercolatorCommand, self).set_index(index)
         self.run()
 
     def set_doc_type(self, doc_type):
-        super(DeletePercolatorCommand, self).set_doc_type(doc_type)
+        super(EsDeletePercolatorCommand, self).set_doc_type(doc_type)
         self.run()
 
     def delete_percolator(self, doc_id):
@@ -546,10 +546,10 @@ class DeletePercolatorCommand(BaseElasticsearchCommand):
         self.run_request('DELETE', url)
 
 
-class SwitchServersCommand(BaseElasticsearchCommand):
+class EsSwitchServersCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(SwitchServersCommand, self).run()
+        super(EsSwitchServersCommand, self).run()
         servers = list(self.servers.keys())
         self.window.show_quick_panel(servers, self.server_selected)
 
@@ -562,10 +562,10 @@ class SwitchServersCommand(BaseElasticsearchCommand):
         self.save_settings()
 
 
-class ShowActiveServerCommand(BaseElasticsearchCommand):
+class EsShowActiveServerCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ShowActiveServerCommand, self).run()
+        super(EsShowActiveServerCommand, self).run()
         self.panel(
             "Active Server Settings [{active_server}]\n"
             "=============================================================\n"
@@ -602,15 +602,15 @@ class ShowActiveServerCommand(BaseElasticsearchCommand):
                 self.active_server, self.index, self.doc_type))
 
 
-class ChangeIndexCommand(BaseElasticsearchCommand):
+class EsChangeIndexCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ChangeIndexCommand, self).run()
+        super(EsChangeIndexCommand, self).run()
         self.get_index(self.set_index)
 
 
-class ChangeDocTypeCommand(BaseElasticsearchCommand):
+class EsChangeDocTypeCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(ChangeDocTypeCommand, self).run()
+        super(EsChangeDocTypeCommand, self).run()
         self.get_doc_type(self.set_doc_type)

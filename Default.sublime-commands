@@ -1,87 +1,87 @@
 [
     {
         "caption": "Elasticsearch: Search",
-        "command": "search_request",
+        "command": "es_search",
     },
     {
         "caption": "Elasticsearch: Analyze",
-        "command": "analyze",
+        "command": "es_analyze",
     },
     {
         "caption": "Elasticsearch: Cluster Health",
-        "command": "cluster_health",
+        "command": "es_cluster_health",
     },
     {
         "caption": "Elasticsearch: List All Indexes",
-        "command": "list_all_indexes",
+        "command": "es_list_all_indexes",
     },
     {
         "caption": "Elasticsearch: Get Index Settings",
-        "command": "get_index_settings",
+        "command": "es_get_index_settings",
     },
     {
         "caption": "Elasticsearch: Get Mapping",
-        "command": "get_mapping",
+        "command": "es_get_mapping",
     },
     {
         "caption": "Elasticsearch: Create Index",
-        "command": "create_index",
+        "command": "es_create_index",
     },
     {
         "caption": "Elasticsearch: Put Mapping",
-        "command": "put_mapping",
+        "command": "es_put_mapping",
     },
     {
         "caption": "Elasticsearch: Index Document",
-        "command": "index_document",
+        "command": "es_index_document",
     },
     {
         "caption": "Elasticsearch: Get Document",
-        "command": "get_document",
+        "command": "es_get_document",
     },
     {
         "caption": "Elasticsearch: Delete Index",
-        "command": "delete_index",
+        "command": "es_delete_index",
     },
     {
         "caption": "Elasticsearch: Delete Mapping",
-        "command": "delete_mapping",
+        "command": "es_delete_mapping",
     },
     {
         "caption": "Elasticsearch: Delete Document",
-        "command": "delete_document",
+        "command": "es_delete_document",
     },
     {
         "caption": "Elasticsearch: Register Query (Percolator)",
-        "command": "register_percolator",
+        "command": "es_register_percolator",
     },
     {
         "caption": "Elasticsearch: Show Registered Query (Percolator)",
-        "command": "show_percolator",
+        "command": "es_show_percolator",
     },
     {
         "caption": "Elasticsearch: Match Document (Percolator)",
-        "command": "match_percolator",
+        "command": "es_match_percolator",
     },
     {
         "caption": "Elasticsearch: UN-Register Query (Percolator)",
-        "command": "delete_percolator",
+        "command": "es_delete_percolator",
     },
     {
         "caption": "Elasticsearch: Switch Servers",
-        "command": "switch_servers",
+        "command": "es_switch_servers",
     },
     {
         "caption": "Elasticsearch: Show Active Server",
-        "command": "show_active_server",
+        "command": "es_show_active_server",
     },
     {
         "caption": "Elasticsearch: Change Index",
-        "command": "change_index",
+        "command": "es_change_index",
     },
     {
         "caption": "Elasticsearch: Change Doc Type",
-        "command": "change_doc_type",
+        "command": "es_change_doc_type",
     }
 
 ]
