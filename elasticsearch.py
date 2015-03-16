@@ -17,6 +17,8 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         self.settings = sublime.load_settings('Elasticsearch.sublime-settings')
         self.servers = self.settings.get('servers')
         self.active_server = self.settings.get("active_server")
+        self.benchmarks = self.settings.get('benchmarks')
+
         if not self.active_server:
             self.active_server = list(self.servers.keys())[0]
 
@@ -128,6 +130,10 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         output_panel.set_syntax_file('')
         self.window.run_command("show_panel", {"panel": "output.textarea"})
         output_panel.run_command("insert", {"characters": text})
+
+    @property
+    def filename(self):
+        return self.window.active_view().file_name()
 
 
 class EsSearchRequestCommand(BaseElasticsearchCommand):
@@ -624,3 +630,36 @@ class EsChangeDocTypeCommand(BaseElasticsearchCommand):
     def run(self):
         super(EsChangeDocTypeCommand, self).run()
         self.get_doc_type(self.set_doc_type)
+
+
+class EsApacheBenchCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(EsApacheBenchCommand, self).run()
+
+        self.select_benchmark(self.run_benchmark)
+
+    def select_benchmark(self, callback):
+        benchmarks = list(self.benchmarks.keys())
+        self.window.show_quick_panel(benchmarks, callback)
+
+    def run_benchmark(self, index):
+        if index == -1:
+            self.status_message('Canceled')
+            return  # canceled
+
+        selected = list(self.benchmarks.keys())[index]
+        benchmark = self.benchmarks[selected]
+        requests = benchmark.get('requests')
+        concurrency = benchmark.get('concurrency')
+        filename = self.filename
+        url = make_path(self.index, self.doc_type, '_search')
+        request_url = self.get_request_url(url, DEFAULT_PARAMS)
+
+        command = ['ab', '-n', str(requests),
+                   '-c', str(concurrency), request_url]
+        if filename:
+            command = ['ab', '-n', str(requests), '-c', str(concurrency),
+                       '-p', filename, '-T', 'application/json', request_url]
+
+        self.window.run_command('exec', {'cmd': command, 'quiet': False})

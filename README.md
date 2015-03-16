@@ -58,6 +58,12 @@ Example:
             "index": "index-zgkksx-my-index",
             "doc_type": "webpages"
         }
+    },
+    "benchmarks": {
+        "default": {
+            "requests": 100,
+            "concurrency": 10,
+        }
     }
 }
 ```
@@ -66,8 +72,9 @@ Setting                    | Description
 -------------------------- | ----------------------------------
 ``active_server``          | Elasticsearch Active Server. You can change the ``Switch Server`` Command
 ``servers``                | Elasticsearch Server settings.
+``benchmarks``             | Apache Bench settings.
 
-**servers.\<key\>**
+**servers**
 
 Setting                    | Description
 -------------------------- | ----------------------------------
@@ -83,6 +90,14 @@ Setting                    | Description
 ``enabled_put_mapping``    | if set ``true`` you can put mapping. default: ``false``
 ``enabled_register_query``    | if set ``true`` you can register query for percolator. default: ``false``
 ``enabled_delete_percolator``    | if set ``true`` you can delete registerd query for percolator. default: ``false``
+
+**benchmarks**
+
+Setting                    | Description
+-------------------------- | ----------------------------------
+``requests``               | Number of requests to perform
+``concurrency``            | Number of multiple requests to make at a time
+
 
 
 ## Commands
@@ -108,10 +123,11 @@ Elasticsearch: Register Query for Percolator | PUT       | ``/index/.percolator/
 Elasticsearch: Show Query for Percolator     | POST      | ``/index/.percolator/_search``
 Elasticsearch: Match Query for Percolator    | POST      | ``/index/type/_percolate``
 Elasticsearch: Delete Query for Percolator   | DELETE    | ``/index/.percolator/id``
-Elasticsearch: Show Active Server  | -         |  ※ appears in the status bar.
+Elasticsearch: Show Active Server  | -         |  ※ show active server settings.
 Elasticsearch: Switch Servers      | -         |  ※ change the active server.
 Elasticsearch: Change Index        | -         |  ※ change the index for active server.
 Elasticsearch: Change Doc Type     | -         |  ※ change the doc type for active server.
+Elasticsearch: Apach Bench         | -         |  ※ benchmarking.
 
 
 ## Snippets for Queries

@@ -1,4 +1,5 @@
 {
+    "active_server": "localhost",
     "servers": {
         "localhost": {
             "base_url": "http://localhost:9200/",
@@ -14,6 +15,12 @@
             "enabled_register_query": true,
             "enabled_delete_percolator": true,
             "hettp_headers": {}
+        }
+    },
+    "benchmarks": {
+        "default": {
+            "requests": 100,
+            "concurrency": 10,
         }
     }
 }
