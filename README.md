@@ -3,6 +3,10 @@
 
 ## Overview
 
+Elasticsearch Client integration: it's pretty handy.
+
+![Command Palette](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/palette.png)
+
 ## Installation
 To install, clone to your "Packages" directory.
 
