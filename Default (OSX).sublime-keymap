@@ -1,0 +1,6 @@
+[
+    {
+      "keys": ["ctrl+alt+s"],
+      "command": "es_search_request"
+    }
+]

@@ -1,4 +1,0 @@
-{
-    "selector": "source.es",
-    "target": "elasticsearch_search_request",
-}

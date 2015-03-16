@@ -24,7 +24,7 @@ you can send a body
 }
 ```
 
-Once you have a request ready, use shortcut ``Command + B`` or open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch Search Request``.
+Once you have a request ready, use shortcut ``Ctrl + Alt + S`` or open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch Search``.
 
 ## Settings
 
