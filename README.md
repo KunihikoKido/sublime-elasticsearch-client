@@ -91,6 +91,7 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
 Elasticsearch: Analyze             | POST      | ``/index/_analyze``
+Elasticsearch: Benchmark           | PUT       | ``/_bench``
 Elasticsearch: Cluster Health      | GET       | ``/_cat/health``
 Elasticsearch: Create Index        | PUT       | ``/index``
 Elasticsearch: Delete Document     | DELETE    | ``/index/type/id``

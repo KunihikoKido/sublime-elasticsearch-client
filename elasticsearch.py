@@ -139,6 +139,15 @@ class EsSearchRequestCommand(BaseElasticsearchCommand):
         self.run_request('POST', url, body)
 
 
+class EsBenchmarkCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(EsBenchmarkCommand, self).run()
+        url = make_path('_bench')
+        body = self.get_selection_text()
+        self.run_request('PUT', url, body)
+
+
 class EsCreateIndexCommand(BaseElasticsearchCommand):
 
     def run(self):

@@ -4,6 +4,10 @@
         "command": "es_search_request",
     },
     {
+        "caption": "Elasticsearch: Benchmark",
+        "command": "es_benchmark",
+    },
+    {
         "caption": "Elasticsearch: Analyze",
         "command": "es_analyze",
     },
