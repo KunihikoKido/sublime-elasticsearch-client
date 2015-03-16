@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import tempfile
 from urllib.parse import urlencode
 import sublime
 import sublime_plugin
@@ -133,7 +134,14 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
 
     @property
     def filename(self):
-        return self.window.active_view().file_name()
+        filename = self.window.active_view().file_name()
+        if not filename:
+            text = self.get_selection_text()
+            tmp = tempfile.NamedTemporaryFile(delete=False)
+            tmp.write(bytes(text, 'utf-8'))
+            filename = tmp.name
+            tmp.close()
+        return filename
 
 
 class EsSearchRequestCommand(BaseElasticsearchCommand):
