@@ -32,4 +32,9 @@
     "enabled_pretty": true,
     "pretty_command": "pretty_json",
     "pretty_syntax": "Elasticsearch",
+
+    "show_panel_on_build": true,
+    "auto_complete": true,
+    "word_wrap": false,
+    "rulers": [],
 }
