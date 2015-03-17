@@ -75,6 +75,8 @@ Setting                    | Description
 ``servers``                | Elasticsearch Server settings.
 ``benchmarks``             | Apache Bench settings.
 ``quiet``                  | if set ``false`` information running about prints the request command. (View/Show Console menu)
+``curl_command``           | Path to the curl command.
+``ab_command``             | Path to the Apache Bench (ab) command.
 
 **servers**
 
