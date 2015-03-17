@@ -16,6 +16,8 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
 
     def run(self):
         self.settings = sublime.load_settings('Elasticsearch.sublime-settings')
+        self.curl_command = self.settings.get('curl_command')
+        self.ab_command = self.settings.get('ab_command')
         self.servers = self.settings.get('servers')
         self.active_server = self.settings.get("active_server")
         self.benchmarks = self.settings.get('benchmarks')
@@ -60,7 +62,7 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         return '{0}?{1}'.format(self.base_url, params)
 
     def run_request(self, method, url=None, body=None, params=None):
-        curl_command = ['curl', '-s', '-X', method]
+        curl_command = [self.curl_command, '-s', '-X', method]
         request_url = self.get_request_url(url, params)
         curl_command += [request_url]
 
@@ -666,10 +668,10 @@ class EsApacheBenchCommand(BaseElasticsearchCommand):
         url = make_path(self.index, self.doc_type, '_search')
         request_url = self.get_request_url(url, DEFAULT_PARAMS)
 
-        command = ['ab', '-n', str(requests),
+        command = [self.ab_command, '-n', str(requests),
                    '-c', str(concurrency), request_url]
         if filename:
-            command = ['ab', '-n', str(requests), '-c', str(concurrency),
+            command = [self.ab_command, '-n', str(requests), '-c', str(concurrency),
                        '-p', filename, '-T', 'application/json', request_url]
 
         self.window.run_command('exec', {'cmd': command, 'quiet': self.quiet})

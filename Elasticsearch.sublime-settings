@@ -22,5 +22,12 @@
             "requests": 100,
             "concurrency": 10,
         }
-    }
+    },
+    // Path to the curl command. If curl is on you path, you should not need to
+    // change this. Windows users will need to use forward slashes in the path.
+    "curl_command": "curl",
+    // Path to the Apache Bench (ab) command. If ab is on you path, you should not need to
+    // change this. Windows users will need to use forward slashes in the path.
+    "ab_command": "ab",
+
 }
