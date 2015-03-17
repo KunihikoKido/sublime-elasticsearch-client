@@ -1,5 +1,7 @@
 # Elasticsearch Client for Sublime Text 3
-... for only OS X
+Elasticsearch Client for Sublime Text
+
+Elasticsearch Client allows you to build an Rest API request in Sublime Text and view the response in a panel.
 
 ## Overview
 
