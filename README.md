@@ -64,7 +64,8 @@ Example:
             "requests": 100,
             "concurrency": 10,
         }
-    }
+    },
+    'quiet': false
 }
 ```
 
@@ -73,6 +74,7 @@ Setting                    | Description
 ``active_server``          | Elasticsearch Active Server. You can change the ``Switch Server`` Command
 ``servers``                | Elasticsearch Server settings.
 ``benchmarks``             | Apache Bench settings.
+``quiet``                  | if set ``false`` information running about prints the request command. (View/Show Console menu)
 
 **servers**
 

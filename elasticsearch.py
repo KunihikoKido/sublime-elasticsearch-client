@@ -19,6 +19,7 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         self.servers = self.settings.get('servers')
         self.active_server = self.settings.get("active_server")
         self.benchmarks = self.settings.get('benchmarks')
+        self.quiet = self.settings.get('quiet', True)
 
         if not self.active_server:
             self.active_server = list(self.servers.keys())[0]
@@ -69,7 +70,8 @@ class BaseElasticsearchCommand(sublime_plugin.WindowCommand):
         for k, v in self.http_headers.items():
             curl_command += ['-H', "{0}: {1}".format(k, v)]
 
-        self.window.run_command('exec', {'cmd': curl_command, 'quiet': True})
+        self.window.run_command(
+            'exec', {'cmd': curl_command, 'quiet': self.quiet})
 
     def get_selection_text(self):
         view = self.window.active_view()
@@ -670,4 +672,4 @@ class EsApacheBenchCommand(BaseElasticsearchCommand):
             command = ['ab', '-n', str(requests), '-c', str(concurrency),
                        '-p', filename, '-T', 'application/json', request_url]
 
-        self.window.run_command('exec', {'cmd': command, 'quiet': False})
+        self.window.run_command('exec', {'cmd': command, 'quiet': self.quiet})
