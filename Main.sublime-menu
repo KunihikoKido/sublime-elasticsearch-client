@@ -10,12 +10,12 @@
         "id": "package-settings",
         "children": [
           {
-            "caption": "Elasticsearch",
+            "caption": "Elasticsearch Client",
             "children": [
               {
                 "command": "open_file",
                 "args": {
-                  "file": "${packages}/Elasticsearch/Elasticsearch.sublime-settings"
+                  "file": "${packages}/Elasticsearch Client/Elasticsearch.sublime-settings"
                 },
                 "caption": "Settings – Default"
               },
