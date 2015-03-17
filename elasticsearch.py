@@ -270,6 +270,19 @@ class EsClusterHealthCommand(BaseElasticsearchCommand):
         self.run_request('GET', url, None, params)
 
 
+class EsCatShardsCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(EsCatShardsCommand, self).run()
+        self.get_index(self.cat_shards)
+
+    def cat_shards(self, index):
+
+        url = make_path('_cat', 'shards', index)
+        params = {'v': 'true'}
+        self.run_request('GET', url, None, params)
+
+
 class EsListAllIndexesCommand(BaseElasticsearchCommand):
 
     def run(self):

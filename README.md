@@ -133,6 +133,7 @@ Elasticsearch: Register Query for Percolator | PUT       | ``/index/.percolator/
 Elasticsearch: Show Query for Percolator     | POST      | ``/index/.percolator/_search``
 Elasticsearch: Match Query for Percolator    | POST      | ``/index/type/_percolate``
 Elasticsearch: Delete Query for Percolator   | DELETE    | ``/index/.percolator/id``
+Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
 Elasticsearch: Show Active Server  | -         |  ※ show active server settings.
 Elasticsearch: Switch Servers      | -         |  ※ change the active server.
 Elasticsearch: Change Index        | -         |  ※ change the index for active server.

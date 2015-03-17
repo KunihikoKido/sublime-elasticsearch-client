@@ -90,6 +90,10 @@
     {
         "caption": "Elasticsearch: Apache Bench",
         "command": "es_apache_bench",
+    },
+    {
+        "caption": "Elasticsearch: Cat Shards",
+        "command": "es_cat_shards",
     }
 
 ]
