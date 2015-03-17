@@ -1,8 +1,28 @@
 {
     "_source": {
-        "include": ["title"]
+        "include": [
+            "title"
+        ]
+    },
+    "aggs": {
+        "genders": {
+            "terms": {
+                "field": "gender"
+            }
+        }
     },
     "query": {
-        "match_all": {}
+        "filtered": {
+            "filter": {
+                "range": {
+                    "created": {
+                        "gte": "now - 1d / d"
+                    }
+                }
+            },
+            "query": {
+                "match_all": {}
+            }
+        }
     }
 }

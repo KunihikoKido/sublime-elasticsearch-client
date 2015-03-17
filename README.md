@@ -80,6 +80,9 @@ Setting                    | Description
 ``quiet``                  | if set ``false`` information running about prints the request command. (View/Show Console menu)
 ``curl_command``           | Path to the curl command.
 ``ab_command``             | Path to the Apache Bench (ab) command.
+``enabled_pretty``         | enabled pretty json. required: [PrettyJson](https://github.com/dzhibas/SublimePrettyJson)
+``pretty_command``         | pretty format command. default: ``pretty_json``
+``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
 
 **servers**
 
