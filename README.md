@@ -65,7 +65,7 @@ Example:
             "concurrency": 10,
         }
     },
-    'quiet': false
+    "quiet": false
 }
 ```
 
