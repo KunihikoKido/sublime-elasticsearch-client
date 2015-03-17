@@ -117,8 +117,8 @@ Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
 Elasticsearch: Analyze             | POST      | ``/index/_analyze``
 Elasticsearch: Benchmark           | PUT       | ``/_bench``
+Elasticsearch: Cat Health          | GET       | ``/_cat/health``
 Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
-Elasticsearch: Cluster Health      | GET       | ``/_cat/health``
 Elasticsearch: Create Index        | PUT       | ``/index``
 Elasticsearch: Delete Document     | DELETE    | ``/index/type/id``
 Elasticsearch: Delete Index        | DELETE    | ``/index/``

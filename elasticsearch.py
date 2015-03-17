@@ -260,13 +260,13 @@ class EsAnalyzeCommand(BaseElasticsearchCommand):
         self.set_analyzer(analyzer)
 
 
-class EsClusterHealthCommand(BaseElasticsearchCommand):
+class EsCatHealthCommand(BaseElasticsearchCommand):
 
     def run(self):
-        super(EsClusterHealthCommand, self).run()
+        super(EsCatHealthCommand, self).run()
 
         url = make_path('_cat', 'health')
-        params = {'v': 'true'}
+        params = {'v': 'true', 'ts': '0'}
         self.run_request('GET', url, None, params)
 
 

@@ -12,8 +12,8 @@
         "command": "es_analyze",
     },
     {
-        "caption": "Elasticsearch: Cluster Health",
-        "command": "es_cluster_health",
+        "caption": "Elasticsearch: Cat Health",
+        "command": "es_cat_health",
     },
     {
         "caption": "Elasticsearch: List All Indexes",
