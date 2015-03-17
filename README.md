@@ -18,6 +18,7 @@ To install, clone to your "Packages" directory.
 git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git "Elasticsearch Client"
 ```
 
+**Note** Elasticsearch Client expects to be installed to a directory called "Elasticsearch Client". Some features like the meny command to open settings will not work if installed somewhere else.
 
 ## Using
 you can send a body
