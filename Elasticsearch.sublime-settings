@@ -32,6 +32,4 @@
     "enabled_pretty": true,
     "pretty_command": "pretty_json",
     "pretty_syntax": "Elasticsearch",
-    "sort_keys": true
-
 }
