@@ -117,24 +117,24 @@ Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
 Elasticsearch: Analyze             | POST      | ``/index/_analyze``
 Elasticsearch: Benchmark           | PUT       | ``/_bench``
+Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
 Elasticsearch: Cluster Health      | GET       | ``/_cat/health``
 Elasticsearch: Create Index        | PUT       | ``/index``
 Elasticsearch: Delete Document     | DELETE    | ``/index/type/id``
 Elasticsearch: Delete Index        | DELETE    | ``/index/``
 Elasticsearch: Delete Mapping      | PUT       | ``/index/_mapping/type``
+Elasticsearch: Delete Query for Percolator   | DELETE    | ``/index/.percolator/id``
 Elasticsearch: Get Document        | GET       | ``/index/type/id``
 Elasticsearch: Get Index Settings  | GET       | ``/index/_settings``
 Elasticsearch: Get Mapping         | GET       | ``/index/_mapping/type``
 Elasticsearch: Index Document      | PUT/POST  | ``/index/type/id``
 Elasticsearch: List All Indexes    | GET       | ``/_cat/indices``
-Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
-Elasticsearch: Search Request      | POST      | ``/index/type/_search``
-Elasticsearch: Register Query for Percolator | PUT       | ``/index/.percolator/id``
-Elasticsearch: Show Query for Percolator     | POST      | ``/index/.percolator/_search``
 Elasticsearch: Match Query for Percolator    | POST      | ``/index/type/_percolate``
-Elasticsearch: Delete Query for Percolator   | DELETE    | ``/index/.percolator/id``
-Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
+Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
+Elasticsearch: Register Query for Percolator | PUT       | ``/index/.percolator/id``
+Elasticsearch: Search Request      | POST      | ``/index/type/_search``
 Elasticsearch: Show Active Server  | -         |  ※ show active server settings.
+Elasticsearch: Show Query for Percolator     | POST      | ``/index/.percolator/_search``
 Elasticsearch: Switch Servers      | -         |  ※ change the active server.
 Elasticsearch: Change Index        | -         |  ※ change the index for active server.
 Elasticsearch: Change Doc Type     | -         |  ※ change the doc type for active server.
