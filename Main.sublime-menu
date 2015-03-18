@@ -10,7 +10,7 @@
         "id": "package-settings",
         "children": [
           {
-            "caption": "Elasticsearch Client",
+            "caption": "ElasticsearchClient",
             "children": [
               {
                 "command": "open_file",
