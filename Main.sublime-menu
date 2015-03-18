@@ -15,7 +15,7 @@
               {
                 "command": "open_file",
                 "args": {
-                  "file": "${packages}/Elasticsearch Client/Elasticsearch.sublime-settings"
+                  "file": "${packages}/ElasticsearchClient/Elasticsearch.sublime-settings"
                 },
                 "caption": "Settings – Default"
               },

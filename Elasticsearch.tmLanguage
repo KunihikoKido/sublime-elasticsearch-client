@@ -5,6 +5,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>es</string>
+		<string>json</string>
 	</array>
 	<key>name</key>
 	<string>Elasticsearch</string>

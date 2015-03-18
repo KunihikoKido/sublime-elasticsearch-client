@@ -15,10 +15,10 @@ To install, clone to your "Packages" directory.
 - OS X: ~/Library/Application\\ Support/Sublime\\ Text\\ 3/Packages
 
 ```bash
-git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git "Elasticsearch Client"
+git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git ElasticsearchClient
 ```
 
-**Note** Elasticsearch Client expects to be installed to a directory called "Elasticsearch Client". Some features like the meny command to open settings will not work if installed somewhere else.
+**Note** Elasticsearch Client expects to be installed to a directory called "ElasticsearchClient". Some features like the meny command to open settings will not work if installed somewhere else.
 
 ## Using
 you can send a body
@@ -113,32 +113,53 @@ Setting                    | Description
 ## Commands
 open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...``.
 
+### Command for Search APIs
+
+Command                                           | Method    | Call API
+------------------------------------------------- | --------- | -------------------------
+Elasticsearch: Search Request                     | POST      | ``/index/type/_search``
+Elasticsearch: Analyze                            | POST      | ``/index/_analyze``
+Elasticsearch: Register Query (Percolator)        | PUT       | ``/index/.percolator/id``
+Elasticsearch: Show Registered Query (Percolator) | POST      | ``/index/type/_percolate``
+Elasticsearch: UN-Register Query (Percolator)     | DELETE    | ``/index/.percolator/id``
+Elasticsearch: Benchmark                          | PUT       | ``/_bench``
+
+### Command for Document APIs
+
 Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
-Elasticsearch: Analyze             | POST      | ``/index/_analyze``
-Elasticsearch: Benchmark           | PUT       | ``/_bench``
-Elasticsearch: Cat Health          | GET       | ``/_cat/health``
-Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
-Elasticsearch: Create Index        | PUT       | ``/index``
 Elasticsearch: Delete Document     | DELETE    | ``/index/type/id``
+Elasticsearch: Index Document      | PUT/POST  | ``/index/type/id``
+Elasticsearch: Get Document        | GET       | ``/index/type/id``
+
+### Command for Index APIs
+
+Command                            | Method    | Call API
+---------------------------------- | --------- | -------------------------
+Elasticsearch: Create Index        | PUT       | ``/index``
 Elasticsearch: Delete Index        | DELETE    | ``/index/``
 Elasticsearch: Delete Mapping      | PUT       | ``/index/_mapping/type``
-Elasticsearch: Delete Query for Percolator   | DELETE    | ``/index/.percolator/id``
-Elasticsearch: Get Document        | GET       | ``/index/type/id``
 Elasticsearch: Get Index Settings  | GET       | ``/index/_settings``
 Elasticsearch: Get Mapping         | GET       | ``/index/_mapping/type``
-Elasticsearch: Index Document      | PUT/POST  | ``/index/type/id``
-Elasticsearch: List All Indexes    | GET       | ``/_cat/indices``
-Elasticsearch: Match Query for Percolator    | POST      | ``/index/type/_percolate``
 Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
-Elasticsearch: Register Query for Percolator | PUT       | ``/index/.percolator/id``
-Elasticsearch: Search Request      | POST      | ``/index/type/_search``
-Elasticsearch: Show Active Server  | -         |  ※ show active server settings.
-Elasticsearch: Show Query for Percolator     | POST      | ``/index/.percolator/_search``
-Elasticsearch: Switch Servers      | -         |  ※ change the active server.
-Elasticsearch: Change Index        | -         |  ※ change the index for active server.
-Elasticsearch: Change Doc Type     | -         |  ※ change the doc type for active server.
-Elasticsearch: Apach Bench         | -         |  ※ benchmarking.
+
+### Command for Cat APIs
+
+Command                            | Method    | Call API
+---------------------------------- | --------- | -------------------------
+Elasticsearch: Cat Health          | GET       | ``/_cat/health``
+Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
+Elasticsearch: Cat Indexes         | GET       | ``/_cat/indices``
+
+### Utility Commands
+
+Command                                | Descrption
+-------------------------------------- | -------------------------
+Elasticsearch: Show Active Server      | show active server settings.
+Elasticsearch: Switch Servers          | change the active server.
+Elasticsearch: Change Index Setting    | change the index for active server.
+Elasticsearch: Change Doc Type Setting | change the doc type for active server.
+Elasticsearch: Apach Bench             | benchmarking.
 
 
 ## Snippets for Queries
@@ -189,7 +210,7 @@ Abbreviation                    | tag
 and                             | ``"and": [...]``
 bool                            | ``"bool": {...}``
 exists                          | ``"exists": {...}``
-geobounding                     | ``"geo_bounding_box": {...}``
+geobox                          | ``"geo_bounding_box": {...}``
 geodistance                     | ``"geo_distance": {...}``
 geopolygon                      | ``"geo_polygon": {...}``
 geoshape                        | ``"geo_shape": {...}``
@@ -217,35 +238,35 @@ file types ``*.es`` or set syntax ``Elasticsearch``
 
 Abbreviation                    | tag
 ------------------------------- | ----------------------------------
-aggsavg                         | ``"aggs": {..."avg": {...}``
-aggscardinality                 | ``"aggs": {..."cardinality": {...}``
-aggschildren                    | ``"aggs": {..."children": {...}``
-aggsdatehistogram               | ``"aggs": {..."date_histogram": {...}``
-aggsdaterange                   | ``"aggs": {..."date_range": {...}``
-aggsextendedstats               | ``"aggs": {..."extended_stats": {...}``
-aggsfilter                      | ``"aggs": {..."filter": {...}``
-aggsfilters                     | ``"aggs": {..."filters": {...}``
-aggsgeobounds                   | ``"aggs": {..."geo_bounds": {...}``
-aggsgeodistance                 | ``"aggs": {..."geo_distance": {...}``
-aggsgeohash                     | ``"aggs": {..."geohash_grid": {...}``
-aggsglobal                      | ``"aggs": {..."global": {...}``
-aggshistogram                   | ``"aggs": {..."histogram": {...}``
-aggsipv4range                   | ``"aggs": {..."ip_range": {...}``
-aggsmax                         | ``"aggs": {..."max": {...}``
-aggsmin                         | ``"aggs": {..."min": {...}``
-aggsmissing                     | ``"aggs": {..."missing": {...}``
-aggsnested                      | ``"aggs": {..."nested": {...}``
-aggspercentileranks             | ``"aggs": {..."percentile_ranks": {...}``
-aggspercentiles                 | ``"aggs": {..."percentiles": {...}``
-aggsrange                       | ``"aggs": {..."range": {...}``
-aggsreversenested               | ``"aggs": {..."reverse_nested": {...}``
-aggsscriptedmetric              | ``"aggs": {..."scripted_metric": {...}``
-saggssignificantterm            | ``"aggs": {..."significant_terms": {...}``
-saggsstat                       | ``"aggs": {..."stats": {...}``
-aggssum                         | ``"aggs": {..."sum": {...}``
-aggsterms                       | ``"aggs": {..."terms": {...}``
-aggstophits                     | ``"aggs": {..."top_hits": {...}``
-aggsvaluecount                  | ``"aggs": {..."value_count": {...}``
+avg                             | ``"aggs": {..."avg": {...}``
+cardinality                     | ``"aggs": {..."cardinality": {...}``
+children                        | ``"aggs": {..."children": {...}``
+datehistogram                   | ``"aggs": {..."date_histogram": {...}``
+daterange                       | ``"aggs": {..."date_range": {...}``
+extendedstats                   | ``"aggs": {..."extended_stats": {...}``
+filter                          | ``"aggs": {..."filter": {...}``
+filters                         | ``"aggs": {..."filters": {...}``
+geobounds                       | ``"aggs": {..."geo_bounds": {...}``
+geodistance                     | ``"aggs": {..."geo_distance": {...}``
+geohash                         | ``"aggs": {..."geohash_grid": {...}``
+global                          | ``"aggs": {..."global": {...}``
+histogram                       | ``"aggs": {..."histogram": {...}``
+ipv4range                       | ``"aggs": {..."ip_range": {...}``
+max                             | ``"aggs": {..."max": {...}``
+min                             | ``"aggs": {..."min": {...}``
+missing                         | ``"aggs": {..."missing": {...}``
+nested                          | ``"aggs": {..."nested": {...}``
+percentileranks                 | ``"aggs": {..."percentile_ranks": {...}``
+percentiles                     | ``"aggs": {..."percentiles": {...}``
+range                           | ``"aggs": {..."range": {...}``
+reversenested                   | ``"aggs": {..."reverse_nested": {...}``
+scriptedmetric                  | ``"aggs": {..."scripted_metric": {...}``
+ssignificantterm                | ``"aggs": {..."significant_terms": {...}``
+stats                           | ``"aggs": {..."stats": {...}``
+sum                             | ``"aggs": {..."sum": {...}``
+terms                           | ``"aggs": {..."terms": {...}``
+tophits                         | ``"aggs": {..."top_hits": {...}``
+valuecount                      | ``"aggs": {..."value_count": {...}``
 
 
 ## Completions

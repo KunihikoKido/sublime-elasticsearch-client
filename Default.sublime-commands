@@ -16,8 +16,8 @@
         "command": "es_cat_health",
     },
     {
-        "caption": "Elasticsearch: List All Indexes",
-        "command": "es_list_all_indexes",
+        "caption": "Elasticsearch: Cat Indexes",
+        "command": "es_cat_indexes",
     },
     {
         "caption": "Elasticsearch: Get Index Settings",
@@ -72,28 +72,28 @@
         "command": "es_delete_percolator",
     },
     {
+        "caption": "Elasticsearch: Cat Shards",
+        "command": "es_cat_shards",
+    },
+    {
         "caption": "Elasticsearch: Switch Servers",
-        "command": "es_switch_servers",
+        "command": "switch_servers",
     },
     {
         "caption": "Elasticsearch: Show Active Server",
-        "command": "es_show_active_server",
+        "command": "show_active_server",
     },
     {
         "caption": "Elasticsearch: Change Index",
-        "command": "es_change_index",
+        "command": "echange_index_setting",
     },
     {
         "caption": "Elasticsearch: Change Doc Type",
-        "command": "es_change_doc_type",
+        "command": "change_doc_type_setting",
     },
     {
         "caption": "Elasticsearch: Apache Bench",
-        "command": "es_apache_bench",
+        "command": "apache_bench",
     },
-    {
-        "caption": "Elasticsearch: Cat Shards",
-        "command": "es_cat_shards",
-    }
 
 ]
