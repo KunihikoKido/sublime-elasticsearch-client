@@ -125,12 +125,14 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 
 Command                                           | Method    | Call API
 ------------------------------------------------- | --------- | -------------------------
-Elasticsearch: Search Request                     | POST      | ``/index/type/_search``
 Elasticsearch: Analyze                            | POST      | ``/index/_analyze``
+Elasticsearch: Benchmark                          | PUT       | ``/_bench``
+Elasticsearch: Explain Document                   | POST      | ``/index/type/id/_explain``
 Elasticsearch: Register Query (Percolator)        | PUT       | ``/index/.percolator/id``
+Elasticsearch: Search Request                     | POST      | ``/index/type/_search``
 Elasticsearch: Show Registered Query (Percolator) | POST      | ``/index/type/_percolate``
 Elasticsearch: UN-Register Query (Percolator)     | DELETE    | ``/index/.percolator/id``
-Elasticsearch: Benchmark                          | PUT       | ``/_bench``
+
 
 ### Command for Document APIs
 
