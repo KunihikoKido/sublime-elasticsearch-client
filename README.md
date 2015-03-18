@@ -149,7 +149,17 @@ Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
 Elasticsearch: Cat Health          | GET       | ``/_cat/health``
 Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
-Elasticsearch: Cat Indexes         | GET       | ``/_cat/indices``
+Elasticsearch: Cat Indexes         | GET       | ``/_cat/indices/index``
+Elasticsearch: Cat Aliases         | GET       | ``/_cat/aliases/alias``
+Elasticsearch: Cat Allocation      | GET       | ``/_cat/allocation``
+Elasticsearch: Cat Master          | GET       | ``/_cat/master``
+Elasticsearch: Cat Nodes           | GET       | ``/_cat/nodes``
+Elasticsearch: Cat Pending Tasks   | GET       | ``/_cat/pending_tasks``
+Elasticsearch: Cat Plugins         | GET       | ``/_cat/plugins``
+Elasticsearch: Cat Recovery        | GET       | ``/_cat/recovery``
+Elasticsearch: Cat Thread Pool     | GET       | ``/_cat/thread_pool``
+Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
+
 
 ### Utility Commands
 

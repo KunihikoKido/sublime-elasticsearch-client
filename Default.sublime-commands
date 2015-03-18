@@ -76,6 +76,42 @@
         "command": "es_cat_shards",
     },
     {
+        "caption": "Elasticsearch: Cat Aliases",
+        "command": "es_cat_aliases",
+    },
+    {
+        "caption": "Elasticsearch: Cat Allocation",
+        "command": "es_cat_allocation",
+    },
+    {
+        "caption": "Elasticsearch: Cat Master",
+        "command": "es_cat_master",
+    },
+    {
+        "caption": "Elasticsearch: Cat Nodes",
+        "command": "es_cat_nodes",
+    },
+    {
+        "caption": "Elasticsearch: Cat Pending Tasks",
+        "command": "es_cat_pending_tasks",
+    },
+    {
+        "caption": "Elasticsearch: Cat Plugins",
+        "command": "es_cat_plugins",
+    },
+    {
+        "caption": "Elasticsearch: Cat Recovery",
+        "command": "es_cat_recovery",
+    },
+    {
+        "caption": "Elasticsearch: Cat Thread Pool",
+        "command": "es_cat_thread_pool",
+    },
+    {
+        "caption": "Elasticsearch: Cat Segments",
+        "command": "es_cat_segments",
+    },
+    {
         "caption": "Elasticsearch: Switch Servers",
         "command": "switch_servers",
     },
