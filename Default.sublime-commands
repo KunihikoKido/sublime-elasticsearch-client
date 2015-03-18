@@ -112,6 +112,10 @@
         "command": "es_cat_segments",
     },
     {
+        "caption": "Elasticsearch: Explain Document",
+        "command": "es_explain_document",
+    },
+    {
         "caption": "Elasticsearch: Switch Servers",
         "command": "switch_servers",
     },

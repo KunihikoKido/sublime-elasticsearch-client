@@ -131,3 +131,36 @@ class EsBenchmarkCommand(BaseElasticsearchCommand):
         url = make_path('_bench')
         body = self.get_selection_text()
         self.run_request('PUT', url, body)
+
+
+class EsExplainDocumentCommand(BaseElasticsearchCommand):
+
+    def run(self):
+        super(EsExplainDocumentCommand, self).run()
+
+        if not self.index:
+            self.get_index(self.set_index)
+            return
+
+        if not self.doc_type:
+            self.get_doc_type(self.set_doc_type)
+            return
+
+        self.get_doc_id(self.get_document)
+
+    def set_index(self, index):
+        super(EsExplainDocumentCommand, self).set_index(index)
+        self.run()
+
+    def set_doc_type(self, doc_type):
+        super(EsExplainDocumentCommand, self).set_doc_type(doc_type)
+        self.run()
+
+    def get_document(self, doc_id):
+        if not doc_id:
+            self.status_message('Canceled')
+            return
+
+        body = self.get_selection_text()
+        url = make_path(self.index, self.doc_type, doc_id, '_explain')
+        self.run_request('POST', url, body)
