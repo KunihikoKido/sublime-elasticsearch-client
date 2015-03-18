@@ -9,14 +9,22 @@ Elasticsearch Client integration: it's pretty handy.
 
 ![Command Palette](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/palette.png)
 
+## Required
+
+- ``curl`` command (required) you need have cURL installed
+- ``ab`` command (optional) if use th ``Apache Bench`` command
+- [PrettyJson](https://github.com/dzhibas/SublimePrettyJson) sublime plugin (optional) 
+
 ## Installation
 To install, clone to your "Packages" directory.
 
-- OS X: ~/Library/Application\\ Support/Sublime\\ Text\\ 3/Packages
-
 ```bash
+cd <Packages directory>
 git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git ElasticsearchClient
 ```
+
+- OS X: ~/Library/Application\\ Support/Sublime\\ Text\\ 3/Packages
+
 
 **Note** Elasticsearch Client expects to be installed to a directory called "ElasticsearchClient". Some features like the meny command to open settings will not work if installed somewhere else.
 
