@@ -20,7 +20,7 @@ Elasticsearch Client integration: it's pretty handy.
 ### Package Control
 The easiest way to install this is with [Package Control](https://packagecontrol.io/packages/ElasticsearchClient).
 
-1. To open the command palette, press ctrl+shift+p (Win, Linux) or cmd+shift+p (OS X). 
+1. To open the command palette, press ``ctrl+shift+p`` (Win, Linux) or ``cmd+shift+p`` (OS X). 
 2. Enter ``Package Control: Install Package``
 3. Search for ``ElasticsearchClient`` and hit Enter to install.
 
