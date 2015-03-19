@@ -313,6 +313,7 @@ file types ``*.es`` or set syntax ``Elasticsearch``
 
 and etc..
 
+---
 
-
+Hello! Elasticsearch [日本語で](https://medium.com/hello-elasticsearch/elasticsearch-client-for-sublime-text-3-82b182d2417e)
 
