@@ -135,5 +135,18 @@
         "caption": "Elasticsearch: Apache Bench",
         "command": "apache_bench",
     },
-
+    {
+        "caption": "Elasticsearch: User File Settings",
+        "command": "open_file",
+        "args": {
+            "file": "${packages}/User/Elasticsearch.sublime-settings"
+        }
+    },
+    {
+        "caption": "Elasticsearch: Open Elasticsearch Reference",
+        "command": "open_url",
+        "args": {
+            "url": "http://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"
+        }
+    },
 ]

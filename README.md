@@ -184,11 +184,13 @@ Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
 
 Command                                | Descrption
 -------------------------------------- | -------------------------
+Elasticsearch: Apach Bench             | benchmarking.
+Elasticsearch: Change Doc Type Setting | change the doc type for active server.
+Elasticsearch: Change Index Setting    | change the index for active server.
+Elasticsearch: Open Reference          | open elasticsearch reference webpage in browser.
 Elasticsearch: Show Active Server      | show active server settings.
 Elasticsearch: Switch Servers          | change the active server.
-Elasticsearch: Change Index Setting    | change the index for active server.
-Elasticsearch: Change Doc Type Setting | change the doc type for active server.
-Elasticsearch: Apach Bench             | benchmarking.
+Elasticsearch: User File Settings      | shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
 
 
 ## Snippets for Queries
