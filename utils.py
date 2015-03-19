@@ -15,6 +15,7 @@ class SwitchServersCommand(BaseElasticsearchCommand):
     def run(self):
         super(SwitchServersCommand, self).run()
         servers = list(self.servers.keys())
+        servers.sort()
         self.window.show_quick_panel(servers, self.server_selected)
 
     def server_selected(self, index):
