@@ -125,7 +125,7 @@
     },
     {
         "caption": "Elasticsearch: Change Index",
-        "command": "echange_index_setting",
+        "command": "change_index_setting",
     },
     {
         "caption": "Elasticsearch: Change Doc Type",
