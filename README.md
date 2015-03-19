@@ -53,9 +53,9 @@ Once you have a request ready, use shortcut ``Ctrl + Alt + S`` or open the Comma
 
 User Settings (accessible from the *Preferences/Package Settings/Elasticsearch Client/Settings - User* menu)
 
-Example:
+*Example:*
 
-```json
+```js
 {
     "active_server": "localhost",
     "servers": {
@@ -68,7 +68,7 @@ Example:
             "enabled_delete_mapping": true,
             "enabled_delete_document": true,
             "enabled_delete_index": true,
-            "enabled_index_document": false,
+            "enabled_index_document": true,
             "enabled_put_mapping": true,
             "enabled_register_query": true,
             "enabled_delete_percolator": true,
@@ -84,10 +84,11 @@ Example:
             "requests": 100,
             "concurrency": 10,
         }
-    },
-    "quiet": false
+    }
 }
 ```
+
+### Properties
 
 Setting                    | Description
 -------------------------- | ----------------------------------
@@ -101,24 +102,24 @@ Setting                    | Description
 ``pretty_command``         | pretty format command. default: ``pretty_json``
 ``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
 
-**servers**
+#### servers.\*
 
-Setting                    | Description
--------------------------- | ----------------------------------
-``base_url``               | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
-``index``                  | Elasticsearch Index name. default: ``test``
-``doc_type``               | Elasticsearch Type name. default: ``test``
-``analyzer``               | analyzer for Analyze Command. default: ``default``
-``enabled_create_index``   | if set ``true`` you can create index. default: ``false``
-``enabled_delete_mapping`` | if set ``true`` you can delete mapping. default: ``false``
-``enabled_delete_document``| if set ``true`` you can delete document. default: ``false``
-``enabled_delete_index``   | if set ``true`` you can delete index. default: ``false``
-``enabled_index_document`` | if set ``true`` you can index document. default: ``false``
-``enabled_put_mapping``    | if set ``true`` you can put mapping. default: ``false``
+Setting                       | Description
+----------------------------- | ----------------------------------
+``base_url``                  | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
+``index``                     | Elasticsearch Index name. default: ``test``
+``doc_type``                  | Elasticsearch Type name. default: ``test``
+``analyzer``                  | analyzer for Analyze Command. default: ``default``
+``enabled_create_index``      | if set ``true`` you can create index. default: ``false``
+``enabled_delete_mapping``    | if set ``true`` you can delete mapping. default: ``false``
+``enabled_delete_document``   | if set ``true`` you can delete document. default: ``false``
+``enabled_delete_index``      | if set ``true`` you can delete index. default: ``false``
+``enabled_index_document``    | if set ``true`` you can index document. default: ``false``
+``enabled_put_mapping``       | if set ``true`` you can put mapping. default: ``false``
 ``enabled_register_query``    | if set ``true`` you can register query for percolator. default: ``false``
-``enabled_delete_percolator``    | if set ``true`` you can delete registerd query for percolator. default: ``false``
+``enabled_delete_percolator`` | if set ``true`` you can delete registerd query for percolator. default: ``false``
 
-**benchmarks**
+#### benchmarks.\*
 
 Setting                    | Description
 -------------------------- | ----------------------------------
@@ -184,13 +185,13 @@ Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
 
 Command                                | Descrption
 -------------------------------------- | -------------------------
-Elasticsearch: Apach Bench             | benchmarking.
-Elasticsearch: Change Doc Type Setting | change the doc type for active server.
-Elasticsearch: Change Index Setting    | change the index for active server.
-Elasticsearch: Open Reference          | open elasticsearch reference webpage in browser.
-Elasticsearch: Show Active Server      | show active server settings.
-Elasticsearch: Switch Servers          | change the active server.
-Elasticsearch: User File Settings      | shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
+Elasticsearch: Apach Bench             | Run Benchmark.
+Elasticsearch: Change Doc Type Setting | Change the doc type for active server.
+Elasticsearch: Change Index Setting    | Change the index for active server.
+Elasticsearch: Open Reference          | Open Elasticsearch Reference Webpage
+Elasticsearch: Show Active Server      | Show active server settings in a panel.
+Elasticsearch: Switch Servers          | Change the active server.
+Elasticsearch: User File Settings      | Shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
 
 
 ## Snippets for Queries
