@@ -2,11 +2,6 @@ from .base import BaseElasticsearchCommand
 from .base import make_path
 from .base import DEFAULT_PARAMS
 
-__all__ = ["EsCreateIndexCommand", "EsDeleteIndexCommand",
-           "EsGetIndexSettingsCommand", "EsPutMappingCommand",
-           "EsGetMappingCommand", "EsDeleteMappingCommand",
-           "EsAnalyzeCommand"]
-
 
 class EsCreateIndexCommand(BaseElasticsearchCommand):
 

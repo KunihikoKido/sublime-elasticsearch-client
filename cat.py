@@ -1,13 +1,6 @@
 from .base import BaseElasticsearchCommand
 from .base import make_path
 
-__all__ = ["EsCatHealthCommand", "EsCatShardsCommand",
-           "EsCatIndexesCommand", "EsCatAliasesCommand",
-           "EsCatAllocationCommand", "EsCatMasterCommand",
-           "EsCatNodesCommand", "EsCatPenddingTasksCommand",
-           "EsCatPluginsCommand", "EsCatRecoveryCommand",
-           "EsCatThreadPoolCommand", "EsCatSegmentsCommand"]
-
 
 class EsCatHealthCommand(BaseElasticsearchCommand):
 

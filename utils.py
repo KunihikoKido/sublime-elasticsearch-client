@@ -5,11 +5,6 @@ from .base import make_path
 from .base import DEFAULT_PARAMS
 
 
-__all__ = ["SwitchServersCommand", "ShowActiveServerCommand",
-           "ChangeIndexSettingCommand", "ChangeDocTypeSettingCommand",
-           "ApacheBenchCommand", "AutoPrettyFormat"]
-
-
 class SwitchServersCommand(BaseElasticsearchCommand):
 
     def run(self):

@@ -2,11 +2,6 @@ from .base import make_path
 from .base import BaseElasticsearchCommand
 
 
-__all__ = ["EsSearchRequestCommand", "EsRegisterPercolatorCommand",
-           "EsShowPercolatorCommand", "EsDeletePercolatorCommand",
-           "EsBenchmarkCommand"]
-
-
 class EsSearchRequestCommand(BaseElasticsearchCommand):
 
     def run(self):
