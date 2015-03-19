@@ -16,15 +16,23 @@ Elasticsearch Client integration: it's pretty handy.
 - [PrettyJson](https://github.com/dzhibas/SublimePrettyJson) sublime plugin (optional) 
 
 ## Installation
+
+### Package Control
+The easiest way to install this is with [Package Control](https://packagecontrol.io/packages/ElasticsearchClient).
+
+1. To open the command palette, press ctrl+shift+p (Win, Linux) or cmd+shift+p (OS X). 
+2. Enter ``Package Control: Install Package``
+3. Search for ``ElasticsearchClient`` and hit Enter to install.
+
+### Manual
 To install, clone to your "Packages" directory.
 
-```bash
-cd <Packages directory>
+1. Click the ``Preferences > Browse Packages`` menu
+2. Open up a terminal and execute the following:
+
+```shell
 git clone https://github.com/kunihikokido/sublime-elasticsearch-client.git ElasticsearchClient
 ```
-
-- OS X: ~/Library/Application\\ Support/Sublime\\ Text\\ 3/Packages
-
 
 **Note** Elasticsearch Client expects to be installed to a directory called "ElasticsearchClient". Some features like the meny command to open settings will not work if installed somewhere else.
 
@@ -46,6 +54,7 @@ Once you have a request ready, use shortcut ``Ctrl + Alt + S`` or open the Comma
 User Settings (accessible from the *Preferences/Package Settings/Elasticsearch Client/Settings - User* menu)
 
 Example:
+
 ```json
 {
     "active_server": "localhost",
