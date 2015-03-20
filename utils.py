@@ -1,3 +1,4 @@
+from urllib.parse import urlencode
 import sublime
 import sublime_plugin
 from .base import BaseElasticsearchCommand
@@ -124,3 +125,15 @@ class AutoPrettyFormat(sublime_plugin.EventListener):
 
         if enabled_pretty and view_syntax.endswith(pretty_syntax):
             view.run_command(pretty_command)
+
+
+class ElasticsearchSearchDocsCommand(sublime_plugin.WindowCommand):
+
+    def search_docs(self, text):
+        params = {'q': text}
+        url = "https://www.elastic.co/search?{}".format(urlencode(params))
+        self.window.run_command('open_url', {'url': url})
+
+    def run(self):
+        self.window.show_input_panel(
+            'Search:', '', self.search_docs, None, None)

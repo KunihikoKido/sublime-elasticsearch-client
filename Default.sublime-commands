@@ -149,4 +149,8 @@
             "url": "http://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"
         }
     },
+    {
+        "caption": "Elasticsearch: Search in Docs",
+        "command": "elasticsearch_search_docs"
+    },
 ]
