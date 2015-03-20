@@ -293,7 +293,7 @@ percentiles                     | ``"aggs": {..."percentiles": {...}``
 range                           | ``"aggs": {..."range": {...}``
 reversenested                   | ``"aggs": {..."reverse_nested": {...}``
 scriptedmetric                  | ``"aggs": {..."scripted_metric": {...}``
-ssignificantterm                | ``"aggs": {..."significant_terms": {...}``
+significantterm                 | ``"aggs": {..."significant_terms": {...}``
 stats                           | ``"aggs": {..."stats": {...}``
 sum                             | ``"aggs": {..."sum": {...}``
 terms                           | ``"aggs": {..."terms": {...}``
