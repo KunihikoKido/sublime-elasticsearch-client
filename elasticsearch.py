@@ -126,53 +126,75 @@ class ElasticsearchBaseCommand(BaseCommand):
     def analyzer(self):
         return self.server_settings.get('analyzer', 'default')
 
+    def command_status_message(self, enabled):
+        if not enabled:
+            sublime.message_dialog(
+                'Disabled This Command!\n\n'
+                'Change the settings: '
+                'Preferences > Package Settings > '
+                'ElasticsearchClient > Settings – User menu'
+            )
+        return enabled
+
     @property
     def enabled_create_index(self):
-        return self.server_settings.get('enabled_create_index', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_create_index', False))
 
     @property
     def enabled_put_mapping(self):
-        return self.server_settings.get('enabled_put_mapping', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_put_mapping', False))
 
     @property
     def enabled_delete_document(self):
-        return self.server_settings.get('enabled_delete_document', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_document', False))
 
     @property
     def enabled_delete_index(self):
-        return self.server_settings.get('enabled_delete_index', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_index', False))
 
     @property
     def enabled_delete_mapping(self):
-        return self.server_settings.get('enabled_delete_mapping', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_mapping', False))
 
     @property
     def enabled_index_document(self):
-        return self.server_settings.get('enabled_index_document', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_index_document', False))
 
     @property
     def enabled_register_query(self):
-        return self.server_settings.get('enabled_register_query', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_register_query', False))
 
     @property
     def enabled_delete_percolator(self):
-        return self.server_settings.get('enabled_delete_percolator', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_percolator', False))
 
     @property
     def enabled_put_warmer(self):
-        return self.server_settings.get('enabled_put_warmer', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_put_warmer', False))
 
     @property
     def enabled_delete_warmer(self):
-        return self.server_settings.get('enabled_delete_warmer', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_warmer', False))
 
     @property
     def enabled_add_alias(self):
-        return self.server_settings.get('enabled_add_alias', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_add_alias', False))
 
     @property
     def enabled_delete_alias(self):
-        return self.server_settings.get('enabled_delete_alias', False)
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_alias', False))
 
     @property
     def http_headers(self):
