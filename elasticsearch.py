@@ -159,6 +159,14 @@ class ElasticsearchBaseCommand(BaseCommand):
         return self.server_settings.get('enabled_delete_percolator', False)
 
     @property
+    def enabled_put_warmer(self):
+        return self.server_settings.get('enabled_put_warmer', False)
+
+    @property
+    def enabled_delete_warmer(self):
+        return self.server_settings.get('enabled_delete_warmer', False)
+
+    @property
     def http_headers(self):
         return self.server_settings.get('http_headers', {})
 
@@ -181,6 +189,9 @@ class ElasticsearchBaseCommand(BaseCommand):
 
     def get_analyzer(self, callback):
         self.show_input_panel('Analyzer: ', self.analyzer, callback)
+
+    def get_warmer(self, callback):
+        self.show_input_panel('Warmer Name: ', '', callback)
 
     def update_server_settings(self, name, value):
         servers = self.servers
@@ -494,6 +505,43 @@ class ElasticsearchPutMappingCommand(ReusltJsonCommand):
         path = make_path(self.index, '_mapping', doc_type)
         body = self.get_selection()
         self.request_put(path, body=body, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_put_warmer:
+            self.get_warmer(self.on_done)
+
+    def on_done(self, name):
+        if not name:
+            return
+        path = make_path(self.index, '_warmer', name)
+        body = self.get_selection()
+        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_delete_warmer:
+            self.get_warmer(self.on_done)
+
+    def on_done(self, name):
+        if not name:
+            return
+        path = make_path(self.index, '_warmer', name)
+        self.request_delete(path, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
+
+    def run(self):
+        self.get_warmer(self.on_done)
+
+    def on_done(self, name):
+        path = make_path(self.index, '_warmer', name)
+        self.request_get(path, params=DEFAULT_PARAMS)
 
 
 # ---------------------------------------------------------------------

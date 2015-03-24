@@ -120,6 +120,8 @@ Setting                       | Description
 ``enabled_put_mapping``       | if set ``true`` you can put mapping. default: ``false``
 ``enabled_register_query``    | if set ``true`` you can register query for percolator. default: ``false``
 ``enabled_delete_percolator`` | if set ``true`` you can delete registerd query for percolator. default: ``false``
+``enabled_put_warmer``        | if set ``true`` you can register warmer. default: ``false``
+``enabled_delete_warmer``     | if set ``true`` you can delete warmer. default: ``false``
 
 #### benchmarks.\*
 
@@ -160,10 +162,14 @@ Command                            | Method    | Call API
 ---------------------------------- | --------- | -------------------------
 Elasticsearch: Create Index        | PUT       | ``/index``
 Elasticsearch: Delete Index        | DELETE    | ``/index/``
-Elasticsearch: Delete Mapping      | PUT       | ``/index/_mapping/type``
 Elasticsearch: Get Index Settings  | GET       | ``/index/_settings``
+Elasticsearch: Delete Mapping      | DELETE    | ``/index/_mapping/type``
 Elasticsearch: Get Mapping         | GET       | ``/index/_mapping/type``
 Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
+Elasticsearch: Get Warmer          | GET       | ``/index/_warmer/name``
+Elasticsearch: Delete Warmer       | DELETE    | ``/index/_warmer/name``
+Elasticsearch: Put Warmer          | PUT       | ``/index/_warmer/name``
+
 
 ### Command for Cat APIs
 

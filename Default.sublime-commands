@@ -23,6 +23,9 @@
     {"command": "elasticsearch_get_settings",              "caption": "Elasticsearch: Get Index Settings"},
     {"command": "elasticsearch_get_mapping",               "caption": "Elasticsearch: Get Mapping"},
     {"command": "elasticsearch_put_mapping",               "caption": "Elasticsearch: Put Mapping"},
+    {"command": "elasticsearch_put_warmer",                "caption": "Elasticsearch: Put Warmer"},
+    {"command": "elasticsearch_delete_warmer",             "caption": "Elasticsearch: Delete Warmer"},
+    {"command": "elasticsearch_get_warmer",                "caption": "Elasticsearch: Get Warmer"},
 
     {"command": "elasticsearch_search",                    "caption": "Elasticsearch: Search"},
     {"command": "elasticsearch_benchmark",                 "caption": "Elasticsearch: Benchmark"},
