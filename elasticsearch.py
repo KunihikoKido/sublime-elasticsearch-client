@@ -126,8 +126,8 @@ class ElasticsearchBaseCommand(BaseCommand):
     def analyzer(self):
         return self.server_settings.get('analyzer', 'default')
 
-    def command_status_message(self, enabled):
-        if not enabled:
+    def command_status_message(self, enabled, quiet=False):
+        if not enabled and quiet is False:
             sublime.message_dialog(
                 'Disabled This Command!\n\n'
                 'Change the settings: '
@@ -136,65 +136,65 @@ class ElasticsearchBaseCommand(BaseCommand):
             )
         return enabled
 
-    @property
-    def enabled_create_index(self):
+    def enabled_create_index(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_create_index', False))
+            self.server_settings.get('enabled_create_index', False),
+            quiet)
 
-    @property
-    def enabled_put_mapping(self):
+    def enabled_put_mapping(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_put_mapping', False))
+            self.server_settings.get('enabled_put_mapping', False),
+            quiet)
 
-    @property
-    def enabled_delete_document(self):
+    def enabled_delete_document(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_delete_document', False))
+            self.server_settings.get('enabled_delete_document', False),
+            quiet)
 
-    @property
-    def enabled_delete_index(self):
+    def enabled_delete_index(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_delete_index', False))
+            self.server_settings.get('enabled_delete_index', False),
+            quiet)
 
-    @property
-    def enabled_delete_mapping(self):
+    def enabled_delete_mapping(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_delete_mapping', False))
+            self.server_settings.get('enabled_delete_mapping', False),
+            quiet)
 
-    @property
-    def enabled_index_document(self):
+    def enabled_index_document(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_index_document', False))
+            self.server_settings.get('enabled_index_document', False),
+            quiet)
 
-    @property
-    def enabled_register_query(self):
+    def enabled_register_query(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_register_query', False))
+            self.server_settings.get('enabled_register_query', False),
+            quiet)
 
-    @property
-    def enabled_delete_percolator(self):
+    def enabled_delete_percolator(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_delete_percolator', False))
+            self.server_settings.get('enabled_delete_percolator', False),
+            quiet)
 
-    @property
-    def enabled_put_warmer(self):
+    def enabled_put_warmer(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_put_warmer', False))
+            self.server_settings.get('enabled_put_warmer', False),
+            quiet)
 
-    @property
-    def enabled_delete_warmer(self):
+    def enabled_delete_warmer(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_delete_warmer', False))
+            self.server_settings.get('enabled_delete_warmer', False),
+            quiet)
 
-    @property
-    def enabled_add_alias(self):
+    def enabled_add_alias(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_add_alias', False))
+            self.server_settings.get('enabled_add_alias', False),
+            quiet)
 
-    @property
-    def enabled_delete_alias(self):
+    def enabled_delete_alias(self, quiet=False):
         return self.command_status_message(
-            self.server_settings.get('enabled_delete_alias', False))
+            self.server_settings.get('enabled_delete_alias', False),
+            quiet)
 
     @property
     def http_headers(self):
@@ -269,17 +269,25 @@ class ElasticsearchBaseCommand(BaseCommand):
             "# =============================================================\n"
             "# Active Server Settings [{active_server}]\n"
             "# =============================================================\n"
+            "\n[ Base Settings ]\n"
             "- base_url                     : '{base_url}'\n"
             "- index                        : '{index}'\n"
             "- doc_type                     : '{doc_type}'\n"
             "- analyzer                     : '{analyzer}'\n"
+            "\n[ Indices APIs ]\n"
+            "- enabled_add_alias            : {enabled_add_alias}\n"
             "- enabled_create_index         : {enabled_create_index}\n"
-            "- enabled_delete_document      : {enabled_delete_document}\n"
+            "- enabled_delete_alias         : {enabled_delete_alias}\n"
             "- enabled_delete_index         : {enabled_delete_index}\n"
             "- enabled_delete_mapping       : {enabled_delete_mapping}\n"
-            "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
-            "- enabled_index_document       : {enabled_index_document}\n"
+            "- enabled_delete_warmer        : {enabled_delete_warmer}\n"
             "- enabled_put_mapping          : {enabled_put_mapping}\n"
+            "- enabled_put_warmer           : {enabled_put_warmer}\n"
+            "\n[ Document APIs ]\n"
+            "- enabled_delete_document      : {enabled_delete_document}\n"
+            "- enabled_index_document       : {enabled_index_document}\n"
+            "\n[ Search APIs ]\n"
+            "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
             "- enabled_register_query       : {enabled_register_query}\n"
             "".format(
                 active_server=self.active_server,
@@ -287,14 +295,18 @@ class ElasticsearchBaseCommand(BaseCommand):
                 index=self.index,
                 doc_type=self.doc_type,
                 analyzer=self.analyzer,
-                enabled_create_index=self.enabled_create_index,
-                enabled_delete_document=self.enabled_delete_document,
-                enabled_delete_index=self.enabled_delete_index,
-                enabled_delete_mapping=self.enabled_delete_mapping,
-                enabled_delete_percolator=self.enabled_delete_percolator,
-                enabled_index_document=self.enabled_index_document,
-                enabled_put_mapping=self.enabled_put_mapping,
-                enabled_register_query=self.enabled_register_query
+                enabled_create_index=self.enabled_create_index(quiet=True),
+                enabled_delete_document=self.enabled_delete_document(quiet=True),
+                enabled_delete_index=self.enabled_delete_index(quiet=True),
+                enabled_delete_mapping=self.enabled_delete_mapping(quiet=True),
+                enabled_delete_percolator=self.enabled_delete_percolator(quiet=True),
+                enabled_index_document=self.enabled_index_document(quiet=True),
+                enabled_put_mapping=self.enabled_put_mapping(quiet=True),
+                enabled_register_query=self.enabled_register_query(quiet=True),
+                enabled_put_warmer=self.enabled_put_warmer(quiet=True),
+                enabled_delete_warmer=self.enabled_delete_warmer(quiet=True),
+                enabled_add_alias=self.enabled_add_alias(quiet=True),
+                enabled_delete_alias=self.enabled_delete_alias(quiet=True)
             )
         )
 
@@ -404,7 +416,7 @@ class ElasticsearchCatThreadPoolCommand(ReusltTextCommand):
 class ElasticsearchDeleteDocumentCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_document:
+        if self.enabled_delete_document():
             self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -430,7 +442,7 @@ class ElasticsearchGetDocumentCommand(ReusltJsonCommand):
 class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_index_document:
+        if self.enabled_index_document():
             self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -463,7 +475,7 @@ class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
 class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_create_index:
+        if self.enabled_create_index():
             self.get_index(self.on_done)
 
     def on_done(self, index):
@@ -476,7 +488,7 @@ class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
 class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_index:
+        if self.enabled_delete_index():
             self.get_index(self.on_done)
 
     def on_done(self, index):
@@ -489,7 +501,7 @@ class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
 class ElasticsearchDeleteMappingCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_mapping:
+        if self.enabled_delete_mapping():
             self.get_doc_type(self.on_done)
 
     def on_done(self, doc_type):
@@ -526,7 +538,7 @@ class ElasticsearchGetMappingCommand(ReusltJsonCommand):
 class ElasticsearchPutMappingCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_put_mapping:
+        if self.enabled_put_mapping():
             self.get_doc_type(self.on_done)
 
     def on_done(self, doc_type):
@@ -540,7 +552,7 @@ class ElasticsearchPutMappingCommand(ReusltJsonCommand):
 class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_put_warmer:
+        if self.enabled_put_warmer():
             self.get_warmer(self.on_done)
 
     def on_done(self, name):
@@ -554,7 +566,7 @@ class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
 class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_warmer:
+        if self.enabled_delete_warmer():
             self.get_warmer(self.on_done)
 
     def on_done(self, name):
@@ -577,7 +589,7 @@ class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
 class ElasticsearchAddAliasCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_add_alias:
+        if self.enabled_add_alias():
             self.get_alias(self.on_done)
 
     def on_done(self, alias):
@@ -588,7 +600,7 @@ class ElasticsearchAddAliasCommand(ReusltJsonCommand):
 class ElasticsearchAddAliasWithFilterCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_add_alias:
+        if self.enabled_add_alias():
             self.get_alias(self.on_done)
 
     def on_done(self, alias):
@@ -600,7 +612,7 @@ class ElasticsearchAddAliasWithFilterCommand(ReusltJsonCommand):
 class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_alias:
+        if self.enabled_delete_alias():
             self.get_alias(self.on_done)
 
     def on_done(self, alias):
@@ -672,7 +684,7 @@ class ElasticsearchBenchmarkCommand(ReusltJsonCommand):
 class ElasticsearchDeletePercolatorCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_percolator:
+        if self.enabled_delete_percolator():
             self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -706,7 +718,7 @@ class ElasticsearchMatchPercolatorCommand(ReusltJsonCommand):
 class ElasticsearchRegisterPercolatorCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_register_query:
+        if self.enabled_register_query():
             self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -729,7 +741,7 @@ class ElasticsearchShowPercolatorCommand(ReusltJsonCommand):
 # ---------------------------------------------------------------------
 
 class SwitchServersCommand(ElasticsearchBaseCommand):
-    syntax = 'Packages/Text/Plain text.tmLanguage'
+    syntax = 'Packages/YAML/YAML.tmLanguage'
     selected_index = 0
 
     def run(self):
@@ -754,7 +766,7 @@ class SwitchServersCommand(ElasticsearchBaseCommand):
 
 
 class ShowActiveServerCommand(ElasticsearchBaseCommand):
-    syntax = 'Packages/Text/Plain text.tmLanguage'
+    syntax = 'Packages/YAML/YAML.tmLanguage'
 
     def run(self):
         self.show_active_server_settings()
