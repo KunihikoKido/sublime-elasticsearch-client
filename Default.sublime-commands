@@ -26,6 +26,10 @@
     {"command": "elasticsearch_put_warmer",                "caption": "Elasticsearch: Put Warmer"},
     {"command": "elasticsearch_delete_warmer",             "caption": "Elasticsearch: Delete Warmer"},
     {"command": "elasticsearch_get_warmer",                "caption": "Elasticsearch: Get Warmer"},
+    {"command": "elasticsearch_add_alias",                 "caption": "Elasticsearch: Add Alias"},
+    {"command": "elasticsearch_add_alias_with_filter",     "caption": "Elasticsearch: Add Alias with Filter"},
+    {"command": "elasticsearch_delete_alias",              "caption": "Elasticsearch: Delete Alias"},
+    {"command": "elasticsearch_get_alias",                 "caption": "Elasticsearch: Get Alias"},
 
     {"command": "elasticsearch_search",                    "caption": "Elasticsearch: Search"},
     {"command": "elasticsearch_benchmark",                 "caption": "Elasticsearch: Benchmark"},

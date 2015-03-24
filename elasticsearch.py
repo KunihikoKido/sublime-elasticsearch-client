@@ -167,6 +167,14 @@ class ElasticsearchBaseCommand(BaseCommand):
         return self.server_settings.get('enabled_delete_warmer', False)
 
     @property
+    def enabled_add_alias(self):
+        return self.server_settings.get('enabled_add_alias', False)
+
+    @property
+    def enabled_delete_alias(self):
+        return self.server_settings.get('enabled_delete_alias', False)
+
+    @property
     def http_headers(self):
         return self.server_settings.get('http_headers', {})
 
@@ -543,6 +551,49 @@ class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
         path = make_path(self.index, '_warmer', name)
         self.request_get(path, params=DEFAULT_PARAMS)
 
+
+class ElasticsearchAddAliasCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_add_alias:
+            self.get_alias(self.on_done)
+
+    def on_done(self, alias):
+        path = make_path(self.index, '_alias', alias)
+        self.request_put(path, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchAddAliasWithFilterCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_add_alias:
+            self.get_alias(self.on_done)
+
+    def on_done(self, alias):
+        path = make_path(self.index, '_alias', alias)
+        body = self.get_selection()
+        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_delete_alias:
+            self.get_alias(self.on_done)
+
+    def on_done(self, alias):
+        path = make_path(self.index, '_alias', alias)
+        self.request_delete(path, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchGetAliasCommand(ReusltJsonCommand):
+
+    def run(self):
+        self.get_alias(self.on_done)
+
+    def on_done(self, alias):
+        path = make_path(self.index, '_alias', alias)
+        self.request_get(path, params=DEFAULT_PARAMS)
 
 # ---------------------------------------------------------------------
 # Search APIs

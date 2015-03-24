@@ -122,6 +122,8 @@ Setting                       | Description
 ``enabled_delete_percolator`` | if set ``true`` you can delete registerd query for percolator. default: ``false``
 ``enabled_put_warmer``        | if set ``true`` you can register warmer. default: ``false``
 ``enabled_delete_warmer``     | if set ``true`` you can delete warmer. default: ``false``
+``enabled_add_alias``         | if set ``true`` you can add alias. default: ``false``
+``enabled_delete_alias``      | if set ``true`` you can delete alias. default: ``false``
 
 #### benchmarks.\*
 
@@ -158,17 +160,21 @@ Elasticsearch: Get Document        | GET       | ``/index/type/id``
 
 ### Command for Index APIs
 
-Command                            | Method    | Call API
----------------------------------- | --------- | -------------------------
-Elasticsearch: Create Index        | PUT       | ``/index``
-Elasticsearch: Delete Index        | DELETE    | ``/index/``
-Elasticsearch: Get Index Settings  | GET       | ``/index/_settings``
-Elasticsearch: Delete Mapping      | DELETE    | ``/index/_mapping/type``
-Elasticsearch: Get Mapping         | GET       | ``/index/_mapping/type``
-Elasticsearch: Put Mapping         | PUT       | ``/index/_mapping/type``
-Elasticsearch: Get Warmer          | GET       | ``/index/_warmer/name``
-Elasticsearch: Delete Warmer       | DELETE    | ``/index/_warmer/name``
-Elasticsearch: Put Warmer          | PUT       | ``/index/_warmer/name``
+Command                              | Method    | Call API
+------------------------------------ | --------- | -------------------------
+Elasticsearch: Create Index          | PUT       | ``/index``
+Elasticsearch: Delete Index          | DELETE    | ``/index/``
+Elasticsearch: Get Index Settings    | GET       | ``/index/_settings``
+Elasticsearch: Delete Mapping        | DELETE    | ``/index/_mapping/type``
+Elasticsearch: Get Mapping           | GET       | ``/index/_mapping/type``
+Elasticsearch: Put Mapping           | PUT       | ``/index/_mapping/type``
+Elasticsearch: Get Warmer            | GET       | ``/index/_warmer/name``
+Elasticsearch: Delete Warmer         | DELETE    | ``/index/_warmer/name``
+Elasticsearch: Put Warmer            | PUT       | ``/index/_warmer/name``
+Elasticsearch: Add Alias             | PUT       | ``/index/_alias/name``
+Elasticsearch: Add Alias with Filter | PUT       | ``/index/_alias/name``
+Elasticsearch: Delete Alias          | DELETE    | ``/index/_alias/name``
+Elasticsearch: Get Alias             | GET       | ``/index/_alias/name``
 
 
 ### Command for Cat APIs
