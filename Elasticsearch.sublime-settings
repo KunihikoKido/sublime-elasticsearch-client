@@ -28,12 +28,10 @@
     // Path to the Apache Bench (ab) command. If ab is on you path, you should not need to
     // change this. Windows users will need to use forward slashes in the path.
     "ab_command": "ab",
+    
     "enabled_pretty": true,
     "pretty_command": "pretty_json",
     "pretty_syntax": "Elasticsearch",
 
-    "show_panel_on_build": true,
-    "auto_complete": true,
-    "word_wrap": false,
-    "rulers": [],
+    "ask_to_search_types": false,
 }

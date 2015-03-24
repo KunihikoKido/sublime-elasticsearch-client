@@ -101,6 +101,8 @@ Setting                    | Description
 ``enabled_pretty``         | enabled pretty json. required: [PrettyJson](https://github.com/dzhibas/SublimePrettyJson)
 ``pretty_command``         | pretty format command. default: ``pretty_json``
 ``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
+``ask_to_search_types``    | if ``true`` you can choice search_types.
+
 
 #### servers.\*
 
@@ -186,8 +188,6 @@ Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
 Command                                | Descrption
 -------------------------------------- | -------------------------
 Elasticsearch: Apach Bench             | Run Benchmark.
-Elasticsearch: Change Doc Type Setting | Change the doc type for active server.
-Elasticsearch: Change Index Setting    | Change the index for active server.
 Elasticsearch: Open Reference          | Open Elasticsearch Reference Webpage
 Elasticsearch: Show Active Server      | Show active server settings in a panel.
 Elasticsearch: Switch Servers          | Change the active server.

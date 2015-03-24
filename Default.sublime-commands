@@ -1,156 +1,41 @@
-[
-    {
-        "caption": "Elasticsearch: Search",
-        "command": "es_search_request",
-    },
-    {
-        "caption": "Elasticsearch: Benchmark",
-        "command": "es_benchmark",
-    },
-    {
-        "caption": "Elasticsearch: Analyze",
-        "command": "es_analyze",
-    },
-    {
-        "caption": "Elasticsearch: Cat Health",
-        "command": "es_cat_health",
-    },
-    {
-        "caption": "Elasticsearch: Cat Indexes",
-        "command": "es_cat_indexes",
-    },
-    {
-        "caption": "Elasticsearch: Get Index Settings",
-        "command": "es_get_index_settings",
-    },
-    {
-        "caption": "Elasticsearch: Get Mapping",
-        "command": "es_get_mapping",
-    },
-    {
-        "caption": "Elasticsearch: Create Index",
-        "command": "es_create_index",
-    },
-    {
-        "caption": "Elasticsearch: Put Mapping",
-        "command": "es_put_mapping",
-    },
-    {
-        "caption": "Elasticsearch: Index Document",
-        "command": "es_index_document",
-    },
-    {
-        "caption": "Elasticsearch: Get Document",
-        "command": "es_get_document",
-    },
-    {
-        "caption": "Elasticsearch: Delete Index",
-        "command": "es_delete_index",
-    },
-    {
-        "caption": "Elasticsearch: Delete Mapping",
-        "command": "es_delete_mapping",
-    },
-    {
-        "caption": "Elasticsearch: Delete Document",
-        "command": "es_delete_document",
-    },
-    {
-        "caption": "Elasticsearch: Register Query (Percolator)",
-        "command": "es_register_percolator",
-    },
-    {
-        "caption": "Elasticsearch: Show Registered Query (Percolator)",
-        "command": "es_show_percolator",
-    },
-    {
-        "caption": "Elasticsearch: Match Document (Percolator)",
-        "command": "es_match_percolator",
-    },
-    {
-        "caption": "Elasticsearch: UN-Register Query (Percolator)",
-        "command": "es_delete_percolator",
-    },
-    {
-        "caption": "Elasticsearch: Cat Shards",
-        "command": "es_cat_shards",
-    },
-    {
-        "caption": "Elasticsearch: Cat Aliases",
-        "command": "es_cat_aliases",
-    },
-    {
-        "caption": "Elasticsearch: Cat Allocation",
-        "command": "es_cat_allocation",
-    },
-    {
-        "caption": "Elasticsearch: Cat Master",
-        "command": "es_cat_master",
-    },
-    {
-        "caption": "Elasticsearch: Cat Nodes",
-        "command": "es_cat_nodes",
-    },
-    {
-        "caption": "Elasticsearch: Cat Pending Tasks",
-        "command": "es_cat_pending_tasks",
-    },
-    {
-        "caption": "Elasticsearch: Cat Plugins",
-        "command": "es_cat_plugins",
-    },
-    {
-        "caption": "Elasticsearch: Cat Recovery",
-        "command": "es_cat_recovery",
-    },
-    {
-        "caption": "Elasticsearch: Cat Thread Pool",
-        "command": "es_cat_thread_pool",
-    },
-    {
-        "caption": "Elasticsearch: Cat Segments",
-        "command": "es_cat_segments",
-    },
-    {
-        "caption": "Elasticsearch: Explain Document",
-        "command": "es_explain_document",
-    },
-    {
-        "caption": "Elasticsearch: Switch Servers",
-        "command": "switch_servers",
-    },
-    {
-        "caption": "Elasticsearch: Show Active Server",
-        "command": "show_active_server",
-    },
-    {
-        "caption": "Elasticsearch: Change Index",
-        "command": "change_index_setting",
-    },
-    {
-        "caption": "Elasticsearch: Change Doc Type",
-        "command": "change_doc_type_setting",
-    },
-    {
-        "caption": "Elasticsearch: Apache Bench",
-        "command": "apache_bench",
-    },
-    {
-        "caption": "Elasticsearch: User File Settings",
-        "command": "open_file",
-        "args": {
-            "file": "${packages}/User/Elasticsearch.sublime-settings"
-        }
-    },
-    {
-        "caption": "Elasticsearch: Open Elasticsearch Reference",
-        "command": "open_url",
-        "args": {
-            "url": "http://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"
-        }
-    },
-    {
-        "caption": "Elasticsearch: Search in Docs",
-        "command": "elasticsearch_search_docs"
-    },
+[   
+    {"command": "elasticsearch_cat_aliases",               "caption": "Elasticsearch: Cat Aliases"},
+    {"command": "elasticsearch_cat_allocation",            "caption": "Elasticsearch: Cat Allocation"},
+    {"command": "elasticsearch_cat_health",                "caption": "Elasticsearch: Cat Health"},
+    {"command": "elasticsearch_cat_indices",               "caption": "Elasticsearch: Cat Indices"},
+    {"command": "elasticsearch_cat_master",                "caption": "Elasticsearch: Cat Master"},
+    {"command": "elasticsearch_cat_nodes",                 "caption": "Elasticsearch: Cat Nodes"},
+    {"command": "elasticsearch_cat_pending_tasks",         "caption": "Elasticsearch: Cat Pending Tasks"},
+    {"command": "elasticsearch_cat_plugins",               "caption": "Elasticsearch: Cat Plugins"},
+    {"command": "elasticsearch_cat_recovery",              "caption": "Elasticsearch: Cat Recovery"},
+    {"command": "elasticsearch_cat_segments",              "caption": "Elasticsearch: Cat Segments"},
+    {"command": "elasticsearch_cat_shards",                "caption": "Elasticsearch: Cat Shards"},
+    {"command": "elasticsearch_cat_thread_pool",           "caption": "Elasticsearch: Cat Thread Pool"},
+
+    {"command": "elasticsearch_delete_document",           "caption": "Elasticsearch: Delete Document"},
+    {"command": "elasticsearch_get_document",              "caption": "Elasticsearch: Get Document"},
+    {"command": "elasticsearch_index_document",            "caption": "Elasticsearch: Index Document"},
+
+    {"command": "elasticsearch_analyze",                   "caption": "Elasticsearch: Analyze"},
+    {"command": "elasticsearch_create_index",              "caption": "Elasticsearch: Create Index"},
+    {"command": "elasticsearch_delete_index",              "caption": "Elasticsearch: Delete Index"},
+    {"command": "elasticsearch_delete_mapping",            "caption": "Elasticsearch: Delete Mapping"},
+    {"command": "elasticsearch_get_settings",              "caption": "Elasticsearch: Get Index Settings"},
+    {"command": "elasticsearch_get_mapping",               "caption": "Elasticsearch: Get Mapping"},
+    {"command": "elasticsearch_put_mapping",               "caption": "Elasticsearch: Put Mapping"},
+
+    {"command": "elasticsearch_search",                    "caption": "Elasticsearch: Search"},
+    {"command": "elasticsearch_benchmark",                 "caption": "Elasticsearch: Benchmark"},
+    {"command": "elasticsearch_delete_percolator",         "caption": "Elasticsearch: UN-Register Query (Percolator)"},
+    {"command": "elasticsearch_explain_document",          "caption": "Elasticsearch: Explain Document"},
+    {"command": "elasticsearch_match_percolator",          "caption": "Elasticsearch: Match Document (Percolator)"},
+    {"command": "elasticsearch_register_percolator",       "caption": "Elasticsearch: Register Query (Percolator)"},
+    {"command": "elasticsearch_show_percolator",           "caption": "Elasticsearch: Show Registered Query (Percolator)"},
+
+    {"command": "switch_servers",                          "caption": "Elasticsearch: Switch Servers"},
+    {"command": "show_active_server",                      "caption": "Elasticsearch: Show Active Server"},
+    {"command": "apache_bench",                            "caption": "Elasticsearch: Apache Bench"},
+    {"command": "open_file",                               "caption": "Elasticsearch: User File Settings", "args": {"file": "${packages}/User/Elasticsearch.sublime-settings"}},
+    {"command": "open_url",                                "caption": "Elasticsearch: Open Elasticsearch Reference", "args": {"url": "http://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"}},
+    {"command": "search_docs",                             "caption": "Elasticsearch: Search in Docs"},
 ]
