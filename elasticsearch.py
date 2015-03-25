@@ -491,8 +491,8 @@ class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
     def on_done(self, analyzer):
         path = make_path(self.index, '_analyze')
         body = self.get_selection()
-        params = DEFAULT_PARAMS
-        params.update(dict(analyzer=analyzer))
+        params = dict(analyzer=analyzer)
+        params.update(DEFAULT_PARAMS)
         self.request_post(path, body=body, params=params)
 
 
@@ -692,8 +692,8 @@ class ElasticsearchSearchCommand(ReusltJsonCommand):
         search_type = self.search_types[selected]
         path = make_path(self.index, self.doc_type, '_search')
         body = self.get_selection()
-        params = DEFAULT_PARAMS
-        params.update(dict(search_type=search_type))
+        params = dict(search_type=search_type)
+        params.update(DEFAULT_PARAMS)
         self.request_post(path, body=body, params=params)
 
 
@@ -704,8 +704,8 @@ class ElasticsearchUriSearchCommand(ReusltJsonCommand):
 
     def on_done(self, query):
         path = make_path(self.index, self.doc_type, '_search')
-        params = DEFAULT_PARAMS
-        params.update(dict(q=query))
+        params = dict(q=query)
+        params.update(DEFAULT_PARAMS)
         self.request_get(path, params=params)
 
 
