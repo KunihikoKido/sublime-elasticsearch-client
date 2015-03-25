@@ -228,6 +228,9 @@ class ElasticsearchBaseCommand(BaseCommand):
     def get_warmer(self, callback):
         self.show_input_panel('Warmer Name: ', '', callback)
 
+    def get_query(self, callback):
+        self.show_input_panel('Query: ', '', callback)
+
     def update_server_settings(self, name, value):
         servers = self.servers
         servers[self.active_server][name] = value
@@ -313,7 +316,7 @@ class ElasticsearchBaseCommand(BaseCommand):
                 enabled_delete_warmer=self.enabled_delete_warmer(quiet=True),
                 enabled_add_alias=self.enabled_add_alias(quiet=True),
                 enabled_delete_alias=self.enabled_delete_alias(quiet=True),
-                enabled_update_index=self.enabled_update_index(quiet=True)
+                enabled_update_document=self.enabled_update_document(quiet=True)
             )
         )
 
@@ -692,6 +695,18 @@ class ElasticsearchSearchCommand(ReusltJsonCommand):
         params = DEFAULT_PARAMS
         params.update(dict(search_type=search_type))
         self.request_post(path, body=body, params=params)
+
+
+class ElasticsearchUriSearchCommand(ReusltJsonCommand):
+
+    def run(self):
+        self.get_query(self.on_done)
+
+    def on_done(self, query):
+        path = make_path(self.index, self.doc_type, '_search')
+        params = DEFAULT_PARAMS
+        params.update(dict(q=query))
+        self.request_get(path, params=params)
 
 
 class ElasticsearchBenchmarkCommand(ReusltJsonCommand):

@@ -32,7 +32,8 @@
     {"command": "elasticsearch_delete_alias",              "caption": "Elasticsearch: Delete Alias"},
     {"command": "elasticsearch_get_alias",                 "caption": "Elasticsearch: Get Alias"},
 
-    {"command": "elasticsearch_search",                    "caption": "Elasticsearch: Search"},
+    {"command": "elasticsearch_search",                    "caption": "Elasticsearch: Search (Request Body Search)"},
+    {"command": "elasticsearch_uri_search",                "caption": "Elasticsearch: Search (URI Search)"},
     {"command": "elasticsearch_benchmark",                 "caption": "Elasticsearch: Benchmark"},
     {"command": "elasticsearch_delete_percolator",         "caption": "Elasticsearch: UN-Register Query (Percolator)"},
     {"command": "elasticsearch_explain_document",          "caption": "Elasticsearch: Explain Document"},
