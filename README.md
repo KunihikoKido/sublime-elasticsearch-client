@@ -117,6 +117,7 @@ Setting                       | Description
 ``enabled_delete_document``   | if set ``true`` you can delete document. default: ``false``
 ``enabled_delete_index``      | if set ``true`` you can delete index. default: ``false``
 ``enabled_index_document``    | if set ``true`` you can index document. default: ``false``
+``enabled_update_document``   | if set ``true`` you can update document. default: ``false``
 ``enabled_put_mapping``       | if set ``true`` you can put mapping. default: ``false``
 ``enabled_register_query``    | if set ``true`` you can register query for percolator. default: ``false``
 ``enabled_delete_percolator`` | if set ``true`` you can delete registerd query for percolator. default: ``false``

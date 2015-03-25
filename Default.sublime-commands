@@ -15,6 +15,7 @@
     {"command": "elasticsearch_delete_document",           "caption": "Elasticsearch: Delete Document"},
     {"command": "elasticsearch_get_document",              "caption": "Elasticsearch: Get Document"},
     {"command": "elasticsearch_index_document",            "caption": "Elasticsearch: Index Document"},
+    {"command": "elasticsearch_update_document",            "caption": "Elasticsearch: Update Document"},
 
     {"command": "elasticsearch_analyze",                   "caption": "Elasticsearch: Analyze"},
     {"command": "elasticsearch_create_index",              "caption": "Elasticsearch: Create Index"},

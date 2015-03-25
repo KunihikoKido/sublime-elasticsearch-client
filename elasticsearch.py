@@ -166,6 +166,11 @@ class ElasticsearchBaseCommand(BaseCommand):
             self.server_settings.get('enabled_index_document', False),
             quiet)
 
+    def enabled_update_document(self, quiet=False):
+        return self.command_status_message(
+            self.server_settings.get('enabled_update_document', False),
+            quiet)
+
     def enabled_register_query(self, quiet=False):
         return self.command_status_message(
             self.server_settings.get('enabled_register_query', False),
@@ -286,6 +291,7 @@ class ElasticsearchBaseCommand(BaseCommand):
             "\n[ Document APIs ]\n"
             "- enabled_delete_document      : {enabled_delete_document}\n"
             "- enabled_index_document       : {enabled_index_document}\n"
+            "- enabled_update_document      : {enabled_update_document}\n"
             "\n[ Search APIs ]\n"
             "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
             "- enabled_register_query       : {enabled_register_query}\n"
@@ -306,7 +312,8 @@ class ElasticsearchBaseCommand(BaseCommand):
                 enabled_put_warmer=self.enabled_put_warmer(quiet=True),
                 enabled_delete_warmer=self.enabled_delete_warmer(quiet=True),
                 enabled_add_alias=self.enabled_add_alias(quiet=True),
-                enabled_delete_alias=self.enabled_delete_alias(quiet=True)
+                enabled_delete_alias=self.enabled_delete_alias(quiet=True),
+                enabled_update_index=self.enabled_update_index(quiet=True)
             )
         )
 
@@ -452,6 +459,20 @@ class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
             self.request_put(path, body=body, params=DEFAULT_PARAMS)
         else:
             self.request_post(path, body=body, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchUpdateDocumentCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_update_document():
+            self.get_document_id(self.on_done)
+
+    def on_done(self, document_id):
+        if not document_id:
+            return
+        path = make_path(self.index, self.doc_type, document_id, '_update')
+        body = self.get_selection()
+        self.request_post(path, body=body, params=DEFAULT_PARAMS)
 
 
 # ---------------------------------------------------------------------
