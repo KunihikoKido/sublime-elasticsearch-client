@@ -13,14 +13,14 @@ Elasticsearch Client integration: it's pretty handy.
 
 - ``curl`` command (required) you need have cURL installed
 - ``ab`` command (optional) if use th ``Apache Bench`` command
-- [PrettyJson](https://github.com/dzhibas/SublimePrettyJson) sublime plugin (optional) 
+- [PrettyJson](https://github.com/dzhibas/SublimePrettyJson) sublime plugin (optional)
 
 ## Installation
 
 ### Package Control
 The easiest way to install this is with [Package Control](https://packagecontrol.io/packages/ElasticsearchClient).
 
-1. To open the command palette, press ``ctrl+shift+p`` (Win, Linux) or ``cmd+shift+p`` (OS X). 
+1. To open the command palette, press ``ctrl+shift+p`` (Win, Linux) or ``cmd+shift+p`` (OS X).
 2. Enter ``Package Control: Install Package``
 3. Search for ``ElasticsearchClient`` and hit Enter to install.
 
@@ -162,21 +162,22 @@ Elasticsearch: Get Document        | GET       | ``/index/type/id``
 
 ### Command for Index APIs
 
-Command                              | Method    | Call API
------------------------------------- | --------- | -------------------------
-Elasticsearch: Create Index          | PUT       | ``/index``
-Elasticsearch: Delete Index          | DELETE    | ``/index/``
-Elasticsearch: Get Index Settings    | GET       | ``/index/_settings``
-Elasticsearch: Delete Mapping        | DELETE    | ``/index/_mapping/type``
-Elasticsearch: Get Mapping           | GET       | ``/index/_mapping/type``
-Elasticsearch: Put Mapping           | PUT       | ``/index/_mapping/type``
-Elasticsearch: Get Warmer            | GET       | ``/index/_warmer/name``
-Elasticsearch: Delete Warmer         | DELETE    | ``/index/_warmer/name``
-Elasticsearch: Put Warmer            | PUT       | ``/index/_warmer/name``
-Elasticsearch: Add Alias             | PUT       | ``/index/_alias/name``
-Elasticsearch: Add Alias with Filter | PUT       | ``/index/_alias/name``
-Elasticsearch: Delete Alias          | DELETE    | ``/index/_alias/name``
-Elasticsearch: Get Alias             | GET       | ``/index/_alias/name``
+Command                                     | Method    | Call API
+------------------------------------------- | --------- | -------------------------
+Elasticsearch: Create Index (Create Only)   | PUT       | ``/index``
+Elasticsearch: Create Index (With Settings) | PUT       | ``/index``
+Elasticsearch: Delete Index                 | DELETE    | ``/index/``
+Elasticsearch: Get Index Settings           | GET       | ``/index/_settings``
+Elasticsearch: Delete Mapping               | DELETE    | ``/index/_mapping/type``
+Elasticsearch: Get Mapping                  | GET       | ``/index/_mapping/type``
+Elasticsearch: Put Mapping                  | PUT       | ``/index/_mapping/type``
+Elasticsearch: Get Warmer                   | GET       | ``/index/_warmer/name``
+Elasticsearch: Delete Warmer                | DELETE    | ``/index/_warmer/name``
+Elasticsearch: Put Warmer                   | PUT       | ``/index/_warmer/name``
+Elasticsearch: Add Alias (Add Only)         | PUT       | ``/index/_alias/name``
+Elasticsearch: Add Alias (With Settings)    | PUT       | ``/index/_alias/name``
+Elasticsearch: Delete Alias                 | DELETE    | ``/index/_alias/name``
+Elasticsearch: Get Alias                    | GET       | ``/index/_alias/name``
 
 
 ### Command for Cat APIs

@@ -519,7 +519,8 @@ class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
 
 class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
 
-    def run(self):
+    def run(self, request_body=False):
+        self.request_body = request_body
         if self.enabled_create_index():
             self.get_index(self.on_done)
 
@@ -527,7 +528,8 @@ class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
         if not index:
             return
         path = make_path(index)
-        self.request_put(path, params=DEFAULT_PARAMS)
+        body = self.request_body and self.get_selection() or None
+        self.request_put(path, body=body, params=DEFAULT_PARAMS)
 
 
 class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
@@ -633,24 +635,14 @@ class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
 
 class ElasticsearchAddAliasCommand(ReusltJsonCommand):
 
-    def run(self):
+    def run(self, request_body=False):
+        self.request_body = request_body
         if self.enabled_add_alias():
             self.get_alias(self.on_done)
 
     def on_done(self, alias):
         path = make_path(self.index, '_alias', alias)
-        self.request_put(path, params=DEFAULT_PARAMS)
-
-
-class ElasticsearchAddAliasWithFilterCommand(ReusltJsonCommand):
-
-    def run(self):
-        if self.enabled_add_alias():
-            self.get_alias(self.on_done)
-
-    def on_done(self, alias):
-        path = make_path(self.index, '_alias', alias)
-        body = self.get_selection()
+        body = self.request_body and self.get_selection() or None
         self.request_put(path, body=body, params=DEFAULT_PARAMS)
 
 
