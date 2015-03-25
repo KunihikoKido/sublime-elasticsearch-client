@@ -7,9 +7,31 @@ SETTINGS_FILE = 'Elasticsearch.sublime-settings'
 DEFAULT_PARAMS = {'pretty': 'true'}
 SKIP_PATH = (None, '', b'', [], ())
 
+SEATCH_TYPE_CHOICES = (
+    ('query_then_fetch', 'Search Type: Query Then Fetch (default)'),
+    ('count', 'Search Type: Count'),
+    ('dfs_query_and_fetch', 'Search Type: Dfs, Query And Fetch'),
+    ('dfs_query_then_fetch', 'Search Type: Dfs, Query Then Fetch'),
+    ('query_and_fetch', 'Search Type: Query And Fetch'),
+)
+
 
 def make_path(*parts):
     return '/'.join([p for p in parts if p not in SKIP_PATH])
+
+
+def make_choices(choices):
+    return [label for value, label in choices]
+
+
+def choice(choices, index):
+    return [value for value, label in choices][index]
+
+
+def make_params(**options):
+    params = DEFAULT_PARAMS.copy()
+    params.update(dict(options))
+    return params
 
 
 class BaseCommand(sublime_plugin.WindowCommand):
@@ -491,8 +513,7 @@ class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
     def on_done(self, analyzer):
         path = make_path(self.index, '_analyze')
         body = self.get_selection()
-        params = dict(analyzer=analyzer)
-        params.update(DEFAULT_PARAMS)
+        params = make_params(analyzer=analyzer)
         self.request_post(path, body=body, params=params)
 
 
@@ -660,40 +681,27 @@ class ElasticsearchGetAliasCommand(ReusltJsonCommand):
 
 class ElasticsearchSearchCommand(ReusltJsonCommand):
 
-    search_types = {
-        'Search Type: Count': 'count',
-        'Search Type: Dfs, Query And Fetch': 'dfs_query_and_fetch',
-        'Search Type: Dfs, Query Then Fetch': 'dfs_query_then_fetch',
-        'Search Type: Query And Fetch': 'query_and_fetch',
-        'Search Type: Query Then Fetch (default)': 'query_then_fetch',
-    }
-
-    selected_index = 4
+    selected_search_type = 0
 
     def run(self):
         if self.ask_to_search_types:
             self.select_panel(self.on_done)
         else:
-            self.on_done(self.selected_index)
+            self.on_done(self.selected_search_type)
 
     def select_panel(self, callback):
-        search_types = list(self.search_types.keys())
-        search_types.sort()
+        choices = make_choices(SEATCH_TYPE_CHOICES)
         self.window.show_quick_panel(
-            search_types, callback, selected_index=self.selected_index)
+            choices, callback, selected_index=self.selected_search_type)
 
     def on_done(self, index):
         if index == -1:
             return
-        self.selected_index = index
-        search_types = list(self.search_types.keys())
-        search_types.sort()
-        selected = search_types[index]
-        search_type = self.search_types[selected]
+        self.selected_search_type = index
+        search_type = choice(SEATCH_TYPE_CHOICES, index)
         path = make_path(self.index, self.doc_type, '_search')
+        params = make_params(search_type=search_type)
         body = self.get_selection()
-        params = dict(search_type=search_type)
-        params.update(DEFAULT_PARAMS)
         self.request_post(path, body=body, params=params)
 
 
@@ -704,8 +712,7 @@ class ElasticsearchUriSearchCommand(ReusltJsonCommand):
 
     def on_done(self, query):
         path = make_path(self.index, self.doc_type, '_search')
-        params = dict(q=query)
-        params.update(DEFAULT_PARAMS)
+        params = make_params(q=query)
         self.request_get(path, params=params)
 
 
