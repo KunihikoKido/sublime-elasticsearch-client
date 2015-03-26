@@ -18,7 +18,7 @@
     {"command": "elasticsearch_update_document",            "caption": "Elasticsearch: Update Document"},
 
     {"command": "elasticsearch_analyze",                   "caption": "Elasticsearch: Analyze"},
-    {"command": "elasticsearch_create_index",              "caption": "Elasticsearch: Create Index (Create Only)"},
+    {"command": "elasticsearch_create_index",              "caption": "Elasticsearch: Create Index (Only Create)"},
     {"command": "elasticsearch_create_index",              "caption": "Elasticsearch: Create Index (With Settings)", "args": {"request_body": true}},
     {"command": "elasticsearch_delete_index",              "caption": "Elasticsearch: Delete Index"},
     {"command": "elasticsearch_delete_mapping",            "caption": "Elasticsearch: Delete Mapping"},
@@ -28,7 +28,7 @@
     {"command": "elasticsearch_put_warmer",                "caption": "Elasticsearch: Put Warmer"},
     {"command": "elasticsearch_delete_warmer",             "caption": "Elasticsearch: Delete Warmer"},
     {"command": "elasticsearch_get_warmer",                "caption": "Elasticsearch: Get Warmer"},
-    {"command": "elasticsearch_add_alias",                 "caption": "Elasticsearch: Add Alias (Add Only)"},
+    {"command": "elasticsearch_add_alias",                 "caption": "Elasticsearch: Add Alias (Only Add)"},
     {"command": "elasticsearch_add_alias",                 "caption": "Elasticsearch: Add Alias (With Settings)", "args": {"request_body": true}},
     {"command": "elasticsearch_delete_alias",              "caption": "Elasticsearch: Delete Alias"},
     {"command": "elasticsearch_get_alias",                 "caption": "Elasticsearch: Get Alias"},

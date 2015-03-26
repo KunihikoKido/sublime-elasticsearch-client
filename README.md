@@ -164,7 +164,7 @@ Elasticsearch: Get Document        | GET       | ``/index/type/id``
 
 Command                                     | Method    | Call API
 ------------------------------------------- | --------- | -------------------------
-Elasticsearch: Create Index (Create Only)   | PUT       | ``/index``
+Elasticsearch: Create Index (Only Create)   | PUT       | ``/index``
 Elasticsearch: Create Index (With Settings) | PUT       | ``/index``
 Elasticsearch: Delete Index                 | DELETE    | ``/index/``
 Elasticsearch: Get Index Settings           | GET       | ``/index/_settings``
@@ -174,7 +174,7 @@ Elasticsearch: Put Mapping                  | PUT       | ``/index/_mapping/type
 Elasticsearch: Get Warmer                   | GET       | ``/index/_warmer/name``
 Elasticsearch: Delete Warmer                | DELETE    | ``/index/_warmer/name``
 Elasticsearch: Put Warmer                   | PUT       | ``/index/_warmer/name``
-Elasticsearch: Add Alias (Add Only)         | PUT       | ``/index/_alias/name``
+Elasticsearch: Add Alias (Only Add)         | PUT       | ``/index/_alias/name``
 Elasticsearch: Add Alias (With Settings)    | PUT       | ``/index/_alias/name``
 Elasticsearch: Delete Alias                 | DELETE    | ``/index/_alias/name``
 Elasticsearch: Get Alias                    | GET       | ``/index/_alias/name``
