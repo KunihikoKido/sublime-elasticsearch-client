@@ -106,7 +106,10 @@ class ElasticsearchBaseCommand(BaseCommand):
 
     @property
     def server_settings(self):
-        return self.servers[self.active_server]
+        active_server = self.active_server
+        if self.active_server is None:
+            active_server = list(self.servers.keys())[0]
+        return self.servers[active_server]
 
     @property
     def curl_command(self):

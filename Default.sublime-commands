@@ -47,5 +47,5 @@
     {"command": "apache_bench",                            "caption": "Elasticsearch: Apache Bench"},
     {"command": "open_file",                               "caption": "Elasticsearch: User File Settings", "args": {"file": "${packages}/User/Elasticsearch.sublime-settings"}},
     {"command": "open_url",                                "caption": "Elasticsearch: Open Elasticsearch Reference", "args": {"url": "http://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"}},
-    {"command": "search_docs",                             "caption": "Elasticsearch: Search in Docs"},
+    {"command": "search_docs",                             "caption": "Elasticsearch: Search in Docs"}
 ]

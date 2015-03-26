@@ -30,6 +30,6 @@
         {"trigger": "indices_boost", "contents": "\"indices_boost\": {$1}" },
         {"trigger": "min_score", "contents": "\"min_score\": ${1:0.5}" },
         {"trigger": "_name", "contents": "\"_name\": \"${1:test}\"" },
-        {"trigger": "stats", "contents": "\"stats\" : [${1:\"group1\", \"group2\"}]" },
+        {"trigger": "stats", "contents": "\"stats\" : [${1:\"group1\", \"group2\"}]" }
     ]
 }
