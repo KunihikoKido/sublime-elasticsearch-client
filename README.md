@@ -340,7 +340,7 @@ and etc..
 **Snippet**
 ![Snippet](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/snippets.png)
 
-**Show API Result**
+**API Result**
 ![Show API Result](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/show_result.png)
 
 **Benchmarking**
