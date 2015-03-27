@@ -335,6 +335,18 @@ file types ``*.es`` or set syntax ``Elasticsearch``
 
 and etc..
 
+## Screenshot
+
+**Snippet**
+![Snippet](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/snippets.png)
+
+**Show API Result**
+![Show API Result](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/show_result.png)
+
+**Benchmarking**
+![Benchmarking](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/benchmarking.png)
+
+
 ---
 
 Hello! Elasticsearch [日本語で](https://medium.com/hello-elasticsearch/elasticsearch-client-for-sublime-text-3-82b182d2417e)
