@@ -226,6 +226,16 @@ class ElasticsearchBaseCommand(BaseCommand):
             self.server_settings.get('enabled_delete_alias', False),
             quiet)
 
+    def enabled_register_search_template(self, quiet=False):
+        return self.command_status_message(
+            self.server_settings.get('enabled_register_search_template', False),
+            quiet)
+
+    def enabled_delete_search_template(self, quiet=False):
+        return self.command_status_message(
+            self.server_settings.get('enabled_delete_search_template', False),
+            quiet)
+
     @property
     def http_headers(self):
         return self.server_settings.get('http_headers', {})
@@ -255,6 +265,9 @@ class ElasticsearchBaseCommand(BaseCommand):
 
     def get_query(self, callback):
         self.show_input_panel('Query: ', '', callback)
+
+    def get_template(self, callback):
+        self.show_input_panel('Template Name: ', '', callback)
 
     def update_server_settings(self, name, value):
         servers = self.servers
@@ -303,26 +316,28 @@ class ElasticsearchBaseCommand(BaseCommand):
             "# Active Server Settings [{active_server}]\n"
             "# =============================================================\n"
             "\n[ Base Settings ]\n"
-            "- base_url                     : '{base_url}'\n"
-            "- index                        : '{index}'\n"
-            "- doc_type                     : '{doc_type}'\n"
-            "- analyzer                     : '{analyzer}'\n"
+            "- base_url                          : '{base_url}'\n"
+            "- index                             : '{index}'\n"
+            "- doc_type                          : '{doc_type}'\n"
+            "- analyzer                          : '{analyzer}'\n"
             "\n[ Indices APIs ]\n"
-            "- enabled_add_alias            : {enabled_add_alias}\n"
-            "- enabled_create_index         : {enabled_create_index}\n"
-            "- enabled_delete_alias         : {enabled_delete_alias}\n"
-            "- enabled_delete_index         : {enabled_delete_index}\n"
-            "- enabled_delete_mapping       : {enabled_delete_mapping}\n"
-            "- enabled_delete_warmer        : {enabled_delete_warmer}\n"
-            "- enabled_put_mapping          : {enabled_put_mapping}\n"
-            "- enabled_put_warmer           : {enabled_put_warmer}\n"
+            "- enabled_add_alias                 : {enabled_add_alias}\n"
+            "- enabled_create_index              : {enabled_create_index}\n"
+            "- enabled_delete_alias              : {enabled_delete_alias}\n"
+            "- enabled_delete_index              : {enabled_delete_index}\n"
+            "- enabled_delete_mapping            : {enabled_delete_mapping}\n"
+            "- enabled_delete_warmer             : {enabled_delete_warmer}\n"
+            "- enabled_put_mapping               : {enabled_put_mapping}\n"
+            "- enabled_put_warmer                : {enabled_put_warmer}\n"
             "\n[ Document APIs ]\n"
-            "- enabled_delete_document      : {enabled_delete_document}\n"
-            "- enabled_index_document       : {enabled_index_document}\n"
-            "- enabled_update_document      : {enabled_update_document}\n"
+            "- enabled_delete_document           : {enabled_delete_document}\n"
+            "- enabled_index_document            : {enabled_index_document}\n"
+            "- enabled_update_document           : {enabled_update_document}\n"
             "\n[ Search APIs ]\n"
-            "- enabled_delete_percolator    : {enabled_delete_percolator}\n"
-            "- enabled_register_query       : {enabled_register_query}\n"
+            "- enabled_delete_percolator         : {enabled_delete_percolator}\n"
+            "- enabled_register_query            : {enabled_register_query}\n"
+            "- enabled_register_search_template  : {enabled_register_search_template}\n"
+            "- enabled_delete_search_template    : {enabled_delete_search_template}\n"
             "".format(
                 active_server=self.active_server,
                 base_url=self.base_url,
@@ -341,7 +356,9 @@ class ElasticsearchBaseCommand(BaseCommand):
                 enabled_delete_warmer=self.enabled_delete_warmer(quiet=True),
                 enabled_add_alias=self.enabled_add_alias(quiet=True),
                 enabled_delete_alias=self.enabled_delete_alias(quiet=True),
-                enabled_update_document=self.enabled_update_document(quiet=True)
+                enabled_update_document=self.enabled_update_document(quiet=True),
+                enabled_register_search_template=self.enabled_register_search_template(quiet=True),
+                enabled_delete_search_template=self.enabled_delete_search_template(quiet=True)
             )
         )
 
@@ -700,6 +717,19 @@ class ElasticsearchSearchCommand(ReusltJsonCommand):
         self.request_post(path, body=body, params=params)
 
 
+class ElasticsearchTemplateSearchCommand(ElasticsearchSearchCommand):
+
+    def on_done(self, index):
+        if index == -1:
+            return
+        self.selected_search_type = index
+        search_type = choice(SEATCH_TYPE_CHOICES, index)
+        path = make_path(self.index, self.doc_type, '_search', 'template')
+        params = make_params(search_type=search_type)
+        body = self.get_selection()
+        self.request_post(path, body=body, params=params)
+
+
 class ElasticsearchUriSearchCommand(ReusltJsonCommand):
 
     def run(self):
@@ -781,6 +811,46 @@ class ElasticsearchValidateQueryCommand(ReusltJsonCommand):
         body = self.get_selection()
         params = make_params(explain='true')
         self.request_post(path, body=body, params=params)
+
+
+class ElasticsearchRegisterSearchTemplateCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_register_search_template():
+            self.get_template(self.on_done)
+
+    def on_done(self, template):
+        if not template:
+            return
+
+        path = make_path('_search', 'template', template)
+        body = self.get_selection()
+        self.request_post(path, body=body, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchDeleteSearchTemplateCommand(ReusltJsonCommand):
+
+    def run(self):
+        if self.enabled_delete_search_template():
+            self.get_template(self.on_done)
+
+    def on_done(self, template):
+        if not template:
+            return
+        path = make_path('_search', 'template', template)
+        self.request_delete(path, body=None, params=DEFAULT_PARAMS)
+
+
+class ElasticsearchGetSearchTemplateCommand(ReusltJsonCommand):
+
+    def run(self):
+        self.get_template(self.on_done)
+
+    def on_done(self, template):
+        if not template:
+            return
+        path = make_path('_search', 'template', template)
+        self.request_get(path, body=None, params=DEFAULT_PARAMS)
 
 
 # ---------------------------------------------------------------------

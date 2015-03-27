@@ -106,25 +106,27 @@ Setting                    | Description
 
 #### servers.\*
 
-Setting                       | Description
------------------------------ | ----------------------------------
-``base_url``                  | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
-``index``                     | Elasticsearch Index name. default: ``test``
-``doc_type``                  | Elasticsearch Type name. default: ``test``
-``analyzer``                  | analyzer for Analyze Command. default: ``default``
-``enabled_create_index``      | if set ``true`` you can create index. default: ``false``
-``enabled_delete_mapping``    | if set ``true`` you can delete mapping. default: ``false``
-``enabled_delete_document``   | if set ``true`` you can delete document. default: ``false``
-``enabled_delete_index``      | if set ``true`` you can delete index. default: ``false``
-``enabled_index_document``    | if set ``true`` you can index document. default: ``false``
-``enabled_update_document``   | if set ``true`` you can update document. default: ``false``
-``enabled_put_mapping``       | if set ``true`` you can put mapping. default: ``false``
-``enabled_register_query``    | if set ``true`` you can register query for percolator. default: ``false``
-``enabled_delete_percolator`` | if set ``true`` you can delete registerd query for percolator. default: ``false``
-``enabled_put_warmer``        | if set ``true`` you can register warmer. default: ``false``
-``enabled_delete_warmer``     | if set ``true`` you can delete warmer. default: ``false``
-``enabled_add_alias``         | if set ``true`` you can add alias. default: ``false``
-``enabled_delete_alias``      | if set ``true`` you can delete alias. default: ``false``
+Setting                              | Description
+------------------------------------ | ----------------------------------
+``base_url``                         | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
+``index``                            | Elasticsearch Index name. default: ``test``
+``doc_type``                         | Elasticsearch Type name. default: ``test``
+``analyzer``                         | analyzer for Analyze Command. default: ``default``
+``enabled_create_index``             | if set ``true`` you can create index. default: ``false``
+``enabled_delete_mapping``           | if set ``true`` you can delete mapping. default: ``false``
+``enabled_delete_document``          | if set ``true`` you can delete document. default: ``false``
+``enabled_delete_index``             | if set ``true`` you can delete index. default: ``false``
+``enabled_index_document``           | if set ``true`` you can index document. default: ``false``
+``enabled_update_document``          | if set ``true`` you can update document. default: ``false``
+``enabled_put_mapping``              | if set ``true`` you can put mapping. default: ``false``
+``enabled_register_query``           | if set ``true`` you can register query for percolator. default: ``false``
+``enabled_delete_percolator``        | if set ``true`` you can delete registerd query for percolator. default: ``false``
+``enabled_put_warmer``               | if set ``true`` you can register warmer. default: ``false``
+``enabled_delete_warmer``            | if set ``true`` you can delete warmer. default: ``false``
+``enabled_add_alias``                | if set ``true`` you can add alias. default: ``false``
+``enabled_delete_alias``             | if set ``true`` you can delete alias. default: ``false``
+``enabled_register_search_template`` | if set ``true`` you can register search template. default: ``false``
+``enabled_delete_search_template``   | if set ``true`` you can delete search template. default: ``false``
 
 #### benchmarks.\*
 
@@ -151,6 +153,9 @@ Elasticsearch: Search (URI Search)                | GET       | ``/index/type/_s
 Elasticsearch: Show Registered Percolator         | POST      | ``/index/type/_percolate``
 Elasticsearch: UN-Register Percolator             | DELETE    | ``/index/.percolator/id``
 Elasticsearch: Validate Query                     | POST      | ``/index/type/_validate/query``
+Elasticsearch: Register Search Template           | POST      | ``/_search/template/name``
+Elasticsearch: Get Search Template                | GET       | ``/_search/template/name``
+Elasticsearch: Delete Search Template             | DELETE    | ``/_search/template/name``
 
 
 ### Command for Document APIs

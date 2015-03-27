@@ -35,6 +35,7 @@
 
     {"command": "elasticsearch_search",                    "caption": "Elasticsearch: Search (Request Body Search)"},
     {"command": "elasticsearch_uri_search",                "caption": "Elasticsearch: Search (URI Search)"},
+    {"command": "elasticsearch_template_search",           "caption": "Elasticsearch: Search (Use Template)"},
     {"command": "elasticsearch_benchmark",                 "caption": "Elasticsearch: Benchmark"},
     {"command": "elasticsearch_delete_percolator",         "caption": "Elasticsearch: UN-Register Percolator"},
     {"command": "elasticsearch_explain_document",          "caption": "Elasticsearch: Explain Document"},
@@ -42,6 +43,9 @@
     {"command": "elasticsearch_register_percolator",       "caption": "Elasticsearch: Register Percolator"},
     {"command": "elasticsearch_show_percolator",           "caption": "Elasticsearch: Show Registered Percolator"},
     {"command": "elasticsearch_validate_query",            "caption": "Elasticsearch: Validate Query"},
+    {"command": "elasticsearch_register_search_template",  "caption": "Elasticsearch: Register Search Template"},
+    {"command": "elasticsearch_delete_search_template",    "caption": "Elasticsearch: Delete Search Template"},
+    {"command": "elasticsearch_get_search_template",       "caption": "Elasticsearch: Get Search Template"},
 
     {"command": "switch_servers",                          "caption": "Elasticsearch: Switch Servers"},
     {"command": "show_active_server",                      "caption": "Elasticsearch: Show Active Server"},
