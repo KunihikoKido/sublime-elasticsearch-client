@@ -15,7 +15,7 @@
     {"command": "elasticsearch_delete_document",           "caption": "Elasticsearch: Delete Document"},
     {"command": "elasticsearch_get_document",              "caption": "Elasticsearch: Get Document"},
     {"command": "elasticsearch_index_document",            "caption": "Elasticsearch: Index Document"},
-    {"command": "elasticsearch_update_document",            "caption": "Elasticsearch: Update Document"},
+    {"command": "elasticsearch_update_document",           "caption": "Elasticsearch: Update Document"},
 
     {"command": "elasticsearch_analyze",                   "caption": "Elasticsearch: Analyze"},
     {"command": "elasticsearch_create_index",              "caption": "Elasticsearch: Create Index (Only Create)"},
@@ -41,6 +41,7 @@
     {"command": "elasticsearch_match_percolator",          "caption": "Elasticsearch: Match Percolator"},
     {"command": "elasticsearch_register_percolator",       "caption": "Elasticsearch: Register Percolator"},
     {"command": "elasticsearch_show_percolator",           "caption": "Elasticsearch: Show Registered Percolator"},
+    {"command": "elasticsearch_validate_query",            "caption": "Elasticsearch: Validate Query"},
 
     {"command": "switch_servers",                          "caption": "Elasticsearch: Switch Servers"},
     {"command": "show_active_server",                      "caption": "Elasticsearch: Show Active Server"},

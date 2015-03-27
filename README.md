@@ -150,6 +150,7 @@ Elasticsearch: Search (Request Body Search)       | POST      | ``/index/type/_s
 Elasticsearch: Search (URI Search)                | GET       | ``/index/type/_search``
 Elasticsearch: Show Registered Percolator         | POST      | ``/index/type/_percolate``
 Elasticsearch: UN-Register Percolator             | DELETE    | ``/index/.percolator/id``
+Elasticsearch: Validate Query                     | POST      | ``/index/type/_validate/query``
 
 
 ### Command for Document APIs

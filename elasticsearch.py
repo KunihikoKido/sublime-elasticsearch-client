@@ -774,6 +774,15 @@ class ElasticsearchShowPercolatorCommand(ReusltJsonCommand):
         self.request_get(path, params=DEFAULT_PARAMS)
 
 
+class ElasticsearchValidateQueryCommand(ReusltJsonCommand):
+
+    def run(self):
+        path = make_path(self.index, self.doc_type, '_validate', 'query')
+        body = self.get_selection()
+        params = make_params(explain='true')
+        self.request_post(path, body=body, params=params)
+
+
 # ---------------------------------------------------------------------
 # Utility Commands
 # ---------------------------------------------------------------------
