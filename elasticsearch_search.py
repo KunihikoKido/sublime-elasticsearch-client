@@ -177,7 +177,11 @@ class ElasticsearchGetSearchTemplateCommand(ReusltJsonCommand):
         self.get_template(self.on_done)
 
     def on_done(self, template):
-        if not template:
-            return
-        path = make_path('_search', 'template', template)
-        self.request_get(path, body=None, params=DEFAULT_PARAMS)
+        if template:
+            path = make_path('_search', 'template', template)
+            params = DEFAULT_PARAMS
+        else:
+            path = make_path('.scripts', '_search')
+            params = make_params(_source='false')
+
+        self.request_get(path, body=None, params=params)
