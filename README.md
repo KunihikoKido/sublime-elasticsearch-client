@@ -206,14 +206,15 @@ Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
 
 ### Utility Commands
 
-Command                                | Descrption
--------------------------------------- | -------------------------
-Elasticsearch: Apach Bench             | Run Benchmark.
-Elasticsearch: Open Reference          | Open Elasticsearch Reference Webpage
-Elasticsearch: Show Active Server      | Show active server settings in a panel.
-Elasticsearch: Switch Servers          | Change the active server.
-Elasticsearch: User File Settings      | Shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
-Elasticsearch: Search in Docs          | Site Search
+Command                                          | Descrption
+------------------------------------------------ | -------------------------
+Elasticsearch: Apach Bench                       | Run Benchmark.
+Elasticsearch: Apach Bench (for Search Template) | Run Benchmark for Search Template Query.
+Elasticsearch: Open Reference                    | Open Elasticsearch Reference Webpage
+Elasticsearch: Show Active Server                | Show active server settings in a panel.
+Elasticsearch: Switch Servers                    | Change the active server.
+Elasticsearch: User File Settings                | Shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
+Elasticsearch: Search in Docs                    | Site Search
 
 
 ## Snippets for Queries

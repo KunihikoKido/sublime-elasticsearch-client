@@ -64,6 +64,9 @@ class ApacheBenchCommand(ElasticsearchBaseCommand):
 
         self.run_command(command)
 
+    def make_path(self):
+        return make_path(self.index, self.doc_type, '_search')
+
     def on_done(self, index):
         if index == -1:
             return
@@ -74,9 +77,16 @@ class ApacheBenchCommand(ElasticsearchBaseCommand):
         benchmark = self.benchmarks[selected]
         requests = str(benchmark.get('requests'))
         concurrency = str(benchmark.get('concurrency'))
-        path = make_path(self.index, self.doc_type, '_search')
+        path = self.make_path()
         postfile = self.get_file_name()
         self.run_apache_bench(path, requests, concurrency, postfile)
+
+
+class SearchTemplateApacheBenchCommand(ApacheBenchCommand):
+    """ Apache Bentch for Search Template Query """
+
+    def make_path(self):
+        return make_path(self.index, self.doc_type, '_search', 'template')
 
 
 class AutoPrettyFormat(sublime_plugin.EventListener):
