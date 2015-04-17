@@ -91,6 +91,10 @@ class BaseCommand(sublime_plugin.WindowCommand):
     def status_message(self, message):
         sublime.status_message(message)
 
+    def delete_ok_cancel_dialog(self, text):
+        message = 'Are you sure you want to delete the {} ?'.format(text)
+        return sublime.ok_cancel_dialog(message, ok_title='Delete')
+
 
 class ElasticsearchBaseCommand(BaseCommand):
 

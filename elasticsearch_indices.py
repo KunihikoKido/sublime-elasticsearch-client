@@ -4,7 +4,6 @@ Indices API Commands for Elasticsearch Client for sublime text 3
 For more information about API, see
 http://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html
 """
-
 from .elasticsearch import ReusltJsonCommand
 from .elasticsearch import make_path
 from .elasticsearch import make_params
@@ -26,14 +25,11 @@ class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
 class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
 
     def run(self, request_body=False):
-        self.request_body = request_body
-        if self.enabled_create_index():
-            self.get_index(self.on_done)
-
-    def on_done(self, index):
-        if not index:
+        if not self.enabled_create_index():
             return
-        path = make_path(index)
+
+        self.request_body = request_body
+        path = make_path(self.index)
         body = self.request_body and self.get_selection() or None
         self.request_put(path, body=body, params=DEFAULT_PARAMS)
 
@@ -41,63 +37,52 @@ class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
 class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_index():
-            self.get_index(self.on_done)
-
-    def on_done(self, index):
-        if not index:
+        if not self.enabled_delete_index():
             return
-        path = make_path(index)
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Index'.format(self.index)):
+            return
+
+        path = make_path(self.index)
         self.request_delete(path, params=DEFAULT_PARAMS)
 
 
 class ElasticsearchDeleteMappingCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_mapping():
-            self.get_doc_type(self.on_done)
-
-    def on_done(self, doc_type):
-        if not doc_type:
+        if not self.enabled_delete_mapping():
             return
-        path = make_path(self.index, doc_type)
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Mapping'.format(self.doc_type)):
+            return
+
+        path = make_path(self.index, self.doc_type)
         self.request_delete(path, params=DEFAULT_PARAMS)
 
 
 class ElasticsearchGetSettingsCommand(ReusltJsonCommand):
 
     def run(self):
-        self.get_index(self.on_done)
-
-    def on_done(self, index):
-        if not index:
-            return
-        path = make_path(index, '_settings')
+        path = make_path(self.index, '_settings')
         self.request_get(path, params=DEFAULT_PARAMS)
 
 
 class ElasticsearchGetMappingCommand(ReusltJsonCommand):
 
     def run(self):
-        self.get_doc_type(self.on_done)
-
-    def on_done(self, doc_type):
-        if not doc_type:
-            return
-        path = make_path(self.index, '_mapping', doc_type)
+        path = make_path(self.index, '_mapping', self.doc_type)
         self.request_get(path, params=DEFAULT_PARAMS)
 
 
 class ElasticsearchPutMappingCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_put_mapping():
-            self.get_doc_type(self.on_done)
-
-    def on_done(self, doc_type):
-        if not doc_type:
+        if not self.enabled_put_mapping():
             return
-        path = make_path(self.index, '_mapping', doc_type)
+
+        path = make_path(self.index, '_mapping', self.doc_type)
         body = self.get_selection()
         self.request_put(path, body=body, params=DEFAULT_PARAMS)
 
@@ -105,8 +90,10 @@ class ElasticsearchPutMappingCommand(ReusltJsonCommand):
 class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_put_warmer():
-            self.get_warmer(self.on_done)
+        if not self.enabled_put_warmer():
+            return
+
+        self.get_warmer(self.on_done)
 
     def on_done(self, name):
         if not name:
@@ -119,13 +106,20 @@ class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
 class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_warmer():
-            self.get_warmer(self.on_done)
-
-    def on_done(self, name):
-        if not name:
+        if not self.enabled_delete_warmer():
             return
-        path = make_path(self.index, '_warmer', name)
+
+        self.get_warmer(self.on_done)
+
+    def on_done(self, warmer):
+        if not warmer:
+            return
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Warmer'.format(self.warmer)):
+            return
+
+        path = make_path(self.index, '_warmer', warmer)
         self.request_delete(path, params=DEFAULT_PARAMS)
 
 
@@ -142,9 +136,11 @@ class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
 class ElasticsearchAddAliasCommand(ReusltJsonCommand):
 
     def run(self, request_body=False):
+        if not self.enabled_add_alias():
+            return
+
         self.request_body = request_body
-        if self.enabled_add_alias():
-            self.get_alias(self.on_done)
+        self.get_alias(self.on_done)
 
     def on_done(self, alias):
         path = make_path(self.index, '_alias', alias)
@@ -155,10 +151,19 @@ class ElasticsearchAddAliasCommand(ReusltJsonCommand):
 class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_alias():
-            self.get_alias(self.on_done)
+        if not self.enabled_delete_alias():
+            return
+
+        self.get_alias(self.on_done)
 
     def on_done(self, alias):
+        if not alias:
+            return
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Alias'.format(self.alias)):
+            return
+
         path = make_path(self.index, '_alias', alias)
         self.request_delete(path, params=DEFAULT_PARAMS)
 

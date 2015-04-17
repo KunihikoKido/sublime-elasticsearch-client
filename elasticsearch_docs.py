@@ -13,12 +13,19 @@ from .elasticsearch import DEFAULT_PARAMS
 class ElasticsearchDeleteDocumentCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_document():
-            self.get_document_id(self.on_done)
+        if not self.enabled_delete_document():
+            return
+
+        self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
         if not document_id:
             return
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Document'.format(self.document_id)):
+            return
+
         path = make_path(self.index, self.doc_type, document_id)
         self.request_delete(path, params=DEFAULT_PARAMS)
 
@@ -39,8 +46,10 @@ class ElasticsearchGetDocumentCommand(ReusltJsonCommand):
 class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_index_document():
-            self.get_document_id(self.on_done)
+        if not self.enabled_index_document():
+            return
+
+        self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
         path = make_path(self.index, self.doc_type, document_id)
@@ -54,8 +63,10 @@ class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
 class ElasticsearchUpdateDocumentCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_update_document():
-            self.get_document_id(self.on_done)
+        if not self.enabled_update_document():
+            return
+
+        self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
         if not document_id:

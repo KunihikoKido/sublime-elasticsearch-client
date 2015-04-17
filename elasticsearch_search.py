@@ -28,8 +28,9 @@ class ElasticsearchSearchCommand(ReusltJsonCommand):
     def run(self):
         if self.ask_to_search_types:
             self.select_panel(self.on_done)
-        else:
-            self.on_done(self.selected_search_type)
+            return
+
+        self.on_done(self.selected_search_type)
 
     def select_panel(self, callback):
         choices = make_choices(SEARCH_TYPE_CHOICES)
@@ -82,12 +83,19 @@ class ElasticsearchBenchmarkCommand(ReusltJsonCommand):
 class ElasticsearchDeletePercolatorCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_percolator():
-            self.get_document_id(self.on_done)
+        if not self.enabled_delete_percolator():
+            return
+
+        self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
         if not document_id:
             return
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Percolator'.format(self.document_id)):
+            return
+
         path = make_path(self.index, '.percolator', document_id)
         self.request_delete(path, params=DEFAULT_PARAMS)
 
@@ -116,8 +124,10 @@ class ElasticsearchMatchPercolatorCommand(ReusltJsonCommand):
 class ElasticsearchRegisterPercolatorCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_register_query():
-            self.get_document_id(self.on_done)
+        if not self.enabled_register_query():
+            return
+
+        self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
         if not document_id:
@@ -146,8 +156,10 @@ class ElasticsearchValidateQueryCommand(ReusltJsonCommand):
 class ElasticsearchRegisterSearchTemplateCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_register_search_template():
-            self.get_template(self.on_done)
+        if not self.enabled_register_search_template():
+            return
+
+        self.get_template(self.on_done)
 
     def on_done(self, template):
         if not template:
@@ -161,12 +173,19 @@ class ElasticsearchRegisterSearchTemplateCommand(ReusltJsonCommand):
 class ElasticsearchDeleteSearchTemplateCommand(ReusltJsonCommand):
 
     def run(self):
-        if self.enabled_delete_search_template():
-            self.get_template(self.on_done)
+        if not self.enabled_delete_search_template():
+            return
+
+        self.get_template(self.on_done)
 
     def on_done(self, template):
         if not template:
             return
+
+        if not self.delete_ok_cancel_dialog(
+                '{} Search Template'.format(self.template)):
+            return
+
         path = make_path('_search', 'template', template)
         self.request_delete(path, body=None, params=DEFAULT_PARAMS)
 
