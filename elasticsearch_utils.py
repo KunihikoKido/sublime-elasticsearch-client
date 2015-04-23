@@ -57,10 +57,12 @@ class ApacheBenchCommand(ElasticsearchBaseCommand):
                          requests='100', concurrency='10', postfile=''):
         url = self.get_request_url(path)
         command = [self.ab_command, '-n', requests, '-c', concurrency,
-                   '-p', postfile, '-T', 'application/json', url]
+                   '-p', postfile, '-T', 'application/json']
 
         for k, v in self.http_headers.items():
             command += ['-H', "{0}: {1}".format(k, v)]
+
+        command += [url]
 
         self.run_command(command)
 
