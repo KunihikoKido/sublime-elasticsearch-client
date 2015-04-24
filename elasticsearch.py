@@ -237,8 +237,12 @@ class HttpRequestCommand(ElasticsearchBaseCommand):
     def request(self, method, path, body=None, params={}):
         url = make_url(self.base_url, path, params)
 
+        if body is not None:
+            body = body.encode('utf-8')
+
         thread = HttpRequestThread(
             method, url, data=body, headers=self.http_headers)
+
         thread.start()
 
         self.handle_thread(thread)
