@@ -7,7 +7,6 @@ http://www.elastic.co/guide/en/elasticsearch/reference/current/search.html
 
 from .elasticsearch import ReusltJsonCommand
 from .elasticsearch import make_path
-from .elasticsearch import make_params
 from .elasticsearch import make_choices
 from .elasticsearch import choice
 from .elasticsearch import DEFAULT_PARAMS
@@ -22,15 +21,12 @@ SEARCH_TYPE_CHOICES = (
 
 
 class ElasticsearchSearchCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Search Result **"
 
     selected_search_type = 0
 
     def run(self):
-        if self.ask_to_search_types:
-            self.select_panel(self.on_done)
-            return
-
-        self.on_done(self.selected_search_type)
+        self.select_panel(self.on_done)
 
     def select_panel(self, callback):
         choices = make_choices(SEARCH_TYPE_CHOICES)
@@ -43,12 +39,13 @@ class ElasticsearchSearchCommand(ReusltJsonCommand):
         self.selected_search_type = index
         search_type = choice(SEARCH_TYPE_CHOICES, index)
         path = make_path(self.index, self.doc_type, '_search')
-        params = make_params(search_type=search_type)
+        params = dict(search_type=search_type)
         body = self.get_selection()
         self.request_post(path, body=body, params=params)
 
 
 class ElasticsearchTemplateSearchCommand(ElasticsearchSearchCommand):
+    result_window_title = "** Elasticsearch: Search Result **"
 
     def on_done(self, index):
         if index == -1:
@@ -56,23 +53,25 @@ class ElasticsearchTemplateSearchCommand(ElasticsearchSearchCommand):
         self.selected_search_type = index
         search_type = choice(SEARCH_TYPE_CHOICES, index)
         path = make_path(self.index, self.doc_type, '_search', 'template')
-        params = make_params(search_type=search_type)
+        params = dict(search_type=search_type)
         body = self.get_selection()
         self.request_post(path, body=body, params=params)
 
 
 class ElasticsearchUriSearchCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Search Result **"
 
     def run(self):
         self.get_query(self.on_done)
 
     def on_done(self, query):
         path = make_path(self.index, self.doc_type, '_search')
-        params = make_params(q=query)
+        params = dict(q=query)
         self.request_get(path, params=params)
 
 
 class ElasticsearchBenchmarkCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Benchmark **"
 
     def run(self):
         path = make_path('_bench')
@@ -81,11 +80,9 @@ class ElasticsearchBenchmarkCommand(ReusltJsonCommand):
 
 
 class ElasticsearchDeletePercolatorCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Percolator **"
 
     def run(self):
-        if not self.enabled_delete_percolator():
-            return
-
         self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -101,6 +98,7 @@ class ElasticsearchDeletePercolatorCommand(ReusltJsonCommand):
 
 
 class ElasticsearchExplainDocumentCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Explain Document **"
 
     def run(self):
         self.get_document_id(self.on_done)
@@ -114,6 +112,7 @@ class ElasticsearchExplainDocumentCommand(ReusltJsonCommand):
 
 
 class ElasticsearchMatchPercolatorCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Match Percolator **"
 
     def run(self):
         path = make_path(self.index, self.doc_type, '_percolate')
@@ -122,11 +121,9 @@ class ElasticsearchMatchPercolatorCommand(ReusltJsonCommand):
 
 
 class ElasticsearchRegisterPercolatorCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Register Percolator **"
 
     def run(self):
-        if not self.enabled_register_query():
-            return
-
         self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -138,6 +135,7 @@ class ElasticsearchRegisterPercolatorCommand(ReusltJsonCommand):
 
 
 class ElasticsearchShowPercolatorCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Show Percolator **"
 
     def run(self):
         path = make_path(self.index, '.percolator', '_search')
@@ -145,20 +143,19 @@ class ElasticsearchShowPercolatorCommand(ReusltJsonCommand):
 
 
 class ElasticsearchValidateQueryCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Validate Query **"
 
     def run(self):
         path = make_path(self.index, self.doc_type, '_validate', 'query')
         body = self.get_selection()
-        params = make_params(explain='true')
+        params = dict(explain='true')
         self.request_post(path, body=body, params=params)
 
 
 class ElasticsearchRegisterSearchTemplateCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Register Search Template **"
 
     def run(self):
-        if not self.enabled_register_search_template():
-            return
-
         self.get_template(self.on_done)
 
     def on_done(self, template):
@@ -171,11 +168,9 @@ class ElasticsearchRegisterSearchTemplateCommand(ReusltJsonCommand):
 
 
 class ElasticsearchDeleteSearchTemplateCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Search Template **"
 
     def run(self):
-        if not self.enabled_delete_search_template():
-            return
-
         self.get_template(self.on_done)
 
     def on_done(self, template):
@@ -191,6 +186,7 @@ class ElasticsearchDeleteSearchTemplateCommand(ReusltJsonCommand):
 
 
 class ElasticsearchGetSearchTemplateCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Get Search Template **"
 
     def run(self):
         self.get_template(self.on_done)
@@ -201,6 +197,6 @@ class ElasticsearchGetSearchTemplateCommand(ReusltJsonCommand):
             params = DEFAULT_PARAMS
         else:
             path = make_path('.scripts', '_search')
-            params = make_params(_source='false')
+            params = dict(_source='false')
 
         self.request_get(path, body=None, params=params)

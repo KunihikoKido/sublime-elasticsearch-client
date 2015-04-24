@@ -11,11 +11,9 @@ from .elasticsearch import DEFAULT_PARAMS
 
 
 class ElasticsearchDeleteDocumentCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Document **"
 
     def run(self):
-        if not self.enabled_delete_document():
-            return
-
         self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -31,6 +29,7 @@ class ElasticsearchDeleteDocumentCommand(ReusltJsonCommand):
 
 
 class ElasticsearchGetDocumentCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Get Document **"
 
     def run(self):
         self.get_document_id(self.on_done)
@@ -44,11 +43,9 @@ class ElasticsearchGetDocumentCommand(ReusltJsonCommand):
 
 
 class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Index Document **"
 
     def run(self):
-        if not self.enabled_index_document():
-            return
-
         self.get_document_id(self.on_done)
 
     def on_done(self, document_id):
@@ -61,11 +58,9 @@ class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
 
 
 class ElasticsearchUpdateDocumentCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Update Document **"
 
     def run(self):
-        if not self.enabled_update_document():
-            return
-
         self.get_document_id(self.on_done)
 
     def on_done(self, document_id):

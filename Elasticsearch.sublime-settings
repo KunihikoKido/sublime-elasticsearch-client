@@ -5,29 +5,15 @@
             "index": "test",
             "doc_type": "test",
             "analyzer": "default",
-            "enabled_create_index": true,
-            "enabled_delete_mapping": true,
-            "enabled_delete_document": true,
-            "enabled_delete_index": true,
-            "enabled_index_document": false,
-            "enabled_put_mapping": true,
-            "enabled_register_query": true,
-            "enabled_delete_percolator": true,
             "hettp_headers": {}
         }
     },
-    "benchmarks": {
-        "default": {
-            "requests": 100,
-            "concurrency": 10
-        }
-    },
-    // Path to the curl command. If curl is on you path, you should not need to
-    // change this. Windows users will need to use forward slashes in the path.
-    "curl_command": "curl",
     // Path to the Apache Bench (ab) command. If ab is on you path, you should not need to
     // change this. Windows users will need to use forward slashes in the path.
     "ab_command": "ab",
+    "ab_options": {
+        "default": ["-n", "10", "-c", "10"]
+    },
 
     "enabled_pretty": true,
     "pretty_command": "pretty_json",

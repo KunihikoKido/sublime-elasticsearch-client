@@ -6,11 +6,11 @@ http://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html
 """
 from .elasticsearch import ReusltJsonCommand
 from .elasticsearch import make_path
-from .elasticsearch import make_params
 from .elasticsearch import DEFAULT_PARAMS
 
 
 class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Analyze **"
 
     def run(self):
         self.get_analyzer(self.on_done)
@@ -18,16 +18,14 @@ class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
     def on_done(self, analyzer):
         path = make_path(self.index, '_analyze')
         body = self.get_selection()
-        params = make_params(analyzer=analyzer)
+        params = dict(analyzer=analyzer)
         self.request_post(path, body=body, params=params)
 
 
 class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Create Index **"
 
     def run(self, request_body=False):
-        if not self.enabled_create_index():
-            return
-
         self.request_body = request_body
         path = make_path(self.index)
         body = self.request_body and self.get_selection() or None
@@ -35,11 +33,9 @@ class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
 
 
 class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Index **"
 
     def run(self):
-        if not self.enabled_delete_index():
-            return
-
         if not self.delete_ok_cancel_dialog(
                 '{} Index'.format(self.index)):
             return
@@ -49,11 +45,9 @@ class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
 
 
 class ElasticsearchDeleteMappingCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Mapping **"
 
     def run(self):
-        if not self.enabled_delete_mapping():
-            return
-
         if not self.delete_ok_cancel_dialog(
                 '{} Mapping'.format(self.doc_type)):
             return
@@ -63,6 +57,7 @@ class ElasticsearchDeleteMappingCommand(ReusltJsonCommand):
 
 
 class ElasticsearchGetSettingsCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Get Index Settings **"
 
     def run(self):
         path = make_path(self.index, '_settings')
@@ -70,6 +65,7 @@ class ElasticsearchGetSettingsCommand(ReusltJsonCommand):
 
 
 class ElasticsearchGetMappingCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Get Mapping **"
 
     def run(self):
         path = make_path(self.index, '_mapping', self.doc_type)
@@ -77,22 +73,18 @@ class ElasticsearchGetMappingCommand(ReusltJsonCommand):
 
 
 class ElasticsearchPutMappingCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Put Mapping **"
 
     def run(self):
-        if not self.enabled_put_mapping():
-            return
-
         path = make_path(self.index, '_mapping', self.doc_type)
         body = self.get_selection()
         self.request_put(path, body=body, params=DEFAULT_PARAMS)
 
 
 class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Put Warmer **"
 
     def run(self):
-        if not self.enabled_put_warmer():
-            return
-
         self.get_warmer(self.on_done)
 
     def on_done(self, name):
@@ -104,11 +96,9 @@ class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
 
 
 class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Warmer **"
 
     def run(self):
-        if not self.enabled_delete_warmer():
-            return
-
         self.get_warmer(self.on_done)
 
     def on_done(self, warmer):
@@ -124,6 +114,7 @@ class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
 
 
 class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Get Warmer **"
 
     def run(self):
         self.get_warmer(self.on_done)
@@ -134,11 +125,9 @@ class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
 
 
 class ElasticsearchAddAliasCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Add Alias **"
 
     def run(self, request_body=False):
-        if not self.enabled_add_alias():
-            return
-
         self.request_body = request_body
         self.get_alias(self.on_done)
 
@@ -149,11 +138,9 @@ class ElasticsearchAddAliasCommand(ReusltJsonCommand):
 
 
 class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Delete Alias **"
 
     def run(self):
-        if not self.enabled_delete_alias():
-            return
-
         self.get_alias(self.on_done)
 
     def on_done(self, alias):
@@ -169,6 +156,7 @@ class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
 
 
 class ElasticsearchGetAliasCommand(ReusltJsonCommand):
+    result_window_title = "** Elasticsearch: Get Alias **"
 
     def run(self):
         self.get_alias(self.on_done)

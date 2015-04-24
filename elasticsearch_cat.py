@@ -10,6 +10,7 @@ from .elasticsearch import make_path
 
 
 class ElasticsearchCatAliasesCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Aliases **"
 
     def run(self):
         path = make_path('_cat', 'aliases')
@@ -17,6 +18,7 @@ class ElasticsearchCatAliasesCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatAllocationCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Allocation **"
 
     def run(self):
         path = make_path('_cat', 'allocation')
@@ -24,6 +26,7 @@ class ElasticsearchCatAllocationCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatHealthCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Health **"
 
     def run(self):
         path = make_path('_cat', 'health')
@@ -31,6 +34,7 @@ class ElasticsearchCatHealthCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatIndicesCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Indices **"
 
     def run(self):
         path = make_path('_cat', 'indices')
@@ -38,6 +42,7 @@ class ElasticsearchCatIndicesCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatMasterCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Master **"
 
     def run(self):
         path = make_path('_cat', 'master')
@@ -45,6 +50,7 @@ class ElasticsearchCatMasterCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatNodesCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Nodes **"
 
     def run(self):
         path = make_path('_cat', 'nodes')
@@ -52,6 +58,7 @@ class ElasticsearchCatNodesCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatPendingTasksCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Pending Tasks **"
 
     def run(self):
         path = make_path('_cat', 'pending_tasks')
@@ -59,6 +66,7 @@ class ElasticsearchCatPendingTasksCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatPluginsCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Plugins **"
 
     def run(self):
         path = make_path('_cat', 'plugins')
@@ -66,6 +74,7 @@ class ElasticsearchCatPluginsCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatRecoveryCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Recovery **"
 
     def run(self):
         path = make_path('_cat', 'recovery')
@@ -73,6 +82,7 @@ class ElasticsearchCatRecoveryCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatSegmentsCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Segments **"
 
     def run(self):
         path = make_path('_cat', 'segments')
@@ -80,6 +90,7 @@ class ElasticsearchCatSegmentsCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatShardsCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Shards **"
 
     def run(self):
         path = make_path('_cat', 'shards')
@@ -87,6 +98,7 @@ class ElasticsearchCatShardsCommand(ReusltTextCommand):
 
 
 class ElasticsearchCatThreadPoolCommand(ReusltTextCommand):
+    result_window_title = "** Elasticsearch: Thread Pool **"
 
     def run(self):
         path = make_path('_cat', 'thread_pool')

@@ -49,7 +49,7 @@
 
     {"command": "switch_servers",                          "caption": "Elasticsearch: Switch Servers"},
     {"command": "show_active_server",                      "caption": "Elasticsearch: Show Active Server"},
-    {"command": "apache_bench",                            "caption": "Elasticsearch: Apache Bench"},
+    {"command": "apache_bench",                            "caption": "Elasticsearch: Apache Bench (Request Body Search)"},
     {"command": "search_template_apache_bench",            "caption": "Elasticsearch: Apache Bench (for Search Template)"},
     {"command": "open_file",                               "caption": "Elasticsearch: User File Settings", "args": {"file": "${packages}/User/Elasticsearch.sublime-settings"}},
     {"command": "open_url",                                "caption": "Elasticsearch: Open Elasticsearch Reference", "args": {"url": "http://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"}},

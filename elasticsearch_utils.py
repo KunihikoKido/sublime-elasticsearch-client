@@ -6,10 +6,10 @@ import sublime_plugin
 from urllib.parse import urlencode
 from .elasticsearch import ElasticsearchBaseCommand
 from .elasticsearch import make_path
+from .elasticsearch import make_url
 
 
 class SwitchServersCommand(ElasticsearchBaseCommand):
-    syntax = 'Packages/YAML/YAML.tmLanguage'
     selected_index = 0
 
     def run(self):
@@ -30,58 +30,60 @@ class SwitchServersCommand(ElasticsearchBaseCommand):
         selected = servers[index]
         self.settings.set('active_server', selected)
         self.save_settings()
-        self.show_active_server_settings()
+        self.window.run_command('show_active_server')
 
 
 class ShowActiveServerCommand(ElasticsearchBaseCommand):
-    syntax = 'Packages/YAML/YAML.tmLanguage'
+    syntax = 'Packages/JavaScript/JSON.tmLanguage'
 
     def run(self):
-        self.show_active_server_settings()
+        self.show_result({self.active_server: self.server_settings})
 
 
 class ApacheBenchCommand(ElasticsearchBaseCommand):
-    syntax = 'Packages/Text/Plain text.tmLanguage'
+
     selected_index = 0
 
     def run(self):
         self.select_panel(self.on_done)
 
     def select_panel(self, callback):
-        benchmarks = list(self.benchmarks.keys())
-        benchmarks.sort()
+        ab_options = list(self.ab_options.keys())
+        ab_options.sort()
         self.window.show_quick_panel(
-            benchmarks, callback, selected_index=self.selected_index)
+            ab_options, callback, selected_index=self.selected_index)
 
-    def run_apache_bench(self, path,
-                         requests='100', concurrency='10', postfile=''):
-        url = self.get_request_url(path)
-        command = [self.ab_command, '-n', requests, '-c', concurrency,
-                   '-p', postfile, '-T', 'application/json']
+    def apache_bench(self, path, ab_options, postfile):
+        url = make_url(self.base_url, path)
+        command = [self.ab_command]
+        command += ab_options
 
         for k, v in self.http_headers.items():
             command += ['-H', "{0}: {1}".format(k, v)]
 
+        command += ['-p', postfile]
         command += [url]
-
-        self.run_command(command)
+        self.window.run_command('exec', {'cmd': command})
 
     def make_path(self):
         return make_path(self.index, self.doc_type, '_search')
 
+    def get_ab_options(self, index):
+        ab_options = list(self.ab_options.keys())
+        ab_options.sort()
+        selected = ab_options[index]
+        return self.ab_options[selected]
+
     def on_done(self, index):
         if index == -1:
             return
+
         self.selected_index = index
-        benchmarks = list(self.benchmarks.keys())
-        benchmarks.sort()
-        selected = benchmarks[index]
-        benchmark = self.benchmarks[selected]
-        requests = str(benchmark.get('requests'))
-        concurrency = str(benchmark.get('concurrency'))
+
+        ab_options = self.get_ab_options(index)
         path = self.make_path()
         postfile = self.get_file_name()
-        self.run_apache_bench(path, requests, concurrency, postfile)
+        self.apache_bench(path, ab_options, postfile)
 
 
 class SearchTemplateApacheBenchCommand(ApacheBenchCommand):

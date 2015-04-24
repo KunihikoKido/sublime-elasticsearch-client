@@ -9,11 +9,11 @@ Elasticsearch Client integration: it's pretty handy.
 
 ![Command Palette](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/palette.png)
 
-## Required
+## Options
 
-- ``curl`` command (required) you need have cURL installed
-- ``ab`` command (optional) if use th ``Apache Bench`` command
-- [PrettyJson](https://github.com/dzhibas/SublimePrettyJson) sublime plugin (optional)
+- ``ab`` command: if use th ``Apache Bench`` command
+- [PrettyJson](https://github.com/dzhibas/SublimePrettyJson) sublime plugin
+
 
 ## Installation
 
@@ -62,16 +62,7 @@ User Settings (accessible from the *Preferences/Package Settings/Elasticsearch C
         "localhost": {
             "base_url": "http://localhost:9200/",
             "index": "test",
-            "doc_type": "test",
-            "analyzer": "default",
-            "enabled_create_index": true,
-            "enabled_delete_mapping": true,
-            "enabled_delete_document": true,
-            "enabled_delete_index": true,
-            "enabled_index_document": true,
-            "enabled_put_mapping": true,
-            "enabled_register_query": true,
-            "enabled_delete_percolator": true,
+            "doc_type": "test"
         },
         "api.siba.tokyo": {
             "base_url": "https://api.siba.tokyo/public/",
@@ -79,11 +70,10 @@ User Settings (accessible from the *Preferences/Package Settings/Elasticsearch C
             "doc_type": "webpages"
         }
     },
-    "benchmarks": {
-        "default": {
-            "requests": 100,
-            "concurrency": 10,
-        }
+    "ab_options": {
+        "small":  ["-n", "10", "-c", "10"],
+        "medium": ["-n", "100", "-c", "10"],
+        "large":  ["-n", "1000", "-c", "10"],
     }
 }
 ```
@@ -94,14 +84,11 @@ Setting                    | Description
 -------------------------- | ----------------------------------
 ``active_server``          | Elasticsearch Active Server. You can change the ``Switch Server`` Command
 ``servers``                | Elasticsearch Server settings.
-``benchmarks``             | Apache Bench settings.
-``quiet``                  | if set ``false`` information running about prints the request command. (View/Show Console menu)
-``curl_command``           | Path to the curl command.
 ``ab_command``             | Path to the Apache Bench (ab) command.
+``ab_options``             | Apache Bench settings.
 ``enabled_pretty``         | enabled pretty json. required: [PrettyJson](https://github.com/dzhibas/SublimePrettyJson)
 ``pretty_command``         | pretty format command. default: ``pretty_json``
 ``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
-``ask_to_search_types``    | if ``true`` you can choice search_types.
 
 
 #### servers.\*
@@ -112,30 +99,9 @@ Setting                              | Description
 ``index``                            | Elasticsearch Index name. default: ``test``
 ``doc_type``                         | Elasticsearch Type name. default: ``test``
 ``analyzer``                         | analyzer for Analyze Command. default: ``default``
-``enabled_create_index``             | if set ``true`` you can create index. default: ``false``
-``enabled_delete_mapping``           | if set ``true`` you can delete mapping. default: ``false``
-``enabled_delete_document``          | if set ``true`` you can delete document. default: ``false``
-``enabled_delete_index``             | if set ``true`` you can delete index. default: ``false``
-``enabled_index_document``           | if set ``true`` you can index document. default: ``false``
-``enabled_update_document``          | if set ``true`` you can update document. default: ``false``
-``enabled_put_mapping``              | if set ``true`` you can put mapping. default: ``false``
-``enabled_register_query``           | if set ``true`` you can register query for percolator. default: ``false``
-``enabled_delete_percolator``        | if set ``true`` you can delete registerd query for percolator. default: ``false``
-``enabled_put_warmer``               | if set ``true`` you can register warmer. default: ``false``
-``enabled_delete_warmer``            | if set ``true`` you can delete warmer. default: ``false``
-``enabled_add_alias``                | if set ``true`` you can add alias. default: ``false``
-``enabled_delete_alias``             | if set ``true`` you can delete alias. default: ``false``
-``enabled_register_search_template`` | if set ``true`` you can register search template. default: ``false``
-``enabled_delete_search_template``   | if set ``true`` you can delete search template. default: ``false``
+``http_headers``                     | Http header
 
-#### benchmarks.\*
-
-Setting                    | Description
--------------------------- | ----------------------------------
-``requests``               | Number of requests to perform
-``concurrency``            | Number of multiple requests to make at a time
-
-
+**Note** Removed Access Control Options.
 
 ## Commands
 open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...``.
@@ -208,7 +174,7 @@ Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
 
 Command                                          | Descrption
 ------------------------------------------------ | -------------------------
-Elasticsearch: Apach Bench                       | Run Benchmark.
+Elasticsearch: Apach Bench (Request Body Search) | Run Benchmark.
 Elasticsearch: Apach Bench (for Search Template) | Run Benchmark for Search Template Query.
 Elasticsearch: Open Reference                    | Open Elasticsearch Reference Webpage
 Elasticsearch: Show Active Server                | Show active server settings in a panel.
