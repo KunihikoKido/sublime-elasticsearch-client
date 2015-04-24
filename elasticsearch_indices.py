@@ -6,7 +6,6 @@ http://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html
 """
 from .elasticsearch import ReusltJsonCommand
 from .elasticsearch import make_path
-from .elasticsearch import DEFAULT_PARAMS
 
 
 class ElasticsearchAnalyzeCommand(ReusltJsonCommand):
@@ -29,7 +28,7 @@ class ElasticsearchCreateIndexCommand(ReusltJsonCommand):
         self.request_body = request_body
         path = make_path(self.index)
         body = self.request_body and self.get_selection() or None
-        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+        self.request_put(path, body=body)
 
 
 class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
@@ -41,7 +40,7 @@ class ElasticsearchDeleteIndexCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index)
-        self.request_delete(path, params=DEFAULT_PARAMS)
+        self.request_delete(path)
 
 
 class ElasticsearchDeleteMappingCommand(ReusltJsonCommand):
@@ -53,7 +52,7 @@ class ElasticsearchDeleteMappingCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index, self.doc_type)
-        self.request_delete(path, params=DEFAULT_PARAMS)
+        self.request_delete(path)
 
 
 class ElasticsearchGetSettingsCommand(ReusltJsonCommand):
@@ -61,7 +60,7 @@ class ElasticsearchGetSettingsCommand(ReusltJsonCommand):
 
     def run(self):
         path = make_path(self.index, '_settings')
-        self.request_get(path, params=DEFAULT_PARAMS)
+        self.request_get(path)
 
 
 class ElasticsearchGetMappingCommand(ReusltJsonCommand):
@@ -69,7 +68,7 @@ class ElasticsearchGetMappingCommand(ReusltJsonCommand):
 
     def run(self):
         path = make_path(self.index, '_mapping', self.doc_type)
-        self.request_get(path, params=DEFAULT_PARAMS)
+        self.request_get(path)
 
 
 class ElasticsearchPutMappingCommand(ReusltJsonCommand):
@@ -78,7 +77,7 @@ class ElasticsearchPutMappingCommand(ReusltJsonCommand):
     def run(self):
         path = make_path(self.index, '_mapping', self.doc_type)
         body = self.get_selection()
-        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+        self.request_put(path, body=body)
 
 
 class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
@@ -92,7 +91,7 @@ class ElasticsearchPutWarmerCommand(ReusltJsonCommand):
             return
         path = make_path(self.index, '_warmer', name)
         body = self.get_selection()
-        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+        self.request_put(path, body=body)
 
 
 class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
@@ -110,7 +109,7 @@ class ElasticsearchDeleteWarmerCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index, '_warmer', warmer)
-        self.request_delete(path, params=DEFAULT_PARAMS)
+        self.request_delete(path)
 
 
 class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
@@ -121,7 +120,7 @@ class ElasticsearchGetWarmerCommand(ReusltJsonCommand):
 
     def on_done(self, name):
         path = make_path(self.index, '_warmer', name)
-        self.request_get(path, params=DEFAULT_PARAMS)
+        self.request_get(path)
 
 
 class ElasticsearchAddAliasCommand(ReusltJsonCommand):
@@ -134,7 +133,7 @@ class ElasticsearchAddAliasCommand(ReusltJsonCommand):
     def on_done(self, alias):
         path = make_path(self.index, '_alias', alias)
         body = self.request_body and self.get_selection() or None
-        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+        self.request_put(path, body=body)
 
 
 class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
@@ -152,7 +151,7 @@ class ElasticsearchDeleteAliasCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index, '_alias', alias)
-        self.request_delete(path, params=DEFAULT_PARAMS)
+        self.request_delete(path)
 
 
 class ElasticsearchGetAliasCommand(ReusltJsonCommand):
@@ -163,4 +162,4 @@ class ElasticsearchGetAliasCommand(ReusltJsonCommand):
 
     def on_done(self, alias):
         path = make_path(self.index, '_alias', alias)
-        self.request_get(path, params=DEFAULT_PARAMS)
+        self.request_get(path)

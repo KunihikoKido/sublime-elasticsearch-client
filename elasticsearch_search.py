@@ -9,7 +9,6 @@ from .elasticsearch import ReusltJsonCommand
 from .elasticsearch import make_path
 from .elasticsearch import make_choices
 from .elasticsearch import choice
-from .elasticsearch import DEFAULT_PARAMS
 
 SEARCH_TYPE_CHOICES = (
     ('query_then_fetch', 'Search Type: Query Then Fetch (default)'),
@@ -76,7 +75,7 @@ class ElasticsearchBenchmarkCommand(ReusltJsonCommand):
     def run(self):
         path = make_path('_bench')
         body = self.get_selection()
-        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+        self.request_put(path, body=body)
 
 
 class ElasticsearchDeletePercolatorCommand(ReusltJsonCommand):
@@ -94,7 +93,7 @@ class ElasticsearchDeletePercolatorCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index, '.percolator', document_id)
-        self.request_delete(path, params=DEFAULT_PARAMS)
+        self.request_delete(path)
 
 
 class ElasticsearchExplainDocumentCommand(ReusltJsonCommand):
@@ -108,7 +107,7 @@ class ElasticsearchExplainDocumentCommand(ReusltJsonCommand):
             return
         path = make_path(self.index, self.doc_type, document_id, '_explain')
         body = self.get_selection()
-        self.request_post(path, body=body, params=DEFAULT_PARAMS)
+        self.request_post(path, body=body)
 
 
 class ElasticsearchMatchPercolatorCommand(ReusltJsonCommand):
@@ -117,7 +116,7 @@ class ElasticsearchMatchPercolatorCommand(ReusltJsonCommand):
     def run(self):
         path = make_path(self.index, self.doc_type, '_percolate')
         body = self.get_selection()
-        self.request_post(path, body=body, params=DEFAULT_PARAMS)
+        self.request_post(path, body=body)
 
 
 class ElasticsearchRegisterPercolatorCommand(ReusltJsonCommand):
@@ -131,7 +130,7 @@ class ElasticsearchRegisterPercolatorCommand(ReusltJsonCommand):
             return
         path = make_path(self.index, '.percolator', document_id)
         body = self.get_selection()
-        self.request_put(path, body=body, params=DEFAULT_PARAMS)
+        self.request_put(path, body=body)
 
 
 class ElasticsearchShowPercolatorCommand(ReusltJsonCommand):
@@ -139,7 +138,7 @@ class ElasticsearchShowPercolatorCommand(ReusltJsonCommand):
 
     def run(self):
         path = make_path(self.index, '.percolator', '_search')
-        self.request_get(path, params=DEFAULT_PARAMS)
+        self.request_get(path)
 
 
 class ElasticsearchValidateQueryCommand(ReusltJsonCommand):
@@ -164,7 +163,7 @@ class ElasticsearchRegisterSearchTemplateCommand(ReusltJsonCommand):
 
         path = make_path('_search', 'template', template)
         body = self.get_selection()
-        self.request_post(path, body=body, params=DEFAULT_PARAMS)
+        self.request_post(path, body=body)
 
 
 class ElasticsearchDeleteSearchTemplateCommand(ReusltJsonCommand):
@@ -182,7 +181,7 @@ class ElasticsearchDeleteSearchTemplateCommand(ReusltJsonCommand):
             return
 
         path = make_path('_search', 'template', template)
-        self.request_delete(path, body=None, params=DEFAULT_PARAMS)
+        self.request_delete(path, body=None)
 
 
 class ElasticsearchGetSearchTemplateCommand(ReusltJsonCommand):
@@ -194,7 +193,7 @@ class ElasticsearchGetSearchTemplateCommand(ReusltJsonCommand):
     def on_done(self, template):
         if template:
             path = make_path('_search', 'template', template)
-            params = DEFAULT_PARAMS
+            params = None
         else:
             path = make_path('.scripts', '_search')
             params = dict(_source='false')

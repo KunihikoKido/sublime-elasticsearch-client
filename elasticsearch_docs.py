@@ -7,7 +7,6 @@ http://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html
 
 from .elasticsearch import ReusltJsonCommand
 from .elasticsearch import make_path
-from .elasticsearch import DEFAULT_PARAMS
 
 
 class ElasticsearchDeleteDocumentCommand(ReusltJsonCommand):
@@ -25,7 +24,7 @@ class ElasticsearchDeleteDocumentCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index, self.doc_type, document_id)
-        self.request_delete(path, params=DEFAULT_PARAMS)
+        self.request_delete(path)
 
 
 class ElasticsearchGetDocumentCommand(ReusltJsonCommand):
@@ -39,7 +38,7 @@ class ElasticsearchGetDocumentCommand(ReusltJsonCommand):
             return
 
         path = make_path(self.index, self.doc_type, document_id)
-        self.request_get(path, params=DEFAULT_PARAMS)
+        self.request_get(path)
 
 
 class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
@@ -52,9 +51,9 @@ class ElasticsearchIndexDocumentCommand(ReusltJsonCommand):
         path = make_path(self.index, self.doc_type, document_id)
         body = self.get_selection()
         if document_id:
-            self.request_put(path, body=body, params=DEFAULT_PARAMS)
+            self.request_put(path, body=body)
         else:
-            self.request_post(path, body=body, params=DEFAULT_PARAMS)
+            self.request_post(path, body=body)
 
 
 class ElasticsearchUpdateDocumentCommand(ReusltJsonCommand):
@@ -68,4 +67,4 @@ class ElasticsearchUpdateDocumentCommand(ReusltJsonCommand):
             return
         path = make_path(self.index, self.doc_type, document_id, '_update')
         body = self.get_selection()
-        self.request_post(path, body=body, params=DEFAULT_PARAMS)
+        self.request_post(path, body=body)
