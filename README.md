@@ -222,21 +222,15 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Cat Shards
 * Elasticsearch: Cat Thread Pool
 
+### Commmand for Query Benchmark
 
+* Elasticsearch: Apache Bench
+* Elasticsearch: Apache Bench for Search Template
 
-### Utility Commands
+### Command for Sublime User Settings
 
-Command                                          | Descrption
------------------------------------------------- | -------------------------
-Elasticsearch: Apach Bench (Request Body Search) | Run Benchmark.
-Elasticsearch: Apach Bench (for Search Template) | Run Benchmark for Search Template Query.
-Elasticsearch: Open Reference                    | Open Elasticsearch Reference Webpage
-Elasticsearch: Show Active Server                | Show active server settings in a panel.
-Elasticsearch: Switch Servers                    | Change the active server.
-Elasticsearch: User File Settings                | Shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
-Elasticsearch: Search in Docs                    | Site Search
-Elasticsearch: Dump Data                         | Dump Index Data (required ``backup_location`` setting.)
-Elasticsearch: Load Data                         | Load Index Data (required ``backup_location`` setting.)
+* Elasticsearch: Switch Servers
+* Elasticsearch: Show Active Server
 
 
 ## Snippets for Queries
