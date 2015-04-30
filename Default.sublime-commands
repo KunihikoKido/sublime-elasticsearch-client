@@ -109,4 +109,5 @@
     {"command": "switch_servers",          "caption": "Elasticsearch: Switch Servers"},
     {"command": "show_active_server",      "caption": "Elasticsearch: Show Active Server"},
 
+    {"command": "reindex",                 "caption": "Elasticsearch: Reindex"},
 ]
