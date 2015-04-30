@@ -227,6 +227,10 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Apache Bench
 * Elasticsearch: Apache Bench for Search Template
 
+### Commmand for Helpers
+
+* Elasticsearch: Reindex
+
 ### Command for Sublime User Settings
 
 * Elasticsearch: Switch Servers
