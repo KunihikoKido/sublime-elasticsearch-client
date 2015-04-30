@@ -19,5 +19,6 @@
     "pretty_command": "pretty_json",
     "pretty_syntax": "Elasticsearch",
 
-    "ask_to_search_types": false
+    "ask_to_search_types": false,
+    "backup_location": ""
 }

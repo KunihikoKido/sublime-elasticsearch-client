@@ -1,6 +1,6 @@
 [
     {
       "keys": ["ctrl+alt+s"],
-      "command": "elasticsearch_search"
+      "command": "request_body_search"
     }
 ]

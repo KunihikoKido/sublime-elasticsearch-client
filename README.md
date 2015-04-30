@@ -89,6 +89,7 @@ Setting                    | Description
 ``enabled_pretty``         | enabled pretty json. required: [PrettyJson](https://github.com/dzhibas/SublimePrettyJson)
 ``pretty_command``         | pretty format command. default: ``pretty_json``
 ``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
+``backup_location``        | Path to the Dump Data & Load Data command.
 
 
 #### servers.\*
@@ -106,68 +107,121 @@ Setting                              | Description
 ## Commands
 open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...``.
 
-### Command for Search APIs
-
-Command                                           | Method    | Call API
-------------------------------------------------- | --------- | -------------------------
-Elasticsearch: Analyze                            | POST      | ``/index/_analyze``
-Elasticsearch: Benchmark                          | PUT       | ``/_bench``
-Elasticsearch: Explain Document                   | POST      | ``/index/type/id/_explain``
-Elasticsearch: Register Percolator                | PUT       | ``/index/.percolator/id``
-Elasticsearch: Search (Request Body Search)       | POST      | ``/index/type/_search``
-Elasticsearch: Search (URI Search)                | GET       | ``/index/type/_search``
-Elasticsearch: Show Registered Percolator         | POST      | ``/index/type/_percolate``
-Elasticsearch: UN-Register Percolator             | DELETE    | ``/index/.percolator/id``
-Elasticsearch: Validate Query                     | POST      | ``/index/type/_validate/query``
-Elasticsearch: Register Search Template           | POST      | ``/_search/template/name``
-Elasticsearch: Get Search Template                | GET       | ``/_search/template/name``
-Elasticsearch: Delete Search Template             | DELETE    | ``/_search/template/name``
-
-
 ### Command for Document APIs
 
-Command                            | Method    | Call API
----------------------------------- | --------- | -------------------------
-Elasticsearch: Delete Document     | DELETE    | ``/index/type/id``
-Elasticsearch: Index Document      | PUT/POST  | ``/index/type/id``
-Elasticsearch: Get Document        | GET       | ``/index/type/id``
+* Elasticsearch: Bulk API
+* Elasticsearch: Create Document
+* Elasticsearch: Delete By Query
+* Elasticsearch: Delete Document
+* Elasticsearch: Delete Percolator
+* Elasticsearch: Get Document
+* Elasticsearch: Get Multiple Documents
+* Elasticsearch: Get Source
+* Elasticsearch: Index Document
+* Elasticsearch: Index Percolator
+* Elasticsearch: Multiple Termvector
+* Elasticsearch: Termvector
+* Elasticsearch: Update Document
 
-### Command for Index APIs
+### Command for Search APIs
 
-Command                                     | Method    | Call API
-------------------------------------------- | --------- | -------------------------
-Elasticsearch: Create Index (Only Create)   | PUT       | ``/index``
-Elasticsearch: Create Index (With Settings) | PUT       | ``/index``
-Elasticsearch: Delete Index                 | DELETE    | ``/index/``
-Elasticsearch: Get Index Settings           | GET       | ``/index/_settings``
-Elasticsearch: Delete Mapping               | DELETE    | ``/index/_mapping/type``
-Elasticsearch: Get Mapping                  | GET       | ``/index/_mapping/type``
-Elasticsearch: Put Mapping                  | PUT       | ``/index/_mapping/type``
-Elasticsearch: Get Warmer                   | GET       | ``/index/_warmer/name``
-Elasticsearch: Delete Warmer                | DELETE    | ``/index/_warmer/name``
-Elasticsearch: Put Warmer                   | PUT       | ``/index/_warmer/name``
-Elasticsearch: Add Alias (Only Add)         | PUT       | ``/index/_alias/name``
-Elasticsearch: Add Alias (With Settings)    | PUT       | ``/index/_alias/name``
-Elasticsearch: Delete Alias                 | DELETE    | ``/index/_alias/name``
-Elasticsearch: Get Alias                    | GET       | ``/index/_alias/name``
+* Elasticsearch: Clear Scroll
+* Elasticsearch: Count
+* Elasticsearch: Count Percolate
+* Elasticsearch: Delete Search Template
+* Elasticsearch: Explain Document
+* Elasticsearch: Get Search Template
+* Elasticsearch: More Like This
+* Elasticsearch: Multiple Different Searches
+* Elasticsearch: Multiple Percolate
+* Elasticsearch: Percolate
+* Elasticsearch: Put Search Template
+* Elasticsearch: Request Body Search
+* Elasticsearch: Request Body Search (search_type=count)
+* Elasticsearch: Scan
+* Elasticsearch: Scroll
+* Elasticsearch: Search Exists
+* Elasticsearch: Search Shards
+* Elasticsearch: Search Template
+* Elasticsearch: Search Template (search_type=count)
+* Elasticsearch: Suggest
+* Elasticsearch: URI Search
+* Elasticsearch: Validate Query
 
+### Command for Indices APIs
+
+* Elasticsearch: Analyze Text
+* Elasticsearch: Clear Index Cache
+* Elasticsearch: Close Index
+* Elasticsearch: Create Index
+* Elasticsearch: Delete Index
+* Elasticsearch: Delete Index Alias
+* Elasticsearch: Delete Index Template
+* Elasticsearch: Delete Index Warmer
+* Elasticsearch: Delete Mapping
+* Elasticsearch: Flush Index
+* Elasticsearch: Get Field Mapping
+* Elasticsearch: Get Index Alias
+* Elasticsearch: Get Index Infomation
+* Elasticsearch: Get Index Settings
+* Elasticsearch: Get Index Template
+* Elasticsearch: Get Index Warmer
+* Elasticsearch: Get Mapping
+* Elasticsearch: Get Upgrade Index Status
+* Elasticsearch: Index Recovery Status
+* Elasticsearch: Index Segments Infomation
+* Elasticsearch: Index Stats
+* Elasticsearch: Index Status
+* Elasticsearch: Open Index
+* Elasticsearch: Optimize Index
+* Elasticsearch: Put Index Alias
+* Elasticsearch: Put Index Settings
+* Elasticsearch: Put Index Template
+* Elasticsearch: Put Index Warmer
+* Elasticsearch: Put Mapping
+* Elasticsearch: Refresh Index
+* Elasticsearch: Update Index Aliases
+* Elasticsearch: Upgrade Index
+
+### Command for Cluster APIs
+
+* Elasticsearch: Cluster Health
+* Elasticsearch: Cluster Info
+* Elasticsearch: Cluster Pending Tasks
+* Elasticsearch: Cluster Reroute
+* Elasticsearch: Cluster State
+* Elasticsearch: Cluster Stats
+* Elasticsearch: Get Cluster Settngs
+* Elasticsearch: Nodes hot_threads
+* Elasticsearch: Nodes Info
+* Elasticsearch: Nodes Shutdown
+* Elasticsearch: Nodes Stats
+* Elasticsearch: Put Cluster Settngs
+
+### Command for Modules APIs
+
+* Elasticsearch: Delete Script
+* Elasticsearch: Get Script
+* Elasticsearch: Put Script
 
 ### Command for Cat APIs
 
-Command                            | Method    | Call API
----------------------------------- | --------- | -------------------------
-Elasticsearch: Cat Health          | GET       | ``/_cat/health``
-Elasticsearch: Cat Shards          | GET       | ``/_cat/shards/index``
-Elasticsearch: Cat Indexes         | GET       | ``/_cat/indices/index``
-Elasticsearch: Cat Aliases         | GET       | ``/_cat/aliases/alias``
-Elasticsearch: Cat Allocation      | GET       | ``/_cat/allocation``
-Elasticsearch: Cat Master          | GET       | ``/_cat/master``
-Elasticsearch: Cat Nodes           | GET       | ``/_cat/nodes``
-Elasticsearch: Cat Pending Tasks   | GET       | ``/_cat/pending_tasks``
-Elasticsearch: Cat Plugins         | GET       | ``/_cat/plugins``
-Elasticsearch: Cat Recovery        | GET       | ``/_cat/recovery``
-Elasticsearch: Cat Thread Pool     | GET       | ``/_cat/thread_pool``
-Elasticsearch: Cat Segments        | GET       | ``/_cat/segments``
+* Elasticsearch: Cat Aliases
+* Elasticsearch: Cat Allocation
+* Elasticsearch: Cat Count
+* Elasticsearch: Cat Fielddata
+* Elasticsearch: Cat Health
+* Elasticsearch: Cat Help
+* Elasticsearch: Cat Indices
+* Elasticsearch: Cat Master
+* Elasticsearch: Cat Nodes
+* Elasticsearch: Cat Pending Tasks
+* Elasticsearch: Cat Plugins
+* Elasticsearch: Cat Recovery
+* Elasticsearch: Cat Segments
+* Elasticsearch: Cat Shards
+* Elasticsearch: Cat Thread Pool
+
 
 
 ### Utility Commands
@@ -181,6 +235,8 @@ Elasticsearch: Show Active Server                | Show active server settings i
 Elasticsearch: Switch Servers                    | Change the active server.
 Elasticsearch: User File Settings                | Shortcut. ``Preferences > Package Settings > ElasticsearchClient > Settings – User`` menu
 Elasticsearch: Search in Docs                    | Site Search
+Elasticsearch: Dump Data                         | Dump Index Data (required ``backup_location`` setting.)
+Elasticsearch: Load Data                         | Load Index Data (required ``backup_location`` setting.)
 
 
 ## Snippets for Queries
