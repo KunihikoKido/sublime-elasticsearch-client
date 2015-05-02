@@ -1,7 +1,7 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 
 
-class UriSearchCommand(ESClientBaseCommand):
+class UriSearchCommand(ElasticsearchCommand):
     result_window_title = "URI Search"
 
     def run(self, search_type='query_then_fetch'):
@@ -14,7 +14,7 @@ class UriSearchCommand(ESClientBaseCommand):
         self.request(es.search, self.index, self.doc_type, params=params)
 
 
-class RequestBodySearchCommand(ESClientBaseCommand):
+class RequestBodySearchCommand(ElasticsearchCommand):
     result_window_title = "Request Body Search"
 
     def run(self, search_type='query_then_fetch'):
@@ -26,7 +26,7 @@ class RequestBodySearchCommand(ESClientBaseCommand):
                      body=body, params=params)
 
 
-class SearchShardsCommand(ESClientBaseCommand):
+class SearchShardsCommand(ElasticsearchCommand):
     result_window_title = "Search Shards"
 
     def run(self):
@@ -34,7 +34,7 @@ class SearchShardsCommand(ESClientBaseCommand):
         self.request(es.search_shards, self.index, self.doc_type)
 
 
-class SearchTemplateCommand(ESClientBaseCommand):
+class SearchTemplateCommand(ElasticsearchCommand):
     result_window_title = "Search Template"
 
     def run(self, search_type='query_then_fetch'):
@@ -46,7 +46,7 @@ class SearchTemplateCommand(ESClientBaseCommand):
                      body=body, params=params)
 
 
-class ExplainDocumentCommand(ESClientBaseCommand):
+class ExplainDocumentCommand(ElasticsearchCommand):
     result_window_title = "Explain Document"
 
     def run(self):
@@ -63,7 +63,7 @@ class ExplainDocumentCommand(ESClientBaseCommand):
                      body=body)
 
 
-class ScanCommand(ESClientBaseCommand):
+class ScanCommand(ElasticsearchCommand):
     result_window_title = "Scan"
 
     def run(self):
@@ -74,7 +74,7 @@ class ScanCommand(ESClientBaseCommand):
                      self.doc_type, params=params)
 
 
-class ScrollCommand(ESClientBaseCommand):
+class ScrollCommand(ElasticsearchCommand):
     result_window_title = "Scroll"
 
     def run(self):
@@ -90,7 +90,7 @@ class ScrollCommand(ESClientBaseCommand):
         self.request(es.scroll, scroll_id, params=params)
 
 
-class ClearScrollCommand(ESClientBaseCommand):
+class ClearScrollCommand(ElasticsearchCommand):
     result_window_title = "Clear Scroll"
 
     def run(self):
@@ -105,7 +105,7 @@ class ClearScrollCommand(ESClientBaseCommand):
         self.request(es.clear_scroll, scroll_id)
 
 
-class CountCommand(ESClientBaseCommand):
+class CountCommand(ElasticsearchCommand):
     result_window_title = "Count"
 
     def run(self):
@@ -116,7 +116,7 @@ class CountCommand(ESClientBaseCommand):
                      body=body, params=None)
 
 
-class MultipleSearchCommand(ESClientBaseCommand):
+class MultipleSearchCommand(ElasticsearchCommand):
     result_window_title = "Multiple Search"
 
     def run(self):
@@ -126,7 +126,7 @@ class MultipleSearchCommand(ESClientBaseCommand):
         self.request(es.msearch, body, self.index, self.doc_type)
 
 
-class SuggestCommand(ESClientBaseCommand):
+class SuggestCommand(ElasticsearchCommand):
     result_window_title = "Suggest"
 
     def run(self):
@@ -136,7 +136,7 @@ class SuggestCommand(ESClientBaseCommand):
         self.request(es.suggest, body, self.index)
 
 
-class PercolateCommand(ESClientBaseCommand):
+class PercolateCommand(ElasticsearchCommand):
     result_window_title = "Percolate"
 
     def run(self):
@@ -146,7 +146,7 @@ class PercolateCommand(ESClientBaseCommand):
                      body=body)
 
 
-class MultiplePercolateCommand(ESClientBaseCommand):
+class MultiplePercolateCommand(ElasticsearchCommand):
     result_window_title = "Multiple Percolate"
 
     def run(self):
@@ -155,7 +155,7 @@ class MultiplePercolateCommand(ESClientBaseCommand):
         self.request(es.mpercolate, body, self.index, self.doc_type)
 
 
-class CountPercolateCommmand(ESClientBaseCommand):
+class CountPercolateCommmand(ElasticsearchCommand):
     result_window_title = "Count Percolate"
 
     def run(self):
@@ -165,7 +165,7 @@ class CountPercolateCommmand(ESClientBaseCommand):
                      self.doc_type, body=body)
 
 
-class MoreLikeThisCommand(ESClientBaseCommand):
+class MoreLikeThisCommand(ElasticsearchCommand):
     result_window_title = "More Like This"
 
     def run(self):
@@ -180,7 +180,7 @@ class MoreLikeThisCommand(ESClientBaseCommand):
                      id)
 
 
-class PutSearchTemplateCommand(ESClientBaseCommand):
+class PutSearchTemplateCommand(ElasticsearchCommand):
     result_window_title = "Put Search Template"
 
     def run(self):
@@ -217,7 +217,7 @@ class DeleteSearchTemplateCommand(PutSearchTemplateCommand):
         self.request(es.delete_template, id)
 
 
-class SearchExistsCommand(ESClientBaseCommand):
+class SearchExistsCommand(ElasticsearchCommand):
     result_window_title = "Search Exists"
 
     def run(self):
@@ -226,7 +226,7 @@ class SearchExistsCommand(ESClientBaseCommand):
         self.request(es.search_exists, self.index, self.doc_type, body)
 
 
-class ValidateQueryCommand(ESClientBaseCommand):
+class ValidateQueryCommand(ElasticsearchCommand):
     result_window_title = "Validate Query"
 
     def run(self):

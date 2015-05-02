@@ -1,7 +1,7 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 
 
-class PutScriptCommand(ESClientBaseCommand):
+class PutScriptCommand(ElasticsearchCommand):
     result_window_title = "Put Script"
 
     def run(self):

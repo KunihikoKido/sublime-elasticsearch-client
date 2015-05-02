@@ -1,9 +1,9 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 from .elasticsearch import Elasticsearch
 from .elasticsearch.helpers import reindex
 
 
-class HelperBaseCommand(ESClientBaseCommand):
+class HelperBaseCommand(ElasticsearchCommand):
     selected_index = 0
 
     def select_server(self, callback):

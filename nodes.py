@@ -1,7 +1,7 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 
 
-class NodesInfoCommand(ESClientBaseCommand):
+class NodesInfoCommand(ElasticsearchCommand):
     result_window_title = "Nodes Info"
 
     def run(self):
@@ -12,7 +12,7 @@ class NodesInfoCommand(ESClientBaseCommand):
         self.request(es.nodes.info, node_id=node_id)
 
 
-class NodesShutdownCommand(ESClientBaseCommand):
+class NodesShutdownCommand(ElasticsearchCommand):
     result_window_title = "Nodes Shutdown"
 
     def run(self):
@@ -23,7 +23,7 @@ class NodesShutdownCommand(ESClientBaseCommand):
         self.request(es.nodes.shutdown, node_id=node_id)
 
 
-class NodesStatsCommand(ESClientBaseCommand):
+class NodesStatsCommand(ElasticsearchCommand):
     result_window_title = "Nodes Stats"
 
     def run(self):
@@ -34,7 +34,7 @@ class NodesStatsCommand(ESClientBaseCommand):
         self.request(es.nodes.stats, node_id=node_id)
 
 
-class NodesHotThreadsCommand(ESClientBaseCommand):
+class NodesHotThreadsCommand(ElasticsearchCommand):
     result_window_title = "Nodes hot_threads"
 
     def run(self):

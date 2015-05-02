@@ -73,7 +73,7 @@ class Settings(object):
         sublime.save_settings(SETTINGS_FILE)
 
 
-class ESClientBaseCommand(sublime_plugin.WindowCommand, Settings):
+class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
     show_result_on_window = True
     syntax = 'Packages/JavaScript/JSON.tmLanguage'
     result_window_title = ""
@@ -180,7 +180,7 @@ class ESClientBaseCommand(sublime_plugin.WindowCommand, Settings):
         self.show_input_panel('Index Warmer: ', '', callback)
 
 
-class SwitchServersCommand(ESClientBaseCommand):
+class SwitchServersCommand(ElasticsearchCommand):
     selected_index = 0
 
     def run(self):
@@ -203,7 +203,7 @@ class SwitchServersCommand(ESClientBaseCommand):
         self.window.run_command('show_active_server')
 
 
-class ShowActiveServerCommand(ESClientBaseCommand):
+class ShowActiveServerCommand(ElasticsearchCommand):
     show_result_on_window = False
     syntax = 'Packages/JavaScript/JSON.tmLanguage'
 

@@ -1,8 +1,8 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 from .base import delete_ok_cancel_dialog
 
 
-class AnalyzeTextCommand(ESClientBaseCommand):
+class AnalyzeTextCommand(ElasticsearchCommand):
     result_window_title = "Analyze Text"
 
     def run(self):
@@ -15,7 +15,7 @@ class AnalyzeTextCommand(ESClientBaseCommand):
         self.request(es.indices.analyze, self.index, body, params)
 
 
-class RefreshIndexCommand(ESClientBaseCommand):
+class RefreshIndexCommand(ElasticsearchCommand):
     result_window_title = "Refresh Index"
 
     def run(self, index):
@@ -23,7 +23,7 @@ class RefreshIndexCommand(ESClientBaseCommand):
         self.request(es.indices.refresh, self.index)
 
 
-class FlushIndexCommand(ESClientBaseCommand):
+class FlushIndexCommand(ElasticsearchCommand):
     result_window_title = "Flush Index"
 
     def run(self):
@@ -31,7 +31,7 @@ class FlushIndexCommand(ESClientBaseCommand):
         self.request(es.indices.flush, self.index)
 
 
-class CreateIndexCommand(ESClientBaseCommand):
+class CreateIndexCommand(ElasticsearchCommand):
     result_window_title = "Create Index"
 
     def run(self):
@@ -45,7 +45,7 @@ class CreateIndexCommand(ESClientBaseCommand):
         self.request(es.indices.create, index)
 
 
-class GetIndexInfomationCommand(ESClientBaseCommand):
+class GetIndexInfomationCommand(ElasticsearchCommand):
     result_window_title = "Get Index Infomation"
 
     def run(self):
@@ -56,7 +56,7 @@ class GetIndexInfomationCommand(ESClientBaseCommand):
         self.request(es.indices.get, self.index, feature)
 
 
-class OpenIndexCommand(ESClientBaseCommand):
+class OpenIndexCommand(ElasticsearchCommand):
     result_window_title = "Open Index"
 
     def run(self):
@@ -70,7 +70,7 @@ class OpenIndexCommand(ESClientBaseCommand):
         self.request(es.indices.open, index)
 
 
-class CloseIndexCommand(ESClientBaseCommand):
+class CloseIndexCommand(ElasticsearchCommand):
     result_window_title = "Close Index"
 
     def run(self):
@@ -84,7 +84,7 @@ class CloseIndexCommand(ESClientBaseCommand):
         self.request(es.indices.close, index)
 
 
-class DeleteIndexCommand(ESClientBaseCommand):
+class DeleteIndexCommand(ElasticsearchCommand):
     result_window_title = "Delete Index"
 
     def run(self):
@@ -101,7 +101,7 @@ class DeleteIndexCommand(ESClientBaseCommand):
         self.request(es.indices.delete, index)
 
 
-class PutMappingCommand(ESClientBaseCommand):
+class PutMappingCommand(ElasticsearchCommand):
     result_window_title = "Put Mapping"
 
     def run(self):
@@ -111,7 +111,7 @@ class PutMappingCommand(ESClientBaseCommand):
             es.indices.put_mapping, self.index, self.doc_type, body)
 
 
-class GetMappingCommand(ESClientBaseCommand):
+class GetMappingCommand(ElasticsearchCommand):
     result_window_title = "Get Mapping"
 
     def run(self):
@@ -120,7 +120,7 @@ class GetMappingCommand(ESClientBaseCommand):
             es.indices.get_mapping, self.index, self.doc_type)
 
 
-class GetFieldMappingCommand(ESClientBaseCommand):
+class GetFieldMappingCommand(ElasticsearchCommand):
     result_window_title = "Get Field Mapping"
 
     def run(self):
@@ -135,7 +135,7 @@ class GetFieldMappingCommand(ESClientBaseCommand):
             es.indices.get_field_mapping, self.index, self.doc_type, field)
 
 
-class DeleteMappingCommand(ESClientBaseCommand):
+class DeleteMappingCommand(ElasticsearchCommand):
     result_window_title = "Delete Mapping"
 
     def run(self):
@@ -147,7 +147,7 @@ class DeleteMappingCommand(ESClientBaseCommand):
             es.indices.delete_mapping, self.index, self.doc_type)
 
 
-class PutIndexAliasCommand(ESClientBaseCommand):
+class PutIndexAliasCommand(ElasticsearchCommand):
     result_window_title = "Put Index Alias"
 
     def run(self):
@@ -161,7 +161,7 @@ class PutIndexAliasCommand(ESClientBaseCommand):
         self.request(es.indices.put_alias, self.index, name)
 
 
-class GetIndexAliasCommand(ESClientBaseCommand):
+class GetIndexAliasCommand(ElasticsearchCommand):
     result_window_title = "Get Index Alias"
 
     def run(self):
@@ -172,7 +172,7 @@ class GetIndexAliasCommand(ESClientBaseCommand):
         self.request(es.indices.get_alias, self.index, name)
 
 
-class UpdateIndexAliasesCommand(ESClientBaseCommand):
+class UpdateIndexAliasesCommand(ElasticsearchCommand):
     result_window_title = "Update Index Aliases"
 
     def run(self):
@@ -181,7 +181,7 @@ class UpdateIndexAliasesCommand(ESClientBaseCommand):
         self.request(es.indices.update_aliases, body)
 
 
-class DeleteIndexAliasCommand(ESClientBaseCommand):
+class DeleteIndexAliasCommand(ElasticsearchCommand):
     result_window_title = "Delete Index Alias"
 
     def run(self):
@@ -195,7 +195,7 @@ class DeleteIndexAliasCommand(ESClientBaseCommand):
         self.request(es.indices.delete_alias, self.index, name)
 
 
-class PutIndexTemplateCommand(ESClientBaseCommand):
+class PutIndexTemplateCommand(ElasticsearchCommand):
     result_window_title = "Put Index Template"
 
     def run(self):
@@ -232,7 +232,7 @@ class DeleteIndexTemplateCommand(PutIndexTemplateCommand):
         self.request(es.indices.delete_template, name)
 
 
-class GetIndexSettingsCommand(ESClientBaseCommand):
+class GetIndexSettingsCommand(ElasticsearchCommand):
     result_window_title = "Get Index Settings"
 
     def run(self):
@@ -240,7 +240,7 @@ class GetIndexSettingsCommand(ESClientBaseCommand):
         self.request(es.indices.get_settings, self.index, None)
 
 
-class PutIndexSettingsCommand(ESClientBaseCommand):
+class PutIndexSettingsCommand(ElasticsearchCommand):
     result_window_title = "Put Index Settings"
 
     def run(self):
@@ -249,7 +249,7 @@ class PutIndexSettingsCommand(ESClientBaseCommand):
         self.request(es.indices.put_settings, body)
 
 
-class PutIndexWarmerCommand(ESClientBaseCommand):
+class PutIndexWarmerCommand(ElasticsearchCommand):
     result_window_title = "Put Index Warmer"
 
     def run(self):
@@ -280,7 +280,7 @@ class DeleteIndexWarmerCommand(PutIndexWarmerCommand):
         self.request(es.indices.delete_warmer, self.index, name)
 
 
-class IndexStatusCommand(ESClientBaseCommand):
+class IndexStatusCommand(ElasticsearchCommand):
     result_window_title = "Index Status"
 
     def run(self):
@@ -291,7 +291,7 @@ class IndexStatusCommand(ESClientBaseCommand):
         self.request(es.indices.status, index)
 
 
-class IndexStatsCommand(ESClientBaseCommand):
+class IndexStatsCommand(ElasticsearchCommand):
     result_window_title = "Index Stats"
 
     def run(self):
@@ -302,7 +302,7 @@ class IndexStatsCommand(ESClientBaseCommand):
         self.request(es.indices.stats, index)
 
 
-class IndexSegmentsInfomationCommand(ESClientBaseCommand):
+class IndexSegmentsInfomationCommand(ElasticsearchCommand):
     result_window_title = "Index Segments Infomation"
 
     def run(self):
@@ -313,7 +313,7 @@ class IndexSegmentsInfomationCommand(ESClientBaseCommand):
         self.request(es.indices.segments, index)
 
 
-class OptimizeIndexCommand(ESClientBaseCommand):
+class OptimizeIndexCommand(ElasticsearchCommand):
     result_window_title = "Optimize Index"
 
     def run(self):
@@ -324,7 +324,7 @@ class OptimizeIndexCommand(ESClientBaseCommand):
         self.request(es.indices.optimize, index)
 
 
-class ClearIndexCacheCommand(ESClientBaseCommand):
+class ClearIndexCacheCommand(ElasticsearchCommand):
     result_window_title = "Clear Index Cache"
 
     def run(self):
@@ -335,7 +335,7 @@ class ClearIndexCacheCommand(ESClientBaseCommand):
         self.request(es.indices.clear_cache, index)
 
 
-class IndexRecoveryStatusCommand(ESClientBaseCommand):
+class IndexRecoveryStatusCommand(ElasticsearchCommand):
     result_window_title = "Index Recovery Status"
 
     def run(self):
@@ -346,7 +346,7 @@ class IndexRecoveryStatusCommand(ESClientBaseCommand):
         self.request(es.indices.recovery, index)
 
 
-class UpgradeIndexCommand(ESClientBaseCommand):
+class UpgradeIndexCommand(ElasticsearchCommand):
     result_window_title = "Upgrade Index"
 
     def run(self):
@@ -357,7 +357,7 @@ class UpgradeIndexCommand(ESClientBaseCommand):
         self.request(es.indices.upgrade, index)
 
 
-class GetUpgradeIndexStatus(ESClientBaseCommand):
+class GetUpgradeIndexStatus(ElasticsearchCommand):
     result_window_title = "Get Upgrade Index Status"
 
     def run(self):

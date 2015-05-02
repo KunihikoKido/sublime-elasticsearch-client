@@ -1,8 +1,8 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 from .base import delete_ok_cancel_dialog
 
 
-class CreateDocumentCommand(ESClientBaseCommand):
+class CreateDocumentCommand(ElasticsearchCommand):
     result_window_title = "Create Document"
 
     def run(self):
@@ -15,7 +15,7 @@ class CreateDocumentCommand(ESClientBaseCommand):
         self.request(es.create, self.index, self.doc_type, body, id=id)
 
 
-class IndexDocumentCommand(ESClientBaseCommand):
+class IndexDocumentCommand(ElasticsearchCommand):
     result_window_title = "Index Document"
 
     def run(self):
@@ -38,7 +38,7 @@ class IndexPercolatorCommand(IndexDocumentCommand):
         self.request(es.index, self.index, '.percolator', body, id=id)
 
 
-class GetDocumentCommand(ESClientBaseCommand):
+class GetDocumentCommand(ElasticsearchCommand):
     result_window_title = "Get Document"
 
     def run(self):
@@ -50,7 +50,7 @@ class GetDocumentCommand(ESClientBaseCommand):
         self.request(es.get, self.index, self.doc_type, id)
 
 
-class GetSourceCommand(ESClientBaseCommand):
+class GetSourceCommand(ElasticsearchCommand):
     result_window_title = "Get Source"
 
     def run(self):
@@ -62,7 +62,7 @@ class GetSourceCommand(ESClientBaseCommand):
         self.request(es.get_source, self.index, self.doc_type, id)
 
 
-class GetMultipleDocumentsCommand(ESClientBaseCommand):
+class GetMultipleDocumentsCommand(ElasticsearchCommand):
     result_window_title = "Multi Get Doducments"
 
     def run(self):
@@ -72,7 +72,7 @@ class GetMultipleDocumentsCommand(ESClientBaseCommand):
         self.request(es.mget, body, self.index, self.doc_type)
 
 
-class UpdateDocumentCommand(ESClientBaseCommand):
+class UpdateDocumentCommand(ElasticsearchCommand):
     result_window_title = "Update Document"
 
     def run(self):
@@ -85,7 +85,7 @@ class UpdateDocumentCommand(ESClientBaseCommand):
         self.request(es.update, self.index, self.doc_type, id, body=body)
 
 
-class DeleteDocumentCommand(ESClientBaseCommand):
+class DeleteDocumentCommand(ElasticsearchCommand):
     result_window_title = "Delete Document"
 
     def run(self):
@@ -116,7 +116,7 @@ class DeletePercolaterCommand(DeleteDocumentCommand):
         self.request(es.delete, self.index, '.percolator', id)
 
 
-class BulkCommand(ESClientBaseCommand):
+class BulkCommand(ElasticsearchCommand):
     result_window_title = "Bulk"
 
     def run(self):
@@ -126,7 +126,7 @@ class BulkCommand(ESClientBaseCommand):
         self.request(es.bulk, body, self.index, self.doc_type)
 
 
-class DeleteByQueryCommand(ESClientBaseCommand):
+class DeleteByQueryCommand(ElasticsearchCommand):
     result_window_title = "Delete By Query"
 
     def run(self):
@@ -140,7 +140,7 @@ class DeleteByQueryCommand(ESClientBaseCommand):
                      self.doc_type, body=body)
 
 
-class TermvectorCommand(ESClientBaseCommand):
+class TermvectorCommand(ElasticsearchCommand):
     result_window_title = "Termvector"
 
     def run(self):
@@ -155,7 +155,7 @@ class TermvectorCommand(ESClientBaseCommand):
         self.request(es.termvector, self.index, self.doc_type, id, body=body)
 
 
-class MultipleTermvectors(ESClientBaseCommand):
+class MultipleTermvectors(ElasticsearchCommand):
     result_window_title = "Multiple Termvectors"
 
     def run(self):

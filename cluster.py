@@ -1,7 +1,7 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 
 
-class ClusterInfoCommand(ESClientBaseCommand):
+class ClusterInfoCommand(ElasticsearchCommand):
     result_window_title = "Cluster Info"
 
     def run(self):
@@ -9,7 +9,7 @@ class ClusterInfoCommand(ESClientBaseCommand):
         self.request(es.info)
 
 
-class ClusterHealthCommand(ESClientBaseCommand):
+class ClusterHealthCommand(ElasticsearchCommand):
     result_window_title = "Cluster Health"
 
     def run(self):
@@ -17,7 +17,7 @@ class ClusterHealthCommand(ESClientBaseCommand):
         self.request(es.cluster.health)
 
 
-class ClusterPendingTasks(ESClientBaseCommand):
+class ClusterPendingTasks(ElasticsearchCommand):
     result_window_title = "Cluster Pending Tasks"
 
     def run(self):
@@ -25,7 +25,7 @@ class ClusterPendingTasks(ESClientBaseCommand):
         self.request(es.cluster.pending_tasks)
 
 
-class ClusterStateCommand(ESClientBaseCommand):
+class ClusterStateCommand(ElasticsearchCommand):
     result_window_title = "Cluster State"
 
     def run(self):
@@ -33,7 +33,7 @@ class ClusterStateCommand(ESClientBaseCommand):
         self.request(es.cluster.state)
 
 
-class ClusterStatsCommand(ESClientBaseCommand):
+class ClusterStatsCommand(ElasticsearchCommand):
     result_window_title = "Cluster Stats"
 
     def run(self):
@@ -41,7 +41,7 @@ class ClusterStatsCommand(ESClientBaseCommand):
         self.request(es.cluster.stats)
 
 
-class ClusterRerouteCommand(ESClientBaseCommand):
+class ClusterRerouteCommand(ElasticsearchCommand):
     result_window_title = "Cluster Reroute"
 
     def run(self):
@@ -50,7 +50,7 @@ class ClusterRerouteCommand(ESClientBaseCommand):
         self.request(es.cluster.reroute, body)
 
 
-class GetClusterSettingsCommand(ESClientBaseCommand):
+class GetClusterSettingsCommand(ElasticsearchCommand):
     result_window_title = "Get Cluster Settings"
 
     def run(self):
@@ -58,7 +58,7 @@ class GetClusterSettingsCommand(ESClientBaseCommand):
         self.request(es.cluster.get_settings)
 
 
-class PutClusterSettingsCommand(ESClientBaseCommand):
+class PutClusterSettingsCommand(ElasticsearchCommand):
     result_window_title = "Put Cluster Settings"
 
     def run(self):

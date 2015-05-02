@@ -1,13 +1,13 @@
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 
 
-class CatClientBaseCommand(ESClientBaseCommand):
+class CatClientCommand(ElasticsearchCommand):
     show_result_on_window = True
     syntax = 'Packages/Text/Plain text.tmLanguage'
     result_window_title = ""
 
 
-class CatAliasesCommand(CatClientBaseCommand):
+class CatAliasesCommand(CatClientCommand):
     result_window_title = "Cat Aliases"
 
     def run(self):
@@ -18,7 +18,7 @@ class CatAliasesCommand(CatClientBaseCommand):
         self.request(es.cat.aliases, name=name, params=dict(v=1))
 
 
-class CatAllocationCommand(CatClientBaseCommand):
+class CatAllocationCommand(CatClientCommand):
     result_window_title = "Cat Allocation"
 
     def run(self):
@@ -30,7 +30,7 @@ class CatAllocationCommand(CatClientBaseCommand):
             es.cat.allocation, node_id=node_id, params=dict(v=1))
 
 
-class CatCountCommand(CatClientBaseCommand):
+class CatCountCommand(CatClientCommand):
     result_window_title = "Cat Count"
 
     def run(self):
@@ -41,7 +41,7 @@ class CatCountCommand(CatClientBaseCommand):
         self.request(es.cat.count, index=index, params=dict(v=1))
 
 
-class CatHealthCommand(CatClientBaseCommand):
+class CatHealthCommand(CatClientCommand):
     result_window_title = "Cat Health"
 
     def run(self):
@@ -49,7 +49,7 @@ class CatHealthCommand(CatClientBaseCommand):
         self.request(es.cat.health, params=dict(v=1))
 
 
-class CatHelpCommand(CatClientBaseCommand):
+class CatHelpCommand(CatClientCommand):
     result_window_title = "Cat Help"
 
     def run(self):
@@ -57,7 +57,7 @@ class CatHelpCommand(CatClientBaseCommand):
         self.request(es.cat.help, self)
 
 
-class CatIndicesCommand(CatClientBaseCommand):
+class CatIndicesCommand(CatClientCommand):
     result_window_title = "Cat Indices"
 
     def run(self):
@@ -68,7 +68,7 @@ class CatIndicesCommand(CatClientBaseCommand):
         self.request(es.cat.indices, index=index, params=dict(v=1))
 
 
-class CatMasterCommand(CatClientBaseCommand):
+class CatMasterCommand(CatClientCommand):
     result_window_title = "Cat Master"
 
     def run(self):
@@ -76,7 +76,7 @@ class CatMasterCommand(CatClientBaseCommand):
         self.request(es.cat.master, params=dict(v=1))
 
 
-class CatNodesCommand(CatClientBaseCommand):
+class CatNodesCommand(CatClientCommand):
     result_window_title = "Cat Nodes"
 
     def run(self):
@@ -84,7 +84,7 @@ class CatNodesCommand(CatClientBaseCommand):
         self.request(es.cat.nodes, params=dict(v=1))
 
 
-class CatRecoveryCommand(CatClientBaseCommand):
+class CatRecoveryCommand(CatClientCommand):
     result_window_title = "Cat Recovery"
 
     def run(self):
@@ -95,7 +95,7 @@ class CatRecoveryCommand(CatClientBaseCommand):
         self.request(es.cat.recovery, index=index, params=dict(v=1))
 
 
-class CatShardsCommand(CatClientBaseCommand):
+class CatShardsCommand(CatClientCommand):
     result_window_title = "Cat Shards"
 
     def run(self):
@@ -106,7 +106,7 @@ class CatShardsCommand(CatClientBaseCommand):
         self.request(es.cat.shards, index=index, params=dict(v=1))
 
 
-class CatSegmentsCommand(CatClientBaseCommand):
+class CatSegmentsCommand(CatClientCommand):
     result_window_title = "Cat Segments"
 
     def run(self):
@@ -117,7 +117,7 @@ class CatSegmentsCommand(CatClientBaseCommand):
         self.request(es.cat.segments, index=index, params=dict(v=1))
 
 
-class CatPendingTasksCommand(CatClientBaseCommand):
+class CatPendingTasksCommand(CatClientCommand):
     result_window_title = "Cat Pending Tasks"
 
     def run(self):
@@ -125,7 +125,7 @@ class CatPendingTasksCommand(CatClientBaseCommand):
         self.request(es.cat.pending_tasks, params=dict(v=1))
 
 
-class CatThreadPoolCommand(CatClientBaseCommand):
+class CatThreadPoolCommand(CatClientCommand):
     result_window_title = "Cat Thread Pool"
 
     def run(self):
@@ -133,7 +133,7 @@ class CatThreadPoolCommand(CatClientBaseCommand):
         self.request(es.cat.thread_pool, params=dict(v=1))
 
 
-class CatFielddataCommand(CatClientBaseCommand):
+class CatFielddataCommand(CatClientCommand):
     result_window_title = "Cat Fielddata"
 
     def run(self):
@@ -145,7 +145,7 @@ class CatFielddataCommand(CatClientBaseCommand):
             es.cat.fielddata, fields=fields, params=dict(v=1))
 
 
-class CatPluginsCommand(CatClientBaseCommand):
+class CatPluginsCommand(CatClientCommand):
     result_window_title = "Cat Plugins"
 
     def run(self):
