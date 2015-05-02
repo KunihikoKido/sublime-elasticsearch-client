@@ -1,10 +1,10 @@
 import tempfile
-from .base import ESClientBaseCommand
+from .base import ElasticsearchCommand
 from .elasticsearch.utils import make_url
 from .elasticsearch.utils import make_path
 
 
-class ApacheBenchCommand(ESClientBaseCommand):
+class ApacheBenchCommand(ElasticsearchCommand):
     selected_index = 0
 
     def run(self):
