@@ -206,7 +206,7 @@ class PutIndexTemplateCommand(ESClientBaseCommand):
             return
 
         es = self.ESClient()
-        body = self.selectio()
+        body = self.selection()
         self.request(es.indices.put_template, name, body)
 
 
