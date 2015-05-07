@@ -5,9 +5,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/issues)
 [![GitHub forks](https://img.shields.io/github/forks/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/network)
+[![Siblime Package Control](https://packagecontrol.herokuapp.com/downloads/ElasticsearchClient.svg)](https://packagecontrol.io/packages/ElasticsearchClient)
 ![Sublime Text](https://img.shields.io/badge/sublime_text-ST3-green.svg)
 ![Sublime Platforms](https://img.shields.io/badge/platforms-windows_osx_linux-green.svg)
-[![Siblime Package Control](https://packagecontrol.herokuapp.com/downloads/ElasticsearchClient.svg)](https://packagecontrol.io/packages/ElasticsearchClient)
 
 
 Elasticsearch Client for Sublime Text
