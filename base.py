@@ -150,6 +150,9 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
     def get_document_id(self, callback):
         self.show_input_panel('Document Id: ', '1', callback)
 
+    def get_document_ids(self, callback):
+        self.show_input_panel('Comma-separated list of ids: ', '', callback)
+
     def get_query(self, callback):
         self.show_input_panel('Query: ', '*', callback)
 

@@ -45,8 +45,10 @@ class GetDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        es = self.ESClient()
+        if not id:
+            return
 
+        es = self.ESClient()
         self.request(es.get, self.index, self.doc_type, id)
 
 
@@ -57,8 +59,10 @@ class GetSourceCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        es = self.ESClient()
+        if not id:
+            return
 
+        es = self.ESClient()
         self.request(es.get_source, self.index, self.doc_type, id)
 
 
@@ -66,9 +70,16 @@ class GetMultipleDocumentsCommand(ElasticsearchCommand):
     result_window_title = "Multi Get Doducments"
 
     def run(self):
-        es = self.ESClient()
-        body = self.selection()
+        self.get_document_ids(self.on_done)
 
+    def on_done(self, ids):
+        if not ids:
+            return
+
+        ids = [id.strip() for id in ids.split(',') if id.strip()]
+
+        es = self.ESClient()
+        body = dict(ids=ids)
         self.request(es.mget, body, self.index, self.doc_type)
 
 
@@ -79,9 +90,11 @@ class UpdateDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
+        if not id:
+            return
+
         es = self.ESClient()
         body = self.selection()
-
         self.request(es.update, self.index, self.doc_type, id, body=body)
 
 
@@ -92,7 +105,7 @@ class DeleteDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if id is None:
+        if not id:
             return
 
         if not delete_ok_cancel_dialog(id):
@@ -106,7 +119,7 @@ class DeletePercolaterCommand(DeleteDocumentCommand):
     result_window_title = "Delete Percolator"
 
     def on_done(self, id):
-        if id is None:
+        if not id:
             return
 
         if not delete_ok_cancel_dialog(id):
@@ -147,7 +160,7 @@ class TermvectorCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if id is None:
+        if not id:
             return
 
         es = self.ESClient()
@@ -162,4 +175,3 @@ class MultipleTermvectors(ElasticsearchCommand):
         es = self.ESClient()
         body = self.selection()
         self.request(es.mtermvectors, self.index, self.doc_type, body=body)
-

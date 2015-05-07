@@ -3,6 +3,8 @@ from urllib.parse import urlencode
 
 SKIP_PATH = (None, '', b'', [], ())
 
+string_types = str, bytes
+
 
 def make_path(*parts):
     return '/'.join([p for p in parts if p not in SKIP_PATH])
@@ -16,6 +18,16 @@ def make_url(base_url, path, params={}):
         return '{0}?{1}'.format(url, query_string)
 
     return url
+
+
+def serialize_body(body):
+    if isinstance(body, string_types):
+        return body.encode('utf-8')
+
+    if body is None:
+        return None
+
+    return json.dumps(body, ensure_ascii=False)
 
 
 def bulk_body(body):

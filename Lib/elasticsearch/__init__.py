@@ -7,6 +7,7 @@ from .nodes import NodesClient
 from .utils import make_url
 from .utils import make_path
 from .utils import show_result_json
+from .utils import serialize_body
 
 
 class Elasticsearch(object):
@@ -22,9 +23,7 @@ class Elasticsearch(object):
 
     def request(self, method, path, body=None, params=None):
         url = make_url(self.base_url, path, params)
-
-        if body is not None:
-            body = body.encode('utf-8')
+        body = serialize_body(body)
 
         try:
             response = requests.request(
@@ -44,7 +43,7 @@ class Elasticsearch(object):
     def create(self, index, doc_type, body, id=None, params=None, command=None):
         params = params or {}
         params['op_type'] = 'create'
-        return self.index(command, index, doc_type, body, id, params=params)
+        return self.index(index, doc_type, body, id, params=params, command=command)
 
     def index(self, index, doc_type, body, id=None, params=None, command=None):
         method = 'POST' if id is not None else 'PUT'
