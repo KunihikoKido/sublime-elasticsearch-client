@@ -1,3 +1,4 @@
+import sublime
 import requests
 from .cat import CatClient
 from .indices import IndicesClient
@@ -25,8 +26,13 @@ class Elasticsearch(object):
         if body is not None:
             body = body.encode('utf-8')
 
-        response = requests.request(
-            method.lower(), url, data=body, headers=self.headers)
+        try:
+            response = requests.request(
+                method.lower(), url, data=body, headers=self.headers)
+        except requests.exceptions.RequestException as e:
+            import sys
+            sublime.error_message("Error: {0!s}".format(e))
+            sys.exit(1)
 
         return response
 
