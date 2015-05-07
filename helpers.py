@@ -1,6 +1,6 @@
 from .base import ElasticsearchCommand
-from .elasticsearch import Elasticsearch
-from .elasticsearch.helpers import reindex
+from elasticsearch import Elasticsearch
+from elasticsearch.helpers import reindex
 
 
 class HelperBaseCommand(ElasticsearchCommand):

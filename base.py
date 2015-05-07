@@ -2,7 +2,7 @@ import json
 import sublime
 import sublime_plugin
 import threading
-from .elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch
 
 SETTINGS_FILE = 'Elasticsearch.sublime-settings'
 

@@ -1,7 +1,7 @@
 import tempfile
 from .base import ElasticsearchCommand
-from .elasticsearch.utils import make_url
-from .elasticsearch.utils import make_path
+from elasticsearch.utils import make_url
+from elasticsearch.utils import make_path
 
 
 class ApacheBenchCommand(ElasticsearchCommand):
