@@ -49,7 +49,7 @@ class CatHelpCommand(CatClientCommand):
     result_window_title = "Cat Help"
 
     def run(self):
-        self.request(self.esclient.cat.help, self)
+        self.request(self.esclient.cat.help)
 
 
 class CatIndicesCommand(CatClientCommand):
