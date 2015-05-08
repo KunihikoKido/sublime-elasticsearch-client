@@ -12,31 +12,35 @@ class CatClientCommand(ElasticsearchCommand):
 class CatAliasesCommand(CatClientCommand):
     result_window_title = "Cat Aliases"
 
-    def run(self):
-        self.get_alias(self.on_done)
+    def run(self, name=None):
+        if name is None:
+            self.get_alias(self.run)
+            return
 
-    def on_done(self, name):
-        self.request(self.client.cat.aliases, name=name, params=DEFAULT_PARAMS)
+        self.request(self.esclient.cat.aliases,
+                     name=name, params=DEFAULT_PARAMS)
 
 
 class CatAllocationCommand(CatClientCommand):
     result_window_title = "Cat Allocation"
 
-    def run(self):
-        self.get_node_id(self.on_done)
+    def run(self, node_id=None):
+        if node_id is None:
+            self.get_node_id(self.run)
+            return
 
-    def on_done(self, node_id):
         self.request(self.esclient.cat.allocation,
-                     node_id=node_id, params=dict(v=1))
+                     node_id=node_id, params=DEFAULT_PARAMS)
 
 
 class CatCountCommand(CatClientCommand):
     result_window_title = "Cat Count"
 
-    def run(self):
-        self.get_index(self.on_done)
+    def run(self, index=None):
+        if index is None:
+            self.get_index(self.run)
+            return
 
-    def on_done(self, index):
         self.request(self.esclient.cat.count,
                      index=index, params=DEFAULT_PARAMS)
 
@@ -58,10 +62,11 @@ class CatHelpCommand(CatClientCommand):
 class CatIndicesCommand(CatClientCommand):
     result_window_title = "Cat Indices"
 
-    def run(self):
-        self.get_index(self.on_done)
+    def run(self, index=None):
+        if index is None:
+            self.get_index(self.run)
+            return
 
-    def on_done(self, index):
         self.request(self.esclient.cat.indices,
                      index=index, params=DEFAULT_PARAMS)
 
@@ -83,10 +88,11 @@ class CatNodesCommand(CatClientCommand):
 class CatRecoveryCommand(CatClientCommand):
     result_window_title = "Cat Recovery"
 
-    def run(self):
-        self.get_index(self.on_done)
+    def run(self, index=None):
+        if index is None:
+            self.get_index(self.run)
+            return
 
-    def on_done(self, index):
         self.request(self.esclient.cat.recovery,
                      index=index, params=DEFAULT_PARAMS)
 
@@ -94,10 +100,11 @@ class CatRecoveryCommand(CatClientCommand):
 class CatShardsCommand(CatClientCommand):
     result_window_title = "Cat Shards"
 
-    def run(self):
-        self.get_index(self.on_done)
+    def run(self, index=None):
+        if index is None:
+            self.get_index(self.run)
+            return
 
-    def on_done(self, index):
         self.request(self.esclient.cat.shards,
                      index=index, params=DEFAULT_PARAMS)
 
@@ -105,10 +112,11 @@ class CatShardsCommand(CatClientCommand):
 class CatSegmentsCommand(CatClientCommand):
     result_window_title = "Cat Segments"
 
-    def run(self):
-        self.get_index(self.on_done)
+    def run(self, index=None):
+        if index is None:
+            self.get_index(self.run)
+            return
 
-    def on_done(self, index):
         self.request(self.esclient.cat.segments,
                      index=index, params=DEFAULT_PARAMS)
 
@@ -130,10 +138,11 @@ class CatThreadPoolCommand(CatClientCommand):
 class CatFielddataCommand(CatClientCommand):
     result_window_title = "Cat Fielddata"
 
-    def run(self):
-        self.get_fields(self.on_done)
+    def run(self, fields=None):
+        if fields is None:
+            self.get_fields(self.run)
+            return
 
-    def on_done(self, fields):
         self.request(self.esclient.cat.fielddata,
                      fields=fields, params=DEFAULT_PARAMS)
 
