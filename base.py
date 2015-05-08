@@ -42,8 +42,8 @@ class Settings(object):
         return self.settings.get('benchmarks')
 
     @property
-    def backup_location(self):
-        return self.settings.get('backup_location')
+    def fixture_dir(self):
+        return self.settings.get('fixture_dir')
 
     @property
     def base_url(self):
@@ -88,7 +88,8 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
         thread = threading.Thread(target=method, args=args, kwargs=kwargs)
         thread.start()
 
-    def ESClient(self):
+    @property
+    def esclient(self):
         return Elasticsearch(self.base_url, self.http_headers)
 
     def selection(self):

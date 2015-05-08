@@ -8,41 +8,35 @@ class UriSearchCommand(ElasticsearchCommand):
         self.get_query(self.on_done)
 
     def on_done(self, query):
-        es = self.ESClient()
         params = dict(q=query)
-
-        self.request(es.search, self.index, self.doc_type, params=params)
+        self.request(self.esclient.search,
+                     self.index, self.doc_type, params=params)
 
 
 class RequestBodySearchCommand(ElasticsearchCommand):
     result_window_title = "Request Body Search"
 
     def run(self, search_type='query_then_fetch'):
-        es = self.ESClient()
         params = dict(search_type=search_type)
         body = self.selection()
-
-        self.request(es.search, self.index, self.doc_type,
-                     body=body, params=params)
+        self.request(self.esclient.search,
+                     self.index, self.doc_type, body=body, params=params)
 
 
 class SearchShardsCommand(ElasticsearchCommand):
     result_window_title = "Search Shards"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.search_shards, self.index, self.doc_type)
+        self.request(self.esclient.search_shards, self.index, self.doc_type)
 
 
 class SearchTemplateCommand(ElasticsearchCommand):
     result_window_title = "Search Template"
 
     def run(self, search_type='query_then_fetch'):
-        es = self.ESClient()
         params = dict(search_type=search_type)
         body = self.selection()
-
-        self.request(es.search_template, self.index, self.doc_type,
+        self.request(self.esclient.search_template, self.index, self.doc_type,
                      body=body, params=params)
 
 
@@ -56,22 +50,18 @@ class ExplainDocumentCommand(ElasticsearchCommand):
         if id is None:
             return
 
-        es = self.ESClient()
         body = self.selection()
-
-        self.request(es.explain, self.index, self.doc_type, id,
-                     body=body)
+        self.request(self.esclient.explain,
+                     self.index, self.doc_type, id, body=body)
 
 
 class ScanCommand(ElasticsearchCommand):
     result_window_title = "Scan"
 
     def run(self):
-        es = self.ESClient()
         params = dict(search_type='scan', scroll='5m')
-
-        self.request(es.search, self.index,
-                     self.doc_type, params=params)
+        self.request(self.esclient.search,
+                     self.index, self.doc_type, params=params)
 
 
 class ScrollCommand(ElasticsearchCommand):
@@ -84,10 +74,8 @@ class ScrollCommand(ElasticsearchCommand):
         if scroll_id == -1:
             return
 
-        es = self.ESClient()
         params = dict(scroll='5m')
-
-        self.request(es.scroll, scroll_id, params=params)
+        self.request(self.esclient.scroll, scroll_id, params=params)
 
 
 class ClearScrollCommand(ElasticsearchCommand):
@@ -100,69 +88,59 @@ class ClearScrollCommand(ElasticsearchCommand):
         if scroll_id == -1:
             return
 
-        es = self.ESClient()
-
-        self.request(es.clear_scroll, scroll_id)
+        self.request(self.esclient.clear_scroll, scroll_id)
 
 
 class CountCommand(ElasticsearchCommand):
     result_window_title = "Count"
 
     def run(self):
-        es = self.ESClient()
         body = self.selection()
-
-        self.request(es.count, self.index, self.doc_type,
-                     body=body, params=None)
+        self.request(self.esclient.count,
+                     self.index, self.doc_type, body=body, params=None)
 
 
 class MultipleSearchCommand(ElasticsearchCommand):
     result_window_title = "Multiple Search"
 
     def run(self):
-        es = self.ESClient()
         body = self.selection()
-
-        self.request(es.msearch, body, self.index, self.doc_type)
+        self.request(self.esclient.msearch, body, self.index, self.doc_type)
 
 
 class SuggestCommand(ElasticsearchCommand):
     result_window_title = "Suggest"
 
     def run(self):
-        es = self.ESClient()
         body = self.selection()
-
-        self.request(es.suggest, body, self.index)
+        self.request(self.esclient.suggest, body, self.index)
 
 
 class PercolateCommand(ElasticsearchCommand):
     result_window_title = "Percolate"
 
     def run(self):
-        es = self.ESClient()
         body = self.selection()
-        self.request(es.percolate, self.index, self.doc_type,
-                     body=body)
+        self.request(self.esclient.percolate,
+                     self.index, self.doc_type, body=body)
 
 
 class MultiplePercolateCommand(ElasticsearchCommand):
     result_window_title = "Multiple Percolate"
 
     def run(self):
-        es = self.ESClient()
         body = self.selection()
-        self.request(es.mpercolate, body, self.index, self.doc_type)
+        self.request(self.esclient.mpercolate, body, self.index, self.doc_type)
 
 
 class CountPercolateCommmand(ElasticsearchCommand):
     result_window_title = "Count Percolate"
 
     def run(self):
-        es = self.ESClient()
+
         body = self.selection()
-        self.request(es.count_percolate, self.index,
-                     self.doc_type, body=body)
+        self.request(self.esclient.count_percolate,
+                     self.index, self.doc_type, body=body)
 
 
 class MoreLikeThisCommand(ElasticsearchCommand):
@@ -175,9 +153,7 @@ class MoreLikeThisCommand(ElasticsearchCommand):
         if not id:
             return
 
-        es = self.ESClient()
-        self.request(es.mlt, self.index, self.doc_type,
-                     id)
+        self.request(self.esclient.mlt, self.index, self.doc_type, id)
 
 
 class PutSearchTemplateCommand(ElasticsearchCommand):
@@ -190,9 +166,8 @@ class PutSearchTemplateCommand(ElasticsearchCommand):
         if not id:
             return
 
-        es = self.ESClient()
         body = self.selection()
-        self.request(es.put_template, id, body)
+        self.request(self.esclient.put_template, id, body)
 
 
 class GetSearchTemplateCommand(PutSearchTemplateCommand):
@@ -202,8 +177,7 @@ class GetSearchTemplateCommand(PutSearchTemplateCommand):
         if not id:
             return
 
-        es = self.ESClient()
-        self.request(es.get_template, id)
+        self.request(self.esclient.get_template, id)
 
 
 class DeleteSearchTemplateCommand(PutSearchTemplateCommand):
@@ -213,24 +187,24 @@ class DeleteSearchTemplateCommand(PutSearchTemplateCommand):
         if not id:
             return
 
-        es = self.ESClient()
-        self.request(es.delete_template, id)
+        self.request(self.esclient.delete_template, id)
 
 
 class SearchExistsCommand(ElasticsearchCommand):
     result_window_title = "Search Exists"
 
     def run(self):
-        es = self.ESClient()
+
         body = self.selection()
-        self.request(es.search_exists, self.index, self.doc_type, body)
+        self.request(self.esclient.search_exists,
+                     self.index, self.doc_type, body)
 
 
 class ValidateQueryCommand(ElasticsearchCommand):
     result_window_title = "Validate Query"
 
     def run(self):
-        es = self.ESClient()
+
         body = self.selection()
-        self.request(
-            es.validate_query, self.index, self.doc_type, body)
+        self.request(self.esclient.validate_query,
+                     self.index, self.doc_type, body)

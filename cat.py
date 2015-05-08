@@ -14,8 +14,7 @@ class CatAliasesCommand(CatClientCommand):
         self.get_alias(self.on_done)
 
     def on_done(self, name):
-        es = self.ESClient()
-        self.request(es.cat.aliases, name=name, params=dict(v=1))
+        self.request(self.client.cat.aliases, name=name, params=dict(v=1))
 
 
 class CatAllocationCommand(CatClientCommand):
@@ -25,9 +24,8 @@ class CatAllocationCommand(CatClientCommand):
         self.get_node_id(self.on_done)
 
     def on_done(self, node_id):
-        es = self.ESClient()
         self.request(
-            es.cat.allocation, node_id=node_id, params=dict(v=1))
+            self.esclient.cat.allocation, node_id=node_id, params=dict(v=1))
 
 
 class CatCountCommand(CatClientCommand):
@@ -37,24 +35,21 @@ class CatCountCommand(CatClientCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        es = self.ESClient()
-        self.request(es.cat.count, index=index, params=dict(v=1))
+        self.request(self.esclient.cat.count, index=index, params=dict(v=1))
 
 
 class CatHealthCommand(CatClientCommand):
     result_window_title = "Cat Health"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.health, params=dict(v=1))
+        self.request(self.esclient.cat.health, params=dict(v=1))
 
 
 class CatHelpCommand(CatClientCommand):
     result_window_title = "Cat Help"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.help, self)
+        self.request(self.esclient.cat.help, self)
 
 
 class CatIndicesCommand(CatClientCommand):
@@ -64,24 +59,21 @@ class CatIndicesCommand(CatClientCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        es = self.ESClient()
-        self.request(es.cat.indices, index=index, params=dict(v=1))
+        self.request(self.esclient.cat.indices, index=index, params=dict(v=1))
 
 
 class CatMasterCommand(CatClientCommand):
     result_window_title = "Cat Master"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.master, params=dict(v=1))
+        self.request(self.esclient.cat.master, params=dict(v=1))
 
 
 class CatNodesCommand(CatClientCommand):
     result_window_title = "Cat Nodes"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.nodes, params=dict(v=1))
+        self.request(self.esclient.cat.nodes, params=dict(v=1))
 
 
 class CatRecoveryCommand(CatClientCommand):
@@ -91,8 +83,7 @@ class CatRecoveryCommand(CatClientCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        es = self.ESClient()
-        self.request(es.cat.recovery, index=index, params=dict(v=1))
+        self.request(self.esclient.cat.recovery, index=index, params=dict(v=1))
 
 
 class CatShardsCommand(CatClientCommand):
@@ -102,8 +93,7 @@ class CatShardsCommand(CatClientCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        es = self.ESClient()
-        self.request(es.cat.shards, index=index, params=dict(v=1))
+        self.request(self.esclient.cat.shards, index=index, params=dict(v=1))
 
 
 class CatSegmentsCommand(CatClientCommand):
@@ -113,24 +103,21 @@ class CatSegmentsCommand(CatClientCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        es = self.ESClient()
-        self.request(es.cat.segments, index=index, params=dict(v=1))
+        self.request(self.esclient.cat.segments, index=index, params=dict(v=1))
 
 
 class CatPendingTasksCommand(CatClientCommand):
     result_window_title = "Cat Pending Tasks"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.pending_tasks, params=dict(v=1))
+        self.request(self.esclient.cat.pending_tasks, params=dict(v=1))
 
 
 class CatThreadPoolCommand(CatClientCommand):
     result_window_title = "Cat Thread Pool"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.thread_pool, params=dict(v=1))
+        self.request(self.esclient.cat.thread_pool, params=dict(v=1))
 
 
 class CatFielddataCommand(CatClientCommand):
@@ -140,14 +127,12 @@ class CatFielddataCommand(CatClientCommand):
         self.get_fields(self.on_done)
 
     def on_done(self, fields):
-        es = self.ESClient()
-        self.request(
-            es.cat.fielddata, fields=fields, params=dict(v=1))
+        self.request(self.esclient.cat.fielddata,
+                     fields=fields, params=dict(v=1))
 
 
 class CatPluginsCommand(CatClientCommand):
     result_window_title = "Cat Plugins"
 
     def run(self):
-        es = self.ESClient()
-        self.request(es.cat.plugins, params=dict(v=1))
+        self.request(self.esclient.cat.plugins, params=dict(v=1))

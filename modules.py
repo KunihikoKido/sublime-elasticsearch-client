@@ -18,9 +18,8 @@ class PutScriptCommand(ElasticsearchCommand):
         if not id:
             return
 
-        es = self.ESClient()
         body = self.selection()
-        self.request(es.put_script, self.lang, id, body=body)
+        self.request(self.esclient.put_script, self.lang, id, body=body)
 
 
 class GetScriptCommand(PutScriptCommand):
@@ -30,8 +29,7 @@ class GetScriptCommand(PutScriptCommand):
         if not id:
             return
 
-        es = self.ESClient()
-        self.request(es.get_script, self.lang, id)
+        self.request(self.esclient.get_script, self.lang, id)
 
 
 class DeleteScriptCommand(PutScriptCommand):
@@ -41,5 +39,4 @@ class DeleteScriptCommand(PutScriptCommand):
         if not id:
             return
 
-        es = self.ESClient()
-        self.request(es.delete_script, self.lang, id)
+        self.request(self.esclient.delete_script, self.lang, id)
