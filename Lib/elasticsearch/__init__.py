@@ -8,6 +8,7 @@ from .utils import make_url
 from .utils import make_path
 from .utils import show_result_json
 from .utils import serialize_body
+from .utils import bulk_body
 
 
 class Elasticsearch(object):
