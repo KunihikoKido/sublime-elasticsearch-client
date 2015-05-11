@@ -1,7 +1,62 @@
+import gzip
 import json
 import sublime
+from itertools import islice
+from operator import methodcaller
+
 from .utils import show_result_json
 from .utils import make_url
+
+
+def change_index(hits, index):
+    for hit in hits:
+        hit['_index'] = index
+        yield hit
+
+
+def expand_action(data):
+    data = data.copy()
+    action = {'index': {}}
+    for key in ('_index', '_parent', '_percolate', '_routing', '_timestamp',
+                '_ttl', '_type', '_version', '_version_type', '_id',
+                '_retry_on_conflict'):
+        if key in data:
+            action['index'][key] = data.pop(key)
+
+    return action, data.get('_source', data)
+
+
+def bulk_index(client, docs, chunk_size=500, **kwargs):
+    success, failed = 0, 0
+    errors = []
+    actions = map(expand_action, docs)
+
+    while True:
+        chunk = islice(actions, chunk_size)
+
+        bulk_actions = []
+        for action, data in chunk:
+            bulk_actions.append(json.dumps(action))
+            if data is not None:
+                bulk_actions.append(json.dumps(data))
+
+        if not bulk_actions:
+            break
+
+        body = "\n".join(bulk_actions) + "\n"
+        response = client.bulk(body, **kwargs)
+
+        for op_type, item in map(methodcaller('popitem'), response['items']):
+            ok = 200 <= item.get('status', 500) < 300
+            if not ok:
+                errors.append(item)
+                failed += 1
+            else:
+                success += 1
+
+            sublime.status_message("docs: {}".format(success + failed))
+
+    return success, failed if not errors else errors
 
 
 def scan(client, query=None, scroll='5m', **kwargs):
@@ -36,7 +91,7 @@ def scan(client, query=None, scroll='5m', **kwargs):
 
 
 def reindex(client, source_index, target_index, query=None, target_client=None,
-            scroll='5m', scan_kwargs={}, command=None):
+            chunk_size=500, scroll='5m', scan_kwargs={}, command=None):
 
     target_client = client if target_client is None else target_client
 
@@ -48,19 +103,58 @@ def reindex(client, source_index, target_index, query=None, target_client=None,
     docs = scan(client, query=query, index=source_index,
                 scroll=scroll, **scan_kwargs)
 
-    success, failed = 0, 0
+    success, failed = bulk_index(
+        target_client, change_index(docs, target_index), chunk_size=chunk_size)
 
-    for doc in docs:
-        response = target_client.index(
-            index=target_index, doc_type=doc['_type'],
-            body=json.dumps(doc['_source']), id=doc['_id'])
+    result['success'] = success
+    result['failed'] = failed
 
-        if 'error' in response.keys():
-            failed += 1
-        else:
-            success += 1
+    show_result_json(result, sort_keys=True, command=command)
 
-        sublime.status_message("{0:_>10}".format(success + failed))
+copyindex = reindex
+
+
+def dumpdata(outputfile, client, index, query=None,
+             scroll='5m', scan_kwargs={}, command=None):
+
+    result = {
+        "_source": make_url(client.base_url, index),
+        "_output": outputfile
+    }
+
+    docs = scan(client, query=query, index=index,
+                scroll=scroll, **scan_kwargs)
+
+    count = 0
+    with gzip.open(outputfile, 'wb') as f:
+        for doc in docs:
+            del doc['_score']
+
+            data = "{}\n".format(json.dumps(doc, ensure_ascii=False))
+            f.write(bytes(data, 'utf-8'))
+
+            count += 1
+            sublime.status_message("dumps: {}".format(count))
+
+    result['docs'] = count
+
+    show_result_json(result, sort_keys=True, command=command)
+
+
+def loaddata(inputfile, client, index, chunk_size=500, command=None):
+    result = {
+        "_target": make_url(client.base_url, index),
+        "_input": inputfile
+    }
+
+    docs = []
+    with gzip.open(inputfile, 'rb') as f:
+        for doc in f:
+            docs.append(json.loads(doc.decode('utf-8')))
+            sublime.status_message("read: {}".format(len(docs)))
+
+    success, failed = bulk_index(
+        client, change_index(docs, index), chunk_size=chunk_size)
 
     result['success'] = success
     result['failed'] = failed

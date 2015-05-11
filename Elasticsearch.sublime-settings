@@ -4,8 +4,6 @@
             "base_url": "http://localhost:9200/",
             "index": "test",
             "doc_type": "test",
-            "analyzer": "default",
-            "hettp_headers": {}
         }
     },
     // Path to the Apache Bench (ab) command. If ab is on you path, you should not need to
@@ -19,6 +17,5 @@
     "pretty_command": "pretty_json",
     "pretty_syntax": "Elasticsearch",
 
-    "ask_to_search_types": false,
-    "backup_location": ""
+    "fixture_dir": ""
 }

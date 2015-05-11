@@ -100,7 +100,7 @@ Setting                    | Description
 ``enabled_pretty``         | enabled pretty json. required: [PrettyJson](https://github.com/dzhibas/SublimePrettyJson)
 ``pretty_command``         | pretty format command. default: ``pretty_json``
 ``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
-``backup_location``        | Path to the Dump Data & Load Data command.
+``fixture_dir``            | Path to the Dump Data & Load Data command.
 
 
 #### servers.\*
@@ -238,9 +238,12 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Apache Bench
 * Elasticsearch: Apache Bench for Search Template
 
-### Commmand for Helpers
+### Commmand for Index Data Management.
 
 * Elasticsearch: Reindex
+* Elasticsearch: Dump Data
+* Elasticsearch: Load Data
+* Elasticsearch: Copy Data from ...
 
 ### Command for Sublime User Settings
 

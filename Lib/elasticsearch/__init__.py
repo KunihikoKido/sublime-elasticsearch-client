@@ -47,7 +47,7 @@ class Elasticsearch(object):
         return self.index(index, doc_type, body, id, params=params, command=command)
 
     def index(self, index, doc_type, body, id=None, params=None, command=None):
-        method = 'POST' if id is not None else 'PUT'
+        method = 'PUT' if id else 'POST'
         result = self.request(
             method, make_path(index, doc_type, id), body=body, params=params)
         return show_result_json(result.json(), command=command)

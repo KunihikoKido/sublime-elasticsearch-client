@@ -110,4 +110,7 @@
     {"command": "show_active_server",      "caption": "Elasticsearch: Show Active Server"},
 
     {"command": "reindex",                 "caption": "Elasticsearch: Reindex"},
+    {"command": "dumpdata",                "caption": "Elasticsearch: Dump Data"},
+    {"command": "loaddata",                "caption": "Elasticsearch: Load Data"},
+    {"command": "copy_index",              "caption": "Elasticsearch: Copy Data from ..."},
 ]
