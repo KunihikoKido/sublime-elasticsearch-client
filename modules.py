@@ -9,9 +9,6 @@ class PutScriptCommand(ElasticsearchCommand):
         self.get_lang(self.on_done_lang)
 
     def on_done_lang(self, lang):
-        if not lang:
-            return
-
         self.lang = lang
         self.get_script_id(self.on_done)
 
