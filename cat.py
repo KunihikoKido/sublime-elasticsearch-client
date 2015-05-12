@@ -130,7 +130,7 @@ class CatThreadPoolCommand(CatClientCommand):
 class CatFielddataCommand(CatClientCommand):
     result_window_title = "Cat Fielddata"
 
-    def run(self, fields=None):
+    def run(self):
         self.get_fields(self.on_done)
 
     def on_done(self, fields):
