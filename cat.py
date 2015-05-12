@@ -8,6 +8,12 @@ class CatClientCommand(ElasticsearchCommand):
     syntax = 'Packages/Text/Plain text.tmLanguage'
     result_window_title = ""
 
+    def request_cat_api(self, method_name, *args, **kwargs):
+        method = getattr(self.esclient.cat, method_name)
+        kwargs = kwargs or {}
+        kwargs['params'] = DEFAULT_PARAMS
+        self.request(method, *args, **kwargs)
+
 
 class CatAliasesCommand(CatClientCommand):
     result_window_title = "Cat Aliases"
@@ -17,8 +23,7 @@ class CatAliasesCommand(CatClientCommand):
             self.get_alias(self.run)
             return
 
-        self.request(self.esclient.cat.aliases,
-                     name=name, params=DEFAULT_PARAMS)
+        self.request_cat_api('aliases', name=name)
 
 
 class CatAllocationCommand(CatClientCommand):
@@ -29,8 +34,7 @@ class CatAllocationCommand(CatClientCommand):
             self.get_node_id(self.run)
             return
 
-        self.request(self.esclient.cat.allocation,
-                     node_id=node_id, params=DEFAULT_PARAMS)
+        self.request_cat_api('allocation', node_id=node_id)
 
 
 class CatCountCommand(CatClientCommand):
@@ -41,22 +45,21 @@ class CatCountCommand(CatClientCommand):
             self.get_index(self.run)
             return
 
-        self.request(self.esclient.cat.count,
-                     index=index, params=DEFAULT_PARAMS)
+        self.request_cat_api('count', index=index)
 
 
 class CatHealthCommand(CatClientCommand):
     result_window_title = "Cat Health"
 
     def run(self):
-        self.request(self.esclient.cat.health, params=DEFAULT_PARAMS)
+        self.request_cat_api('health')
 
 
 class CatHelpCommand(CatClientCommand):
     result_window_title = "Cat Help"
 
     def run(self):
-        self.request(self.esclient.cat.help)
+        self.request_cat_api('help')
 
 
 class CatIndicesCommand(CatClientCommand):
@@ -67,22 +70,21 @@ class CatIndicesCommand(CatClientCommand):
             self.get_index(self.run)
             return
 
-        self.request(self.esclient.cat.indices,
-                     index=index, params=DEFAULT_PARAMS)
+        self.request_cat_api('indices', index=index)
 
 
 class CatMasterCommand(CatClientCommand):
     result_window_title = "Cat Master"
 
     def run(self):
-        self.request(self.esclient.cat.master, params=DEFAULT_PARAMS)
+        self.request_cat_api('master')
 
 
 class CatNodesCommand(CatClientCommand):
     result_window_title = "Cat Nodes"
 
     def run(self):
-        self.request(self.esclient.cat.nodes, params=DEFAULT_PARAMS)
+        self.request_cat_api('nodes')
 
 
 class CatRecoveryCommand(CatClientCommand):
@@ -93,8 +95,7 @@ class CatRecoveryCommand(CatClientCommand):
             self.get_index(self.run)
             return
 
-        self.request(self.esclient.cat.recovery,
-                     index=index, params=DEFAULT_PARAMS)
+        self.request_cat_api('recovery', index=index)
 
 
 class CatShardsCommand(CatClientCommand):
@@ -105,8 +106,7 @@ class CatShardsCommand(CatClientCommand):
             self.get_index(self.run)
             return
 
-        self.request(self.esclient.cat.shards,
-                     index=index, params=DEFAULT_PARAMS)
+        self.request_cat_api('shards', index=index)
 
 
 class CatSegmentsCommand(CatClientCommand):
@@ -117,22 +117,21 @@ class CatSegmentsCommand(CatClientCommand):
             self.get_index(self.run)
             return
 
-        self.request(self.esclient.cat.segments,
-                     index=index, params=DEFAULT_PARAMS)
+        self.request_cat_api('segments', index=index)
 
 
 class CatPendingTasksCommand(CatClientCommand):
     result_window_title = "Cat Pending Tasks"
 
     def run(self):
-        self.request(self.esclient.cat.pending_tasks, params=DEFAULT_PARAMS)
+        self.request_cat_api('pending_tasks')
 
 
 class CatThreadPoolCommand(CatClientCommand):
     result_window_title = "Cat Thread Pool"
 
     def run(self):
-        self.request(self.esclient.cat.thread_pool, params=DEFAULT_PARAMS)
+        self.request_cat_api('thread_pool')
 
 
 class CatFielddataCommand(CatClientCommand):
@@ -143,12 +142,11 @@ class CatFielddataCommand(CatClientCommand):
             self.get_fields(self.run)
             return
 
-        self.request(self.esclient.cat.fielddata,
-                     fields=fields, params=DEFAULT_PARAMS)
+        self.request_cat_api('fielddata', fields=fields)
 
 
 class CatPluginsCommand(CatClientCommand):
     result_window_title = "Cat Plugins"
 
     def run(self):
-        self.request(self.esclient.cat.plugins, params=DEFAULT_PARAMS)
+        self.request_cat_api('plugins')
