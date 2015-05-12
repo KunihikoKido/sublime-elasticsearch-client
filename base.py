@@ -19,6 +19,12 @@ class Settings(object):
         return self.settings.get('servers')
 
     @property
+    def select_servers(self):
+        servers = list(self.servers.keys())
+        servers.sort()
+        return servers
+
+    @property
     def active_server(self):
         active_server = self.settings.get('active_server', None)
         if active_server is None:
@@ -183,26 +189,30 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
     def get_warmer(self, callback):
         self.show_input_panel('Index Warmer: ', '', callback)
 
+    def show_select_servers(self, callback):
+        if not hasattr(self, '_selected_server_index'):
+            self._selected_server_index = 0
+
+        self.window.show_quick_panel(
+            self.select_servers, callback,
+            selected_index=self._selected_server_index)
+
+    def get_selected_server(self, index):
+        self._selected_server_index = index
+        return self.select_servers[index]
+
 
 class SwitchServersCommand(ElasticsearchCommand):
-    selected_index = 0
 
     def run(self):
-        self.select_panel(self.on_done)
-
-    def select_panel(self, callback):
-        self.server_choices = list(self.servers.keys())
-        self.server_choices.sort()
-        self.window.show_quick_panel(
-            self.server_choices, self.on_done,
-            selected_index=self.selected_index)
+        self.show_select_servers(self.on_done)
 
     def on_done(self, index):
         if index == -1:
             return
-        self.selected_index = index
-        selected = self.server_choices[index]
-        self.settings.set('active_server', selected)
+
+        selected_server = self.get_selected_server(index)
+        self.settings.set('active_server', selected_server)
         self.save_settings()
         self.window.run_command('show_active_server')
 
