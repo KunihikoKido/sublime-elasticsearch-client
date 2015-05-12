@@ -8,8 +8,8 @@ class CatClientCommand(ElasticsearchCommand):
     syntax = 'Packages/Text/Plain text.tmLanguage'
     result_window_title = ""
 
-    def request_cat_api(self, method_name, *args, **kwargs):
-        method = getattr(self.esclient.cat, method_name)
+    def request_cat_api(self, method, *args, **kwargs):
+        method = getattr(self.esclient.cat, method.lower())
         kwargs = kwargs or {}
         kwargs['params'] = DEFAULT_PARAMS
         self.request(method, *args, **kwargs)

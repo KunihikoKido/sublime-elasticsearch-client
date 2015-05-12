@@ -94,6 +94,11 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
         thread = threading.Thread(target=method, args=args, kwargs=kwargs)
         thread.start()
 
+    def request_api(self, method, *args, **kwargs):
+        method = getattr(self.esclient, method.lower())
+        kwargs = kwargs or {}
+        self.request(method, *args, **kwargs)
+
     @property
     def esclient(self):
         return Elasticsearch(self.base_url, self.http_headers)

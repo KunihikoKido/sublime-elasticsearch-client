@@ -9,9 +9,9 @@ class CreateDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        body = self.selection()
-        self.request(self.esclient.create,
-                     self.index, self.doc_type, body, id=id)
+        self.request_api(
+            'create', index=self.index, doc_type=self.doc_type,
+            body=self.selection(), id=id)
 
 
 class IndexDocumentCommand(ElasticsearchCommand):
@@ -21,18 +21,18 @@ class IndexDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        body = self.selection()
-        self.request(self.esclient.index,
-                     self.index, self.doc_type, body, id=id)
+        self.request_api(
+            'index', index=self.index, doc_type=self.doc_type,
+            body=self.selectio(), id=id)
 
 
 class IndexPercolatorCommand(IndexDocumentCommand):
     result_window_title = "Index Percolator"
 
     def on_done(self, id):
-        body = self.selection()
-        self.request(self.esclient.index,
-                     self.index, '.percolator', body, id=id)
+        self.request_api(
+            'index', index=self.index, doc_type='.percolator',
+            body=self.selection(), id=id)
 
 
 class GetDocumentCommand(ElasticsearchCommand):
@@ -42,11 +42,8 @@ class GetDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if not id:
-            return
-
-        self.request(self.esclient.get,
-                     self.index, self.doc_type, id)
+        self.request_api(
+            'get', index=self.index, doc_type=self.doc_type, id=id)
 
 
 class GetSourceCommand(ElasticsearchCommand):
@@ -56,10 +53,8 @@ class GetSourceCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if not id:
-            return
-
-        self.request(self.esclient.get_source, self.index, self.doc_type, id)
+        self.request_api(
+            'get_source', index=self.index, doc_type=self.doc_type, id=id)
 
 
 class GetMultipleDocumentsCommand(ElasticsearchCommand):
@@ -68,13 +63,14 @@ class GetMultipleDocumentsCommand(ElasticsearchCommand):
     def run(self):
         self.get_document_ids(self.on_done)
 
-    def on_done(self, ids):
-        if not ids:
-            return
-
+    def make_body(self, ids):
         ids = [id.strip() for id in ids.split(',') if id.strip()]
-        body = dict(ids=ids)
-        self.request(self.esclient.mget, body, self.index, self.doc_type)
+        return dict(ids=ids)
+
+    def on_done(self, ids):
+        self.request_api(
+            'mget', index=self.index, doc_type=self.doc_type,
+            body=self.make_body(ids))
 
 
 class UpdateDocumentCommand(ElasticsearchCommand):
@@ -84,12 +80,9 @@ class UpdateDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if not id:
-            return
-
-        body = self.selection()
-        self.request(self.esclient.update,
-                     self.index, self.doc_type, id, body=body)
+        self.request_api(
+            'update', index=self.index, doc_type=self.doc_type,
+            id=id, body=self.selection())
 
 
 class DeleteDocumentCommand(ElasticsearchCommand):
@@ -99,36 +92,31 @@ class DeleteDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if not id:
-            return
-
         if not delete_ok_cancel_dialog(id):
             return
 
-        self.request(self.esclient.delete, self.index, self.doc_type, id)
+        self.request_api(
+            'delete', index=self.index, doc_type=self.doc_type, id=id)
 
 
 class DeletePercolaterCommand(DeleteDocumentCommand):
     result_window_title = "Delete Percolator"
 
     def on_done(self, id):
-        if not id:
-            return
-
         if not delete_ok_cancel_dialog(id):
             return
 
-        self.request(self.esclient.delete, self.index, '.percolator', id)
+        self.request_api(
+            'delete', index=self.index, doc_type='.percolator', id=id)
 
 
 class BulkCommand(ElasticsearchCommand):
     result_window_title = "Bulk"
 
     def run(self):
-
-        body = self.selection()
-
-        self.request(self.esclient.bulk, body, self.index, self.doc_type)
+        self.request_api(
+            'bulk', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class DeleteByQueryCommand(ElasticsearchCommand):
@@ -138,9 +126,9 @@ class DeleteByQueryCommand(ElasticsearchCommand):
         if not delete_ok_cancel_dialog('Matched query documents'):
             return
 
-        body = self.selection()
-        self.request(self.esclient.delete_by_query, self.index,
-                     self.doc_type, body=body)
+        self.request_api(
+            'delete_by_query', index=self.index,
+            doc_type=self.doc_type, body=self.selection())
 
 
 class TermvectorCommand(ElasticsearchCommand):
@@ -150,18 +138,15 @@ class TermvectorCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if not id:
-            return
-
-        body = self.selection()
-        self.request(self.esclient.termvector,
-                     self.index, self.doc_type, id, body=body)
+        self.request_api(
+            'termvector', index=self.index, doc_type=self.doc_type,
+            id=id, body=self.selection())
 
 
 class MultipleTermvectors(ElasticsearchCommand):
     result_window_title = "Multiple Termvectors"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.mtermvectors,
-                     self.index, self.doc_type, body=body)
+        self.request_api(
+            'mtermvectors', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
