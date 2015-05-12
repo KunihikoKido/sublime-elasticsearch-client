@@ -9,7 +9,7 @@ class IndicesClientCommand(ElasticsearchCommand):
         self.request(method, *args, **kwargs)
 
 
-class AnalyzeTextCommand(ElasticsearchCommand):
+class AnalyzeTextCommand(IndicesClientCommand):
     result_window_title = "Analyze Text"
 
     def run(self):
@@ -21,21 +21,21 @@ class AnalyzeTextCommand(ElasticsearchCommand):
             body=self.selection(), params=dict(analyzer=analyzer))
 
 
-class RefreshIndexCommand(ElasticsearchCommand):
+class RefreshIndexCommand(IndicesClientCommand):
     result_window_title = "Refresh Index"
 
     def run(self):
         self.request_indices_api('refresh', index=self.index)
 
 
-class FlushIndexCommand(ElasticsearchCommand):
+class FlushIndexCommand(IndicesClientCommand):
     result_window_title = "Flush Index"
 
     def run(self):
         self.request_indices_api('flush', index=self.index)
 
 
-class CreateIndexCommand(ElasticsearchCommand):
+class CreateIndexCommand(IndicesClientCommand):
     result_window_title = "Create Index"
 
     def run(self):
@@ -45,7 +45,7 @@ class CreateIndexCommand(ElasticsearchCommand):
         self.request_indices_api('create', index=index)
 
 
-class GetIndexInfomationCommand(ElasticsearchCommand):
+class GetIndexInfomationCommand(IndicesClientCommand):
     result_window_title = "Get Index Infomation"
 
     def run(self):
@@ -55,7 +55,7 @@ class GetIndexInfomationCommand(ElasticsearchCommand):
         self.request_indices_api('get', index=self.index, feature=feature)
 
 
-class OpenIndexCommand(ElasticsearchCommand):
+class OpenIndexCommand(IndicesClientCommand):
     result_window_title = "Open Index"
 
     def run(self):
@@ -65,7 +65,7 @@ class OpenIndexCommand(ElasticsearchCommand):
         self.request_indices_api('open', index=index)
 
 
-class CloseIndexCommand(ElasticsearchCommand):
+class CloseIndexCommand(IndicesClientCommand):
     result_window_title = "Close Index"
 
     def run(self):
@@ -75,7 +75,7 @@ class CloseIndexCommand(ElasticsearchCommand):
         self.request_indices_api('close', index=index)
 
 
-class DeleteIndexCommand(ElasticsearchCommand):
+class DeleteIndexCommand(IndicesClientCommand):
     result_window_title = "Delete Index"
 
     def run(self):
@@ -88,7 +88,7 @@ class DeleteIndexCommand(ElasticsearchCommand):
         self.request_indices_api('delete', index=self.index)
 
 
-class PutMappingCommand(ElasticsearchCommand):
+class PutMappingCommand(IndicesClientCommand):
     result_window_title = "Put Mapping"
 
     def run(self):
@@ -97,7 +97,7 @@ class PutMappingCommand(ElasticsearchCommand):
             body=self.selection())
 
 
-class GetMappingCommand(ElasticsearchCommand):
+class GetMappingCommand(IndicesClientCommand):
     result_window_title = "Get Mapping"
 
     def run(self):
@@ -105,7 +105,7 @@ class GetMappingCommand(ElasticsearchCommand):
             'get_mapping', index=self.index, doc_type=self.doc_type)
 
 
-class GetFieldMappingCommand(ElasticsearchCommand):
+class GetFieldMappingCommand(IndicesClientCommand):
     result_window_title = "Get Field Mapping"
 
     def run(self):
@@ -117,7 +117,7 @@ class GetFieldMappingCommand(ElasticsearchCommand):
             doc_type=self.doc_type, field=field)
 
 
-class DeleteMappingCommand(ElasticsearchCommand):
+class DeleteMappingCommand(IndicesClientCommand):
     result_window_title = "Delete Mapping"
 
     def run(self):
@@ -128,7 +128,7 @@ class DeleteMappingCommand(ElasticsearchCommand):
             'delete_mapping', index=self.index, doc_type=self.doc_type)
 
 
-class PutIndexAliasCommand(ElasticsearchCommand):
+class PutIndexAliasCommand(IndicesClientCommand):
     result_window_title = "Put Index Alias"
 
     def run(self):
@@ -138,7 +138,7 @@ class PutIndexAliasCommand(ElasticsearchCommand):
         self.request_indices_api('put_alias', index=self.index, name=name)
 
 
-class GetIndexAliasCommand(ElasticsearchCommand):
+class GetIndexAliasCommand(IndicesClientCommand):
     result_window_title = "Get Index Alias"
 
     def run(self):
@@ -148,14 +148,14 @@ class GetIndexAliasCommand(ElasticsearchCommand):
         self.request_indices_api('get_alias', index=self.index, name=name)
 
 
-class UpdateIndexAliasesCommand(ElasticsearchCommand):
+class UpdateIndexAliasesCommand(IndicesClientCommand):
     result_window_title = "Update Index Aliases"
 
     def run(self):
         self.request_indices_api('update_aliases', body=self.selection())
 
 
-class DeleteIndexAliasCommand(ElasticsearchCommand):
+class DeleteIndexAliasCommand(IndicesClientCommand):
     result_window_title = "Delete Index Alias"
 
     def run(self):
@@ -168,7 +168,7 @@ class DeleteIndexAliasCommand(ElasticsearchCommand):
         self.request_indices_api('delete_alias', index=self.index, name=name)
 
 
-class PutIndexTemplateCommand(ElasticsearchCommand):
+class PutIndexTemplateCommand(IndicesClientCommand):
     result_window_title = "Put Index Template"
 
     def run(self):
@@ -196,21 +196,21 @@ class DeleteIndexTemplateCommand(PutIndexTemplateCommand):
         self.request_indices_api('delete_template', name=name)
 
 
-class GetIndexSettingsCommand(ElasticsearchCommand):
+class GetIndexSettingsCommand(IndicesClientCommand):
     result_window_title = "Get Index Settings"
 
     def run(self):
         self.request_indices_api('get_settings', index=self.index)
 
 
-class PutIndexSettingsCommand(ElasticsearchCommand):
+class PutIndexSettingsCommand(IndicesClientCommand):
     result_window_title = "Put Index Settings"
 
     def run(self):
         self.request_indices_api('put_settings', body=self.selection())
 
 
-class PutIndexWarmerCommand(ElasticsearchCommand):
+class PutIndexWarmerCommand(IndicesClientCommand):
     result_window_title = "Put Index Warmer"
 
     def run(self):
@@ -239,7 +239,7 @@ class DeleteIndexWarmerCommand(PutIndexWarmerCommand):
         self.request_indices_api('delete_warmer', index=self.index, name=name)
 
 
-class IndexStatusCommand(ElasticsearchCommand):
+class IndexStatusCommand(IndicesClientCommand):
     result_window_title = "Index Status"
 
     def run(self):
@@ -249,7 +249,7 @@ class IndexStatusCommand(ElasticsearchCommand):
         self.request_indices_api('status', index=index)
 
 
-class IndexStatsCommand(ElasticsearchCommand):
+class IndexStatsCommand(IndicesClientCommand):
     result_window_title = "Index Stats"
 
     def run(self):
@@ -259,7 +259,7 @@ class IndexStatsCommand(ElasticsearchCommand):
         self.request_indices_api('stats', index=index)
 
 
-class IndexSegmentsInfomationCommand(ElasticsearchCommand):
+class IndexSegmentsInfomationCommand(IndicesClientCommand):
     result_window_title = "Index Segments Infomation"
 
     def run(self):
@@ -269,7 +269,7 @@ class IndexSegmentsInfomationCommand(ElasticsearchCommand):
         self.request_indices_api('segments', index=index)
 
 
-class OptimizeIndexCommand(ElasticsearchCommand):
+class OptimizeIndexCommand(IndicesClientCommand):
     result_window_title = "Optimize Index"
 
     def run(self):
@@ -279,7 +279,7 @@ class OptimizeIndexCommand(ElasticsearchCommand):
         self.request_indices_api('optimize', index=index)
 
 
-class ClearIndexCacheCommand(ElasticsearchCommand):
+class ClearIndexCacheCommand(IndicesClientCommand):
     result_window_title = "Clear Index Cache"
 
     def run(self):
@@ -289,7 +289,7 @@ class ClearIndexCacheCommand(ElasticsearchCommand):
         self.request_indices_api('clear_cache', index=index)
 
 
-class IndexRecoveryStatusCommand(ElasticsearchCommand):
+class IndexRecoveryStatusCommand(IndicesClientCommand):
     result_window_title = "Index Recovery Status"
 
     def run(self):
@@ -299,7 +299,7 @@ class IndexRecoveryStatusCommand(ElasticsearchCommand):
         self.request_indices_api('recovery', index=index)
 
 
-class UpgradeIndexCommand(ElasticsearchCommand):
+class UpgradeIndexCommand(IndicesClientCommand):
     result_window_title = "Upgrade Index"
 
     def run(self):
@@ -309,7 +309,7 @@ class UpgradeIndexCommand(ElasticsearchCommand):
         self.request_indices_api('upgrade', index=index)
 
 
-class GetUpgradeIndexStatus(ElasticsearchCommand):
+class GetUpgradeIndexStatus(IndicesClientCommand):
     result_window_title = "Get Upgrade Index Status"
 
     def run(self):
