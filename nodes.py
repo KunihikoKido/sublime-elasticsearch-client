@@ -4,7 +4,6 @@ from .base import ElasticsearchCommand
 class NodesClientCommand(ElasticsearchCommand):
     def request_nodes_api(self, method, *args, **kwargs):
         method = getattr(self.esclient.nodes, method.lower())
-        kwargs = kwargs or {}
         self.request(method, *args, **kwargs)
 
 

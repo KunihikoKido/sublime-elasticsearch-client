@@ -2,6 +2,13 @@ from .base import ElasticsearchCommand
 from .base import delete_ok_cancel_dialog
 
 
+class IndicesClientCommand(ElasticsearchCommand):
+
+    def request_indices_api(self, method, *args, **kwargs):
+        method = getattr(self.esclient.indices, method.lower())
+        self.request(method, *args, **kwargs)
+
+
 class AnalyzeTextCommand(ElasticsearchCommand):
     result_window_title = "Analyze Text"
 
@@ -9,23 +16,23 @@ class AnalyzeTextCommand(ElasticsearchCommand):
         self.get_analyzer(self.on_done)
 
     def on_done(self, analyzer):
-        params = dict(analyzer=analyzer)
-        body = self.selection()
-        self.request(self.esclient.indices.analyze, self.index, body, params)
+        self.request_indices_api(
+            'analyze', index=self.index, doc_type=self.doc_type,
+            body=self.selection(), params=dict(analyzer=analyzer))
 
 
 class RefreshIndexCommand(ElasticsearchCommand):
     result_window_title = "Refresh Index"
 
     def run(self):
-        self.request(self.esclient.indices.refresh, self.index)
+        self.request_indices_api('refresh', index=self.index)
 
 
 class FlushIndexCommand(ElasticsearchCommand):
     result_window_title = "Flush Index"
 
     def run(self):
-        self.request(self.esclient.indices.flush, self.index)
+        self.request_indices_api('flush', index=self.index)
 
 
 class CreateIndexCommand(ElasticsearchCommand):
@@ -35,10 +42,7 @@ class CreateIndexCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        if not index:
-            return
-
-        self.request(self.esclient.indices.create, index)
+        self.request_indices_api('create', index=index)
 
 
 class GetIndexInfomationCommand(ElasticsearchCommand):
@@ -48,7 +52,7 @@ class GetIndexInfomationCommand(ElasticsearchCommand):
         self.get_include_feature(self.on_done)
 
     def on_done(self, feature):
-        self.request(self.esclient.indices.get, self.index, feature)
+        self.request_indices_api('get', index=self.index, feature=feature)
 
 
 class OpenIndexCommand(ElasticsearchCommand):
@@ -58,10 +62,7 @@ class OpenIndexCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        if not index:
-            return
-
-        self.request(self.esclient.indices.open, index)
+        self.request_indices_api('open', index=index)
 
 
 class CloseIndexCommand(ElasticsearchCommand):
@@ -71,10 +72,7 @@ class CloseIndexCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        if not index:
-            return
-
-        self.request(self.esclient.indices.close, index)
+        self.request_indices_api('close', index=index)
 
 
 class DeleteIndexCommand(ElasticsearchCommand):
@@ -84,32 +82,27 @@ class DeleteIndexCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        if not index:
-            return
-
         if not delete_ok_cancel_dialog(index):
             return
 
-        self.request(self.esclient.indices.delete, index)
+        self.request_indices_api('delete', index=self.index)
 
 
 class PutMappingCommand(ElasticsearchCommand):
     result_window_title = "Put Mapping"
 
     def run(self):
-
-        body = self.selection()
-        self.request(self.esclient.indices.put_mapping,
-                     self.index, self.doc_type, body)
+        self.request_indices_api(
+            'put_mapping', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class GetMappingCommand(ElasticsearchCommand):
     result_window_title = "Get Mapping"
 
     def run(self):
-
-        self.request(self.esclient.indices.get_mapping,
-                     self.index, self.doc_type)
+        self.request_indices_api(
+            'get_mapping', index=self.index, doc_type=self.doc_type)
 
 
 class GetFieldMappingCommand(ElasticsearchCommand):
@@ -119,11 +112,9 @@ class GetFieldMappingCommand(ElasticsearchCommand):
         self.get_field(self.on_done)
 
     def on_done(self, field):
-        if not field:
-            return
-
-        self.request(self.esclient.indices.get_field_mapping,
-                     self.index, self.doc_type, field)
+        self.request_indices_api(
+            'get_field_mapping', index=self.index,
+            doc_type=self.doc_type, field=field)
 
 
 class DeleteMappingCommand(ElasticsearchCommand):
@@ -133,8 +124,8 @@ class DeleteMappingCommand(ElasticsearchCommand):
         if not delete_ok_cancel_dialog(self.doc_type):
             return
 
-        self.request(self.esclient.indices.delete_mapping,
-                     self.index, self.doc_type)
+        self.request_indices_api(
+            'delete_mapping', index=self.index, doc_type=self.doc_type)
 
 
 class PutIndexAliasCommand(ElasticsearchCommand):
@@ -144,10 +135,7 @@ class PutIndexAliasCommand(ElasticsearchCommand):
         self.get_alias(self.on_done)
 
     def on_done(self, name):
-        if not name:
-            return
-
-        self.request(self.esclient.indices.put_alias, self.index, name)
+        self.request_indices_api('put_alias', index=self.index, name=name)
 
 
 class GetIndexAliasCommand(ElasticsearchCommand):
@@ -157,15 +145,14 @@ class GetIndexAliasCommand(ElasticsearchCommand):
         self.get_alias(self.on_done)
 
     def on_done(self, name):
-        self.request(self.esclient.indices.get_alias, self.index, name)
+        self.request_indices_api('get_alias', index=self.index, name=name)
 
 
 class UpdateIndexAliasesCommand(ElasticsearchCommand):
     result_window_title = "Update Index Aliases"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.indices.update_aliases, body)
+        self.request_indices_api('update_aliases', body=self.selection())
 
 
 class DeleteIndexAliasCommand(ElasticsearchCommand):
@@ -178,7 +165,7 @@ class DeleteIndexAliasCommand(ElasticsearchCommand):
         if not delete_ok_cancel_dialog(name):
             return
 
-        self.request(self.esclient.indices.delete_alias, self.index, name)
+        self.request_indices_api('delete_alias', index=self.index, name=name)
 
 
 class PutIndexTemplateCommand(ElasticsearchCommand):
@@ -188,46 +175,39 @@ class PutIndexTemplateCommand(ElasticsearchCommand):
         self.get_index_template(self.on_done)
 
     def on_done(self, name):
-        if not name:
-            return
-
-        body = self.selection()
-        self.request(self.esclient.indices.put_template, name, body)
+        self.request_indices_api(
+            'put_template', name=name, body=self.selection())
 
 
 class GetIndexTemplateCommand(PutIndexTemplateCommand):
     result_window_title = "Get Index Template"
 
     def on_done(self, name):
-        self.request(self.esclient.indices.get_template, name)
+        self.request_indices_api('get_template', name=name)
 
 
 class DeleteIndexTemplateCommand(PutIndexTemplateCommand):
     result_window_title = "Delete Index Template"
 
     def on_done(self, name):
-        if not name:
-            return
-
         if not delete_ok_cancel_dialog(name):
             return
 
-        self.request(self.esclient.indices.delete_template, name)
+        self.request_indices_api('delete_template', name=name)
 
 
 class GetIndexSettingsCommand(ElasticsearchCommand):
     result_window_title = "Get Index Settings"
 
     def run(self):
-        self.request(self.esclient.indices.get_settings, self.index, None)
+        self.request_indices_api('get_settings', index=self.index)
 
 
 class PutIndexSettingsCommand(ElasticsearchCommand):
     result_window_title = "Put Index Settings"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.indices.put_settings, body)
+        self.request_indices_api('put_settings', body=self.selection())
 
 
 class PutIndexWarmerCommand(ElasticsearchCommand):
@@ -237,25 +217,26 @@ class PutIndexWarmerCommand(ElasticsearchCommand):
         self.get_warmer(self.on_done)
 
     def on_done(self, name):
-        if not name:
-            return
-
-        body = self.selection()
-        self.request(self.esclient.indices.put_warmer, self.index, name, body)
+        self.request_indices_api(
+            'put_warmer', index=self.index,
+            name=name, body=self.selection())
 
 
 class GetIndexWarmerCommand(PutIndexWarmerCommand):
     result_window_title = "Get Index Warmer"
 
     def on_done(self, name):
-        self.request(self.esclient.indices.get_warmer, self.index, name)
+        self.request_indices_api('get_warmer', index=self.index, name=name)
 
 
 class DeleteIndexWarmerCommand(PutIndexWarmerCommand):
     result_window_title = "Delete Index Warmer"
 
     def on_done(self, name):
-        self.request(self.esclient.indices.delete_warmer, self.index, name)
+        if not delete_ok_cancel_dialog(name):
+            return
+
+        self.request_indices_api('delete_warmer', index=self.index, name=name)
 
 
 class IndexStatusCommand(ElasticsearchCommand):
@@ -265,7 +246,7 @@ class IndexStatusCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.status, index)
+        self.request_indices_api('status', index=index)
 
 
 class IndexStatsCommand(ElasticsearchCommand):
@@ -275,7 +256,7 @@ class IndexStatsCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.stats, index)
+        self.request_indices_api('stats', index=index)
 
 
 class IndexSegmentsInfomationCommand(ElasticsearchCommand):
@@ -285,7 +266,7 @@ class IndexSegmentsInfomationCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.segments, index)
+        self.request_indices_api('segments', index=index)
 
 
 class OptimizeIndexCommand(ElasticsearchCommand):
@@ -295,7 +276,7 @@ class OptimizeIndexCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.optimize, index)
+        self.request_indices_api('optimize', index=index)
 
 
 class ClearIndexCacheCommand(ElasticsearchCommand):
@@ -305,7 +286,7 @@ class ClearIndexCacheCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.clear_cache, index)
+        self.request_indices_api('clear_cache', index=index)
 
 
 class IndexRecoveryStatusCommand(ElasticsearchCommand):
@@ -315,7 +296,7 @@ class IndexRecoveryStatusCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.recovery, index)
+        self.request_indices_api('recovery', index=index)
 
 
 class UpgradeIndexCommand(ElasticsearchCommand):
@@ -325,7 +306,7 @@ class UpgradeIndexCommand(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.upgrade, index)
+        self.request_indices_api('upgrade', index=index)
 
 
 class GetUpgradeIndexStatus(ElasticsearchCommand):
@@ -335,4 +316,4 @@ class GetUpgradeIndexStatus(ElasticsearchCommand):
         self.get_index(self.on_done)
 
     def on_done(self, index):
-        self.request(self.esclient.indices.get_upgrade, index)
+        self.request_indices_api('get_upgrade', index=index)
