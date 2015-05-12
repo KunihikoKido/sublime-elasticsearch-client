@@ -1,43 +1,44 @@
 from .base import ElasticsearchCommand
+from .base import delete_ok_cancel_dialog
 
 
 class UriSearchCommand(ElasticsearchCommand):
     result_window_title = "URI Search"
 
     def run(self, search_type='query_then_fetch'):
+        self.search_type = search_type
         self.get_query(self.on_done)
 
     def on_done(self, query):
-        params = dict(q=query)
-        self.request(self.esclient.search,
-                     self.index, self.doc_type, params=params)
+        self.request_api(
+            'search', index=self.index, doc_type=self.doc_type,
+            params=dict(q=query, search_type=self.search_type))
 
 
 class RequestBodySearchCommand(ElasticsearchCommand):
     result_window_title = "Request Body Search"
 
     def run(self, search_type='query_then_fetch'):
-        params = dict(search_type=search_type)
-        body = self.selection()
-        self.request(self.esclient.search,
-                     self.index, self.doc_type, body=body, params=params)
+        self.request_api(
+            'search', index=self.index, doc_type=self.doc_type,
+            body=self.selection(), params=dict(search_type=search_type))
 
 
 class SearchShardsCommand(ElasticsearchCommand):
     result_window_title = "Search Shards"
 
     def run(self):
-        self.request(self.esclient.search_shards, self.index, self.doc_type)
+        self.request_api(
+            'search_shards', index=self.index, doc_type=self.doc_type)
 
 
 class SearchTemplateCommand(ElasticsearchCommand):
     result_window_title = "Search Template"
 
     def run(self, search_type='query_then_fetch'):
-        params = dict(search_type=search_type)
-        body = self.selection()
-        self.request(self.esclient.search_template, self.index, self.doc_type,
-                     body=body, params=params)
+        self.request_api(
+            'search_template', index=self.index, doc_type=self.doc_type,
+            body=self.selection(), params=dict(search_type=search_type))
 
 
 class ExplainDocumentCommand(ElasticsearchCommand):
@@ -47,21 +48,18 @@ class ExplainDocumentCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def on_done(self, id):
-        if id is None:
-            return
-
-        body = self.selection()
-        self.request(self.esclient.explain,
-                     self.index, self.doc_type, id, body=body)
+        self.request_api(
+            'explain', index=self.index, doc_type=self.doc_type,
+            id=id, body=self.selection())
 
 
 class ScanCommand(ElasticsearchCommand):
     result_window_title = "Scan"
 
     def run(self):
-        params = dict(search_type='scan', scroll='5m')
-        self.request(self.esclient.search,
-                     self.index, self.doc_type, params=params)
+        self.request_api(
+            'search', index=self.index, doc_type=self.doc_type,
+            params=dict(search_type='scan', scroll='5m'))
 
 
 class ScrollCommand(ElasticsearchCommand):
@@ -71,11 +69,8 @@ class ScrollCommand(ElasticsearchCommand):
         self.get_scroll_id(self.on_done)
 
     def on_done(self, scroll_id):
-        if scroll_id == -1:
-            return
-
-        params = dict(scroll='5m')
-        self.request(self.esclient.scroll, scroll_id, params=params)
+        self.request_api(
+            'scroll', scroll_id=scroll_id, params=dict(scroll='5m'))
 
 
 class ClearScrollCommand(ElasticsearchCommand):
@@ -85,62 +80,59 @@ class ClearScrollCommand(ElasticsearchCommand):
         self.get_scroll_id(self.on_done)
 
     def on_done(self, scroll_id):
-        if scroll_id == -1:
-            return
-
-        self.request(self.esclient.clear_scroll, scroll_id)
+        self.request_api('clear_scroll', scroll_id=scroll_id)
 
 
 class CountCommand(ElasticsearchCommand):
     result_window_title = "Count"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.count,
-                     self.index, self.doc_type, body=body, params=None)
+        self.request_api(
+            'count', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class MultipleSearchCommand(ElasticsearchCommand):
     result_window_title = "Multiple Search"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.msearch, body, self.index, self.doc_type)
+        self.request_api(
+            'msearch', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class SuggestCommand(ElasticsearchCommand):
     result_window_title = "Suggest"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.suggest, body, self.index)
+        self.request_api('suggest', index=self.index, body=self.selection())
 
 
 class PercolateCommand(ElasticsearchCommand):
     result_window_title = "Percolate"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.percolate,
-                     self.index, self.doc_type, body=body)
+        self.request_api(
+            'percolate', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class MultiplePercolateCommand(ElasticsearchCommand):
     result_window_title = "Multiple Percolate"
 
     def run(self):
-        body = self.selection()
-        self.request(self.esclient.mpercolate, body, self.index, self.doc_type)
+        self.request_api(
+            'mpercolate', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class CountPercolateCommmand(ElasticsearchCommand):
     result_window_title = "Count Percolate"
 
     def run(self):
-
-        body = self.selection()
-        self.request(self.esclient.count_percolate,
-                     self.index, self.doc_type, body=body)
+        self.request_api(
+            'count_percolate', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class MoreLikeThisCommand(ElasticsearchCommand):
@@ -150,10 +142,8 @@ class MoreLikeThisCommand(ElasticsearchCommand):
         self.get_document_id(self.on_done)
 
     def one_done(self, id):
-        if not id:
-            return
-
-        self.request(self.esclient.mlt, self.index, self.doc_type, id)
+        self.request_api(
+            'mlt', index=self.index, doc_type=self.doc_type, id=id)
 
 
 class PutSearchTemplateCommand(ElasticsearchCommand):
@@ -163,48 +153,39 @@ class PutSearchTemplateCommand(ElasticsearchCommand):
         self.get_template_id(self.on_done)
 
     def on_done(self, id):
-        if not id:
-            return
-
-        body = self.selection()
-        self.request(self.esclient.put_template, id, body)
+        self.request_api('put_template', id=id, body=self.selection())
 
 
 class GetSearchTemplateCommand(PutSearchTemplateCommand):
     result_window_title = "Get Search Template"
 
     def on_done(self, id):
-        if not id:
-            return
-
-        self.request(self.esclient.get_template, id)
+        self.request_api('get_template', id=id)
 
 
 class DeleteSearchTemplateCommand(PutSearchTemplateCommand):
     result_window_title = "Delete Search Template"
 
     def on_done(self, id):
-        if not id:
+        if not delete_ok_cancel_dialog(id):
             return
 
-        self.request(self.esclient.delete_template, id)
+        self.request_api('delete_template', id=id)
 
 
 class SearchExistsCommand(ElasticsearchCommand):
     result_window_title = "Search Exists"
 
     def run(self):
-
-        body = self.selection()
-        self.request(self.esclient.search_exists,
-                     self.index, self.doc_type, body)
+        self.request_api(
+            'search_exists', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
 
 
 class ValidateQueryCommand(ElasticsearchCommand):
     result_window_title = "Validate Query"
 
     def run(self):
-
-        body = self.selection()
-        self.request(self.esclient.validate_query,
-                     self.index, self.doc_type, body)
+        self.request_api(
+            'validate_query', index=self.index, doc_type=self.doc_type,
+            body=self.selection())
