@@ -18,33 +18,30 @@ class CatClientCommand(ElasticsearchCommand):
 class CatAliasesCommand(CatClientCommand):
     result_window_title = "Cat Aliases"
 
-    def run(self, name=None):
-        if name is None:
-            self.get_alias(self.run)
-            return
+    def run(self):
+        self.get_alias(self.on_done)
 
+    def on_done(self, name):
         self.request_cat_api('aliases', name=name)
 
 
 class CatAllocationCommand(CatClientCommand):
     result_window_title = "Cat Allocation"
 
-    def run(self, node_id=None):
-        if node_id is None:
-            self.get_node_id(self.run)
-            return
+    def run(self):
+        self.get_node_id(self.on_done)
 
+    def on_done(self, node_id):
         self.request_cat_api('allocation', node_id=node_id)
 
 
 class CatCountCommand(CatClientCommand):
     result_window_title = "Cat Count"
 
-    def run(self, index=None):
-        if index is None:
-            self.get_index(self.run)
-            return
+    def run(self):
+        self.get_index(self.on_done)
 
+    def on_done(self, index):
         self.request_cat_api('count', index=index)
 
 
@@ -65,11 +62,10 @@ class CatHelpCommand(CatClientCommand):
 class CatIndicesCommand(CatClientCommand):
     result_window_title = "Cat Indices"
 
-    def run(self, index=None):
-        if index is None:
-            self.get_index(self.run)
-            return
+    def run(self):
+        self.get_index(self.on_done)
 
+    def on_done(self, index):
         self.request_cat_api('indices', index=index)
 
 
@@ -90,33 +86,30 @@ class CatNodesCommand(CatClientCommand):
 class CatRecoveryCommand(CatClientCommand):
     result_window_title = "Cat Recovery"
 
-    def run(self, index=None):
-        if index is None:
-            self.get_index(self.run)
-            return
+    def run(self):
+        self.get_index(self.on_done)
 
+    def on_done(self, index):
         self.request_cat_api('recovery', index=index)
 
 
 class CatShardsCommand(CatClientCommand):
     result_window_title = "Cat Shards"
 
-    def run(self, index=None):
-        if index is None:
-            self.get_index(self.run)
-            return
+    def run(self):
+        self.get_index(self.on_done)
 
+    def on_done(self, index):
         self.request_cat_api('shards', index=index)
 
 
 class CatSegmentsCommand(CatClientCommand):
     result_window_title = "Cat Segments"
 
-    def run(self, index=None):
-        if index is None:
-            self.get_index(self.run)
-            return
+    def run(self):
+        self.get_index(self.on_done)
 
+    def on_done(self, index):
         self.request_cat_api('segments', index=index)
 
 
@@ -138,10 +131,9 @@ class CatFielddataCommand(CatClientCommand):
     result_window_title = "Cat Fielddata"
 
     def run(self, fields=None):
-        if fields is None:
-            self.get_fields(self.run)
-            return
+        self.get_fields(self.on_done)
 
+    def on_done(self, fields):
         self.request_cat_api('fielddata', fields=fields)
 
 
