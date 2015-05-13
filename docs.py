@@ -23,7 +23,7 @@ class IndexDocumentCommand(ElasticsearchCommand):
     def on_done(self, id):
         self.request_api(
             'index', index=self.index, doc_type=self.doc_type,
-            body=self.selectio(), id=id)
+            body=self.selection(), id=id)
 
 
 class IndexPercolatorCommand(IndexDocumentCommand):
