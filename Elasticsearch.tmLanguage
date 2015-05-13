@@ -6,16 +6,63 @@
 	<array>
 		<string>es</string>
 		<string>json</string>
+		<string>mustache</string>
 	</array>
 	<key>name</key>
 	<string>Elasticsearch</string>
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>begin</key>
+			<string>{{!</string>
+			<key>end</key>
+			<string>}}</string>
+			<key>name</key>
+			<string>comment.block.es</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>{{[{&amp;amp;&amp;gt;#^/]?</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.es</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>}?}}</string>
+			<key>name</key>
+			<string>source.es.embedded.json</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#template_filter</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>include</key>
 			<string>source.json</string>
 		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>template_filter</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>[a-zA-Z0-9_.]+</string>
+					<key>name</key>
+					<string>string.unquoted.tag-string.es</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>source.es</string>
 	<key>uuid</key>

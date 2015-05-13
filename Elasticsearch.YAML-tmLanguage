@@ -2,10 +2,28 @@
 ---
 name: Elasticsearch
 scopeName: source.es
-fileTypes: [es, json]
+fileTypes: [es, json, mustache]
 uuid: bd4306a8-862e-4fbb-a455-8c351164cf0d
 
 patterns:
+- name: comment.block.es
+  begin: "{{!"
+  end: "}}"
+
+- name: source.es.embedded.json
+  begin: "{{[{&amp;&gt;#^/]?"
+  captures:
+    '0': {name: entity.name.tag.es}
+  end: "}?}}"
+  patterns:
+  - include: '#template_filter'
+
 - include: source.json
+
+repository:
+  template_filter:
+    patterns:
+    - name: string.unquoted.tag-string.es
+      match: "[a-zA-Z0-9_.]+"
 
 ...
