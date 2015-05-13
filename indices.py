@@ -17,7 +17,7 @@ class AnalyzeTextCommand(IndicesClientCommand):
 
     def on_done(self, analyzer):
         self.request_indices_api(
-            'analyze', index=self.index, doc_type=self.doc_type,
+            'analyze', index=self.index,
             body=self.selection(), params=dict(analyzer=analyzer))
 
 
