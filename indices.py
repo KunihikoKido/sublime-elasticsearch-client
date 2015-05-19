@@ -207,7 +207,8 @@ class PutIndexSettingsCommand(IndicesClientCommand):
     result_window_title = "Put Index Settings"
 
     def run(self):
-        self.request_indices_api('put_settings', body=self.selection())
+        self.request_indices_api(
+            'put_settings', index=self.index, body=self.selection())
 
 
 class PutIndexWarmerCommand(IndicesClientCommand):

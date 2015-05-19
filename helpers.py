@@ -134,3 +134,10 @@ class LoaddataCommand(HelperBaseCommand):
 
     def run(self):
         self.show_select_inputfiles(self.on_done)
+
+
+class CsvBulkIndexCommand(HelperBaseCommand):
+
+    def run(self):
+        self.window.run_command('csv_convert_bulk_format')
+        self.window.run_command('bulk')

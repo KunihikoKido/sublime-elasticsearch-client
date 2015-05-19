@@ -113,4 +113,7 @@
     {"command": "dumpdata",                "caption": "Elasticsearch: Dump Data"},
     {"command": "loaddata",                "caption": "Elasticsearch: Load Data"},
     {"command": "copy_index",              "caption": "Elasticsearch: Copy Data from ..."},
+
+    {"command": "csv_convert_bulk_format",  "caption": "Elasticsearch: CSV Convert to Bulk Index format"},
+    {"command": "csv_bulk_index",           "caption": "Elasticsearch: CSV Bulk Index"},
 ]
