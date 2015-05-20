@@ -4,7 +4,7 @@ DEFAULT_PARAMS = dict(v=1)
 
 
 class CatClientCommand(ElasticsearchCommand):
-    show_result_on_window = True
+    show_result_on_window = False
     syntax = 'Packages/Text/Plain text.tmLanguage'
     result_window_title = ""
 
