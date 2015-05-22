@@ -188,4 +188,4 @@ class ValidateQueryCommand(ElasticsearchCommand):
     def run(self):
         self.request_api(
             'validate_query', index=self.index, doc_type=self.doc_type,
-            body=self.selection())
+            body=self.selection(), params=dict(explain=1))
