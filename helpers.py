@@ -109,6 +109,7 @@ class LoaddataCommand(HelperBaseCommand):
     @property
     def select_inputfiles(self):
         inputfiles = glob.glob(os.path.join(self.fixture_dir, 'dump-*.gz'))
+        inputfiles = [os.path.basename(path) for path in inputfiles]
         inputfiles.sort(reverse=True)
         return inputfiles
 
@@ -122,7 +123,7 @@ class LoaddataCommand(HelperBaseCommand):
 
     def get_selected_inputfile(self, index):
         self._selected_inputfile_index = index
-        return self.select_inputfiles[index]
+        return os.path.join(self.fixture_dir, self.select_inputfiles[index])
 
     def on_done(self, index):
         if index == -1:
