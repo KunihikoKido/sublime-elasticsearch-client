@@ -140,7 +140,6 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
         panel.set_read_only(True)
         return text
 
-
     def show_input_panel(self, label, default, callback):
         self.window.show_input_panel(label, default, callback, None, None)
 

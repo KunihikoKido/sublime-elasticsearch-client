@@ -11,11 +11,82 @@ class IndicesClientCommand(ElasticsearchCommand):
 
 class AnalyzeTextCommand(IndicesClientCommand):
     result_window_title = "Analyze Text"
+    default_analyzers = [
+        'Standard Analyzer: standard',
+        'Simple Analyzer: simple',
+        'Whitespace Analyzer: whitespace',
+        'Stop Analyzer: stop',
+        'Keyword Analyzer: keyword',
+        'Pattern Analyzer: pattern',
+        'Snowball Analyzer: snowball',
+        'Language Analyzer: arabic',
+        'Language Analyzer: armenian',
+        'Language Analyzer: basque',
+        'Language Analyzer: brazilian',
+        'Language Analyzer: bulgarian',
+        'Language Analyzer: catalan',
+        'Language Analyzer: chinese',
+        'Language Analyzer: cjk',
+        'Language Analyzer: czech',
+        'Language Analyzer: danish',
+        'Language Analyzer: dutch',
+        'Language Analyzer: english',
+        'Language Analyzer: finnish',
+        'Language Analyzer: french',
+        'Language Analyzer: galician',
+        'Language Analyzer: german',
+        'Language Analyzer: greek',
+        'Language Analyzer: hindi',
+        'Language Analyzer: hungarian',
+        'Language Analyzer: indonesian',
+        'Language Analyzer: irish',
+        'Language Analyzer: italian',
+        'Language Analyzer: latvian',
+        'Language Analyzer: norwegian',
+        'Language Analyzer: persian',
+        'Language Analyzer: portuguese',
+        'Language Analyzer: romanian',
+        'Language Analyzer: russian',
+        'Language Analyzer: sorani',
+        'Language Analyzer: spanish',
+        'Language Analyzer: swedish',
+        'Language Analyzer: turkish',
+        'Language Analyzer: thai',
+    ]
+
+    @property
+    def custom_analyzers(self):
+        r = self.esclient.indices.get_settings(index=self.index)
+        items = list(r[self.index]['settings']['index']['analysis']['analyzer'].keys())
+        return list(map(lambda s: "Custom Analyzer: {}".format(s), items))
+
+    @property
+    def select_analyzers(self):
+        analyzers = self.default_analyzers + self.custom_analyzers
+        analyzers.sort(reverse=False)
+        return analyzers
+
+    def show_select_analyzers(self, callback):
+        if not hasattr(self, '_selected_analyzer_index'):
+            self._selected_analyzer_index = 0
+
+        self.window.show_quick_panel(
+            self.select_analyzers, callback,
+            selected_index=self._selected_analyzer_index)
+
+    def get_selected_analyzer(self, index):
+        self._selected_analyzer_index = index
+        return self.select_analyzers[index].split()[-1]
 
     def run(self):
-        self.get_analyzer(self.on_done)
+        self.show_select_analyzers(self.on_done)
 
-    def on_done(self, analyzer):
+    def on_done(self, index):
+        if index == -1:
+            return
+
+        analyzer = self.get_selected_analyzer(index)
+
         self.request_indices_api(
             'analyze', index=self.index,
             body=self.selection(), params=dict(analyzer=analyzer))
