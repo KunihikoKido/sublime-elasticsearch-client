@@ -246,6 +246,7 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Copy Data from ...
 * Elasticsearch: CSV Convert to Bulk Index format
 * Elasticsearch: CSV Bulk Index
+* Elasticsearch: Analyze Keywords
 
 ### Command for Sublime User Settings
 
