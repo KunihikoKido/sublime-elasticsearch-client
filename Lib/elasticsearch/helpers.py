@@ -167,6 +167,9 @@ def analyze_keywords(client, index, body, analyzer='default', command=None):
     items = []
 
     for keyword in keywords:
+        if len(keyword) == 0:
+            continue
+
         r = client.indices.analyze(
             index, keyword, params=dict(analyzer=analyzer))
 
