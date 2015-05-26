@@ -160,3 +160,21 @@ def loaddata(inputfile, client, index, chunk_size=500, command=None):
     result['failed'] = failed
 
     show_result_json(result, sort_keys=True, command=command)
+
+
+def analyze_keywords(client, index, body, analyzer='default', command=None):
+    keywords = body.split('\n')
+    items = []
+
+    for keyword in keywords:
+        r = client.indices.analyze(
+            index, keyword, params=dict(analyzer=analyzer))
+
+        if 'tokens' not in r:
+            show_result_json(r, command=command)
+            return
+
+        tokens = [t['token'] for t in r['tokens']]
+        items.append(dict(keyword=keyword, analyzed=' / '.join(tokens)))
+
+    show_result_json(items, command=command)

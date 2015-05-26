@@ -10,6 +10,8 @@ from elasticsearch.helpers import reindex
 from elasticsearch.helpers import dumpdata
 from elasticsearch.helpers import loaddata
 from elasticsearch.helpers import copyindex
+from elasticsearch.helpers import analyze_keywords
+from .indices import AnalyzeTextCommand
 
 
 class HelperBaseCommand(ElasticsearchCommand):
@@ -141,3 +143,16 @@ class CsvBulkIndexCommand(HelperBaseCommand):
     def run(self):
         self.window.run_command('csv_convert_bulk_format')
         self.window.run_command('bulk')
+
+
+class AnalyzeKeywordsCommand(AnalyzeTextCommand):
+
+    def on_done(self, index):
+        if index == -1:
+            return
+
+        analyzer = self.get_selected_analyzer(index)
+
+        analyze_keywords(
+            self.esclient, index=self.index,
+            body=self.selection(), analyzer=analyzer, command=self)
