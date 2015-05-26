@@ -46,6 +46,57 @@ def show_result_json(obj, indent=4, sort_keys=False, command=None):
     return obj
 
 
+def show_result_table(text, padding=1, divider='|', header_div='-', command=None):
+
+    def pad_to(unpadded, target_len):
+        under = target_len - len(unpadded)
+        if under <= 0:
+            return unpadded
+        return unpadded + (' ' * under)
+
+    table = text.split('\n')
+    table = [s.split() for s in table]
+    output = ''
+
+    longest_row_len = max([len(row) for row in table])
+
+    for row in table:
+        while len(row) < longest_row_len:
+            row.append('')
+
+    col_sizes = [max(map(len, col)) for col in zip(*table)]
+    header_divs = [None] * len(col_sizes)
+    num_cols = len(col_sizes)
+
+    for cell_num in range(num_cols):
+        header_divs[cell_num] = header_div * (col_sizes[cell_num] +
+                                              padding * 2)
+
+    if padding > 0:
+        header_div_row = divider.join(header_divs)[padding:-padding]
+    else:
+        header_div_row = divider.join(header_divs)
+
+    for row in table:
+        for cell_num, cell in enumerate(row):
+            row[cell_num] = pad_to(cell, col_sizes[cell_num])
+
+    header = table[0]
+    body = table[1:]
+
+    multipad = ' ' * padding
+    divider = multipad + divider + multipad
+    output += divider.join(header) + '\n'
+    output += header_div_row + '\n'
+    for row in body:
+        output += divider.join(row) + '\n'
+
+    if output.endswith('\n'):
+        output = output[:-1]
+
+    show_result(output, command=command)
+
+
 def show_result(text, command=None):
     if command is None:
         return text
