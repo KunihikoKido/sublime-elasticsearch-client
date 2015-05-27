@@ -124,10 +124,26 @@ class CreateIndexCommand(IndicesClientCommand):
     result_window_title = "Create Index"
 
     def run(self):
-        self.get_index(self.on_done)
+        self.get_index(self.first_done)
 
-    def on_done(self, index):
-        self.request_indices_api('create', index=index)
+    def first_done(self, text):
+        self._index = text
+        self.get_shards(self.second_done)
+
+    def second_done(self, text):
+        self._shards = text
+        self.get_replicas(self.third_done)
+
+    def third_done(self, text):
+        self._replicas = text
+        self.create_index()
+
+    def create_index(self):
+        body = dict(settings=dict(
+            number_of_shards=self._shards,
+            number_of_replicas=self._replicas))
+
+        self.request_indices_api('create', index=self._index, body=body)
 
 
 class GetIndexInfomationCommand(IndicesClientCommand):
