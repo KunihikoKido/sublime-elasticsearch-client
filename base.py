@@ -196,8 +196,8 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
     def get_shards(self, callback):
         self.show_input_panel('# Shards: ', '5', callback)
 
-    def get_replicas(self, callback):
-        self.show_input_panel('# Replicas: ', '1', callback)
+    def get_replicas(self, callback, default='1'):
+        self.show_input_panel('# Replicas: ', default, callback)
 
     def show_select_servers(self, callback):
         if not hasattr(self, '_selected_server_index'):

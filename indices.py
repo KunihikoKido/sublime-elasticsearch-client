@@ -312,6 +312,22 @@ class PutIndexSettingsCommand(IndicesClientCommand):
             'put_settings', index=self.index, body=self.selection())
 
 
+class ChangeReplicasCommand(IndicesClientCommand):
+    result_window_title = "Change Number Of Replicas"
+
+    def number_of_replicas(self):
+        r = self.esclient.indices.get_settings(index=self.index)
+        return r[self.index]['settings']['index']['number_of_replicas']
+
+    def run(self):
+        self.get_replicas(self.on_done, default=self.number_of_replicas())
+
+    def on_done(self, replicas):
+        body = dict(index=dict(number_of_replicas=replicas))
+        self.request_indices_api(
+            'put_settings', index=self.index, body=body)
+
+
 class PutIndexWarmerCommand(IndicesClientCommand):
     result_window_title = "Put Index Warmer"
 

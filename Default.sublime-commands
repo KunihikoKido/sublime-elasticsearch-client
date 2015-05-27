@@ -92,6 +92,7 @@
     {"command": "delete_index_template",  "caption": "Elasticsearch: Delete Index Template"},
     {"command": "get_index_settings",     "caption": "Elasticsearch: Get Index Settings"},
     {"command": "put_index_settings",     "caption": "Elasticsearch: Put Index Settings"},
+    {"command": "change_replicas",        "caption": "Elasticsearch: Change Number Of Replicas"},
     {"command": "put_index_warmer",       "caption": "Elasticsearch: Put Index Warmer"},
     {"command": "get_index_warmer",       "caption": "Elasticsearch: Get Index Warmer"},
     {"command": "delete_index_warmer",    "caption": "Elasticsearch: Delete Index Warmer"},
