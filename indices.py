@@ -318,13 +318,8 @@ class ChangeReplicasCommand(IndicesClientCommand):
     def get_index_settings(self):
         return self.esclient.indices.get_settings(index=self.index)
 
-    def is_enabled(self):
-        if self.index in self.get_index_settings().keys():
-            return True
-        return False
-
     def number_of_replicas(self):
-        r = self.esclient.indices.get_settings(index=self.index)
+        r = self.get_index_settings()
         return r[self.index]['settings']['index']['number_of_replicas']
 
     def run(self):
