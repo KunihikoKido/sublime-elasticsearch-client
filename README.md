@@ -163,6 +163,7 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 
 * Elasticsearch: Analyze Keywords
 * Elasticsearch: Analyze Text
+* Elasticsearch: Change Number Of Replicas
 * Elasticsearch: Clear Index Cache
 * Elasticsearch: Close Index
 * Elasticsearch: Create Index
