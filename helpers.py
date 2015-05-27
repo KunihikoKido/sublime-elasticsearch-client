@@ -169,6 +169,7 @@ class SearchDocsCommand(sublime_plugin.WindowCommand):
             'https://www.elastic.co/suggest', params={'q': query})
         self.results = response.json()
         self.window.show_quick_panel(self.result_titles, self.open_url)
+        sublime.status_message('Total: {}'.format(self.results['total']))
 
     def open_url(self, index):
         if index == -1:
