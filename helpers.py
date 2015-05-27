@@ -2,6 +2,8 @@ import os.path
 import glob
 import datetime
 import sublime
+import sublime_plugin
+import requests
 
 from .base import ElasticsearchCommand
 
@@ -10,8 +12,6 @@ from elasticsearch.helpers import reindex
 from elasticsearch.helpers import dumpdata
 from elasticsearch.helpers import loaddata
 from elasticsearch.helpers import copyindex
-from elasticsearch.helpers import analyze_keywords
-from .indices import AnalyzeTextCommand
 
 
 class HelperBaseCommand(ElasticsearchCommand):
@@ -146,14 +146,38 @@ class CsvBulkIndexCommand(HelperBaseCommand):
         self.window.run_command('bulk')
 
 
-class AnalyzeKeywordsCommand(AnalyzeTextCommand):
+class SearchDocsCommand(sublime_plugin.WindowCommand):
+    base_url = 'https://www.elastic.co'
+    base_keywords = ['reference', 'elasticsearch']
+    keywords = ''
 
-    def on_done(self, index):
+    @property
+    def result_titles(self):
+        return [[hit['title'], hit['url']] for hit in self.results['hits']]
+
+    @property
+    def result_urls(self):
+        return [self.base_url + hit['url'] for hit in self.results['hits']]
+
+    def query(self, keywords):
+        self.keywords = keywords
+        return ' '.join(self.base_keywords + keywords.split())
+
+    def search(self, keywords):
+        query = self.query(keywords)
+        response = requests.get(
+            'https://www.elastic.co/suggest', params={'q': query})
+        self.results = response.json()
+        self.window.show_quick_panel(self.result_titles, self.open_url)
+
+    def open_url(self, index):
         if index == -1:
             return
 
-        analyzer = self.get_selected_analyzer(index)
+        url = self.result_urls[index]
+        self.window.run_command('open_url', {'url': url})
 
-        analyze_keywords(
-            self.esclient, index=self.index,
-            body=self.selection(), analyzer=analyzer, command=self)
+    def run(self):
+        self.window.show_input_panel(
+            'Search in www.elastic.co:', self.keywords,
+            self.search, None, None)

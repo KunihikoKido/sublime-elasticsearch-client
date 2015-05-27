@@ -55,7 +55,7 @@ def show_result_table(text, padding=1, divider='|', header_div='-', command=None
         return unpadded + (' ' * under)
 
     table = text.split('\n')
-    table = [s.split() for s in table]
+    table = [s.split() for s in table if s]
     output = ''
 
     longest_row_len = max([len(row) for row in table])

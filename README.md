@@ -161,6 +161,7 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 
 ### Command for Indices APIs
 
+* Elasticsearch: Analyze Keywords
 * Elasticsearch: Analyze Text
 * Elasticsearch: Clear Index Cache
 * Elasticsearch: Close Index
@@ -238,7 +239,7 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Apache Bench
 * Elasticsearch: Apache Bench for Search Template
 
-### Commmand for Index Data Management.
+### Helper Commmands.
 
 * Elasticsearch: Reindex
 * Elasticsearch: Dump Data
@@ -246,7 +247,7 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Copy Data from ...
 * Elasticsearch: CSV Convert to Bulk Index format
 * Elasticsearch: CSV Bulk Index
-* Elasticsearch: Analyze Keywords
+* Elasticsearch: Search in www.elastic.co
 
 ### Command for Sublime User Settings
 

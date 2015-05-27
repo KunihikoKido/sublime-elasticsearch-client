@@ -1,5 +1,6 @@
 from .base import ElasticsearchCommand
 from .base import delete_ok_cancel_dialog
+from elasticsearch.helpers import analyze_keywords
 
 
 class IndicesClientCommand(ElasticsearchCommand):
@@ -90,6 +91,19 @@ class AnalyzeTextCommand(IndicesClientCommand):
         self.request_indices_api(
             'analyze', index=self.index,
             body=self.selection(), params=dict(analyzer=analyzer))
+
+
+class AnalyzeKeywordsCommand(AnalyzeTextCommand):
+
+    def on_done(self, index):
+        if index == -1:
+            return
+
+        analyzer = self.get_selected_analyzer(index)
+
+        analyze_keywords(
+            self.esclient, index=self.index,
+            body=self.selection(), analyzer=analyzer, command=self)
 
 
 class RefreshIndexCommand(IndicesClientCommand):

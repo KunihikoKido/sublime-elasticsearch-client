@@ -71,6 +71,7 @@
     {"command": "put_script",             "caption": "Elasticsearch: Put Script"},
 
     {"command": "analyze_text",           "caption": "Elasticsearch: Analyze Text"},
+    {"command": "analyze_keywords",       "caption": "Elasticsearch: Analyze Keywords"},
     {"command": "refresh_index",          "caption": "Elasticsearch: Refresh Index"},
     {"command": "flush_index",            "caption": "Elasticsearch: Flush Index"},
     {"command": "create_index",           "caption": "Elasticsearch: Create Index"},
@@ -116,5 +117,5 @@
 
     {"command": "csv_convert_bulk_format",  "caption": "Elasticsearch: CSV Convert to Bulk Index format"},
     {"command": "csv_bulk_index",           "caption": "Elasticsearch: CSV Bulk Index"},
-    {"command": "analyze_keywords", "caption": "Elasticsearch: Analyze Keywords"},
+    {"command": "search_docs", "caption": "Elasticsearch: Search in www.elastic.co"},
 ]
