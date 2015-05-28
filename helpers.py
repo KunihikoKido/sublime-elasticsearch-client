@@ -207,9 +207,8 @@ class SearchDocsCommand(sublime_plugin.WindowCommand):
                 'https://www.elastic.co/suggest',
                 params={'q': query}, timeout=3)
 
-        except requests.exceptions.Timeout:
-            return sublime.error_message(
-                "Error: Connection to www.elastic.co timed out.")
+        except requests.exceptions.RequestException as e:
+            return sublime.error_message("Error: {0!s}".format(e))
 
         self.results = response.json()
         self.window.show_quick_panel(self.results_titles, self.open_url)
