@@ -74,6 +74,7 @@ class ScrollCommand(ElasticsearchCommand):
 
 
 class ClearScrollCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Clear Scroll"
 
     def run(self):
@@ -147,6 +148,7 @@ class MoreLikeThisCommand(ElasticsearchCommand):
 
 
 class PutSearchTemplateCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Put Search Template"
 
     def run(self):
@@ -164,6 +166,7 @@ class GetSearchTemplateCommand(PutSearchTemplateCommand):
 
 
 class DeleteSearchTemplateCommand(PutSearchTemplateCommand):
+    show_result_on_window = False
     result_window_title = "Delete Search Template"
 
     def on_done(self, id):

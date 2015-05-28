@@ -3,6 +3,7 @@ from .base import delete_ok_cancel_dialog
 
 
 class CreateDocumentCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Create Document"
 
     def run(self):
@@ -15,6 +16,7 @@ class CreateDocumentCommand(ElasticsearchCommand):
 
 
 class IndexDocumentCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Index Document"
 
     def run(self):
@@ -27,6 +29,7 @@ class IndexDocumentCommand(ElasticsearchCommand):
 
 
 class IndexPercolatorCommand(IndexDocumentCommand):
+    show_result_on_window = False
     result_window_title = "Index Percolator"
 
     def on_done(self, id):
@@ -74,6 +77,7 @@ class GetMultipleDocumentsCommand(ElasticsearchCommand):
 
 
 class UpdateDocumentCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Update Document"
 
     def run(self):
@@ -86,6 +90,7 @@ class UpdateDocumentCommand(ElasticsearchCommand):
 
 
 class DeleteDocumentCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Delete Document"
 
     def run(self):
@@ -100,6 +105,7 @@ class DeleteDocumentCommand(ElasticsearchCommand):
 
 
 class DeletePercolaterCommand(DeleteDocumentCommand):
+    show_result_on_window = False
     result_window_title = "Delete Percolator"
 
     def on_done(self, id):
@@ -111,6 +117,7 @@ class DeletePercolaterCommand(DeleteDocumentCommand):
 
 
 class BulkCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Bulk"
 
     def run(self):
@@ -120,6 +127,7 @@ class BulkCommand(ElasticsearchCommand):
 
 
 class DeleteByQueryCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Delete By Query"
 
     def run(self):

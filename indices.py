@@ -107,6 +107,7 @@ class AnalyzeKeywordsCommand(AnalyzeTextCommand):
 
 
 class RefreshIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Refresh Index"
 
     def run(self):
@@ -114,6 +115,7 @@ class RefreshIndexCommand(IndicesClientCommand):
 
 
 class FlushIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Flush Index"
 
     def run(self):
@@ -121,6 +123,7 @@ class FlushIndexCommand(IndicesClientCommand):
 
 
 class CreateIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Create Index"
 
     def run(self):
@@ -157,6 +160,7 @@ class GetIndexInfomationCommand(IndicesClientCommand):
 
 
 class OpenIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Open Index"
 
     def run(self):
@@ -167,6 +171,7 @@ class OpenIndexCommand(IndicesClientCommand):
 
 
 class CloseIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Close Index"
 
     def run(self):
@@ -177,6 +182,7 @@ class CloseIndexCommand(IndicesClientCommand):
 
 
 class DeleteIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Delete Index"
 
     def run(self):
@@ -190,6 +196,7 @@ class DeleteIndexCommand(IndicesClientCommand):
 
 
 class PutMappingCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Put Mapping"
 
     def run(self):
@@ -219,6 +226,7 @@ class GetFieldMappingCommand(IndicesClientCommand):
 
 
 class DeleteMappingCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Delete Mapping"
 
     def run(self):
@@ -230,6 +238,7 @@ class DeleteMappingCommand(IndicesClientCommand):
 
 
 class PutIndexAliasCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Put Index Alias"
 
     def run(self):
@@ -250,6 +259,7 @@ class GetIndexAliasCommand(IndicesClientCommand):
 
 
 class UpdateIndexAliasesCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Update Index Aliases"
 
     def run(self):
@@ -257,6 +267,7 @@ class UpdateIndexAliasesCommand(IndicesClientCommand):
 
 
 class DeleteIndexAliasCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Delete Index Alias"
 
     def run(self):
@@ -270,6 +281,7 @@ class DeleteIndexAliasCommand(IndicesClientCommand):
 
 
 class PutIndexTemplateCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Put Index Template"
 
     def run(self):
@@ -288,6 +300,7 @@ class GetIndexTemplateCommand(PutIndexTemplateCommand):
 
 
 class DeleteIndexTemplateCommand(PutIndexTemplateCommand):
+    show_result_on_window = False
     result_window_title = "Delete Index Template"
 
     def on_done(self, name):
@@ -305,6 +318,7 @@ class GetIndexSettingsCommand(IndicesClientCommand):
 
 
 class PutIndexSettingsCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Put Index Settings"
 
     def run(self):
@@ -313,6 +327,7 @@ class PutIndexSettingsCommand(IndicesClientCommand):
 
 
 class ChangeReplicasCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Change Number Of Replicas"
 
     def get_index_settings(self):
@@ -332,6 +347,7 @@ class ChangeReplicasCommand(IndicesClientCommand):
 
 
 class PutIndexWarmerCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Put Index Warmer"
 
     def run(self):
@@ -351,6 +367,7 @@ class GetIndexWarmerCommand(PutIndexWarmerCommand):
 
 
 class DeleteIndexWarmerCommand(PutIndexWarmerCommand):
+    show_result_on_window = False
     result_window_title = "Delete Index Warmer"
 
     def on_done(self, name):
@@ -391,6 +408,7 @@ class IndexSegmentsInfomationCommand(IndicesClientCommand):
 
 
 class OptimizeIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Optimize Index"
 
     def run(self):
@@ -401,6 +419,7 @@ class OptimizeIndexCommand(IndicesClientCommand):
 
 
 class ClearIndexCacheCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Clear Index Cache"
 
     def run(self):
@@ -421,6 +440,7 @@ class IndexRecoveryStatusCommand(IndicesClientCommand):
 
 
 class UpgradeIndexCommand(IndicesClientCommand):
+    show_result_on_window = False
     result_window_title = "Upgrade Index"
 
     def run(self):

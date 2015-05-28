@@ -57,6 +57,7 @@ class GetClusterSettingsCommand(ClusterClientCommand):
 
 
 class PutClusterSettingsCommand(ClusterClientCommand):
+    show_result_on_window = False
     result_window_title = "Put Cluster Settings"
 
     def run(self):

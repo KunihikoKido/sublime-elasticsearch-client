@@ -3,6 +3,7 @@ from .base import delete_ok_cancel_dialog
 
 
 class PutScriptCommand(ElasticsearchCommand):
+    show_result_on_window = False
     result_window_title = "Put Script"
 
     def run(self):
@@ -25,6 +26,7 @@ class GetScriptCommand(PutScriptCommand):
 
 
 class DeleteScriptCommand(PutScriptCommand):
+    show_result_on_window = False
     result_window_title = "Delete Script"
 
     def on_done(self, id):

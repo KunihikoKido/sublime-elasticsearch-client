@@ -18,6 +18,7 @@ class NodesInfoCommand(NodesClientCommand):
 
 
 class NodesShutdownCommand(NodesClientCommand):
+    show_result_on_window = False
     result_window_title = "Nodes Shutdown"
 
     def run(self):
