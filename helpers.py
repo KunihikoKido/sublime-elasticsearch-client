@@ -205,7 +205,7 @@ class SearchDocsCommand(sublime_plugin.WindowCommand):
         try:
             response = requests.get(
                 'https://www.elastic.co/suggest',
-                params={'q': query}, timeout=3)
+                params={'q': query}, timeout=3, verify=False)
 
         except requests.exceptions.RequestException as e:
             return sublime.error_message("Error: {0!s}".format(e))
