@@ -28,7 +28,8 @@ class Elasticsearch(object):
 
         try:
             response = requests.request(
-                method.lower(), url, data=body, headers=self.headers)
+                method.lower(), url, data=body,
+                headers=self.headers, verify=False)
         except requests.exceptions.RequestException as e:
             import sys
             sublime.error_message("Error: {0!s}".format(e))
