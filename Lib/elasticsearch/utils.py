@@ -27,7 +27,7 @@ def serialize_body(body):
     if body is None:
         return None
 
-    return json.dumps(body, ensure_ascii=False)
+    return bytes(json.dumps(body, ensure_ascii=False), 'utf-8')
 
 
 def bulk_body(body):
