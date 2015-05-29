@@ -119,4 +119,6 @@
     {"command": "csv_convert_bulk_format",  "caption": "Elasticsearch: CSV Convert to Bulk Index format"},
     {"command": "csv_bulk_index",           "caption": "Elasticsearch: CSV Bulk Index"},
     {"command": "search_reference",         "caption": "Elasticsearch: Search in www.elastic.co"},
+    {"command": "feed",                     "caption": "Elasticsearch: Feed Elastic Blog", "args": {"url": "https://www.elastic.co/blog/feed/"}},
+    {"command": "feed",                     "caption": "Elasticsearch: Feed Hello! Elasticsearch. (日本語)", "args": {"url": "https://medium.com/feed/hello-elasticsearch"}},
 ]
