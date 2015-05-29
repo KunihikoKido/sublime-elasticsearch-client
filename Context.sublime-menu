@@ -1,0 +1,12 @@
+[
+    {
+        "caption": "ElasticsearchClient",
+        "id": "elasticsearch_client_context",
+        "children": [
+            {
+                "command": "analyze_text",
+                "caption": "Analyze Text"
+            }
+        ]
+    }
+]
