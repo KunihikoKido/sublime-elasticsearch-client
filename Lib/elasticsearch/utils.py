@@ -36,7 +36,7 @@ def bulk_body(body):
     return body
 
 
-def show_result_json(obj, indent=4, sort_keys=False, command=None):
+def show_result_json(obj, indent=4, sort_keys=True, command=None):
     if command is None:
         return obj
 
