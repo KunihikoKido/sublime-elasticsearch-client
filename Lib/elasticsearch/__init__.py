@@ -10,6 +10,8 @@ from .utils import show_result_json
 from .utils import serialize_body
 from .utils import bulk_body
 
+MAX_RETRIES = 3
+
 
 class Elasticsearch(object):
 
@@ -26,10 +28,15 @@ class Elasticsearch(object):
         url = make_url(self.base_url, path, params)
         body = serialize_body(body)
 
+        session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(max_retries=MAX_RETRIES)
+        session.mount(self.base_url, adapter)
+
         try:
-            response = requests.request(
+            response = session.request(
                 method.lower(), url, data=body,
                 headers=self.headers, verify=False)
+
         except requests.exceptions.RequestException as e:
             import sys
             sublime.error_message("Error: {0!s}".format(e))
