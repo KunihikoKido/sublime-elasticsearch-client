@@ -32,6 +32,10 @@ class Elasticsearch(object):
         adapter = requests.adapters.HTTPAdapter(max_retries=MAX_RETRIES)
         session.mount(self.base_url, adapter)
 
+        print('{method} {url}\n{body}'.format(
+            method=method, url=url,
+            body=body and body.decode('utf-8') or ''))
+
         try:
             response = session.request(
                 method.lower(), url, data=body,
