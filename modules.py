@@ -6,6 +6,9 @@ class PutScriptCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Put Script"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.get_lang(self.on_done_lang)
 

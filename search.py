@@ -18,6 +18,9 @@ class UriSearchCommand(ElasticsearchCommand):
 class RequestBodySearchCommand(ElasticsearchCommand):
     result_window_title = "Request Body Search"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self, search_type='query_then_fetch'):
         self.request_api(
             'search', index=self.index, doc_type=self.doc_type,
@@ -35,6 +38,9 @@ class SearchShardsCommand(ElasticsearchCommand):
 class SearchTemplateCommand(ElasticsearchCommand):
     result_window_title = "Search Template"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self, search_type='query_then_fetch'):
         self.request_api(
             'search_template', index=self.index, doc_type=self.doc_type,
@@ -43,6 +49,9 @@ class SearchTemplateCommand(ElasticsearchCommand):
 
 class ExplainDocumentCommand(ElasticsearchCommand):
     result_window_title = "Explain Document"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.get_document_id(self.on_done)
@@ -87,6 +96,9 @@ class ClearScrollCommand(ElasticsearchCommand):
 class CountCommand(ElasticsearchCommand):
     result_window_title = "Count"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_api(
             'count', index=self.index, doc_type=self.doc_type,
@@ -95,6 +107,9 @@ class CountCommand(ElasticsearchCommand):
 
 class MultipleSearchCommand(ElasticsearchCommand):
     result_window_title = "Multiple Search"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.request_api(
@@ -105,12 +120,18 @@ class MultipleSearchCommand(ElasticsearchCommand):
 class SuggestCommand(ElasticsearchCommand):
     result_window_title = "Suggest"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_api('suggest', index=self.index, body=self.selection())
 
 
 class PercolateCommand(ElasticsearchCommand):
     result_window_title = "Percolate"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.request_api(
@@ -121,6 +142,9 @@ class PercolateCommand(ElasticsearchCommand):
 class MultiplePercolateCommand(ElasticsearchCommand):
     result_window_title = "Multiple Percolate"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_api(
             'mpercolate', index=self.index, doc_type=self.doc_type,
@@ -129,6 +153,9 @@ class MultiplePercolateCommand(ElasticsearchCommand):
 
 class CountPercolateCommmand(ElasticsearchCommand):
     result_window_title = "Count Percolate"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.request_api(
@@ -150,6 +177,11 @@ class MoreLikeThisCommand(ElasticsearchCommand):
 class PutSearchTemplateCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Put Search Template"
+
+    def is_enabled(self):
+        if self.selection():
+            return True
+        return False
 
     def run(self):
         self.get_template_id(self.on_done)
@@ -179,6 +211,9 @@ class DeleteSearchTemplateCommand(PutSearchTemplateCommand):
 class SearchExistsCommand(ElasticsearchCommand):
     result_window_title = "Search Exists"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_api(
             'search_exists', index=self.index, doc_type=self.doc_type,
@@ -187,6 +222,9 @@ class SearchExistsCommand(ElasticsearchCommand):
 
 class ValidateQueryCommand(ElasticsearchCommand):
     result_window_title = "Validate Query"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.request_api(

@@ -45,6 +45,9 @@ class ClusterStatsCommand(ClusterClientCommand):
 class ClusterRerouteCommand(ClusterClientCommand):
     result_window_title = "Cluster Reroute"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_cluster_api('reroute', body=self.selection())
 
@@ -59,6 +62,9 @@ class GetClusterSettingsCommand(ClusterClientCommand):
 class PutClusterSettingsCommand(ClusterClientCommand):
     show_result_on_window = False
     result_window_title = "Put Cluster Settings"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.request_cluster_api('put_settings', body=self.selection())

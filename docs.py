@@ -6,6 +6,9 @@ class CreateDocumentCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Create Document"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.get_document_id(self.on_done)
 
@@ -19,6 +22,9 @@ class IndexDocumentCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Index Document"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.get_document_id(self.on_done)
 
@@ -31,6 +37,9 @@ class IndexDocumentCommand(ElasticsearchCommand):
 class IndexPercolatorCommand(IndexDocumentCommand):
     show_result_on_window = False
     result_window_title = "Index Percolator"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def on_done(self, id):
         self.request_api(
@@ -63,6 +72,9 @@ class GetSourceCommand(ElasticsearchCommand):
 class GetMultipleDocumentsCommand(ElasticsearchCommand):
     result_window_title = "Multi Get Doducments"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.get_document_ids(self.on_done)
 
@@ -79,6 +91,9 @@ class GetMultipleDocumentsCommand(ElasticsearchCommand):
 class UpdateDocumentCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Update Document"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.get_document_id(self.on_done)
@@ -120,6 +135,11 @@ class BulkCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Bulk"
 
+    def is_enabled(self):
+        if self.selection():
+            return True
+        return False
+
     def run(self):
         self.request_api(
             'bulk', index=self.index, doc_type=self.doc_type,
@@ -129,6 +149,9 @@ class BulkCommand(ElasticsearchCommand):
 class DeleteByQueryCommand(ElasticsearchCommand):
     show_result_on_window = False
     result_window_title = "Delete By Query"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         if not delete_ok_cancel_dialog('Matched query documents'):
@@ -142,6 +165,9 @@ class DeleteByQueryCommand(ElasticsearchCommand):
 class TermvectorCommand(ElasticsearchCommand):
     result_window_title = "Termvector"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.get_document_id(self.on_done)
 
@@ -153,6 +179,9 @@ class TermvectorCommand(ElasticsearchCommand):
 
 class MultipleTermvectors(ElasticsearchCommand):
     result_window_title = "Multiple Termvectors"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.request_api(

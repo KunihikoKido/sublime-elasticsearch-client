@@ -55,6 +55,11 @@ class AnalyzeTextCommand(IndicesClientCommand):
         'Language Analyzer: thai',
     ]
 
+    def is_enabled(self):
+        if self.selection():
+            return True
+        return False
+
     @property
     def custom_analyzers(self):
         r = self.esclient.indices.get_settings(index=self.index)
@@ -199,6 +204,9 @@ class PutMappingCommand(IndicesClientCommand):
     show_result_on_window = False
     result_window_title = "Put Mapping"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_indices_api(
             'put_mapping', index=self.index, doc_type=self.doc_type,
@@ -262,6 +270,9 @@ class UpdateIndexAliasesCommand(IndicesClientCommand):
     show_result_on_window = False
     result_window_title = "Update Index Aliases"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_indices_api('update_aliases', body=self.selection())
 
@@ -283,6 +294,9 @@ class DeleteIndexAliasCommand(IndicesClientCommand):
 class PutIndexTemplateCommand(IndicesClientCommand):
     show_result_on_window = False
     result_window_title = "Put Index Template"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.get_index_template(self.on_done)
@@ -321,6 +335,9 @@ class PutIndexSettingsCommand(IndicesClientCommand):
     show_result_on_window = False
     result_window_title = "Put Index Settings"
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.request_indices_api(
             'put_settings', index=self.index, body=self.selection())
@@ -349,6 +366,9 @@ class ChangeReplicasCommand(IndicesClientCommand):
 class PutIndexWarmerCommand(IndicesClientCommand):
     show_result_on_window = False
     result_window_title = "Put Index Warmer"
+
+    def is_enabled(self):
+        return self.is_valid_json()
 
     def run(self):
         self.get_warmer(self.on_done)

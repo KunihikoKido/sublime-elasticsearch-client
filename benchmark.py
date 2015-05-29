@@ -7,6 +7,9 @@ from elasticsearch.utils import make_path
 class ApacheBenchCommand(ElasticsearchCommand):
     selected_index = 0
 
+    def is_enabled(self):
+        return self.is_valid_json()
+
     def run(self):
         self.select_panel(self.on_done)
 

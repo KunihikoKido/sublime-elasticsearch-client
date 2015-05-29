@@ -113,6 +113,13 @@ class ElasticsearchCommand(sublime_plugin.WindowCommand, Settings):
         selection = ''.join([view.substr(sel) for sel in sels])
         return selection
 
+    def is_valid_json(self):
+        try:
+            json.loads(self.selection())
+        except ValueError:
+            return False
+        return True
+
     def show_result_json(self, obj):
 
         text = json.dumps(obj, indent=4, ensure_ascii=False)
