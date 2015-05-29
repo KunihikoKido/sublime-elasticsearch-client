@@ -5,6 +5,7 @@ import sublime_plugin
 
 class SearchReferenceCommand(sublime_plugin.WindowCommand):
     base_url = 'https://www.elastic.co'
+
     base_keywords = ['elasticsearch']
     no_results_hits = [
         {
@@ -52,13 +53,23 @@ class SearchReferenceCommand(sublime_plugin.WindowCommand):
             hits = self.no_results_hits
         return [make_url(hit['url']) for hit in hits]
 
+    @property
+    def session(self):
+        if hasattr(self, '_session'):
+            return self._session
+
+        self._session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(max_retries=1)
+        self._session.mount(self.base_url, adapter)
+        return self._session
+
     def query(self, keywords):
         return ' '.join(self.base_keywords + keywords.split())
 
     def search(self, keywords):
         query = self.query(keywords)
         try:
-            response = requests.get(
+            response = self.session.get(
                 'https://www.elastic.co/suggest',
                 params={'q': query}, timeout=3, verify=False)
 
