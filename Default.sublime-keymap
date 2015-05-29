@@ -2,5 +2,9 @@
     {
       "keys": ["ctrl+alt+s"],
       "command": "request_body_search"
+    },
+    {
+      "keys": ["ctrl+alt+d"],
+      "command": "search_reference"
     }
 ]

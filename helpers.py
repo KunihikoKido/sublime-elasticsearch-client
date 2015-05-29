@@ -2,8 +2,6 @@ import os.path
 import glob
 import datetime
 import sublime
-import sublime_plugin
-import requests
 
 from .base import ElasticsearchCommand
 
@@ -144,93 +142,3 @@ class CsvBulkIndexCommand(HelperBaseCommand):
     def run(self):
         self.window.run_command('csv_convert_bulk_format')
         self.window.run_command('bulk')
-
-
-class SearchDocsCommand(sublime_plugin.WindowCommand):
-    base_url = 'https://www.elastic.co'
-    base_keywords = ['reference', 'elasticsearch']
-    keywords = ''
-    no_results_hits = [
-        {
-            'title': 'No results found...',
-            'url': ''
-        },
-        {
-            'title': 'Elasticsearch Reference | Elastic',
-            'url': 'https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html'
-        },
-        {
-            'title': 'Elasticsearch - The Definitive Guide | Elastic',
-            'url': 'https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html'
-        },
-        {
-            'title': 'Hello Elasticsearch Blog (日本語) | by Kunihiko Kido',
-            'url': 'https://medium.com/hello-elasticsearch'
-        }
-    ]
-
-    @property
-    def results_total(self):
-        return self.results['total']
-
-    @property
-    def results_hits(self):
-        return self.results['hits']
-
-    @property
-    def results_titles(self):
-        hits = self.results_hits
-        if self.is_no_results():
-            hits = self.no_results_hits
-        return [[hit['title'], hit['url']] for hit in hits]
-
-    @property
-    def results_urls(self):
-        def make_url(url):
-            if url.startswith('http') or not url:
-                return url
-            return self.base_url + url
-
-        hits = self.results_hits
-        if self.is_no_results():
-            hits = self.no_results_hits
-        return [make_url(hit['url']) for hit in hits]
-
-    def query(self, keywords):
-        self.keywords = keywords
-        return ' '.join(self.base_keywords + keywords.split())
-
-    def search(self, keywords):
-        query = self.query(keywords)
-        try:
-            response = requests.get(
-                'https://www.elastic.co/suggest',
-                params={'q': query}, timeout=3, verify=False)
-
-        except requests.exceptions.RequestException as e:
-            return sublime.error_message("Error: {0!s}".format(e))
-
-        self.results = response.json()
-        self.window.show_quick_panel(self.results_titles, self.open_url)
-        sublime.status_message('Total: {}'.format(self.results_total))
-
-    def is_no_results(self):
-        if self.results_total == 0:
-            return True
-        return False
-
-    def open_url(self, index):
-        if index == -1:
-            return
-
-        url = self.results_urls[index]
-
-        if not url:
-            return self.run()
-
-        self.window.run_command('open_url', {'url': url})
-
-    def run(self):
-        self.window.show_input_panel(
-            'Search in www.elastic.co:', self.keywords,
-            self.search, None, None)
