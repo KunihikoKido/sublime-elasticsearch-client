@@ -18,7 +18,7 @@ Elasticsearch Client allows you to build an Rest API request in Sublime Text and
 
 Elasticsearch Client integration: it's pretty handy.
 
-![Command Palette](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/palette.png)
+![Command Palette](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/overview.gif)
 
 ## Options
 
@@ -374,17 +374,6 @@ file types ``*.es`` or set syntax ``Elasticsearch``
 - true
 
 and etc..
-
-## Screenshot
-
-**Snippet**
-![Snippet](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/snippets.png)
-
-**API Result**
-![Show API Result](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/show_result.png)
-
-**Benchmarking**
-![Benchmarking](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/benchmarking.png)
 
 
 ---
