@@ -363,6 +363,17 @@ tophits                         | ``"aggs": {..."top_hits": {...}``
 valuecount                      | ``"aggs": {..."value_count": {...}``
 
 
+## Snippets for Index Aliases
+file types ``*.es`` or set syntax ``Elasticsearch``
+
+Abbreviation                    | tag
+------------------------------- | ----------------------------------
+add_alias                       | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
+associate_alias                 | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
+remove_alias                    | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
+rename_alias                    | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
+
+
 ## Completions
 file types ``*.es`` or set syntax ``Elasticsearch``
 
