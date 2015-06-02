@@ -110,7 +110,6 @@ Setting                              | Description
 ``base_url``                         | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
 ``index``                            | Elasticsearch Index name. default: ``test``
 ``doc_type``                         | Elasticsearch Type name. default: ``test``
-``analyzer``                         | analyzer for Analyze Command. default: ``default``
 ``http_headers``                     | Http header
 
 **Note** Removed Access Control Options.
