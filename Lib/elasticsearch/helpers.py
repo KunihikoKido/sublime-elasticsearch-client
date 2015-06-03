@@ -46,6 +46,10 @@ def bulk_index(client, docs, chunk_size=500, **kwargs):
         body = "\n".join(bulk_actions) + "\n"
         response = client.bulk(body, **kwargs)
 
+        if 'items' not in response:
+            errors.append(response)
+            return success, errors
+
         for op_type, item in map(methodcaller('popitem'), response['items']):
             ok = 200 <= item.get('status', 500) < 300
             if not ok:
