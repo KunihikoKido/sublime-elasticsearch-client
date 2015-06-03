@@ -109,7 +109,9 @@ class MultipleSearchCommand(ElasticsearchCommand):
     result_window_title = "Multiple Search"
 
     def is_enabled(self):
-        return self.is_valid_json()
+        if self.selection():
+            return True
+        return False
 
     def run(self):
         self.request_api(
@@ -143,7 +145,9 @@ class MultiplePercolateCommand(ElasticsearchCommand):
     result_window_title = "Multiple Percolate"
 
     def is_enabled(self):
-        return self.is_valid_json()
+        if self.selection():
+            return True
+        return False
 
     def run(self):
         self.request_api(
