@@ -17,7 +17,7 @@ def change_index(hits, index):
 def expand_action(data):
     data = data.copy()
     action = {'index': {}}
-    for key in ('_index', '_parent', '_percolate', '_routing', '_timestamp',
+    for key in ('_parent', '_percolate', '_routing', '_timestamp',
                 '_ttl', '_type', '_version', '_version_type', '_id',
                 '_retry_on_conflict'):
         if key in data:
@@ -108,7 +108,8 @@ def reindex(client, source_index, target_index, query=None, target_client=None,
                 scroll=scroll, **scan_kwargs)
 
     success, failed = bulk_index(
-        target_client, change_index(docs, target_index), chunk_size=chunk_size)
+        target_client, change_index(docs, target_index),
+        chunk_size=chunk_size, index=target_index)
 
     result['success'] = success
     result['failed'] = failed
@@ -158,7 +159,8 @@ def loaddata(inputfile, client, index, chunk_size=500, command=None):
             sublime.status_message("read: {}".format(len(docs)))
 
     success, failed = bulk_index(
-        client, change_index(docs, index), chunk_size=chunk_size)
+        client, change_index(docs, index), chunk_size=chunk_size,
+        index=index)
 
     result['success'] = success
     result['failed'] = failed
