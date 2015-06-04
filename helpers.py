@@ -10,6 +10,7 @@ from elasticsearch.helpers import reindex
 from elasticsearch.helpers import dumpdata
 from elasticsearch.helpers import loaddata
 from elasticsearch.helpers import copyindex
+from elasticsearch.helpers import reindex_dictionary
 
 
 class HelperBaseCommand(ElasticsearchCommand):
@@ -142,3 +143,17 @@ class CsvBulkIndexCommand(HelperBaseCommand):
     def run(self):
         self.window.run_command('csv_convert_bulk_format')
         self.window.run_command('bulk')
+
+
+class ReindexDictionaryCommand(HelperBaseCommand):
+    result_window_title = "Reindex Dictionary"
+    comfirm_message = 'Are you sure you want to reindex dictionary ?'
+    comfirm_ok_title = 'Reindex Dictionary'
+
+    def run(self, chunk_size=1000):
+        if not self.is_comfirmed():
+            return
+
+        self.request(
+            reindex_dictionary, self.esclient,
+            index=self.index, chunk_size=chunk_size)

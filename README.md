@@ -234,19 +234,17 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Cat Shards
 * Elasticsearch: Cat Thread Pool
 
-### Commmand for Query Benchmark
+### Helper Commmands.
 
 * Elasticsearch: Apache Bench
 * Elasticsearch: Apache Bench for Search Template
-
-### Helper Commmands.
-
-* Elasticsearch: Reindex
+* Elasticsearch: Copy Data from ...
+* Elasticsearch: CSV Bulk Index
+* Elasticsearch: CSV Convert to Bulk Index format
 * Elasticsearch: Dump Data
 * Elasticsearch: Load Data
-* Elasticsearch: Copy Data from ...
-* Elasticsearch: CSV Convert to Bulk Index format
-* Elasticsearch: CSV Bulk Index
+* Elasticsearch: Reindex
+* Elasticsearch: Reindex Dictionary (Closing and reopening the index)
 * Elasticsearch: Search in www.elastic.co
 
 ### Command for Sublime User Settings

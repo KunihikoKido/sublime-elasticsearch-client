@@ -121,4 +121,5 @@
     {"command": "search_reference",         "caption": "Elasticsearch: Search in www.elastic.co"},
     {"command": "feed",                     "caption": "Elasticsearch: Feed Elastic Blog", "args": {"url": "https://www.elastic.co/blog/feed/"}},
     {"command": "feed",                     "caption": "Elasticsearch: Feed Hello! Elasticsearch. (日本語)", "args": {"url": "https://medium.com/feed/hello-elasticsearch"}},
+    {"command": "reindex_dictionary",       "caption": "Elasticsearch: Reindex Dictionary (Closing and reopening the index)"},
 ]

@@ -39,7 +39,7 @@ class Elasticsearch(object):
         try:
             response = session.request(
                 method.lower(), url, data=body,
-                headers=self.headers, verify=False)
+                headers=self.headers, verify=False, timeout=60)
 
         except requests.exceptions.RequestException as e:
             import sys

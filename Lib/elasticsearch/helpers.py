@@ -1,3 +1,4 @@
+import time
 import gzip
 import json
 import sublime
@@ -187,3 +188,38 @@ def analyze_keywords(client, index, body, analyzer='default', command=None):
         items.append(dict(keyword=keyword, analyzed=' / '.join(tokens)))
 
     show_result_json(items, command=command)
+
+
+def is_started_all_shards(client, index):
+    r = client.search_shards(index)
+    shards = r.get('shards', [[]])
+    states = [True in [i['state'] == 'STARTED' for i in s] for s in shards]
+
+    sublime.status_message("Shards state: {}".format(states))
+
+    if not states:
+        return False
+
+    for state in states:
+        if state is not True:
+            return False
+
+    return True
+
+
+def reindex_dictionary(client, index, chunk_size=500, max_retries=3, command=None):
+    client.indices.close(index)
+    client.indices.open(index)
+
+    retries = 0
+    while retries < max_retries:
+        time.sleep(3)
+        if is_started_all_shards(client, index):
+            reindex(
+                client, source_index=index, target_index=index,
+                chunk_size=chunk_size, command=command)
+            break
+        retries += 1
+
+    if retries == max_retries:
+        show_result_json(dict(error='max retries exceed.'), command=command)
