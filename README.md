@@ -361,7 +361,9 @@ valuecount                      | ``"aggs": {..."value_count": {...}``
 
 
 ## Snippets for Index Aliases
-file types ``*.es`` or set syntax ``Elasticsearch``
+file types ``*.es`` or set syntax ``Elasticsearch``.
+
+> for `Update Index Aliases` command.
 
 Abbreviation                    | tag
 ------------------------------- | ----------------------------------
