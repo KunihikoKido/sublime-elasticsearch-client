@@ -1,4 +1,7 @@
 [
+    {"command": "cat_aliases",            "caption": "Elasticsearch: Cat Aliases"},
+    {"command": "cat_allocation",         "caption": "Elasticsearch: Cat Allocation"},
+    {"command": "cat_shards",             "caption": "Elasticsearch: Cat Shards"},
     {"command": "cluster_state",          "caption": "Elasticsearch: Cluster State"},
     {"command": "indices_get",            "caption": "Elasticsearch: Indices Get"},
     {"command": "indices_get_mapping",    "caption": "Elasticsearch: Indices Get Mapping"},
@@ -8,4 +11,6 @@
     {"command": "search_template",        "caption": "Elasticsearch: Search Template Count", "args": {"search_type": "count"}},
     {"command": "search_template",        "caption": "Elasticsearch: Search Template Scan", "args": {"search_type": "scan"}},
     {"command": "search_template",        "caption": "Elasticsearch: Search Template"},
+    {"command": "settings_switch_server",      "caption": "Elasticsearch: Settings Switch Server"},
+    {"command": "settings_show_active_server", "caption": "Elasticsearch: Settings Show Active Server"},
 ]

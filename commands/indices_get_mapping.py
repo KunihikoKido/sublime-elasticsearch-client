@@ -1,6 +1,5 @@
 import sublime
 from .base import BaseCommand
-from ..panel import DocTypeListPanel
 
 
 class IndicesGetMappingCommand(BaseCommand):

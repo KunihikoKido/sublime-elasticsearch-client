@@ -1,21 +1,17 @@
 {
-    "servers": {
-        "localhost": {
-            "base_url": "http://localhost:9200/",
-            "index": "test",
-            "doc_type": "test",
+    "base_url": "http://localhost:9200",
+    "index": "blog",
+    "doc_type": "posts",
+    "servers": [
+        {
+            "base_url": "http://localhost:9200",
+            "index": "blog",
+            "doc_type": "posts",
+        },
+        {
+            "base_url": "http://localhost:9200",
+            "index": "twitter",
+            "doc_type": "tweets",
         }
-    },
-    // Path to the Apache Bench (ab) command. If ab is on you path, you should not need to
-    // change this. Windows users will need to use forward slashes in the path.
-    "ab_command": "ab",
-    "ab_options": {
-        "default": ["-n", "10", "-c", "10"]
-    },
-
-    "enabled_pretty": true,
-    "pretty_command": "pretty_json",
-    "pretty_syntax": "Elasticsearch",
-
-    "fixture_dir": ""
+    ]
 }

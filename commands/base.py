@@ -5,6 +5,7 @@ import sublime_plugin
 from elasticsearch import Elasticsearch
 from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
+from ..panel import SwitchServerListPanel
 
 
 class Settings(object):
@@ -32,6 +33,21 @@ class Settings(object):
     @property
     def servers(self):
         return self.settings.get("servers", [])
+
+    @property
+    def active_server(self):
+        return dict(
+            base_url=self.base_url,
+            index=self.index,
+            doc_type=self.doc_type,
+            scroll_size=self.scroll_size,
+        )
+
+    def set(self, key, value):
+        self.settings.set(key, value)
+
+    def save(self):
+        sublime.save_settings(self.SETTINGS_FILE)
 
 
 class BaseCommand(sublime_plugin.WindowCommand):
@@ -86,6 +102,25 @@ class BaseCommand(sublime_plugin.WindowCommand):
         list_panel = DocTypeListPanel(
             self.window, self.client, self.settings.index)
         list_panel.show(callback)
+
+    def show_switch_server_list_panel(self, callback):
+        list_panel = SwitchServerListPanel(
+            self.window, self.settings.servers)
+        list_panel.show(callback)
+
+    def show_output_panel(self, text, syntax="Packages/Text/Plain text.tmLanguage"):
+        panel = self.window.create_output_panel("elasticsearch")
+        self.window.run_command(
+            "show_panel", {"panel": "output.elasticsearch"})
+        panel.set_syntax_file(syntax)
+        panel.settings().set('gutter', True)
+        panel.settings().set('word_wrap', False)
+        panel.set_read_only(False)
+        panel.run_command('append', {'characters': text})
+        panel.set_read_only(True)
+
+    def show_active_server(self):
+        self.window.run_command("settings_show_active_server")
 
     def request_thread(self, *args, **kwargs):
         thread = threading.Thread(
