@@ -5,7 +5,13 @@ from .cat_fielddata import CatFielddataCommand
 from .cat_health import CatHealthCommand
 from .cat_indices import CatIndicesCommand
 from .cat_master import CatMasterCommand
+from .cat_nodes import CatNodesCommand
+from .cat_pending_tasks import CatPendingTasksCommand
+from .cat_plugins import CatPluginsCommand
+from .cat_recovery import CatRecoveryCommand
+from .cat_segments import CatSegmentsCommand
 from .cat_shards import CatShardsCommand
+from .cat_thread_pool import CatThreadPoolCommand
 from .cluster_state import ClusterStateCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
@@ -24,7 +30,13 @@ __all__ = [
     "CatHealthCommand",
     "CatIndicesCommand",
     "CatMasterCommand",
+    "CatNodesCommand",
+    "CatPendingTasksCommand",
+    "CatPluginsCommand",
+    "CatRecoveryCommand",
+    "CatSegmentsCommand",
     "CatShardsCommand",
+    "CatThreadPoolCommand",
     "ClusterStateCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
