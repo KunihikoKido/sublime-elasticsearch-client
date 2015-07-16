@@ -1,6 +1,7 @@
 [
     {"command": "cat_aliases",            "caption": "Elasticsearch: Cat Aliases"},
     {"command": "cat_allocation",         "caption": "Elasticsearch: Cat Allocation"},
+    {"command": "cat_count",              "caption": "Elasticsearch: Cat Count"},
     {"command": "cat_shards",             "caption": "Elasticsearch: Cat Shards"},
     {"command": "cluster_state",          "caption": "Elasticsearch: Cluster State"},
     {"command": "indices_get",            "caption": "Elasticsearch: Indices Get"},

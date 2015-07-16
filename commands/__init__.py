@@ -1,5 +1,6 @@
 from .cat_aliases import CatAliasesCommand
 from .cat_allocation import CatAllocationCommand
+from .cat_count import CatCountCommand
 from .cat_shards import CatShardsCommand
 from .cluster_state import ClusterStateCommand
 from .indices_get import IndicesGetCommand
@@ -14,6 +15,7 @@ from .show_response import ShowResponseCommand
 __all__ = [
     "CatAliasesCommand",
     "CatAllocationCommand",
+    "CatCountCommand",
     "CatShardsCommand",
     "ClusterStateCommand",
     "IndicesGetCommand",
