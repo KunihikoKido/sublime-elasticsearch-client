@@ -15,6 +15,7 @@ class IndicesGetMappingCommand(BaseCommand):
             index=self.settings.index,
             doc_type=doc_type
         )
+        print(options)
 
         try:
             response = self.client.indices.get_mapping(**options)

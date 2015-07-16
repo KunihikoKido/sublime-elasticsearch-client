@@ -3,9 +3,18 @@ import threading
 import sublime
 import sublime_plugin
 from elasticsearch import Elasticsearch
+from elasticsearch import Urllib3HttpConnection
+
 from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
 from ..panel import SwitchServerListPanel
+
+
+class CustomConnection(Urllib3HttpConnection):
+    def __init__(self, host='localhost', port=80, headers=None, **kwargs):
+        super(CustomConnection, self).__init__(host=host, port=port, **kwargs)
+        if headers is not None:
+            self.headers.update(headers)
 
 
 class Settings(object):
@@ -29,6 +38,10 @@ class Settings(object):
     @property
     def scroll_size(self):
         return self.settings.get("scroll_size", "1m")
+
+    @property
+    def headers(self):
+        return self.settings.get("headers", None)
 
     @property
     def servers(self):
@@ -71,18 +84,23 @@ class BaseCommand(sublime_plugin.WindowCommand):
         return self.is_valid_json()
 
     def get_text(self):
-        text = self.view.substr(sublime.Region(0, self.view.size()))
-        return text
+        return self.view.substr(sublime.Region(0, self.view.size()))
 
     def init_client(self):
-        self._client = Elasticsearch(self.settings.base_url)
+        self._client = Elasticsearch(
+            self.settings.base_url,
+            connection_class=CustomConnection,
+            headers=self.settings.headers
+        )
+        return self._client
+
+    def save_settings(self):
+        self.settings.save()
+        self.init_client()
 
     @property
     def client(self):
-        if hasattr(self, "_client"):
-            return self._client
-        self.init_client()
-        return self.client
+        return self.init_client()
 
     def show_response(self, response, title=""):
         title = title or self.__class__.__name__

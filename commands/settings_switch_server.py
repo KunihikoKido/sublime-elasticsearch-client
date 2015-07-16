@@ -15,6 +15,6 @@ class SettingsSwitchServerCommand(BaseCommand):
         for key, value in server.items():
             self.settings.set(key, value)
 
-        self.settings.save()
+        self.save_settings()
 
         self.show_active_server()
