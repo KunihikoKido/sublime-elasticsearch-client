@@ -3,18 +3,11 @@ import threading
 import sublime
 import sublime_plugin
 from elasticsearch import Elasticsearch
-from elasticsearch import Urllib3HttpConnection
+from elasticsearch_connections import CustomHeadersConnection
 
 from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
 from ..panel import SwitchServerListPanel
-
-
-class CustomConnection(Urllib3HttpConnection):
-    def __init__(self, host='localhost', port=80, headers=None, **kwargs):
-        super(CustomConnection, self).__init__(host=host, port=port, **kwargs)
-        if headers is not None:
-            self.headers.update(headers)
 
 
 class Settings(object):
@@ -89,7 +82,7 @@ class BaseCommand(sublime_plugin.WindowCommand):
     def init_client(self):
         self._client = Elasticsearch(
             self.settings.base_url,
-            connection_class=CustomConnection,
+            connection_class=CustomHeadersConnection,
             headers=self.settings.headers
         )
         return self._client
