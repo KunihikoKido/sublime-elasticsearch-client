@@ -102,11 +102,7 @@ class BaseCommand(sublime_plugin.WindowCommand):
         title = title or self.__class__.__name__
         text = json.dumps(response, indent=2, ensure_ascii=False)
         self.window.run_command(
-            "show_response", {
-                "title": title,
-                "text": text
-            }
-        )
+            "show_response", {"title": title, "text": text})
 
     def show_index_list_panel(self, callback):
         list_panel = IndexListPanel(self.window, self.client)
@@ -122,26 +118,19 @@ class BaseCommand(sublime_plugin.WindowCommand):
             self.window, self.settings.servers)
         list_panel.show(callback)
 
-    def show_output_panel(self, text, syntax="Packages/Text/Plain text.tmLanguage"):
-        panel = self.window.create_output_panel("elasticsearch")
+    def show_output_panel(self, text, syntax=None):
         self.window.run_command(
-            "show_panel", {"panel": "output.elasticsearch"})
-        panel.set_syntax_file(syntax)
-        panel.settings().set('gutter', True)
-        panel.settings().set('word_wrap', False)
-        panel.set_read_only(False)
-        panel.run_command('append', {'characters': text})
-        panel.set_read_only(True)
+            "show_output_panel", {"text": text, "syntax": syntax})
 
-    def show_object_output_panel(self, obj, syntax="Packages/JavaScript/JSON.tmLanguage"):
+    def show_object_output_panel(self, obj):
         options = dict(
             indent=4,
             ensure_ascii=False
         )
 
-        self.show_output_panel(json.dumps(obj, **options), syntax=syntax)
-
-
+        self.show_output_panel(
+            json.dumps(obj, **options),
+            syntax="Packages/JavaScript/JSON.tmLanguage")
 
     def show_active_server(self):
         self.window.run_command("settings_show_active_server")

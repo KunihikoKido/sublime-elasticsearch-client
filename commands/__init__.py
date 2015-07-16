@@ -22,6 +22,7 @@ from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
 from .settings_switch_server import SettingsSwitchServerCommand
+from .show_output_panel import ShowOutputPanelCommand
 from .show_response import ShowResponseCommand
 
 
@@ -50,5 +51,6 @@ __all__ = [
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
     "SettingsSwitchServerCommand",
+    "ShowOutputPanelCommand",
     "ShowResponseCommand",
 ]
