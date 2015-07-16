@@ -1,4 +1,3 @@
-import json
 from .base import BaseCommand
 
 
@@ -8,12 +7,5 @@ class SettingsShowActiveServerCommand(BaseCommand):
         return True
 
     def run(self):
-        options = dict(
-            indent=4,
-            ensure_ascii=False
-        )
 
-        self.show_output_panel(
-            json.dumps(self.settings.active_server, **options),
-            syntax="Packages/JavaScript/JSON.tmLanguage"
-        )
+        self.show_object_output_panel(self.settings.active_server)

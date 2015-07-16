@@ -15,6 +15,9 @@ from .cat_thread_pool import CatThreadPoolCommand
 from .cluster_state import ClusterStateCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
+from .get_document import GetDocumentCommand
+from .get_document_source import GetDocumentSourceCommand
+from .index_document import IndexDocumentCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -40,6 +43,9 @@ __all__ = [
     "ClusterStateCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
+    "GetDocumentCommand",
+    "GetDocumentSourceCommand",
+    "IndexDocumentCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",

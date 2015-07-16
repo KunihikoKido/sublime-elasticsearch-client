@@ -95,6 +95,9 @@ class BaseCommand(sublime_plugin.WindowCommand):
     def client(self):
         return self.init_client()
 
+    def show_input_panel(self, label, default, callback):
+        self.window.show_input_panel(label, default, callback, None, None)
+
     def show_response(self, response, title=""):
         title = title or self.__class__.__name__
         text = json.dumps(response, indent=2, ensure_ascii=False)
@@ -129,6 +132,16 @@ class BaseCommand(sublime_plugin.WindowCommand):
         panel.set_read_only(False)
         panel.run_command('append', {'characters': text})
         panel.set_read_only(True)
+
+    def show_object_output_panel(self, obj, syntax="Packages/JavaScript/JSON.tmLanguage"):
+        options = dict(
+            indent=4,
+            ensure_ascii=False
+        )
+
+        self.show_output_panel(json.dumps(obj, **options), syntax=syntax)
+
+
 
     def show_active_server(self):
         self.window.run_command("settings_show_active_server")
