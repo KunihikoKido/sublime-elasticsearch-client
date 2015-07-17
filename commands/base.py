@@ -9,6 +9,7 @@ from abc import ABCMeta, abstractmethod
 from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
 from ..panel import SwitchServerListPanel
+from ..panel import AnalyzerListPanel
 
 
 class Settings(object):
@@ -112,6 +113,11 @@ class BaseCommand(sublime_plugin.WindowCommand):
 
     def show_doc_type_list_panel(self, callback):
         list_panel = DocTypeListPanel(
+            self.window, self.client, self.settings.index)
+        list_panel.show(callback)
+
+    def show_analyzer_list_panel(self, callback):
+        list_panel = AnalyzerListPanel(
             self.window, self.client, self.settings.index)
         list_panel.show(callback)
 

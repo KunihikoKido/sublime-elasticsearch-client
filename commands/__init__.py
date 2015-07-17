@@ -22,6 +22,7 @@ from .cluster_stats import ClusterStatsCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .index_document import IndexDocumentCommand
+from .indices_analyze import IndicesAnalyzeCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .search_request_body import SearchRequestBodyCommand
@@ -57,6 +58,7 @@ __all__ = [
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
     "IndexDocumentCommand",
+    "IndicesAnalyzeCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
     "SearchRequestBodyCommand",
