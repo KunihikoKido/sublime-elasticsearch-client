@@ -12,12 +12,18 @@ from .cat_recovery import CatRecoveryCommand
 from .cat_segments import CatSegmentsCommand
 from .cat_shards import CatShardsCommand
 from .cat_thread_pool import CatThreadPoolCommand
+from .cluster_get_settings import ClusterGetSettingsCommand
+from .cluster_health import ClusterHealthCommand
+from .cluster_pending_tasks import ClusterPendingTasksCommand
+from .cluster_put_settings import ClusterPutSettingsCommand
+from .cluster_reroute import ClusterRerouteCommand
 from .cluster_state import ClusterStateCommand
-from .indices_get import IndicesGetCommand
-from .indices_get_mapping import IndicesGetMappingCommand
+from .cluster_stats import ClusterStatsCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .index_document import IndexDocumentCommand
+from .indices_get import IndicesGetCommand
+from .indices_get_mapping import IndicesGetMappingCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -41,12 +47,18 @@ __all__ = [
     "CatSegmentsCommand",
     "CatShardsCommand",
     "CatThreadPoolCommand",
+    "ClusterGetSettingsCommand",
+    "ClusterHealthCommand",
+    "ClusterPendingTasksCommand",
+    "ClusterPutSettingsCommand",
+    "ClusterRerouteCommand",
     "ClusterStateCommand",
-    "IndicesGetCommand",
-    "IndicesGetMappingCommand",
+    "ClusterStatsCommand",
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
     "IndexDocumentCommand",
+    "IndicesGetCommand",
+    "IndicesGetMappingCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
