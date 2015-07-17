@@ -23,8 +23,11 @@ from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .index_document import IndexDocumentCommand
 from .indices_analyze import IndicesAnalyzeCommand
+from .indices_clear_cache import IndicesClearCacheCommand
+from .indices_close import IndicesCloseCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
+from .indices_open import IndicesOpenCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -59,8 +62,11 @@ __all__ = [
     "GetDocumentSourceCommand",
     "IndexDocumentCommand",
     "IndicesAnalyzeCommand",
+    "IndicesClearCacheCommand",
+    "IndicesCloseCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
+    "IndicesOpenCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
