@@ -149,9 +149,13 @@ class BaseCommand(sublime_plugin.WindowCommand):
 
     def run_request_wrapper(self, *args, **kwargs):
         try:
-            self.run_request(*args, **kwargs)
+            response = self.run_request(*args, **kwargs)
         except Exception as e:
             sublime.error_message("Error: {}".format(e))
+            return
+
+        if response is not None:
+            self.show_response(response)
 
     def request_thread(self, *args, **kwargs):
         thread = threading.Thread(
@@ -162,10 +166,37 @@ class BaseCommand(sublime_plugin.WindowCommand):
         self.request_thread(*args, **kwargs)
 
 
-class CatBaseCommand(BaseCommand):
+class CreateBaseCommand(BaseCommand):
+
+    def run_request_wrapper(self, *args, **kwargs):
+        try:
+            response = self.run_request(*args, **kwargs)
+        except Exception as e:
+            sublime.error_message("Error: {}".format(e))
+            return
+
+        if response is not None:
+            self.show_object_output_panel(response)
+
+
+class DeleteBaseCommand(CreateBaseCommand):
+    pass
+
+
+class CatBaseCommand(CreateBaseCommand):
 
     def is_enabled(self):
         return True
+
+    def run_request_wrapper(self, *args, **kwargs):
+        try:
+            response = self.run_request(*args, **kwargs)
+        except Exception as e:
+            sublime.error_message("Error: {}".format(e))
+            return
+
+        if response is not None:
+            self.show_output_panel(response)
 
 
 class SearchBaseCommand(BaseCommand):
@@ -181,3 +212,9 @@ class SearchBaseCommand(BaseCommand):
                 search_type=search_type
             )
         return options
+
+
+class SettingsBaseCommand(BaseCommand):
+
+    def is_enabled(self):
+        return True

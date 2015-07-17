@@ -8,5 +8,4 @@ class CatPendingTasksCommand(CatBaseCommand):
             params=dict(v=1)
         )
 
-        response = self.client.cat.pending_tasks(**options)
-        self.show_output_panel(response)
+        return self.client.cat.pending_tasks(**options)

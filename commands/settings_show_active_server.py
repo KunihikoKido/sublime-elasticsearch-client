@@ -1,10 +1,7 @@
-from .base import BaseCommand
+from .base import SettingsBaseCommand
 
 
-class SettingsShowActiveServerCommand(BaseCommand):
-
-    def is_enabled(self):
-        return True
+class SettingsShowActiveServerCommand(SettingsBaseCommand):
 
     def run(self):
         self.show_object_output_panel(self.settings.active_server)

@@ -11,5 +11,4 @@ class CatAliasesCommand(CatBaseCommand):
             params=dict(v=1)
         )
 
-        response = self.client.cat.aliases(**options)
-        self.show_output_panel(response)
+        return self.client.cat.aliases(**options)

@@ -8,5 +8,4 @@ class CatFielddataCommand(CatBaseCommand):
             params=dict(v=1)
         )
 
-        response = self.client.cat.fielddata(**options)
-        self.show_output_panel(response)
+        return self.client.cat.fielddata(**options)

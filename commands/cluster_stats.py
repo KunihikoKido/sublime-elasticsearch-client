@@ -8,5 +8,4 @@ class ClusterStatsCommand(BaseCommand):
 
     def run_request(self):
         options = dict()
-        response = self.client.cluster.stats(**options)
-        self.show_response(response)
+        return self.client.cluster.stats(**options)

@@ -8,7 +8,7 @@ class GetDocumentSourceCommand(BaseCommand):
 
     def run_request(self, id=None):
         if not id:
-            self.show_input_panel('Document Id: ', '', self.run_request)
+            self.show_input_panel('Document Id: ', '', self.run)
             return
 
         options = dict(
@@ -16,5 +16,5 @@ class GetDocumentSourceCommand(BaseCommand):
             doc_type=self.settings.doc_type,
             id=id
         )
-        response = self.client.get_source(**options)
-        self.show_response(response)
+
+        return self.client.get_source(**options)

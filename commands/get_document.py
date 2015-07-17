@@ -8,7 +8,7 @@ class GetDocumentCommand(BaseCommand):
 
     def run_request(self, id=None):
         if not id:
-            self.show_input_panel('Document Id: ', '', self.run_request)
+            self.show_input_panel('Document Id: ', '', self.run)
             return
 
         options = dict(
@@ -17,5 +17,4 @@ class GetDocumentCommand(BaseCommand):
             id=id
         )
 
-        response = self.client.get(**options)
-        self.show_response(response)
+        return self.client.get(**options)

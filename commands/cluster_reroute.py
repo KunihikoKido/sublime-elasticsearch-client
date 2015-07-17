@@ -1,11 +1,10 @@
-from .base import BaseCommand
+from .base import CreateBaseCommand
 
 
-class ClusterRerouteCommand(BaseCommand):
+class ClusterRerouteCommand(CreateBaseCommand):
 
     def run_request(self):
         options = dict(
             body=self.get_text()
         )
-        response = self.client.cluster.reroute(**options)
-        self.show_object_output_panel(response)
+        return self.client.cluster.reroute(**options)

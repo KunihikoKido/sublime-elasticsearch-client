@@ -8,5 +8,4 @@ class CatMasterCommand(CatBaseCommand):
             params=dict(v=1)
         )
 
-        response = self.client.cat.master(**options)
-        self.show_output_panel(response)
+        return self.client.cat.master(**options)

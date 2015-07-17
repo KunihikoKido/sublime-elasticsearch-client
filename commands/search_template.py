@@ -14,5 +14,4 @@ class SearchTemplateCommand(SearchBaseCommand):
 
         self.extend_options(options, search_type=search_type)
 
-        response = self.client.search_template(**options)
-        self.show_response(response)
+        return self.client.search_template(**options)

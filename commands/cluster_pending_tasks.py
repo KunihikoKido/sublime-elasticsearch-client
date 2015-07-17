@@ -8,5 +8,4 @@ class ClusterPendingTasksCommand(BaseCommand):
 
     def run_request(self):
         options = dict()
-        response = self.client.cluster.pending_tasks(**options)
-        self.show_response(response)
+        return self.client.cluster.pending_tasks(**options)

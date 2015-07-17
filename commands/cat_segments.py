@@ -5,7 +5,7 @@ class CatSegmentsCommand(CatBaseCommand):
 
     def run_request(self, index=None):
         if index is None:
-            self.show_index_list_panel(self.run_request)
+            self.show_index_list_panel(self.run)
             return
 
         options = dict(
@@ -13,5 +13,4 @@ class CatSegmentsCommand(CatBaseCommand):
             params=dict(v=1)
         )
 
-        response = self.client.cat.segments(**options)
-        self.show_output_panel(response)
+        return self.client.cat.segments(**options)

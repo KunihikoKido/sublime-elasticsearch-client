@@ -8,5 +8,4 @@ class ClusterGetSettingsCommand(BaseCommand):
 
     def run_request(self):
         options = dict()
-        response = self.client.cluster.get_settings(**options)
-        self.show_response(response)
+        return self.client.cluster.get_settings(**options)

@@ -1,11 +1,10 @@
-from .base import BaseCommand
+from .base import CreateBaseCommand
 
 
-class ClusterPutSettingsCommand(BaseCommand):
+class ClusterPutSettingsCommand(CreateBaseCommand):
 
     def run_request(self):
         options = dict(
             body=self.get_text()
         )
-        response = self.client.cluster.put_settings(**options)
-        self.show_object_output_panel(response)
+        return self.client.cluster.put_settings(**options)

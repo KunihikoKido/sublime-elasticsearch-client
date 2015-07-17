@@ -14,5 +14,4 @@ class SearchRequestBodyCommand(SearchBaseCommand):
 
         self.extend_options(options, search_type=search_type)
 
-        response = self.client.search(**options)
-        self.show_response(response)
+        return self.client.search(**options)

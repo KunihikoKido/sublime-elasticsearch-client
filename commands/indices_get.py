@@ -8,12 +8,11 @@ class IndicesGetCommand(BaseCommand):
 
     def run_request(self, index=None):
         if index is None:
-            self.show_index_list_panel(self.run_request)
+            self.show_index_list_panel(self.run)
             return
 
         options = dict(
             index=index
         )
 
-        response = self.client.indices.get(**options)
-        self.show_response(response)
+        return self.client.indices.get(**options)

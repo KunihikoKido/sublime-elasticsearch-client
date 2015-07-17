@@ -1,12 +1,12 @@
-from .base import BaseCommand
+from .base import CreateBaseCommand
 
 
-class IndexDocumentCommand(BaseCommand):
+class IndexDocumentCommand(CreateBaseCommand):
 
     def run_request(self, id=None):
         if id is None:
             self.show_input_panel(
-                'Document Id (option): ', '', self.run_request)
+                'Document Id (option): ', '', self.run)
             return
 
         options = dict(
@@ -16,5 +16,4 @@ class IndexDocumentCommand(BaseCommand):
             id=id
         )
 
-        response = self.client.index(**options)
-        self.show_object_output_panel(response)
+        return self.client.index(**options)

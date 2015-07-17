@@ -1,10 +1,7 @@
-from .base import BaseCommand
+from .base import SettingsBaseCommand
 
 
-class SettingsSwitchServerCommand(BaseCommand):
-
-    def is_enabled(self):
-        return True
+class SettingsSwitchServerCommand(SettingsBaseCommand):
 
     def run(self, index=None):
         if index is None:

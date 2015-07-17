@@ -8,7 +8,7 @@ class IndicesAnalyzeCommand(BaseCommand):
 
     def run_request(self, analyzer=None):
         if analyzer is None:
-            self.show_analyzer_list_panel(self.run_request)
+            self.show_analyzer_list_panel(self.run)
             return
 
         options = dict(
@@ -17,5 +17,4 @@ class IndicesAnalyzeCommand(BaseCommand):
             body=self.get_text()
         )
 
-        response = self.client.indices.analyze(**options)
-        self.show_response(response)
+        return self.client.indices.analyze(**options)
