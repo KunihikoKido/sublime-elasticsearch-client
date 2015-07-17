@@ -8,7 +8,8 @@ class SettingsSwitchServerCommand(BaseCommand):
 
     def run(self, index=None):
         if index is None:
-            return self.show_switch_server_list_panel(self.run)
+            self.show_switch_server_list_panel(self.run)
+            return
 
         server = self.settings.servers[index]
 
@@ -16,5 +17,4 @@ class SettingsSwitchServerCommand(BaseCommand):
             self.settings.set(key, value)
 
         self.save_settings()
-
         self.show_active_server()

@@ -1,4 +1,3 @@
-import sublime
 from .base import BaseCommand
 
 
@@ -9,15 +8,12 @@ class IndicesGetCommand(BaseCommand):
 
     def run_request(self, index=None):
         if index is None:
-            return self.show_index_list_panel(self.run_request)
+            self.show_index_list_panel(self.run_request)
+            return
 
         options = dict(
             index=index
         )
 
-        try:
-            response = self.client.indices.get(**options)
-        except Exception as e:
-            return sublime.error_message("Error: {}".format(e))
-
-        return self.show_response(response)
+        response = self.client.indices.get(**options)
+        self.show_response(response)

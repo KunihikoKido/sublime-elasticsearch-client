@@ -1,4 +1,3 @@
-import sublime
 from .base import BaseCommand
 
 
@@ -9,8 +8,8 @@ class GetDocumentCommand(BaseCommand):
 
     def run_request(self, id=None):
         if not id:
-            return self.show_input_panel(
-                'Document Id: ', '', self.run_request)
+            self.show_input_panel('Document Id: ', '', self.run_request)
+            return
 
         options = dict(
             index=self.settings.index,
@@ -18,9 +17,5 @@ class GetDocumentCommand(BaseCommand):
             id=id
         )
 
-        try:
-            response = self.client.get(**options)
-        except Exception as e:
-            return sublime.error_message("Error: {}".format(e))
-
-        return self.show_response(response)
+        response = self.client.get(**options)
+        self.show_response(response)

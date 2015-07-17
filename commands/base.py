@@ -4,6 +4,7 @@ import sublime
 import sublime_plugin
 from elasticsearch import Elasticsearch
 from elasticsearch_connections import CustomHeadersConnection
+from abc import ABCMeta, abstractmethod
 
 from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
@@ -57,6 +58,7 @@ class Settings(object):
 
 
 class BaseCommand(sublime_plugin.WindowCommand):
+    __metaclass__ = ABCMeta
 
     def __init__(self, *args, **kwargs):
         self.settings = Settings()
@@ -135,10 +137,41 @@ class BaseCommand(sublime_plugin.WindowCommand):
     def show_active_server(self):
         self.window.run_command("settings_show_active_server")
 
+    @abstractmethod
+    def run_request(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def run_request_wrapper(self, *args, **kwargs):
+        try:
+            self.run_request(*args, **kwargs)
+        except Exception as e:
+            sublime.error_message("Error: {}".format(e))
+
     def request_thread(self, *args, **kwargs):
         thread = threading.Thread(
-            target=self.run_request, args=args, kwargs=kwargs)
+            target=self.run_request_wrapper, args=args, kwargs=kwargs)
         thread.start()
 
     def run(self, *args, **kwargs):
         self.request_thread(*args, **kwargs)
+
+
+class CatBaseCommand(BaseCommand):
+
+    def is_enabled(self):
+        return True
+
+
+class SearchBaseCommand(BaseCommand):
+
+    def extend_options(self, options, search_type=None):
+        if search_type == "scan":
+            options["params"] = dict(
+                search_type=search_type,
+                scroll=self.settings.scroll_size
+            )
+        elif search_type is not None:
+            options["params"] = dict(
+                search_type=search_type
+            )
+        return options

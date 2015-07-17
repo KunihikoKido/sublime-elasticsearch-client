@@ -1,21 +1,12 @@
-import sublime
-from .base import BaseCommand
+from .base import CatBaseCommand
 
 
-class CatPluginsCommand(BaseCommand):
-
-    def is_enabled(self):
-        return True
+class CatPluginsCommand(CatBaseCommand):
 
     def run_request(self):
-
         options = dict(
             params=dict(v=1)
         )
 
-        try:
-            response = self.client.cat.plugins(**options)
-        except Exception as e:
-            return sublime.error_message("Error: {}".format(e))
-
-        return self.show_output_panel(response)
+        response = self.client.cat.plugins(**options)
+        self.show_output_panel(response)

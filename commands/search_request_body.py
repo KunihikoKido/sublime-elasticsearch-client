@@ -1,10 +1,9 @@
-import sublime
-from .base import BaseCommand
+from .base import SearchBaseCommand
 
 
-class SearchRequestBodyCommand(BaseCommand):
+class SearchRequestBodyCommand(SearchBaseCommand):
 
-    def make_options(self, search_type=None):
+    def run_request(self, search_type=None):
         options = dict(
             index=self.settings.index,
             doc_type=self.settings.doc_type,
@@ -13,23 +12,7 @@ class SearchRequestBodyCommand(BaseCommand):
             ignore=[404, 400]
         )
 
-        if search_type == "scan":
-            options["params"] = dict(
-                search_type=search_type,
-                scroll=self.settings.scroll_size
-            )
-        elif search_type is not None:
-            options["params"] = dict(
-                search_type=search_type
-            )
-        return options
+        self.extend_options(options, search_type=search_type)
 
-    def run_request(self, search_type=None):
-        options = self.make_options(search_type=search_type)
-
-        try:
-            response = self.client.search(**options)
-        except Exception as e:
-            return sublime.error_message("Error: {}".format(e))
-
-        return self.show_response(response)
+        response = self.client.search(**options)
+        self.show_response(response)

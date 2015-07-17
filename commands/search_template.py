@@ -1,15 +1,18 @@
-import sublime
-from .search_request_body import SearchRequestBodyCommand
+from .base import SearchBaseCommand
 
 
-class SearchTemplateCommand(SearchRequestBodyCommand):
+class SearchTemplateCommand(SearchBaseCommand):
 
     def run_request(self, search_type=None):
-        options = self.make_options(search_type=search_type)
+        options = dict(
+            index=self.settings.index,
+            doc_type=self.settings.doc_type,
+            body=self.get_text(),
+            params={},
+            ignore=[404, 400]
+        )
 
-        try:
-            response = self.client.search_template(**options)
-        except Exception as e:
-            return sublime.error_message("Error: {}".format(e))
+        self.extend_options(options, search_type=search_type)
 
-        return self.show_response(response)
+        response = self.client.search_template(**options)
+        self.show_response(response)

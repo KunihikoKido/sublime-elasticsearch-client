@@ -1,22 +1,13 @@
-import sublime
-from .base import BaseCommand
+from .base import CatBaseCommand
 
 
-class CatAllocationCommand(BaseCommand):
-
-    def is_enabled(self):
-        return True
+class CatAllocationCommand(CatBaseCommand):
 
     def run_request(self):
-
         options = dict(
             node_id="_all",
             params=dict(v=1)
         )
 
-        try:
-            response = self.client.cat.allocation(**options)
-        except Exception as e:
-            return sublime.error_message("Error: {}".format(e))
-
-        return self.show_output_panel(response)
+        response = self.client.cat.allocation(**options)
+        self.show_output_panel(response)
