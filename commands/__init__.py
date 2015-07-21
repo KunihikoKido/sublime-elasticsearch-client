@@ -33,6 +33,7 @@ from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .get_multiple_document import GetMultipleDocumentCommand
 from .get_percolator_query import GetPercolatorQueryCommand
+from .get_script import GetScriptCommand
 
 from .index_document import IndexDocumentCommand
 from .indices_analyze import IndicesAnalyzeCommand
@@ -85,6 +86,7 @@ __all__ = [
     "GetDocumentSourceCommand",
     "GetMultipleDocumentCommand",
     "GetPercolatorQueryCommand",
+    "GetScriptCommand",
     "IndexDocumentCommand",
     "IndicesAnalyzeCommand",
     "IndicesClearCacheCommand",
