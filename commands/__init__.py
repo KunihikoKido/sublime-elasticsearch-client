@@ -19,8 +19,8 @@ from .cluster_put_settings import ClusterPutSettingsCommand
 from .cluster_reroute import ClusterRerouteCommand
 from .cluster_state import ClusterStateCommand
 from .cluster_stats import ClusterStatsCommand
-from .count_percolate import CountPercolateCommand
 from .count import CountCommand
+from .count_percolate import CountPercolateCommand
 from .create_document import CreateDocumentCommand
 from .delete_by_query import DeleteByQueryCommand
 from .delete_document import DeleteDocumentCommand
@@ -40,8 +40,9 @@ from .index_percolator_query import IndexPercolatorQueryCommand
 from .indices_analyze import IndicesAnalyzeCommand
 from .indices_clear_cache import IndicesClearCacheCommand
 from .indices_close import IndicesCloseCommand
-from .indices_create_doc_type import IndicesCreateDocTypeCommand
 from .indices_create import IndicesCreateCommand
+from .indices_create_doc_type import IndicesCreateDocTypeCommand
+from .indices_delete import IndicesDeleteCommand
 from .indices_delete_alias import IndicesDeleteAliasCommand
 from .indices_delete_mapping import IndicesDeleteMappingCommand
 from .indices_delete_template import IndicesDeleteTemplateCommand
@@ -79,8 +80,8 @@ __all__ = [
     "ClusterRerouteCommand",
     "ClusterStateCommand",
     "ClusterStatsCommand",
-    "CountPercolateCommand",
     "CountCommand",
+    "CountPercolateCommand",
     "CreateDocumentCommand",
     "DeleteByQueryCommand",
     "DeleteDocumentCommand",
@@ -100,9 +101,10 @@ __all__ = [
     "IndicesAnalyzeCommand",
     "IndicesClearCacheCommand",
     "IndicesCloseCommand",
-    "IndicesCreateDocTypeCommand",
     "IndicesCreateCommand",
+    "IndicesCreateDocTypeCommand",
     "IndicesDeleteAliasCommand",
+    "IndicesDeleteCommand",
     "IndicesDeleteMappingCommand",
     "IndicesDeleteTemplateCommand",
     "IndicesDeleteWarmerCommand",

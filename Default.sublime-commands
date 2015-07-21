@@ -49,6 +49,7 @@
     {"command": "indices_delete_mapping",           "caption": "Elasticsearch: Indices Delete Mapping"},
     {"command": "indices_delete_template",          "caption": "Elasticsearch: Indices Delete Template"},
     {"command": "indices_delete_warmer",            "caption": "Elasticsearch: Indices Delete Warmer"},
+    {"command": "indices_delete",                   "caption": "Elasticsearch: Indices Delete"},
     {"command": "indices_get_mapping",              "caption": "Elasticsearch: Indices Get Mapping"},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Count", "args": {"search_type": "count"}},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Scan", "args": {"search_type": "scan"}},
