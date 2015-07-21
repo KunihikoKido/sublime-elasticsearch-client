@@ -24,6 +24,8 @@ from .count import CountCommand
 from .create_document import CreateDocumentCommand
 from .delete_by_query import DeleteByQueryCommand
 from .delete_document import DeleteDocumentCommand
+from .delete_script import DeleteScriptCommand
+from .delete_search_template import DeleteSearchTemplateCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .index_document import IndexDocumentCommand
@@ -68,6 +70,8 @@ __all__ = [
     "CreateDocumentCommand",
     "DeleteByQueryCommand",
     "DeleteDocumentCommand",
+    "DeleteScriptCommand",
+    "DeleteSearchTemplateCommand",
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
     "IndexDocumentCommand",

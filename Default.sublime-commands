@@ -25,6 +25,8 @@
     {"command": "create_document",                  "caption": "Elasticsearch: Create Document"},
     {"command": "delete_by_query",                  "caption": "Elasticsearch: Delete By Query"},
     {"command": "delete_document",                  "caption": "Elasticsearch: Delete Document"},
+    {"command": "delete_script",                    "caption": "Elasticsearch: Delete Script"},
+    {"command": "delete_search_template",           "caption": "Elasticsearch: Delete Search Template"},
     {"command": "get_document",                     "caption": "Elasticsearch: Get Document"},
     {"command": "get_document_source",              "caption": "Elasticsearch: Get Document Source"},
     {"command": "index_document",                   "caption": "Elasticsearch: Index Document"},

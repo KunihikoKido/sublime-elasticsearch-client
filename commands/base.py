@@ -13,6 +13,9 @@ from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
 from ..panel import SwitchServerListPanel
 from ..panel import AnalyzerListPanel
+from ..panel import ScriptListPanel
+from ..panel import SearchTemplateListPanel
+
 
 ANALYTICS_WRITE_KEY = "phc2hsUe48Dfw1iwsYQs2W7HH9jcwrws"
 
@@ -154,8 +157,15 @@ class BaseCommand(sublime_plugin.WindowCommand):
         list_panel.show(callback)
 
     def show_switch_server_list_panel(self, callback):
-        list_panel = SwitchServerListPanel(
-            self.window, self.settings.servers)
+        list_panel = SwitchServerListPanel(self.window, self.settings.servers)
+        list_panel.show(callback)
+
+    def show_script_list_panel(self, callback):
+        list_panel = ScriptListPanel(self.window, self.client)
+        list_panel.show(callback)
+
+    def show_search_template_list_panel(self, callback):
+        list_panel = SearchTemplateListPanel(self.window, self.client)
         list_panel.show(callback)
 
     def show_output_panel(self, text, syntax=None):
