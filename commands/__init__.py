@@ -55,6 +55,7 @@ from .indices_get_alias import IndicesGetAliasCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_get_settings import IndicesGetSettingsCommand
+from .indices_get_template import IndicesGetTemplateCommand
 from .indices_open import IndicesOpenCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
@@ -122,6 +123,7 @@ __all__ = [
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
     "IndicesGetSettingsCommand",
+    "IndicesGetTemplateCommand",
     "IndicesOpenCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
