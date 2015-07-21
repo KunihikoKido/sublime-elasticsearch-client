@@ -26,6 +26,7 @@ from .delete_by_query import DeleteByQueryCommand
 from .delete_document import DeleteDocumentCommand
 from .delete_script import DeleteScriptCommand
 from .delete_search_template import DeleteSearchTemplateCommand
+from .exists_document import ExistsDocumentCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .index_document import IndexDocumentCommand
@@ -72,6 +73,7 @@ __all__ = [
     "DeleteDocumentCommand",
     "DeleteScriptCommand",
     "DeleteSearchTemplateCommand",
+    "ExistsDocumentCommand",
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
     "IndexDocumentCommand",
