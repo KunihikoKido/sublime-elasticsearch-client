@@ -14,5 +14,9 @@
             "doc_type": "tweets",
         }
     ],
-    "user_id": ""
+    // There is [Segment.com](https://segment.com/) which forwards data to [Google
+    // Analytics](http://www.google.com/analytics/) to track what command are being
+    // used the most, as well as other stats. Everything is anonymized and no personal
+    // information, such as source code, is sent.
+    "analytics": true
 }
