@@ -47,6 +47,10 @@ from .indices_delete_alias import IndicesDeleteAliasCommand
 from .indices_delete_mapping import IndicesDeleteMappingCommand
 from .indices_delete_template import IndicesDeleteTemplateCommand
 from .indices_delete_warmer import IndicesDeleteWarmerCommand
+from .indices_exists import IndicesExistsCommand
+from .indices_exists_alias import IndicesExistsAliasCommand
+from .indices_exists_doc_type import IndicesExistsDocTypeCommand
+from .indices_exists_template import IndicesExistsTemplateCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_open import IndicesOpenCommand
@@ -108,6 +112,10 @@ __all__ = [
     "IndicesDeleteMappingCommand",
     "IndicesDeleteTemplateCommand",
     "IndicesDeleteWarmerCommand",
+    "IndicesExistsCommand",
+    "IndicesExistsAliasCommand",
+    "IndicesExistsDocTypeCommand",
+    "IndicesExistsTemplateCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
     "IndicesOpenCommand",
