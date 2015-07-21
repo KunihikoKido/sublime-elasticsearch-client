@@ -41,6 +41,7 @@ from .indices_analyze import IndicesAnalyzeCommand
 from .indices_clear_cache import IndicesClearCacheCommand
 from .indices_close import IndicesCloseCommand
 from .indices_create_doc_type import IndicesCreateDocTypeCommand
+from .indices_create import IndicesCreateCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_open import IndicesOpenCommand
@@ -96,6 +97,7 @@ __all__ = [
     "IndicesClearCacheCommand",
     "IndicesCloseCommand",
     "IndicesCreateDocTypeCommand",
+    "IndicesCreateCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
     "IndicesOpenCommand",

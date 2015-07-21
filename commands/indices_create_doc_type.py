@@ -2,7 +2,7 @@ from .base import CreateBaseCommand
 
 
 class IndicesCreateDocTypeCommand(CreateBaseCommand):
-    command_name = "elasticsearch:indices-close"
+    command_name = "elasticsearch:indices-create-doc-type"
 
     def is_enabled(self):
         return True
