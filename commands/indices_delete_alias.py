@@ -19,4 +19,4 @@ class IndicesDeleteAliasCommand(DeleteBaseCommand):
         )
 
         if sublime.ok_cancel_dialog("Are you sure you want to delete?", ok_title='Delete'):
-            return self.client.delete_alias(**options)
+            return self.client.indices.delete_alias(**options)
