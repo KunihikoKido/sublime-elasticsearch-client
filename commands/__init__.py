@@ -44,6 +44,8 @@ from .indices_create_doc_type import IndicesCreateDocTypeCommand
 from .indices_create import IndicesCreateCommand
 from .indices_delete_alias import IndicesDeleteAliasCommand
 from .indices_delete_mapping import IndicesDeleteMappingCommand
+from .indices_delete_template import IndicesDeleteTemplateCommand
+from .indices_delete_warmer import IndicesDeleteWarmerCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_open import IndicesOpenCommand
@@ -102,6 +104,8 @@ __all__ = [
     "IndicesCreateCommand",
     "IndicesDeleteAliasCommand",
     "IndicesDeleteMappingCommand",
+    "IndicesDeleteTemplateCommand",
+    "IndicesDeleteWarmerCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
     "IndicesOpenCommand",
