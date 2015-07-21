@@ -27,8 +27,13 @@ from .delete_document import DeleteDocumentCommand
 from .delete_script import DeleteScriptCommand
 from .delete_search_template import DeleteSearchTemplateCommand
 from .exists_document import ExistsDocumentCommand
+from .explain_document import ExplainDocumentCommand
+from .field_stats import FieldStatsCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
+from .get_multiple_document import GetMultipleDocumentCommand
+from .get_percolator_query import GetPercolatorQueryCommand
+
 from .index_document import IndexDocumentCommand
 from .indices_analyze import IndicesAnalyzeCommand
 from .indices_clear_cache import IndicesClearCacheCommand
@@ -74,8 +79,12 @@ __all__ = [
     "DeleteScriptCommand",
     "DeleteSearchTemplateCommand",
     "ExistsDocumentCommand",
+    "ExplainDocumentCommand",
+    "FieldStatsCommand",
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
+    "GetMultipleDocumentCommand",
+    "GetPercolatorQueryCommand",
     "IndexDocumentCommand",
     "IndicesAnalyzeCommand",
     "IndicesClearCacheCommand",
