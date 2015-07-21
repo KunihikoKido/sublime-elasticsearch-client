@@ -59,6 +59,7 @@ from .indices_get_field_mapping import IndicesGetFieldMappingCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_get_settings import IndicesGetSettingsCommand
 from .indices_get_template import IndicesGetTemplateCommand
+from .indices_get_upgrade import IndicesGetUpgradeCommand
 from .indices_open import IndicesOpenCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
@@ -130,6 +131,7 @@ __all__ = [
     "IndicesGetMappingCommand",
     "IndicesGetSettingsCommand",
     "IndicesGetTemplateCommand",
+    "IndicesGetUpgradeCommand",
     "IndicesOpenCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",

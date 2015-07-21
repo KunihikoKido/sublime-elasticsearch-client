@@ -60,6 +60,7 @@
     {"command": "indices_get_mapping",              "caption": "Elasticsearch: Indices Get Mapping"},
     {"command": "indices_get_settings",             "caption": "Elasticsearch: Indices Get Settings"},
     {"command": "indices_get_template",             "caption": "Elasticsearch: Indices Get Template"},
+    {"command": "indices_get_upgrade",              "caption": "Elasticsearch: Indices Get Upgrade"},
     {"command": "indices_open",                     "caption": "Elasticsearch: Indices Open"},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Count", "args": {"search_type": "count"}},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Scan", "args": {"search_type": "scan"}},
