@@ -7,6 +7,7 @@ from .script_list_panel import ScriptListPanel
 from .search_template_list_panel import SearchTemplateListPanel
 from .switch_server_list_panel import SwitchServerListPanel
 from .warmer_list_panel import WarmerListPanel
+from .field_list_panel import FieldListPanel
 
 
 __all__ = [
@@ -19,4 +20,5 @@ __all__ = [
     "SearchTemplateListPanel",
     "SwitchServerListPanel",
     "WarmerListPanel",
+    "FieldListPanel",
 ]
