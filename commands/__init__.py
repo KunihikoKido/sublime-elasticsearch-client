@@ -19,6 +19,11 @@ from .cluster_put_settings import ClusterPutSettingsCommand
 from .cluster_reroute import ClusterRerouteCommand
 from .cluster_state import ClusterStateCommand
 from .cluster_stats import ClusterStatsCommand
+from .count_percolate import CountPercolateCommand
+from .count import CountCommand
+from .create_document import CreateDocumentCommand
+from .delete_by_query import DeleteByQueryCommand
+from .delete_document import DeleteDocumentCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
 from .index_document import IndexDocumentCommand
@@ -58,6 +63,11 @@ __all__ = [
     "ClusterRerouteCommand",
     "ClusterStateCommand",
     "ClusterStatsCommand",
+    "CountPercolateCommand",
+    "CountCommand",
+    "CreateDocumentCommand",
+    "DeleteByQueryCommand",
+    "DeleteDocumentCommand",
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
     "IndexDocumentCommand",
