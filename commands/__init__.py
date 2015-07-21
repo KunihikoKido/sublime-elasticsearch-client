@@ -51,12 +51,12 @@ from .indices_exists import IndicesExistsCommand
 from .indices_exists_alias import IndicesExistsAliasCommand
 from .indices_exists_doc_type import IndicesExistsDocTypeCommand
 from .indices_exists_template import IndicesExistsTemplateCommand
-from .indices_get_alias import IndicesGetAliasCommand
 from .indices_get import IndicesGetCommand
+from .indices_get_alias import IndicesGetAliasCommand
+from .indices_get_field_mapping import IndicesGetFieldMappingCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_get_settings import IndicesGetSettingsCommand
 from .indices_get_template import IndicesGetTemplateCommand
-from .indices_get_field_mapping import IndicesGetFieldMappingCommand
 from .indices_open import IndicesOpenCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
@@ -116,16 +116,16 @@ __all__ = [
     "IndicesDeleteMappingCommand",
     "IndicesDeleteTemplateCommand",
     "IndicesDeleteWarmerCommand",
-    "IndicesExistsCommand",
     "IndicesExistsAliasCommand",
+    "IndicesExistsCommand",
     "IndicesExistsDocTypeCommand",
     "IndicesExistsTemplateCommand",
     "IndicesGetAliasCommand",
     "IndicesGetCommand",
+    "IndicesGetFieldMappingCommand",
     "IndicesGetMappingCommand",
     "IndicesGetSettingsCommand",
     "IndicesGetTemplateCommand",
-    "IndicesGetFieldMappingCommand",
     "IndicesOpenCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
