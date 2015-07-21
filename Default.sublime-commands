@@ -53,6 +53,7 @@
     {"command": "indices_exists_doc_type",          "caption": "Elasticsearch: Indices Exists Doc Type"},
     {"command": "indices_exists_template",          "caption": "Elasticsearch: Indices Exists Template"},
     {"command": "indices_get_alias",                "caption": "Elasticsearch: Indices Get Alias"},
+    {"command": "indices_get_settings",             "caption": "Elasticsearch: Indices Get Settings"},
     {"command": "indices_get",                      "caption": "Elasticsearch: Indices Get"},
     {"command": "indices_get_mapping",              "caption": "Elasticsearch: Indices Get Mapping"},
     {"command": "indices_open",                     "caption": "Elasticsearch: Indices Open"},
