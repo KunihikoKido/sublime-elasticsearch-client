@@ -51,6 +51,7 @@ from .indices_exists import IndicesExistsCommand
 from .indices_exists_alias import IndicesExistsAliasCommand
 from .indices_exists_doc_type import IndicesExistsDocTypeCommand
 from .indices_exists_template import IndicesExistsTemplateCommand
+from .indices_get_alias import IndicesGetAliasCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_open import IndicesOpenCommand
@@ -116,6 +117,7 @@ __all__ = [
     "IndicesExistsAliasCommand",
     "IndicesExistsDocTypeCommand",
     "IndicesExistsTemplateCommand",
+    "IndicesGetAliasCommand",
     "IndicesGetCommand",
     "IndicesGetMappingCommand",
     "IndicesOpenCommand",
