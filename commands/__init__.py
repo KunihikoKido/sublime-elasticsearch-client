@@ -51,6 +51,8 @@ from .indices_exists import IndicesExistsCommand
 from .indices_exists_alias import IndicesExistsAliasCommand
 from .indices_exists_doc_type import IndicesExistsDocTypeCommand
 from .indices_exists_template import IndicesExistsTemplateCommand
+from .indices_flush import IndicesFlushCommand
+from .indices_flush_synced import IndicesFlushSyncedCommand
 from .indices_get import IndicesGetCommand
 from .indices_get_alias import IndicesGetAliasCommand
 from .indices_get_field_mapping import IndicesGetFieldMappingCommand
@@ -120,6 +122,8 @@ __all__ = [
     "IndicesExistsCommand",
     "IndicesExistsDocTypeCommand",
     "IndicesExistsTemplateCommand",
+    "IndicesFlushCommand",
+    "IndicesFlushSyncedCommand",
     "IndicesGetAliasCommand",
     "IndicesGetCommand",
     "IndicesGetFieldMappingCommand",

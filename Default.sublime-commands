@@ -52,6 +52,8 @@
     {"command": "indices_exists_alias",             "caption": "Elasticsearch: Indices Exists Alias"},
     {"command": "indices_exists_doc_type",          "caption": "Elasticsearch: Indices Exists Doc Type"},
     {"command": "indices_exists_template",          "caption": "Elasticsearch: Indices Exists Template"},
+    {"command": "indices_flush",                    "caption": "Elasticsearch: Indices Flush"},
+    {"command": "indices_flush_synced",             "caption": "Elasticsearch: Indices Flush Synced"},
     {"command": "indices_get",                      "caption": "Elasticsearch: Indices Get"},
     {"command": "indices_get_alias",                "caption": "Elasticsearch: Indices Get Alias"},
     {"command": "indices_get_field_mapping",        "caption": "Elasticsearch: Indices Get Field Mapping"},
