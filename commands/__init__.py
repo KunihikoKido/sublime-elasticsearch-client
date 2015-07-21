@@ -60,7 +60,9 @@ from .indices_get_mapping import IndicesGetMappingCommand
 from .indices_get_settings import IndicesGetSettingsCommand
 from .indices_get_template import IndicesGetTemplateCommand
 from .indices_get_upgrade import IndicesGetUpgradeCommand
+from .indices_get_warmer import IndicesGetWarmerCommand
 from .indices_open import IndicesOpenCommand
+from .indices_optimize import IndicesOptimizeCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -132,7 +134,9 @@ __all__ = [
     "IndicesGetSettingsCommand",
     "IndicesGetTemplateCommand",
     "IndicesGetUpgradeCommand",
+    "IndicesGetWarmerCommand",
     "IndicesOpenCommand",
+    "IndicesOptimizeCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",

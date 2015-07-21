@@ -1,7 +1,7 @@
-from .base import CreateBaseCommand
+from .base import BaseCommand
 
 
-class IndicesGetUpgradeCommand(CreateBaseCommand):
+class IndicesGetUpgradeCommand(BaseCommand):
     command_name = "elasticsearch:indices-get-upgrade"
 
     def is_enabled(self):
