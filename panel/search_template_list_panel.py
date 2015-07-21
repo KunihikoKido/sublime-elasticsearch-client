@@ -11,8 +11,8 @@ class SearchTemplateListPanel(object):
     def on_done(self, index):
         if index == -1:
             return
-        search_template = self.choices[index]
-        self.callback(id=search_template[0])
+        id = self.choices[index]
+        self.callback(id=id)
 
     def show(self, callback):
         self.callback = callback

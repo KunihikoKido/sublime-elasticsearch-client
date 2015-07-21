@@ -35,6 +35,7 @@
     {"command": "get_percolator_query",             "caption": "Elasticsearch: Get Percolator Query"},
     {"command": "get_multiple_document",            "caption": "Elasticsearch: Get Multiple Document"},
     {"command": "get_script",                       "caption": "Elasticsearch: Get Script"},
+    {"command": "get_search_template",              "caption": "Elasticsearch: Get Search Template"},
     {"command": "index_document",                   "caption": "Elasticsearch: Index Document"},
     {"command": "indices_analyze",                  "caption": "Elasticsearch: Indices Analyze"},
     {"command": "indices_clear_cache",              "caption": "Elasticsearch: Indices Clear Cache"},
