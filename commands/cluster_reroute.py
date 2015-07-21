@@ -2,6 +2,7 @@ from .base import CreateBaseCommand
 
 
 class ClusterRerouteCommand(CreateBaseCommand):
+    command_name = "elasticsearch:cluster-reroute"
 
     def run_request(self):
         options = dict(

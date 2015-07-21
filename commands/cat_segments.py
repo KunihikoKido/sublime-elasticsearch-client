@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatSegmentsCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-segments"
 
     def run_request(self, index=None):
         if index is None:

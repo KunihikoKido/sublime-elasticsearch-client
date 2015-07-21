@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatNodesCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-nodes"
 
     def run_request(self):
         options = dict(

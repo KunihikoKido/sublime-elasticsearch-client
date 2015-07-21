@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatCountCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-count"
 
     def run_request(self, index=None):
         if index is None:

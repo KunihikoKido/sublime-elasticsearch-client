@@ -2,6 +2,7 @@ from .base import CreateBaseCommand
 
 
 class IndexDocumentCommand(CreateBaseCommand):
+    command_name = "elasticsearch:index-document"
 
     def run_request(self, id=None):
         if id is None:

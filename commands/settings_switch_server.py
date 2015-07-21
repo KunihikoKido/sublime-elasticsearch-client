@@ -2,6 +2,7 @@ from .base import SettingsBaseCommand
 
 
 class SettingsSwitchServerCommand(SettingsBaseCommand):
+    command_name = "elasticsearch:settings-switch-server"
 
     def run(self, index=None):
         if index is None:
@@ -15,3 +16,4 @@ class SettingsSwitchServerCommand(SettingsBaseCommand):
 
         self.save_settings()
         self.show_active_server()
+        self.track_command()

@@ -2,6 +2,7 @@ from .base import BaseCommand
 
 
 class IndicesAnalyzeCommand(BaseCommand):
+    command_name = "elasticsearch:indices-analyze"
 
     def is_enabled(self):
         return True

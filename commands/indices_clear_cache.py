@@ -2,6 +2,7 @@ from .base import CreateBaseCommand
 
 
 class IndicesClearCacheCommand(CreateBaseCommand):
+    command_name = "elasticsearch:indices-clear-cache"
 
     def is_enabled(self):
         return True

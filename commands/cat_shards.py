@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatShardsCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-shards"
 
     def run_request(self, index=None):
         if index is None:

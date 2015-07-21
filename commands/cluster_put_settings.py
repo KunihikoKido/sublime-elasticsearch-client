@@ -2,6 +2,7 @@ from .base import CreateBaseCommand
 
 
 class ClusterPutSettingsCommand(CreateBaseCommand):
+    command_name = "elasticsearch:cluster-put-settings"
 
     def run_request(self):
         options = dict(

@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatAliasesCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-aliases"
 
     def is_enabled(self):
         return True

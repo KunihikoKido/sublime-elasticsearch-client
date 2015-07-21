@@ -2,6 +2,7 @@ from .base import BaseCommand
 
 
 class IndicesGetMappingCommand(BaseCommand):
+    command_name = "elasticsearch:indices-get-mapping"
 
     def is_enabled(self):
         return True

@@ -2,6 +2,7 @@ from .base import BaseCommand
 
 
 class ClusterHealthCommand(BaseCommand):
+    command_name = "elasticsearch:cluster-health"
 
     def is_enabled(self):
         return True

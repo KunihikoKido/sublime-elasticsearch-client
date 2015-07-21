@@ -13,5 +13,6 @@
             "index": "twitter",
             "doc_type": "tweets",
         }
-    ]
+    ],
+    "user_id": ""
 }

@@ -2,6 +2,7 @@ from .base import CreateBaseCommand
 
 
 class IndicesCloseCommand(CreateBaseCommand):
+    command_name = "elasticsearch:indices-close"
 
     def is_enabled(self):
         return True

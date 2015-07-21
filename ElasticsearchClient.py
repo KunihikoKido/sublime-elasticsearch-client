@@ -30,5 +30,4 @@ module = "ElasticsearchClient.commands"
 if module in sys.modules.keys():
     reload_modeule(module)
 
-
 from .commands import *

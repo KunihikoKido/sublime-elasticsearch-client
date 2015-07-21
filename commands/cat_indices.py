@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatIndicesCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-indices"
 
     def run_request(self, index=None):
         if index is None:

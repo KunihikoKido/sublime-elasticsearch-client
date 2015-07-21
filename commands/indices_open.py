@@ -2,6 +2,7 @@ from .base import CreateBaseCommand
 
 
 class IndicesOpenCommand(CreateBaseCommand):
+    command_name = "elasticsearch:indices-open"
 
     def is_enabled(self):
         return True

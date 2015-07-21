@@ -2,6 +2,9 @@ import json
 import threading
 import sublime
 import sublime_plugin
+import analytics
+import uuid
+
 from elasticsearch import Elasticsearch
 from elasticsearch_connections import CustomHeadersConnection
 from abc import ABCMeta, abstractmethod
@@ -10,6 +13,17 @@ from ..panel import IndexListPanel
 from ..panel import DocTypeListPanel
 from ..panel import SwitchServerListPanel
 from ..panel import AnalyzerListPanel
+
+ANALYTICS_WRITE_KEY = "phc2hsUe48Dfw1iwsYQs2W7HH9jcwrws"
+
+
+def track_command(user_id, command_name):
+    analytics.write_key = ANALYTICS_WRITE_KEY
+    analytics.identify(user_id)
+    analytics.track(user_id, "Run Command", {
+        "category": "ST3",
+        "label": command_name,
+    })
 
 
 class Settings(object):
@@ -51,6 +65,14 @@ class Settings(object):
             scroll_size=self.scroll_size,
         )
 
+    @property
+    def analytics(self):
+        return self.settings.get("analytics", True)
+
+    @property
+    def user_id(self):
+        return self.settings.get("user_id", None)
+
     def set(self, key, value):
         self.settings.set(key, value)
 
@@ -60,6 +82,7 @@ class Settings(object):
 
 class BaseCommand(sublime_plugin.WindowCommand):
     __metaclass__ = ABCMeta
+    command_name = None
 
     def __init__(self, *args, **kwargs):
         self.settings = Settings()
@@ -97,6 +120,15 @@ class BaseCommand(sublime_plugin.WindowCommand):
     @property
     def client(self):
         return self.init_client()
+
+    def track_command(self):
+        if self.settings.analytics:
+            user_id = self.settings.user_id
+            if not user_id:
+                user_id = uuid.uuid4()
+                self.settings.set("user_id", str(user_id))
+                self.settings.save()
+            track_command(user_id, self.command_name)
 
     def show_input_panel(self, label, default, callback):
         self.window.show_input_panel(label, default, callback, None, None)
@@ -156,6 +188,7 @@ class BaseCommand(sublime_plugin.WindowCommand):
 
         if response is not None:
             self.show_response(response)
+            self.track_command()
 
     def request_thread(self, *args, **kwargs):
         thread = threading.Thread(
@@ -177,6 +210,7 @@ class CreateBaseCommand(BaseCommand):
 
         if response is not None:
             self.show_object_output_panel(response)
+            self.track_command()
 
 
 class DeleteBaseCommand(CreateBaseCommand):
@@ -197,11 +231,18 @@ class CatBaseCommand(CreateBaseCommand):
 
         if response is not None:
             self.show_output_panel(response)
+            self.track_command()
 
 
 class SearchBaseCommand(BaseCommand):
 
     def extend_options(self, options, search_type=None):
+        if search_type:
+            self.command_name = "{base}-{search_type}".format(
+                    base=self.command_name,
+                    search_type=search_type.lower()
+                )
+
         if search_type == "scan":
             options["params"] = dict(
                 search_type=search_type,

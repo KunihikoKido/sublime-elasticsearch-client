@@ -2,6 +2,7 @@ from .base import BaseCommand
 
 
 class GetDocumentSourceCommand(BaseCommand):
+    command_name = "elasticsearch:get-document-source"
 
     def is_enabled(self):
         return True

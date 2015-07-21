@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatHealthCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-health"
 
     def run_request(self):
         options = dict(

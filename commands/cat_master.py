@@ -2,6 +2,7 @@ from .base import CatBaseCommand
 
 
 class CatMasterCommand(CatBaseCommand):
+    command_name = "elasticsearch:cat-master"
 
     def run_request(self):
         options = dict(

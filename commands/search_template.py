@@ -2,6 +2,7 @@ from .base import SearchBaseCommand
 
 
 class SearchTemplateCommand(SearchBaseCommand):
+    command_name = "elasticsearch:search-template"
 
     def run_request(self, search_type=None):
         options = dict(

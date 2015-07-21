@@ -2,6 +2,7 @@ from .base import BaseCommand
 
 
 class ClusterGetSettingsCommand(BaseCommand):
+    command_name = "elasticsearch:cluster-get-settings"
 
     def is_enabled(self):
         return True
