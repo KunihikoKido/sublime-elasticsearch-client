@@ -33,5 +33,5 @@ class FieldListPanel(object):
 
         for field in response[self.index]["mappings"][self.doc_type].keys():
             self.choices.append(field)
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)

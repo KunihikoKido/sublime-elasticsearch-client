@@ -31,5 +31,5 @@ class WarmerListPanel(object):
         for name in response[self.index]["warmers"].keys():
             print(response[self.index])
             self.choices.append(name)
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)

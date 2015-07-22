@@ -27,5 +27,5 @@ class IndexTemplateListPanel(object):
         self.choices = []
         for name in response.keys():
             self.choices.append(name)
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)

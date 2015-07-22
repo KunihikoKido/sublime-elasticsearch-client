@@ -24,5 +24,5 @@ class IndexListPanel(object):
             return sublime.error_message("Error: {}".format(e))
 
         self.choices = list(response["metadata"]["indices"].keys())
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)

@@ -32,8 +32,7 @@ class AnalyzerListPanel(object):
         analyzers = []
 
         try:
-            analyzers = \
-                response[self.index]["settings"]["index"]["analysis"].keys()
+            analyzers = response[self.index]["settings"]["index"]["analysis"]["analyzer"].keys()
         except KeyError:
             pass
 
@@ -44,7 +43,7 @@ class AnalyzerListPanel(object):
                 ])
 
         self.choices += DEFAULT_ANALYZERS
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)
 
 

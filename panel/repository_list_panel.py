@@ -27,5 +27,5 @@ class RepositoryListPanel(object):
         self.choices = []
         for repository, info in response.items():
             self.choices.append([repository, info["type"]])
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)

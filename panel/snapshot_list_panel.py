@@ -36,5 +36,5 @@ class SnapshotListPanel(object):
                 snapshot["snapshot"],
                 ",".join(snapshot["indices"])
                 ])
-
+        self.choices.sort(reverse=True)
         self.window.show_quick_panel(self.choices, self.on_done)

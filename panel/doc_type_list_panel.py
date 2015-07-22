@@ -35,5 +35,5 @@ class DocTypeListPanel(object):
         for name in mappings:
             if name != "_default_":
                 self.choices.append(name)
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)

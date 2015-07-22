@@ -32,4 +32,6 @@ class AliasListPanel(object):
             for alias in aliases["aliases"].keys():
                 self.choices.append([alias, index])
 
+        self.choices.sort()
+
         self.window.show_quick_panel(self.choices, self.on_done)

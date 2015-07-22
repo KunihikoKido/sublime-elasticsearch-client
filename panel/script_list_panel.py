@@ -29,5 +29,5 @@ class ScriptListPanel(object):
         self.choices = []
         for doc in response["hits"]["hits"]:
             self.choices.append([doc["_id"], doc["_type"]])
-
+        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)
