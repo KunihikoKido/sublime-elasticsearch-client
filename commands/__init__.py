@@ -13,6 +13,7 @@ from .cat_recovery import CatRecoveryCommand
 from .cat_segments import CatSegmentsCommand
 from .cat_shards import CatShardsCommand
 from .cat_thread_pool import CatThreadPoolCommand
+from .clear_scroll import ClearScrollCommand
 from .cluster_get_settings import ClusterGetSettingsCommand
 from .cluster_health import ClusterHealthCommand
 from .cluster_pending_tasks import ClusterPendingTasksCommand
@@ -113,7 +114,7 @@ from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
-
+from .helper_benchmark import HelperBenchmarkCommand
 
 __all__ = [
     "BulkCommand",
@@ -131,6 +132,7 @@ __all__ = [
     "CatSegmentsCommand",
     "CatShardsCommand",
     "CatThreadPoolCommand",
+    "ClearScrollCommand",
     "ClusterGetSettingsCommand",
     "ClusterHealthCommand",
     "ClusterPendingTasksCommand",
@@ -231,4 +233,5 @@ __all__ = [
     "SuggestCommand",
     "TermvectorCommand",
     "UpdateDocumentCommand",
+    "HelperBenchmarkCommand",
 ]

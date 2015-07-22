@@ -58,7 +58,7 @@ class Settings(object):
 
     @property
     def headers(self):
-        return self.settings.get("headers", None)
+        return self.settings.get("headers", {})
 
     @property
     def servers(self):
@@ -72,6 +72,18 @@ class Settings(object):
             doc_type=self.doc_type,
             scroll_size=self.scroll_size,
         )
+
+    @property
+    def ab_command(self):
+        return self.settings.get("ab_command")
+
+    @property
+    def ab_requests(self):
+        return str(self.settings.get("ab_requests"))
+
+    @property
+    def ab_concurrency(self):
+        return str(self.settings.get("ab_concurrency"))
 
     @property
     def analytics(self):

@@ -14,6 +14,13 @@
             "doc_type": "tweets",
         }
     ],
+    "headers": {},
+    "scroll_size": "1m",
+    // Path to the Apache Bench (ab) command. If ab is on you path, you should not need to
+    // change this. Windows users will need to use forward slashes in the path.
+    "ab_command": "ab",
+    "ab_requests": 100,
+    "ab_concurrency": 1,
     // There is [Segment.com](https://segment.com/) which forwards data to [Google
     // Analytics](http://www.google.com/analytics/) to track what command are being
     // used the most, as well as other stats. Everything is anonymized and no personal
