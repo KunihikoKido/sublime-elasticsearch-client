@@ -76,6 +76,10 @@ from .indices_status import IndicesStatusCommand
 from .indices_update_aliases import IndicesUpdateAliasesCommand
 from .indices_upgrade import IndicesUpgradeCommand
 from .indices_validate_query import IndicesValidateQueryCommand
+from .info import InfoCommand
+from .multiple_percolate import MultiplePercolateCommand
+from .multiple_search import MultipleSearchCommand
+from .multiple_termvectors import MultipleTermvectorsCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -163,6 +167,10 @@ __all__ = [
     "IndicesUpdateAliasesCommand",
     "IndicesUpgradeCommand",
     "IndicesValidateQueryCommand",
+    "InfoCommand",
+    "MultiplePercolateCommand",
+    "MultipleSearchCommand",
+    "MultipleTermvectorsCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
