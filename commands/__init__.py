@@ -89,6 +89,7 @@ from .put_script import PutScriptCommand
 from .put_search_template import PutSearchTemplateCommand
 from .scroll import ScrollCommand
 from .search_exists import SearchExistsCommand
+from .search_percolator_query import SearchPercolatorQueryCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -189,6 +190,7 @@ __all__ = [
     "PutSearchTemplateCommand",
     "ScrollCommand",
     "SearchExistsCommand",
+    "SearchPercolatorQueryCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
