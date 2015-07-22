@@ -91,11 +91,22 @@ from .scroll import ScrollCommand
 from .search_exists import SearchExistsCommand
 from .search_percolator_query import SearchPercolatorQueryCommand
 from .search_request_body import SearchRequestBodyCommand
+from .search_shards import SearchShardsCommand
+from .search_simple_query import SearchSimpleQueryCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
 from .settings_switch_server import SettingsSwitchServerCommand
 from .show_output_panel import ShowOutputPanelCommand
 from .show_response import ShowResponseCommand
+from .snapshot_create import SnapshotCreateCommand
+from .snapshot_create_repository import SnapshotCreateRepositoryCommand
+from .snapshot_delete import SnapshotDeleteCommand
+from .snapshot_delete_repository import SnapshotDeleteRepositoryCommand
+from .snapshot_get import SnapshotGetCommand
+from .snapshot_get_repository import SnapshotGetRepositoryCommand
+from .snapshot_restore import SnapshotRestoreCommand
+from .snapshot_status import SnapshotStatusCommand
+from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 
 
 __all__ = [
@@ -193,8 +204,19 @@ __all__ = [
     "SearchPercolatorQueryCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
+    "SearchShardsCommand",
+    "SearchSimpleQueryCommand",
     "SettingsShowActiveServerCommand",
     "SettingsSwitchServerCommand",
     "ShowOutputPanelCommand",
     "ShowResponseCommand",
+    "SnapshotCreateCommand",
+    "SnapshotCreateRepositoryCommand",
+    "SnapshotDeleteCommand",
+    "SnapshotDeleteRepositoryCommand",
+    "SnapshotGetCommand",
+    "SnapshotGetRepositoryCommand",
+    "SnapshotRestoreCommand",
+    "SnapshotStatusCommand",
+    "SnapshotVerifyRepositoryCommand",
 ]
