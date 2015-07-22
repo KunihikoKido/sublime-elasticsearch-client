@@ -87,6 +87,8 @@ from .percolate import PercolateCommand
 from .ping import PingCommand
 from .put_script import PutScriptCommand
 from .put_search_template import PutSearchTemplateCommand
+from .scroll import ScrollCommand
+from .search_exists import SearchExistsCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -185,6 +187,8 @@ __all__ = [
     "PingCommand",
     "PutScriptCommand",
     "PutSearchTemplateCommand",
+    "ScrollCommand",
+    "SearchExistsCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",

@@ -90,6 +90,8 @@
     {"command": "ping",                             "caption": "Elasticsearch: Ping"},
     {"command": "put_script",                       "caption": "Elasticsearch: Put Script"},
     {"command": "put_search_template",              "caption": "Elasticsearch: Put Search Template"},
+    {"command": "scroll",                           "caption": "Elasticsearch: Scroll"},
+    {"command": "search_exists",                    "caption": "Elasticsearch: Search Exists"},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Count", "args": {"search_type": "count"}},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Scan", "args": {"search_type": "scan"}},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body"},
