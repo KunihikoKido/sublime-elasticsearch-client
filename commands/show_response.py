@@ -6,7 +6,7 @@ class ShowResponseCommand(sublime_plugin.WindowCommand):
 
     def run(self, title="", text=""):
         panel = self.window.new_file()
-        panel.set_name('{}'.format(title))
+        panel.set_name('RESPONSE: {}'.format(title))
         panel.set_scratch(True)
         panel.set_syntax_file(self.default_syntax)
         panel.set_scratch(True)
