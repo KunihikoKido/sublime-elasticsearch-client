@@ -37,6 +37,8 @@ from .get_multiple_document import GetMultipleDocumentCommand
 from .get_percolator_query import GetPercolatorQueryCommand
 from .get_script import GetScriptCommand
 from .get_search_template import GetSearchTemplateCommand
+from .helper_benchmark import HelperBenchmarkCommand
+from .helper_change_number_of_replicas import HelperChangeNumberOfReplicasCommand
 from .index_document import IndexDocumentCommand
 from .index_percolator_query import IndexPercolatorQueryCommand
 from .indices_analyze import IndicesAnalyzeCommand
@@ -114,7 +116,7 @@ from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
-from .helper_benchmark import HelperBenchmarkCommand
+
 
 __all__ = [
     "BulkCommand",
@@ -156,6 +158,8 @@ __all__ = [
     "GetPercolatorQueryCommand",
     "GetScriptCommand",
     "GetSearchTemplateCommand",
+    "HelperBenchmarkCommand",
+    "HelperChangeNumberOfReplicasCommand",
     "IndexDocumentCommand",
     "IndexPercolatorQueryCommand",
     "IndicesAnalyzeCommand",
@@ -233,5 +237,4 @@ __all__ = [
     "SuggestCommand",
     "TermvectorCommand",
     "UpdateDocumentCommand",
-    "HelperBenchmarkCommand",
 ]

@@ -38,6 +38,11 @@
     {"command": "get_percolator_query",             "caption": "Elasticsearch: Get Percolator Query"},
     {"command": "get_script",                       "caption": "Elasticsearch: Get Script"},
     {"command": "get_search_template",              "caption": "Elasticsearch: Get Search Template"},
+    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Request Body Count", "args": {"endpoint": "_search", "search_type": "count"}},
+    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Request Body", "args": {"endpoint": "_search", "search_type": null}},
+    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Template Count", "args": {"endpoint": "_search/template", "search_type": "count"}},
+    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Template", "args": {"endpoint": "_search/template", "search_type": null}},
+    {"command": "helper_change_number_of_replicas", "caption": "Elasticsearch: Helper Change Number Of Replicas"}
     {"command": "index_document",                   "caption": "Elasticsearch: Index Document"},
     {"command": "index_percolator_query",           "caption": "Elasticsearch: Index Percolator Query"},
     {"command": "indices_analyze",                  "caption": "Elasticsearch: Indices Analyze"},
@@ -119,8 +124,4 @@
     {"command": "suggest",                          "caption": "Elasticsearch: Suggest"},
     {"command": "termvector",                       "caption": "Elasticsearch: Termvector"},
     {"command": "update_document",                  "caption": "Elasticsearch: Update Document"},
-    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Request Body", "args": {"endpoint": "_search", "search_type": null}},
-    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Request Body Count", "args": {"endpoint": "_search", "search_type": "count"}},
-    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Template", "args": {"endpoint": "_search/template", "search_type": null}},
-    {"command": "helper_benchmark",                 "caption": "Elasticsearch: Helper Benchmark For Search Template Count", "args": {"endpoint": "_search/template", "search_type": "count"}},
 ]
