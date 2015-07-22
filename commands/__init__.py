@@ -85,6 +85,7 @@ from .nodes_info import NodesInfoCommand
 from .nodes_shutdown import NodesShutdownCommand
 from .percolate import PercolateCommand
 from .ping import PingCommand
+from .put_script import PutScriptCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -181,6 +182,7 @@ __all__ = [
     "NodesShutdownCommand",
     "PercolateCommand",
     "PingCommand",
+    "PutScriptCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
