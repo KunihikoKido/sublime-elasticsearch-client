@@ -80,6 +80,9 @@ from .info import InfoCommand
 from .multiple_percolate import MultiplePercolateCommand
 from .multiple_search import MultipleSearchCommand
 from .multiple_termvectors import MultipleTermvectorsCommand
+from .nodes_hot_threads import NodesHotThreadsCommand
+from .nodes_info import NodesInfoCommand
+from .nodes_shutdown import NodesShutdownCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -171,6 +174,9 @@ __all__ = [
     "MultiplePercolateCommand",
     "MultipleSearchCommand",
     "MultipleTermvectorsCommand",
+    "NodesHotThreadsCommand",
+    "NodesInfoCommand",
+    "NodesShutdownCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
