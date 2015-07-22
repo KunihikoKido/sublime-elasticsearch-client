@@ -69,6 +69,13 @@ from .indices_put_settings import IndicesPutSettingsCommand
 from .indices_put_template import IndicesPutTemplateCommand
 from .indices_put_warmer import IndicesPutWarmerCommand
 from .indices_recovery import IndicesRecoveryCommand
+from .indices_refresh import IndicesRefreshCommand
+from .indices_segments import IndicesSegmentsCommand
+from .indices_stats import IndicesStatsCommand
+from .indices_status import IndicesStatusCommand
+from .indices_update_aliases import IndicesUpdateAliasesCommand
+from .indices_upgrade import IndicesUpgradeCommand
+from .indices_validate_query import IndicesValidateQueryCommand
 from .search_request_body import SearchRequestBodyCommand
 from .search_template import SearchTemplateCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
@@ -149,6 +156,13 @@ __all__ = [
     "IndicesPutTemplateCommand",
     "IndicesPutWarmerCommand",
     "IndicesRecoveryCommand",
+    "IndicesRefreshCommand",
+    "IndicesSegmentsCommand",
+    "IndicesStatsCommand",
+    "IndicesStatusCommand",
+    "IndicesUpdateAliasesCommand",
+    "IndicesUpgradeCommand",
+    "IndicesValidateQueryCommand",
     "SearchRequestBodyCommand",
     "SearchTemplateCommand",
     "SettingsShowActiveServerCommand",
