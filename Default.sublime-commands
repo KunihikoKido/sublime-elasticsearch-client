@@ -86,6 +86,8 @@
     {"command": "nodes_shutdown",                   "caption": "Elasticsearch: Nodes Shutdown All", "args": {"node_id": "_all"}},
     {"command": "nodes_shutdown",                   "caption": "Elasticsearch: Nodes Shutdown Local", "args": {"node_id": "_local"}},
     {"command": "nodes_shutdown",                   "caption": "Elasticsearch: Nodes Shutdown Master", "args": {"node_id": "_master"}},
+    {"command": "percolate",                        "caption": "Elasticsearch: Percolate"},
+    {"command": "ping",                             "caption": "Elasticsearch: Ping"},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Count", "args": {"search_type": "count"}},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body Scan", "args": {"search_type": "scan"}},
     {"command": "search_request_body",              "caption": "Elasticsearch: Search Request Body"},
