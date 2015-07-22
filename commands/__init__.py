@@ -110,6 +110,8 @@ from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
+from .settings_select_doc_type import SettingsSelectDocTypeCommand
+from .settings_select_index import SettingsSelectIndexCommand
 
 
 __all__ = [
@@ -225,4 +227,6 @@ __all__ = [
     "SuggestCommand",
     "TermvectorCommand",
     "UpdateDocumentCommand",
+    "SettingsSelectDocTypeCommand",
+    "SettingsSelectIndexCommand",
 ]

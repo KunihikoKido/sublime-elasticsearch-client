@@ -101,6 +101,8 @@
     {"command": "search_template",                  "caption": "Elasticsearch: Search Template"},
     {"command": "search_shards",                    "caption": "Elasticsearch: Search Shards"},
     {"command": "search_simple_query",              "caption": "Elasticsearch: Search Simple Query"},
+    {"command": "settings_select_doc_type",         "caption": "Elasticsearch: Settings Select Doc Type"},
+    {"command": "settings_select_index",            "caption": "Elasticsearch: Settings Select Index"},
     {"command": "settings_show_active_server",      "caption": "Elasticsearch: Settings Show Active Server"},
     {"command": "settings_switch_server",           "caption": "Elasticsearch: Settings Switch Server"},
     {"command": "snapshot_create",                  "caption": "Elasticsearch: Snapshot Create"},
