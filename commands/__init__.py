@@ -1,3 +1,4 @@
+from .bulk import BulkCommand
 from .cat_aliases import CatAliasesCommand
 from .cat_allocation import CatAllocationCommand
 from .cat_count import CatCountCommand
@@ -94,6 +95,8 @@ from .search_request_body import SearchRequestBodyCommand
 from .search_shards import SearchShardsCommand
 from .search_simple_query import SearchSimpleQueryCommand
 from .search_template import SearchTemplateCommand
+from .settings_select_doc_type import SettingsSelectDocTypeCommand
+from .settings_select_index import SettingsSelectIndexCommand
 from .settings_show_active_server import SettingsShowActiveServerCommand
 from .settings_switch_server import SettingsSwitchServerCommand
 from .show_output_panel import ShowOutputPanelCommand
@@ -110,11 +113,10 @@ from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
-from .settings_select_doc_type import SettingsSelectDocTypeCommand
-from .settings_select_index import SettingsSelectIndexCommand
 
 
 __all__ = [
+    "BulkCommand",
     "CatAliasesCommand",
     "CatAllocationCommand",
     "CatCountCommand",
@@ -208,9 +210,11 @@ __all__ = [
     "SearchExistsCommand",
     "SearchPercolatorQueryCommand",
     "SearchRequestBodyCommand",
-    "SearchTemplateCommand",
     "SearchShardsCommand",
     "SearchSimpleQueryCommand",
+    "SearchTemplateCommand",
+    "SettingsSelectDocTypeCommand",
+    "SettingsSelectIndexCommand",
     "SettingsShowActiveServerCommand",
     "SettingsSwitchServerCommand",
     "ShowOutputPanelCommand",
@@ -227,6 +231,4 @@ __all__ = [
     "SuggestCommand",
     "TermvectorCommand",
     "UpdateDocumentCommand",
-    "SettingsSelectDocTypeCommand",
-    "SettingsSelectIndexCommand",
 ]
