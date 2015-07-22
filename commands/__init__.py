@@ -116,6 +116,7 @@ from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
+from .helper_close_open_index import HelperCloseOpenIndexCommand
 
 
 __all__ = [
@@ -237,4 +238,5 @@ __all__ = [
     "SuggestCommand",
     "TermvectorCommand",
     "UpdateDocumentCommand",
+    "HelperCloseOpenIndexCommand",
 ]
