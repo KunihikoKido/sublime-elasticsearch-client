@@ -107,6 +107,9 @@ from .snapshot_get_repository import SnapshotGetRepositoryCommand
 from .snapshot_restore import SnapshotRestoreCommand
 from .snapshot_status import SnapshotStatusCommand
 from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
+from .suggest import SuggestCommand
+from .termvector import TermvectorCommand
+from .update_document import UpdateDocumentCommand
 
 
 __all__ = [
@@ -219,4 +222,7 @@ __all__ = [
     "SnapshotRestoreCommand",
     "SnapshotStatusCommand",
     "SnapshotVerifyRepositoryCommand",
+    "SuggestCommand",
+    "TermvectorCommand",
+    "UpdateDocumentCommand",
 ]

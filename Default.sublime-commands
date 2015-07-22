@@ -112,4 +112,7 @@
     {"command": "snapshot_restore",                 "caption": "Elasticsearch: Snapshot Restore"},
     {"command": "snapshot_status",                  "caption": "Elasticsearch: Snapshot Status"},
     {"command": "snapshot_verify_repository",       "caption": "Elasticsearch: Snapshot Verify Repository"},
+    {"command": "suggest",                          "caption": "Elasticsearch: Suggest"},
+    {"command": "termvector",                       "caption": "Elasticsearch: Termvector"},
+    {"command": "update_document",                  "caption": "Elasticsearch: Update Document"},
 ]
