@@ -42,7 +42,10 @@ class Settings(object):
 
     @property
     def base_url(self):
-        return self.settings.get("base_url", "http://localhost:9200")
+        base_url = self.settings.get("base_url", "http://localhost:9200")
+        if base_url.endswith("/"):
+            return base_url[:-1]
+        return base_url
 
     @property
     def index(self):
@@ -62,7 +65,11 @@ class Settings(object):
 
     @property
     def servers(self):
-        return self.settings.get("servers", [])
+        servers = self.settings.get("servers", [])
+
+        if isinstance(servers, dict):
+            return servers.values()
+        return servers
 
     @property
     def active_server(self):
