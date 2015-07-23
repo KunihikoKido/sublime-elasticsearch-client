@@ -34,7 +34,7 @@
     {"command": "field_stats",                      "caption": "Elasticsearch: Field Stats"},
     {"command": "get_document",                     "caption": "Elasticsearch: Get Document"},
     {"command": "get_document_source",              "caption": "Elasticsearch: Get Document Source"},
-    {"command": "get_multiple_document",            "caption": "Elasticsearch: Get Multiple Document"},
+    {"command": "get_multiple_documents",           "caption": "Elasticsearch: Get Multiple Documents"},
     {"command": "get_percolator_query",             "caption": "Elasticsearch: Get Percolator Query"},
     {"command": "get_script",                       "caption": "Elasticsearch: Get Script"},
     {"command": "get_search_template",              "caption": "Elasticsearch: Get Search Template"},

@@ -1,7 +1,7 @@
 from .base import BaseCommand
 
 
-class GetMultipleDocumentCommand(BaseCommand):
+class GetMultipleDocumentsCommand(BaseCommand):
     command_name = "elasticsearch:get-multiple-document"
 
     def run_request(self):

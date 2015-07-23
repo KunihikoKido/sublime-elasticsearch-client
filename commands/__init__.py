@@ -33,7 +33,7 @@ from .explain_document import ExplainDocumentCommand
 from .field_stats import FieldStatsCommand
 from .get_document import GetDocumentCommand
 from .get_document_source import GetDocumentSourceCommand
-from .get_multiple_document import GetMultipleDocumentCommand
+from .get_multiple_documents import GetMultipleDocumentsCommand
 from .get_percolator_query import GetPercolatorQueryCommand
 from .get_script import GetScriptCommand
 from .get_search_template import GetSearchTemplateCommand
