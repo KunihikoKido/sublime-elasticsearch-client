@@ -7,13 +7,15 @@ class IndicesGetMappingCommand(BaseCommand):
     def is_enabled(self):
         return True
 
-    def run_request(self, doc_type=None):
-        if doc_type is None:
+    def run_request(self, index=None, doc_type=None):
+        index = index or self.settings.index
+
+        if not doc_type:
             self.show_doc_type_list_panel(self.run)
             return
 
         options = dict(
-            index=self.settings.index,
+            index=index,
             doc_type=doc_type
         )
 

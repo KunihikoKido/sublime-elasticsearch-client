@@ -128,4 +128,5 @@
     {"command": "helper_convert_csv_bulk_index",    "caption": "Elasticsearch: Helper Convert Csv Bulk Index"},
     {"command": "helper_dump_index_data",           "caption": "Elasticsearch: Helper Dump Index Data"},
     {"command": "helper_load_index_data",           "caption": "Elasticsearch: Helper Load Index Data"},
+    {"command": "helper_import_csv",                "caption": "Elasticsearch: Helper Import Csv"},
 ]

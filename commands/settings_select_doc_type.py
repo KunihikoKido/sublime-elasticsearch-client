@@ -4,7 +4,7 @@ from .base import SettingsBaseCommand
 class SettingsSelectDocTypeCommand(SettingsBaseCommand):
     command_name = "elasticsearch:settings-select-doc-type"
 
-    def run(self, doc_type=None):
+    def run(self, index=None, doc_type=None):
         if not doc_type:
             self.show_doc_type_list_panel(self.run)
             return

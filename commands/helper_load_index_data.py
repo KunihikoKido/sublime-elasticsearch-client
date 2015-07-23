@@ -1,7 +1,7 @@
 import sublime
 import json
-from .base import CreateBaseCommand
 from elasticsearch.helpers import bulk_index
+from .base import CreateBaseCommand
 
 
 def readlines_chunks(file, chunk_size=1024 * 1024):
@@ -74,7 +74,7 @@ class HelperLoadIndexDataCommand(CreateBaseCommand):
                     chunk_size=self.settings.chunk_size,
                     expand_action_callback=expand_action
                 )
-                print(options)
+
                 success, errors = bulk_index(
                     self.client, change_doc_index(docs, index), **options)
 

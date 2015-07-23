@@ -8,7 +8,9 @@ class IndicesDeleteMappingCommand(DeleteBaseCommand):
     def is_enabled(self):
         return True
 
-    def run_request(self, doc_type=None):
+    def run_request(self, index=None, doc_type=None):
+        index = index or self.settings.index
+
         if not doc_type:
             self.show_doc_type_list_panel(self.run)
             return

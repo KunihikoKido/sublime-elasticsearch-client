@@ -12,7 +12,7 @@ class DocTypeListPanel(object):
     def on_done(self, index):
         if index == -1:
             return
-        self.callback(doc_type=self.choices[index])
+        self.callback(index=self.index, doc_type=self.choices[index])
 
     def show(self, callback):
         self.callback = callback
