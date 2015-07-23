@@ -39,6 +39,12 @@ from .get_script import GetScriptCommand
 from .get_search_template import GetSearchTemplateCommand
 from .helper_benchmark import HelperBenchmarkCommand
 from .helper_change_number_of_replicas import HelperChangeNumberOfReplicasCommand
+from .helper_close_open_index import HelperCloseOpenIndexCommand
+from .helper_convert_csv_bulk_index import HelperConvertCsvBulkIndexCommand
+from .helper_dump_index_data import HelperDumpIndexDataCommand
+from .helper_import_csv import HelperImportCsvCommand
+from .helper_load_index_data import HelperLoadIndexDataCommand
+from .helper_reindex import HelperReindexCommand
 from .index_document import IndexDocumentCommand
 from .index_percolator_query import IndexPercolatorQueryCommand
 from .indices_analyze import IndicesAnalyzeCommand
@@ -116,12 +122,6 @@ from .snapshot_verify_repository import SnapshotVerifyRepositoryCommand
 from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
-from .helper_close_open_index import HelperCloseOpenIndexCommand
-from .helper_convert_csv_bulk_index import HelperConvertCsvBulkIndexCommand
-from .helper_dump_index_data import HelperDumpIndexDataCommand
-from .helper_load_index_data import HelperLoadIndexDataCommand
-from .helper_import_csv import HelperImportCsvCommand
-from .helper_reindex import HelperReindexCommand
 
 
 
@@ -161,12 +161,18 @@ __all__ = [
     "FieldStatsCommand",
     "GetDocumentCommand",
     "GetDocumentSourceCommand",
-    "GetMultipleDocumentCommand",
+    "GetMultipleDocumentsCommand",
     "GetPercolatorQueryCommand",
     "GetScriptCommand",
     "GetSearchTemplateCommand",
     "HelperBenchmarkCommand",
     "HelperChangeNumberOfReplicasCommand",
+    "HelperCloseOpenIndexCommand",
+    "HelperConvertCsvBulkIndexCommand",
+    "HelperDumpIndexDataCommand",
+    "HelperImportCsvCommand",
+    "HelperLoadIndexDataCommand",
+    "HelperReindexCommand",
     "IndexDocumentCommand",
     "IndexPercolatorQueryCommand",
     "IndicesAnalyzeCommand",
@@ -244,10 +250,4 @@ __all__ = [
     "SuggestCommand",
     "TermvectorCommand",
     "UpdateDocumentCommand",
-    "HelperCloseOpenIndexCommand",
-    "HelperConvertCsvBulkIndexCommand",
-    "HelperDumpIndexDataCommand",
-    "HelperLoadIndexDataCommand",
-    "HelperImportCsvCommand",
-    "HelperReindexCommand",
 ]
