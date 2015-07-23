@@ -121,6 +121,8 @@ from .helper_convert_csv_bulk_index import HelperConvertCsvBulkIndexCommand
 from .helper_dump_index_data import HelperDumpIndexDataCommand
 from .helper_load_index_data import HelperLoadIndexDataCommand
 from .helper_import_csv import HelperImportCsvCommand
+from .helper_reindex import HelperReindexCommand
+
 
 
 __all__ = [
@@ -247,4 +249,5 @@ __all__ = [
     "HelperDumpIndexDataCommand",
     "HelperLoadIndexDataCommand",
     "HelperImportCsvCommand",
+    "HelperReindexCommand",
 ]

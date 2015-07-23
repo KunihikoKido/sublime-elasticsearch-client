@@ -70,7 +70,7 @@ class HelperLoadIndexDataCommand(CreateBaseCommand):
             for docs in readlines_chunks(f):
                 options = dict(
                     index=index,
-                    stats_only=True,
+                    stats_only=False,
                     chunk_size=self.settings.chunk_size,
                     expand_action_callback=expand_action
                 )
@@ -79,9 +79,21 @@ class HelperLoadIndexDataCommand(CreateBaseCommand):
                     self.client, change_doc_index(docs, index), **options)
 
                 if errors:
-                    return dict(index=index, filename=filename, errors=errors)
+                    return dict(
+                        command=self.command_name,
+                        index=index,
+                        filename=filename,
+                        status="ERROR",
+                        errors=errors
+                    )
 
                 count += success
                 sublime.status_message("Load: {}".format(count))
 
-        return dict(index=index, filename=filename, docs=count)
+        return dict(
+            command=self.command_name,
+            index=index,
+            filename=filename,
+            status="SUCCESS",
+            docs=count
+        )

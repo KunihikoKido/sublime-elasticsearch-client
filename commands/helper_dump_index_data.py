@@ -46,4 +46,10 @@ class HelperDumpIndexDataCommand(CreateBaseCommand):
 
         self.save_filename(filename)
 
-        return dict(index=index, filename=filename, docs=count)
+        return dict(
+            command=self.command_name,
+            index=index,
+            filename=filename,
+            status="SUCCESS",
+            docs=count
+        )
