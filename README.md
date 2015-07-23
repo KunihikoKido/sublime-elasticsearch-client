@@ -1,24 +1,8 @@
-# Elasticsearch Client for Sublime Text 3
+# Elasticsearch Client for ST3
 
-[![GitHub release](https://img.shields.io/github/release/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/releases)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/issues)
-[![GitHub forks](https://img.shields.io/github/forks/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/network)
-[![Gratipay](https://img.shields.io/gratipay/KunihikoKido.svg)](https://gratipay.com/KunihikoKido/)
-![Sublime Text](https://img.shields.io/badge/sublime_text-ST3-green.svg)
-![Sublime Platforms](https://img.shields.io/badge/platforms-windows_osx_linux-green.svg)
+Elasticsearch Client allows you to build an Rest API request in Sublime Text 3 and view the response in a panel.
 
-
-Elasticsearch Client for Sublime Text
-
-Elasticsearch Client allows you to build an Rest API request in Sublime Text and view the response in a panel.
-
-## Overview
-
-Elasticsearch Client integration: it's pretty handy.
-
-![Command Palette](https://github.com/KunihikoKido/sublime-elasticsearch-client/wiki/images/overview.gif)
+![orverview](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/screenshots/search.gif)
 
 ## Options
 
@@ -58,7 +42,7 @@ you can send a body
 }
 ```
 
-Once you have a request ready, use shortcut ``Ctrl + Alt + S`` or open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch Request Body Search``.
+Once you have a request ready, use shortcut ``Ctrl + Alt + S`` or open the Command Palette (``Shift + Command + P``) and enter ``elasticsearch search request body``.
 
 ## Settings
 
@@ -68,153 +52,76 @@ User Settings (accessible from the *Preferences/Package Settings/Elasticsearch C
 
 ```js
 {
-    "active_server": "localhost",
-    "servers": {
-        "localhost": {
-            "base_url": "http://localhost:9200/",
-            "index": "test",
-            "doc_type": "test"
-        },
-        "api.siba.tokyo": {
-            "base_url": "https://api.siba.tokyo/public/",
-            "index": "index-zgkksx-my-index",
-            "doc_type": "webpages"
-        }
-    },
-    "ab_options": {
-        "small":  ["-n", "10", "-c", "10"],
-        "medium": ["-n", "100", "-c", "10"],
-        "large":  ["-n", "1000", "-c", "10"],
-    }
+  "base_url": "http://localhost:9200",
+  "index": "blog",
+  "doc_type": "posts",
+  "servers": [
+      {
+          "base_url": "http://localhost:9200",
+          "index": "blog",
+          "doc_type": "posts",
+      },
+      {
+          "base_url": "http://localhost:9200",
+          "index": "twitter",
+          "doc_type": "tweets",
+      }
+  ]
 }
 ```
 
-### Properties
+You can switch the server, use ``Elasticsearch: Settings Switch Server`` command.
 
-Setting                    | Description
--------------------------- | ----------------------------------
-``active_server``          | Elasticsearch Active Server. You can change the ``Switch Server`` Command
-``servers``                | Elasticsearch Server settings.
-``ab_command``             | Path to the Apache Bench (ab) command.
-``ab_options``             | Apache Bench settings.
-``enabled_pretty``         | enabled pretty json. required: [PrettyJson](https://github.com/dzhibas/SublimePrettyJson)
-``pretty_command``         | pretty format command. default: ``pretty_json``
-``pretty_syntax``          | pretty json target syntax. default: ``Elasticsearch``
-``fixture_dir``            | Path to the Dump Data & Load Data command.
-
-
-#### servers.\*
-
-Setting                              | Description
------------------------------------- | ----------------------------------
-``base_url``                         | Elasticsearch API Endpoint URL. default: ``http://localhost:9200``
-``index``                            | Elasticsearch Index name. default: ``test``
-``doc_type``                         | Elasticsearch Type name. default: ``test``
-``http_headers``                     | Http header
-
-**Note** Removed Access Control Options.
+## Snippets
+Currently this should work in ``.json`` or ``.es``
 
 ## Commands
-open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...``.
 
-### Command for Document APIs
+### Command for Search & Document APIs
 
-* Elasticsearch: Bulk API
-* Elasticsearch: Create Document
-* Elasticsearch: Delete By Query
-* Elasticsearch: Delete Document
-* Elasticsearch: Delete Percolator
-* Elasticsearch: Get Document
-* Elasticsearch: Get Multiple Documents
-* Elasticsearch: Get Source
-* Elasticsearch: Index Document
-* Elasticsearch: Index Percolator
-* Elasticsearch: Multiple Termvector
-* Elasticsearch: Termvector
-* Elasticsearch: Update Document
-
-### Command for Search APIs
-
+* Elasticsearch: Bulk
 * Elasticsearch: Clear Scroll
 * Elasticsearch: Count
 * Elasticsearch: Count Percolate
+* Elasticsearch: Create Document
+* Elasticsearch: Delete By Query
+* Elasticsearch: Delete Document
+* Elasticsearch: Delete Script
 * Elasticsearch: Delete Search Template
+* Elasticsearch: Exists Document
 * Elasticsearch: Explain Document
+* Elasticsearch: Field Stats
+* Elasticsearch: Get Document
+* Elasticsearch: Get Document Source
+* Elasticsearch: Get Multiple Documents
+* Elasticsearch: Get Percolator Query
+* Elasticsearch: Get Script
 * Elasticsearch: Get Search Template
-* Elasticsearch: More Like This
-* Elasticsearch: Multiple Different Searches
+* Elasticsearch: Index Document
+* Elasticsearch: Index Percolator Query
+* Elasticsearch: Info
 * Elasticsearch: Multiple Percolate
+* Elasticsearch: Multiple Search
+* Elasticsearch: Multiple Termvectors
 * Elasticsearch: Percolate
+* Elasticsearch: Ping
+* Elasticsearch: Put Script
 * Elasticsearch: Put Search Template
-* Elasticsearch: Request Body Search
-* Elasticsearch: Request Body Search (search_type=count)
-* Elasticsearch: Scan
 * Elasticsearch: Scroll
 * Elasticsearch: Search Exists
+* Elasticsearch: Search Percolator Query
+* Elasticsearch: Search Request Body
+* Elasticsearch: Search Request Body Count
+* Elasticsearch: Search Request Body Scan
 * Elasticsearch: Search Shards
+* Elasticsearch: Search Simple Query
 * Elasticsearch: Search Template
-* Elasticsearch: Search Template (search_type=count)
+* Elasticsearch: Search Template Count
+* Elasticsearch: Search Template Scan
 * Elasticsearch: Suggest
-* Elasticsearch: URI Search
-* Elasticsearch: Validate Query
+* Elasticsearch: Termvector
+* Elasticsearch: Update Document
 
-### Command for Indices APIs
-
-* Elasticsearch: Analyze Keywords
-* Elasticsearch: Analyze Text
-* Elasticsearch: Change Number Of Replicas
-* Elasticsearch: Clear Index Cache
-* Elasticsearch: Close Index
-* Elasticsearch: Create Index
-* Elasticsearch: Delete Index
-* Elasticsearch: Delete Index Alias
-* Elasticsearch: Delete Index Template
-* Elasticsearch: Delete Index Warmer
-* Elasticsearch: Delete Mapping
-* Elasticsearch: Flush Index
-* Elasticsearch: Get Field Mapping
-* Elasticsearch: Get Index Alias
-* Elasticsearch: Get Index Infomation
-* Elasticsearch: Get Index Settings
-* Elasticsearch: Get Index Template
-* Elasticsearch: Get Index Warmer
-* Elasticsearch: Get Mapping
-* Elasticsearch: Get Upgrade Index Status
-* Elasticsearch: Index Recovery Status
-* Elasticsearch: Index Segments Infomation
-* Elasticsearch: Index Stats
-* Elasticsearch: Index Status
-* Elasticsearch: Open Index
-* Elasticsearch: Optimize Index
-* Elasticsearch: Put Index Alias
-* Elasticsearch: Put Index Settings
-* Elasticsearch: Put Index Template
-* Elasticsearch: Put Index Warmer
-* Elasticsearch: Put Mapping
-* Elasticsearch: Refresh Index
-* Elasticsearch: Update Index Aliases
-* Elasticsearch: Upgrade Index
-
-### Command for Cluster APIs
-
-* Elasticsearch: Cluster Health
-* Elasticsearch: Cluster Info
-* Elasticsearch: Cluster Pending Tasks
-* Elasticsearch: Cluster Reroute
-* Elasticsearch: Cluster State
-* Elasticsearch: Cluster Stats
-* Elasticsearch: Get Cluster Settngs
-* Elasticsearch: Nodes hot_threads
-* Elasticsearch: Nodes Info
-* Elasticsearch: Nodes Shutdown
-* Elasticsearch: Nodes Stats
-* Elasticsearch: Put Cluster Settngs
-
-### Command for Modules APIs
-
-* Elasticsearch: Delete Script
-* Elasticsearch: Get Script
-* Elasticsearch: Put Script
 
 ### Command for Cat APIs
 
@@ -223,7 +130,6 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Cat Count
 * Elasticsearch: Cat Fielddata
 * Elasticsearch: Cat Health
-* Elasticsearch: Cat Help
 * Elasticsearch: Cat Indices
 * Elasticsearch: Cat Master
 * Elasticsearch: Cat Nodes
@@ -234,159 +140,111 @@ open the Command Palette (``Shift + Command + P``) and enter ``Elasticsearch ...
 * Elasticsearch: Cat Shards
 * Elasticsearch: Cat Thread Pool
 
-### Helper Commmands.
+### Command for Cluster APIs
 
-* Elasticsearch: Apache Bench
-* Elasticsearch: Apache Bench for Search Template
-* Elasticsearch: Copy Data from ...
-* Elasticsearch: CSV Bulk Index
-* Elasticsearch: CSV Convert to Bulk Index format
-* Elasticsearch: Dump Data
-* Elasticsearch: Load Data
-* Elasticsearch: Reindex
-* Elasticsearch: Reindex Dictionary (Closing and reopening the index)
-* Elasticsearch: Search in www.elastic.co
+* Elasticsearch: Cluster Get Settings
+* Elasticsearch: Cluster Health
+* Elasticsearch: Cluster Pending Tasks
+* Elasticsearch: Cluster Put Settings
+* Elasticsearch: Cluster Reroute
+* Elasticsearch: Cluster State
+* Elasticsearch: Cluster Stats
 
-### Command for Sublime User Settings
+### Command for Indices APIs
 
-* Elasticsearch: Switch Servers
-* Elasticsearch: Show Active Server
+* Elasticsearch: Indices Analyze
+* Elasticsearch: Indices Clear Cache
+* Elasticsearch: Indices Close
+* Elasticsearch: Indices Create
+* Elasticsearch: Indices Create Doc Type
+* Elasticsearch: Indices Delete
+* Elasticsearch: Indices Delete Alias
+* Elasticsearch: Indices Delete Mapping
+* Elasticsearch: Indices Delete Template
+* Elasticsearch: Indices Delete Warmer
+* Elasticsearch: Indices Exists
+* Elasticsearch: Indices Exists Alias
+* Elasticsearch: Indices Exists Doc Type
+* Elasticsearch: Indices Exists Template
+* Elasticsearch: Indices Flush
+* Elasticsearch: Indices Flush Synced
+* Elasticsearch: Indices Get
+* Elasticsearch: Indices Get Alias
+* Elasticsearch: Indices Get Field Mapping
+* Elasticsearch: Indices Get Mapping
+* Elasticsearch: Indices Get Settings
+* Elasticsearch: Indices Get Template
+* Elasticsearch: Indices Get Upgrade
+* Elasticsearch: Indices Get Warmer
+* Elasticsearch: Indices Open
+* Elasticsearch: Indices Optimize
+* Elasticsearch: Indices Put Alias
+* Elasticsearch: Indices Put Mapping
+* Elasticsearch: Indices Put Settings
+* Elasticsearch: Indices Put Template
+* Elasticsearch: Indices Put Warmer
+* Elasticsearch: Indices Recovery
+* Elasticsearch: Indices Refresh
+* Elasticsearch: Indices Segments
+* Elasticsearch: Indices Stats
+* Elasticsearch: Indices Status
+* Elasticsearch: Indices Update Aliases
+* Elasticsearch: Indices Upgrade
+* Elasticsearch: Indices Validate Query
 
+### Command for Nodes APIs
 
-## Snippets for Queries
-file types ``*.es`` or set syntax ``Elasticsearch``
+* Elasticsearch: Nodes Hot Threads
+* Elasticsearch: Nodes Info
+* Elasticsearch: Nodes Shutdown All
+* Elasticsearch: Nodes Shutdown Local
+* Elasticsearch: Nodes Shutdown Master
 
-Abbreviation                    | tag
-------------------------------- | ----------------------------------
-bool                            | ``"bool": {...}``
-boosting                        | ``"boosting": {...}``
-commonterms                     | ``"common": {...}``
-constantscore                   | ``"constant_score": {...}``
-dismax                          | ``"dis_max": {...}``
-filtered                        | ``"filtered": {...}``
-functionscore                   | ``"function_score": {...}``
-fuzzy                           | ``"fuzzy": {...}``
-fuzzylike                       | ``"fuzzy_like_this": {...}``
-fuzzylike                       | ``"fuzzy_like_this_field": {...}``
-geoshape                        | ``"geo_shape": {...}``
-haschild                        | ``"has_child": {...}``
-ids                             | ``"ids": {...}``
-indices                         | ``"indices": {...}``
-matchall                        | ``"match_all": {..}``
-match                           | ``"match": {...}``
-morelike                        | ``"more_like_this": {...}``
-multimatch                      | ``"multi_match": {...}``
-nested                          | ``"nested": {...}``
-prefix                          | ``"prefix": {...}``
-querystring                     | ``"query_string": {...}``
-range                           | ``"range": {...}``
-regexp                          | ``"regexp": {...}``
-simplequery                     | ``"simple_query_string": {...}``
-spanfirst                       | ``"span_first": {...}``
-spannear                        | ``"span_near": {...}``
-spanmulti                       | ``"span_multi": {...}``
-spannot                         | ``"span_not": {..}``
-spanor                          | ``"span_or": {...}``
-template                        | ``"template": {...}``
-term                            | ``"term": {...}``
-terms                           | ``"terms": {...}``
-topchildren                     | ``"top_children": {...}``
-wildcard                        | ``"wildcard": {...}``
+### Command for Snapshot APIs
 
-## Snippets for Filters
-file types ``*.es`` or set syntax ``Elasticsearch``
+* Elasticsearch: Snapshot Create
+* Elasticsearch: Snapshot Create Repository
+* Elasticsearch: Snapshot Delete
+* Elasticsearch: Snapshot Delete Repository
+* Elasticsearch: Snapshot Get
+* Elasticsearch: Snapshot Get Repository
+* Elasticsearch: Snapshot Restore
+* Elasticsearch: Snapshot Status
+* Elasticsearch: Snapshot Verify Repository
 
-Abbreviation                    | tag
-------------------------------- | ----------------------------------
-and                             | ``"and": [...]``
-bool                            | ``"bool": {...}``
-exists                          | ``"exists": {...}``
-geobox                          | ``"geo_bounding_box": {...}``
-geodistance                     | ``"geo_distance": {...}``
-geopolygon                      | ``"geo_polygon": {...}``
-geoshape                        | ``"geo_shape": {...}``
-geohash                         | ``"geohash_cell": {...}``
-haschild                        | ``"has_child": {...}``
-hascparent                      | ``"has_parent": {...}``
-ids                             | ``"ids": {...}``
-indices                         | ``"indices": {...}``
-limit                           | ``"limit": {...}``
-matchall                        | ``"match_all": {..}``
-missing                         | ``"missing": {...}``
-nested                          | ``"nested": {...}``
-not                             | ``"not": [...]``
-or                              | ``"or": [...]``
-prefix                          | ``"prefix": {...}``
-range                           | ``"range": {...}``
-regexp                          | ``"regexp": {...}``
-script                          | ``"script": {...}``
-term                            | ``"term": {...}``
-terms                           | ``"terms": {...}``
-type                            | ``"type": {...}``
+### Helper Commands
 
-## Snippets for Aggregations
-file types ``*.es`` or set syntax ``Elasticsearch``
-
-Abbreviation                    | tag
-------------------------------- | ----------------------------------
-avg                             | ``"aggs": {..."avg": {...}``
-cardinality                     | ``"aggs": {..."cardinality": {...}``
-children                        | ``"aggs": {..."children": {...}``
-datehistogram                   | ``"aggs": {..."date_histogram": {...}``
-daterange                       | ``"aggs": {..."date_range": {...}``
-extendedstats                   | ``"aggs": {..."extended_stats": {...}``
-filter                          | ``"aggs": {..."filter": {...}``
-filters                         | ``"aggs": {..."filters": {...}``
-geobounds                       | ``"aggs": {..."geo_bounds": {...}``
-geodistance                     | ``"aggs": {..."geo_distance": {...}``
-geohash                         | ``"aggs": {..."geohash_grid": {...}``
-global                          | ``"aggs": {..."global": {...}``
-histogram                       | ``"aggs": {..."histogram": {...}``
-ipv4range                       | ``"aggs": {..."ip_range": {...}``
-max                             | ``"aggs": {..."max": {...}``
-min                             | ``"aggs": {..."min": {...}``
-missing                         | ``"aggs": {..."missing": {...}``
-nested                          | ``"aggs": {..."nested": {...}``
-percentileranks                 | ``"aggs": {..."percentile_ranks": {...}``
-percentiles                     | ``"aggs": {..."percentiles": {...}``
-range                           | ``"aggs": {..."range": {...}``
-reversenested                   | ``"aggs": {..."reverse_nested": {...}``
-scriptedmetric                  | ``"aggs": {..."scripted_metric": {...}``
-significantterm                 | ``"aggs": {..."significant_terms": {...}``
-stats                           | ``"aggs": {..."stats": {...}``
-sum                             | ``"aggs": {..."sum": {...}``
-terms                           | ``"aggs": {..."terms": {...}``
-tophits                         | ``"aggs": {..."top_hits": {...}``
-valuecount                      | ``"aggs": {..."value_count": {...}``
+* Elasticsearch: Helper Benchmark For Search Request Body
+* Elasticsearch: Helper Benchmark For Search Request Body Count
+* Elasticsearch: Helper Benchmark For Search Template
+* Elasticsearch: Helper Benchmark For Search Template Count
+* Elasticsearch: Helper Change Number Of Replicas
+* Elasticsearch: Helper Close Open Index
+* Elasticsearch: Helper Convert Csv Bulk Index
+* Elasticsearch: Helper Dump Index Data
+* Elasticsearch: Helper Import Csv
+* Elasticsearch: Helper Load Index Data
+* Elasticsearch: Helper Reindex
 
 
-## Snippets for Index Aliases
-file types ``*.es`` or set syntax ``Elasticsearch``.
+### Command for User Settings
 
-> for `Update Index Aliases` command.
-
-Abbreviation                    | tag
-------------------------------- | ----------------------------------
-add_alias                       | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
-associate_alias                 | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
-remove_alias                    | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
-rename_alias                    | See [Index Aliases](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#indices-aliases)
+* Elasticsearch: Settings Select Doc Type
+* Elasticsearch: Settings Select Index
+* Elasticsearch: Settings Show Active Server
+* Elasticsearch: Settings Switch Server
 
 
-## Completions
-file types ``*.es`` or set syntax ``Elasticsearch``
+## Screenshots
 
-- _all
-- _score
-- asc
-- desc
-- false
-- true
+### Search Request Body Command
+![search](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/screenshots/search.gif)
 
-and etc..
+### Cat Api Command
+![cat](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/screenshots/cat.gif)
 
+## Helper Reindex Command
+![reindex](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/screenshots/reindex.gif)
 
----
-
-Hello! Elasticsearch [日本語で](https://medium.com/hello-elasticsearch/elasticsearch-client-for-sublime-text-3-82b182d2417e)
-
+## Helper Benchmark
+![reindex](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/screenshots/benchmark.gif)

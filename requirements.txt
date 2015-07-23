@@ -1,0 +1,2 @@
+elasticsearch==1.6.0
+analytics-python==1.1.0
