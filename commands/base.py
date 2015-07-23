@@ -93,6 +93,14 @@ class Settings(object):
     def user_id(self):
         return self.settings.get("user_id", None)
 
+    @property
+    def dump_file(self):
+        return self.settings.get("dump_file", "")
+
+    @property
+    def chunk_size(self):
+        return self.settings.get("chunk_size", 500)
+
     def set(self, key, value):
         self.settings.set(key, value)
 

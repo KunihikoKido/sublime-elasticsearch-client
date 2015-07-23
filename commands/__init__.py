@@ -117,6 +117,9 @@ from .suggest import SuggestCommand
 from .termvector import TermvectorCommand
 from .update_document import UpdateDocumentCommand
 from .helper_close_open_index import HelperCloseOpenIndexCommand
+from .helper_convert_csv_bulk_index import HelperConvertCsvBulkIndexCommand
+from .helper_dump_index_data import HelperDumpIndexDataCommand
+from .helper_load_index_data import HelperLoadIndexDataCommand
 
 
 __all__ = [
@@ -239,4 +242,7 @@ __all__ = [
     "TermvectorCommand",
     "UpdateDocumentCommand",
     "HelperCloseOpenIndexCommand",
+    "HelperConvertCsvBulkIndexCommand",
+    "HelperDumpIndexDataCommand",
+    "HelperLoadIndexDataCommand",
 ]

@@ -40,7 +40,7 @@ def expand_action(data):
 
 
 def streaming_bulk(client, actions, chunk_size=500, raise_on_error=True,
-        expand_action_callback=expand_action, raise_on_exception=True, 
+        expand_action_callback=expand_action, raise_on_exception=True,
         **kwargs):
     """
     Streaming bulk consumes actions from the iterable passed in and yields

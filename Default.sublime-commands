@@ -124,5 +124,8 @@
     {"command": "suggest",                          "caption": "Elasticsearch: Suggest"},
     {"command": "termvector",                       "caption": "Elasticsearch: Termvector"},
     {"command": "update_document",                  "caption": "Elasticsearch: Update Document"},
-    {"command": "helper_close_open_index",          "caption": "Elasticsearch: Helper Close Open Index"}
+    {"command": "helper_close_open_index",          "caption": "Elasticsearch: Helper Close Open Index"},
+    {"command": "helper_convert_csv_bulk_index",    "caption": "Elasticsearch: Helper Convert Csv Bulk Index"},
+    {"command": "helper_dump_index_data",           "caption": "Elasticsearch: Helper Dump Index Data"},
+    {"command": "helper_load_index_data",           "caption": "Elasticsearch: Helper Load Index Data"},
 ]
