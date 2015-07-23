@@ -1,14 +1,4 @@
-# Elasticsearch Client for Sublime Text 3
-
-[![GitHub release](https://img.shields.io/github/release/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/releases)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/KunihikoKido/sublime-elasticsearch-client/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/issues)
-[![GitHub forks](https://img.shields.io/github/forks/KunihikoKido/sublime-elasticsearch-client.svg)](https://github.com/KunihikoKido/sublime-elasticsearch-client/network)
-[![Gratipay](https://img.shields.io/gratipay/KunihikoKido.svg)](https://gratipay.com/KunihikoKido/)
-![Sublime Text](https://img.shields.io/badge/sublime_text-ST3-green.svg)
-![Sublime Platforms](https://img.shields.io/badge/platforms-windows_osx_linux-green.svg)
-
+# Elasticsearch Client for ST3
 
 Elasticsearch Client for Sublime Text
 
