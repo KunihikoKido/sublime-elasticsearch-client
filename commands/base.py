@@ -66,9 +66,8 @@ class Settings(object):
     @property
     def servers(self):
         servers = self.settings.get("servers", [])
-
         if isinstance(servers, dict):
-            return servers.values()
+            servers = list(servers.values())
         return servers
 
     @property
