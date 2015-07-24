@@ -24,9 +24,11 @@ class IndexListPanel(object):
         except Exception as e:
             return sublime.error_message("Error: {}".format(e))
 
+        self.choices.append(self.default_index)
         if "metadata" in response.keys():
-            self.choices = list(response["metadata"]["indices"].keys())
-        else:
-            self.choices.append(self.default_index)
+            for index in list(response["metadata"]["indices"].keys()):
+                if index != self.default_index:
+                    self.choices.append(index)
+
         self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)
