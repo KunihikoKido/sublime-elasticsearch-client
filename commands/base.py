@@ -34,6 +34,15 @@ def track_command(user_id, command_name):
     })
 
 
+def track_activate(user_id):
+    analytics.write_key = ANALYTICS_WRITE_KEY
+    analytics.identify(user_id)
+    analytics.track(user_id, "Activate", {
+        "category": "ST3",
+        "label": sublime.platform(),
+    })
+
+
 class Settings(object):
     SETTINGS_FILE = 'Elasticsearch.sublime-settings'
 
@@ -159,9 +168,10 @@ class BaseCommand(sublime_plugin.WindowCommand):
         if self.settings.analytics:
             user_id = self.settings.user_id
             if not user_id:
-                user_id = uuid.uuid4()
-                self.settings.set("user_id", str(user_id))
+                user_id = str(uuid.uuid4())
+                self.settings.set("user_id", user_id)
                 self.settings.save()
+                track_activate(user_id)
             track_command(user_id, self.command_name)
 
     def show_input_panel(self, label, default, callback):
@@ -174,7 +184,8 @@ class BaseCommand(sublime_plugin.WindowCommand):
             "show_response", {"title": title, "text": text})
 
     def show_index_list_panel(self, callback):
-        list_panel = IndexListPanel(self.window, self.client)
+        list_panel = IndexListPanel(
+            self.window, self.client, self.settings.index)
         list_panel.show(callback)
 
     def show_doc_type_list_panel(self, callback):
