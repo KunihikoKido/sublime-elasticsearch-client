@@ -74,9 +74,17 @@ class Settings(object):
 
     @property
     def servers(self):
+        def _normalize_servers(servers):
+            items = []
+            for name, server in servers.items():
+                server["name"] = name
+                items.append(server)
+            servers = sorted(items, key=lambda k: k["name"])
+            return servers
+
         servers = self.settings.get("servers", [])
         if isinstance(servers, dict):
-            servers = list(servers.values())
+            servers = _normalize_servers(servers)
         return servers
 
     @property
