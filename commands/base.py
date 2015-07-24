@@ -159,6 +159,7 @@ class BaseCommand(sublime_plugin.WindowCommand):
     def init_client(self):
         self._client = Elasticsearch(
             self.settings.base_url,
+            send_get_body_as='POST',
             connection_class=CustomHeadersConnection,
             headers=self.settings.headers
         )
