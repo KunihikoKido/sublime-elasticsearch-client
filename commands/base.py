@@ -184,7 +184,8 @@ class BaseCommand(sublime_plugin.WindowCommand):
             "show_response", {"title": title, "text": text})
 
     def show_index_list_panel(self, callback):
-        list_panel = IndexListPanel(self.window, self.client)
+        list_panel = IndexListPanel(
+            self.window, self.client, self.settings.index)
         list_panel.show(callback)
 
     def show_doc_type_list_panel(self, callback):
