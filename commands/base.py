@@ -187,7 +187,7 @@ class BaseCommand(sublime_plugin.WindowCommand):
         self.window.show_input_panel(label, default, callback, None, None)
 
     def show_response(self, response, title=""):
-        title = title or self.__class__.__name__
+        title = title or self.command_name
         text = json.dumps(response, indent=2, ensure_ascii=False)
         self.window.run_command(
             "show_response", {"title": title, "text": text})

@@ -21,9 +21,10 @@ class ActiveServerStatusBar(sublime_plugin.EventListener):
             doc_type=doc_type
         )
 
-        view.set_status(
-            "elasticsearch-client",
-            "Elasticsearch: {base_url}".format(**options))
+        if view is not None:
+            view.set_status(
+                "elasticsearch-client",
+                "Elasticsearch: {base_url}".format(**options))
 
     def on_new(self, view):
         self.update_status_bar(view)
