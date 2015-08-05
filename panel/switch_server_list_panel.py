@@ -20,5 +20,4 @@ class SwitchServerListPanel(object):
                 "{index}/{doc_type}".format(**server),
                 "{base_url}".format(**server)
                 ])
-        self.choices.sort()
         self.window.show_quick_panel(self.choices, self.on_done)
