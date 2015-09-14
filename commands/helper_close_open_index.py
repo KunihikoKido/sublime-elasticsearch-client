@@ -13,7 +13,7 @@ class HelperCloseOpenIndexCommand(CreateBaseCommand):
             return
 
         response_close = self.client.indices.close(index=index)
-        response_open = self.client.indices.close(index=index)
+        response_open = self.client.indices.open(index=index)
         return dict(
             command=self.command_name,
             close=response_close, open=response_open)
