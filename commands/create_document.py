@@ -2,7 +2,10 @@ from .base import CreateBaseCommand
 
 
 class CreateDocumentCommand(CreateBaseCommand):
-    command_name = "elasticsearch:index-document"
+    command_name = "elasticsearch:create-document"
+
+    def is_enabled(self):
+        return True
 
     def run_request(self, id=None):
         if not id:
