@@ -1,6 +1,9 @@
 import os
 import sys
-from imp import reload
+try:
+    from importlib import reload
+except ImportError:  # Python 3.3
+    from imp import reload
 
 package_path = os.path.dirname(__file__)
 libpath = os.path.join(package_path, "lib")
